@@ -17,6 +17,8 @@ bookdown::gitbook:
       github: yes
       facebook: no
       twitter: no
+  includes:
+    in_header: html/in_header.html
 # bookdown::pdf_book:
 #   includes:
 #     in_header: latex/preamble.tex
