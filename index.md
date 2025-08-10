@@ -27,7 +27,7 @@ Notas del curso *Fundamentos de Estadística con Remuestreo*, este curso busca e
 - Canvas: <https://itam.instructure.com/courses/15939>\
 
 </br>
-x
+
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Licencia Creative Commons" style="border-width:0"/></a><br />Este trabajo está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional</a>.
 
 # Temario {-}
