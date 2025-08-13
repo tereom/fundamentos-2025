@@ -20,10 +20,8 @@ formatear_tabla <- function(x_tbl, scroll = FALSE){
 }
 
 cuantil <- function(x, probs = c(0,0.25, 0.5, 0.75,1), ...){
-  x_quo <- enquo(x)
   valores <- quantile(x, probs = probs, names = FALSE, ...)
-  cuantil_nom <- probs
-  tibble(cuantil = cuantil_nom, valor = valores)
+  tibble(cuantil = probs, valor = valores)
 }
 
 grafica_cuantiles <- function(datos, grupo, valor){

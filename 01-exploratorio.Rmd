@@ -77,15 +77,15 @@ separados según se fumó o no en la mesa, y temporalmente en dos partes:
 el día (Jueves, Viernes, Sábado o Domingo), cada uno separado por Cena y
 Comida.
 
-```{block, type='mathblock'}
-Denotamos por $x$ el valor de medición de una *unidad de observación.*
-Usualmente utilizamos sub-índices para identificar entre diferentes *puntos de
-datos* (observaciones), por ejemplo, $x_n$ para la $n-$ésima observación. De tal
-forma que una colección de $N$ observaciones la escribimos como
-\begin{align}
-\{x_1, \ldots, x_N\}.
-\end{align}
-```
+<!-- ```{block, type='mathblock'} -->
+<!-- Denotamos por $x$ el valor de medición de una *unidad de observación.* -->
+<!-- Usualmente utilizamos sub-índices para identificar entre diferentes *puntos de -->
+<!-- datos* (observaciones), por ejemplo, $x_n$ para la $n-$ésima observación. De tal -->
+<!-- forma que una colección de $N$ observaciones la escribimos como -->
+<!-- \begin{align} -->
+<!-- \{x_1, \ldots, x_N\}. -->
+<!-- \end{align} -->
+<!-- ``` -->
 
 El primer tipo de comparaciones que nos interesa hacer es para una
 medición: ¿Varían mucho o poco los datos de un tipo de medición? ¿Cuáles
@@ -103,7 +103,8 @@ cuenta <- propinas |>
   select(orden_cuenta, f, cuenta_total) |> 
   arrange(f)
 bind_rows(head(cuenta), tail(cuenta)) |> 
-  gt() |> fmt_number(columns = f, decimals = 3)
+  gt() |> 
+  fmt_number(columns = f, decimals = 3)
 ```
 
 También podemos graficar los datos en orden, interpolando valores
@@ -176,7 +177,7 @@ gráfica:
     dispersión local o están más separados.
 
 **Observación**: Hay varias maneras de definir los cuantiles (ver
-[@cleveland93]): Supongamos que queremos definir $q(f)$, y denotamos los
+[@cleveland93], y [ejemplos](https://www.amherst.edu/media/view/129116/original/Sample+Quantiles.pdf): Supongamos que queremos definir $q(f)$, y denotamos los
 datos ordenados como $x_{(1)}, x_{(2)}, \ldots, x_{(N)}$, de forma que
 $x_{(1)}$ es el dato más chico y $x_{(N)}$ es el dato más grande. Para
 cada $x_{(i)}$ definimos\
@@ -248,11 +249,20 @@ distintas particiones resaltan distintos aspectos de los datos.
 compara con distintos histogramas?
 ```
 
-```{r, fig.width = 4, fig.height = 3, cache = TRUE}
+```{r, fig.width = 4, fig.height = 3, eval = FALSE}
 g_1 <- ggplot(propinas, aes(sample = propina)) +
   geom_qq(distribution = stats::qunif) + 
   labs(x = "f", y = "propina")
 g_1
+
+binwidth_min <- 0.15
+h_1 <- ggplot(propinas, aes(x = propina)) + 
+  geom_histogram(binwidth = binwidth_min)
+h_2 <- ggplot(propinas, aes(x = propina)) + 
+  geom_histogram(binwidth = binwidth_min * 2)
+h_3 <- ggplot(propinas, aes(x = propina)) + 
+  geom_histogram(binwidth = binwidth_min * 5)
+h_1 + h_2 + h_3
 ```
 
 Finalmente, una gráfica más compacta que resume la gráfica de cuantiles
@@ -317,8 +327,6 @@ cuantiles:
 -   Es fácil comparar cuantiles de distintos bonches de datos en la
     misma escala
 
-**Nota:** Existen diferentes definiciones para calcular cuantiles de una muestra de 
-datos, puedes leer más en [este artículo](https://www.amherst.edu/media/view/129116/original/Sample+Quantiles.pdf).
 
 ### Media y desviación estándar {.unnumbered}
 
