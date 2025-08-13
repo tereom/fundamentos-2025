@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Karla:400,400i,700,700i|Lora:400,400i,700,700i&display=swap');
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+
+.mathblock {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #fff2e6 5px center/2.5em no-repeat;
+  background-image: url("../images/pen.png");
+  background-position: 6px 15px;
+  background-repeat: no-repeat;
+  background-size: 2.8em; /* or px, %, etc. */
+}
+
+
+.resumen {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  
+  position:relative;
+}
+
+.ejercicio {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #fff2e6 5px center/2.8em no-repeat;
+  background-image: url("../images/calculator-3.png");
+  background-position: 6px 15px;
+  background-repeat: no-repeat;
+  background-size: 2.8em; /* or px, %, etc. */
+}
+
+.level1 .header-section-number {
+  display: inline-block;
+  border-bottom: 3px solid;
+}
+
+.level1 h1 {
+  border-bottom: 1px solid;
+}
+
+.level2 h2 {
+  border-bottom: 1px solid;
+}
+
+body {
+  text-align: justify;
+}
+
+.cols {
+  display: flex;
+}
+
+.caja {
+    background-color:#fff6f5;
+    padding:5px;
+    margin: 20px 0;
+    border-radius: 3px;
+}

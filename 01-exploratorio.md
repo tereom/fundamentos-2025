@@ -67,23 +67,23 @@ slice_sample(propinas, n = 10) |> gt()
 ```
 
 ```{=html}
-<div id="bzjkiegsud" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bzjkiegsud table {
+<div id="cnfuutdfcw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cnfuutdfcw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bzjkiegsud thead, #bzjkiegsud tbody, #bzjkiegsud tfoot, #bzjkiegsud tr, #bzjkiegsud td, #bzjkiegsud th {
+#cnfuutdfcw thead, #cnfuutdfcw tbody, #cnfuutdfcw tfoot, #cnfuutdfcw tr, #cnfuutdfcw td, #cnfuutdfcw th {
   border-style: none;
 }
 
-#bzjkiegsud p {
+#cnfuutdfcw p {
   margin: 0;
   padding: 0;
 }
 
-#bzjkiegsud .gt_table {
+#cnfuutdfcw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -109,12 +109,12 @@ slice_sample(propinas, n = 10) |> gt()
   border-left-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_caption {
+#cnfuutdfcw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bzjkiegsud .gt_title {
+#cnfuutdfcw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -126,7 +126,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-bottom-width: 0;
 }
 
-#bzjkiegsud .gt_subtitle {
+#cnfuutdfcw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -138,7 +138,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-top-width: 0;
 }
 
-#bzjkiegsud .gt_heading {
+#cnfuutdfcw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -150,13 +150,13 @@ slice_sample(propinas, n = 10) |> gt()
   border-right-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_bottom_border {
+#cnfuutdfcw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_col_headings {
+#cnfuutdfcw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -171,7 +171,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-right-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_col_heading {
+#cnfuutdfcw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -191,7 +191,7 @@ slice_sample(propinas, n = 10) |> gt()
   overflow-x: hidden;
 }
 
-#bzjkiegsud .gt_column_spanner_outer {
+#cnfuutdfcw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -203,15 +203,15 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 4px;
 }
 
-#bzjkiegsud .gt_column_spanner_outer:first-child {
+#cnfuutdfcw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bzjkiegsud .gt_column_spanner_outer:last-child {
+#cnfuutdfcw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bzjkiegsud .gt_column_spanner {
+#cnfuutdfcw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -223,11 +223,11 @@ slice_sample(propinas, n = 10) |> gt()
   width: 100%;
 }
 
-#bzjkiegsud .gt_spanner_row {
+#cnfuutdfcw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bzjkiegsud .gt_group_heading {
+#cnfuutdfcw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -253,7 +253,7 @@ slice_sample(propinas, n = 10) |> gt()
   text-align: left;
 }
 
-#bzjkiegsud .gt_empty_group_heading {
+#cnfuutdfcw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -268,15 +268,15 @@ slice_sample(propinas, n = 10) |> gt()
   vertical-align: middle;
 }
 
-#bzjkiegsud .gt_from_md > :first-child {
+#cnfuutdfcw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bzjkiegsud .gt_from_md > :last-child {
+#cnfuutdfcw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bzjkiegsud .gt_row {
+#cnfuutdfcw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -295,7 +295,7 @@ slice_sample(propinas, n = 10) |> gt()
   overflow-x: hidden;
 }
 
-#bzjkiegsud .gt_stub {
+#cnfuutdfcw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -308,7 +308,7 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#bzjkiegsud .gt_stub_row_group {
+#cnfuutdfcw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -322,15 +322,15 @@ slice_sample(propinas, n = 10) |> gt()
   vertical-align: top;
 }
 
-#bzjkiegsud .gt_row_group_first td {
+#cnfuutdfcw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bzjkiegsud .gt_row_group_first th {
+#cnfuutdfcw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bzjkiegsud .gt_summary_row {
+#cnfuutdfcw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -340,16 +340,16 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#bzjkiegsud .gt_first_summary_row {
+#cnfuutdfcw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_first_summary_row.thick {
+#cnfuutdfcw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bzjkiegsud .gt_last_summary_row {
+#cnfuutdfcw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -359,7 +359,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-bottom-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_grand_summary_row {
+#cnfuutdfcw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -369,7 +369,7 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#bzjkiegsud .gt_first_grand_summary_row {
+#cnfuutdfcw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -379,7 +379,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-top-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_last_grand_summary_row_top {
+#cnfuutdfcw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -389,11 +389,11 @@ slice_sample(propinas, n = 10) |> gt()
   border-bottom-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_striped {
+#cnfuutdfcw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bzjkiegsud .gt_table_body {
+#cnfuutdfcw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -402,7 +402,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-bottom-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_footnotes {
+#cnfuutdfcw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -416,7 +416,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-right-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_footnote {
+#cnfuutdfcw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -425,7 +425,7 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#bzjkiegsud .gt_sourcenotes {
+#cnfuutdfcw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -439,7 +439,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-right-color: #D3D3D3;
 }
 
-#bzjkiegsud .gt_sourcenote {
+#cnfuutdfcw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -447,72 +447,72 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#bzjkiegsud .gt_left {
+#cnfuutdfcw .gt_left {
   text-align: left;
 }
 
-#bzjkiegsud .gt_center {
+#cnfuutdfcw .gt_center {
   text-align: center;
 }
 
-#bzjkiegsud .gt_right {
+#cnfuutdfcw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bzjkiegsud .gt_font_normal {
+#cnfuutdfcw .gt_font_normal {
   font-weight: normal;
 }
 
-#bzjkiegsud .gt_font_bold {
+#cnfuutdfcw .gt_font_bold {
   font-weight: bold;
 }
 
-#bzjkiegsud .gt_font_italic {
+#cnfuutdfcw .gt_font_italic {
   font-style: italic;
 }
 
-#bzjkiegsud .gt_super {
+#cnfuutdfcw .gt_super {
   font-size: 65%;
 }
 
-#bzjkiegsud .gt_footnote_marks {
+#cnfuutdfcw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bzjkiegsud .gt_asterisk {
+#cnfuutdfcw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bzjkiegsud .gt_indent_1 {
+#cnfuutdfcw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bzjkiegsud .gt_indent_2 {
+#cnfuutdfcw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bzjkiegsud .gt_indent_3 {
+#cnfuutdfcw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bzjkiegsud .gt_indent_4 {
+#cnfuutdfcw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bzjkiegsud .gt_indent_5 {
+#cnfuutdfcw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bzjkiegsud .katex-display {
+#cnfuutdfcw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bzjkiegsud div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cnfuutdfcw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -528,66 +528,66 @@ slice_sample(propinas, n = 10) |> gt()
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="cuenta_total" class="gt_row gt_right">25.89</td>
-<td headers="propina" class="gt_row gt_right">5.16</td>
-<td headers="fumador" class="gt_row gt_left">Si</td>
-<td headers="dia" class="gt_row gt_left">Sab</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">13.00</td>
-<td headers="propina" class="gt_row gt_right">2.00</td>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">19.44</td>
+<td headers="propina" class="gt_row gt_right">3.00</td>
 <td headers="fumador" class="gt_row gt_left">Si</td>
 <td headers="dia" class="gt_row gt_left">Jue</td>
 <td headers="momento" class="gt_row gt_left">Comida</td>
 <td headers="num_personas" class="gt_row gt_right">2</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">15.04</td>
-<td headers="propina" class="gt_row gt_right">1.96</td>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">13.39</td>
+<td headers="propina" class="gt_row gt_right">2.61</td>
 <td headers="fumador" class="gt_row gt_left">No</td>
 <td headers="dia" class="gt_row gt_left">Dom</td>
 <td headers="momento" class="gt_row gt_left">Cena</td>
 <td headers="num_personas" class="gt_row gt_right">2</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">14.83</td>
-<td headers="propina" class="gt_row gt_right">3.02</td>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">10.09</td>
+<td headers="propina" class="gt_row gt_right">2.00</td>
+<td headers="fumador" class="gt_row gt_left">Si</td>
+<td headers="dia" class="gt_row gt_left">Vie</td>
+<td headers="momento" class="gt_row gt_left">Comida</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">16.97</td>
+<td headers="propina" class="gt_row gt_right">3.50</td>
 <td headers="fumador" class="gt_row gt_left">No</td>
 <td headers="dia" class="gt_row gt_left">Dom</td>
 <td headers="momento" class="gt_row gt_left">Cena</td>
+<td headers="num_personas" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">7.74</td>
+<td headers="propina" class="gt_row gt_right">1.44</td>
+<td headers="fumador" class="gt_row gt_left">Si</td>
+<td headers="dia" class="gt_row gt_left">Sab</td>
+<td headers="momento" class="gt_row gt_left">Cena</td>
 <td headers="num_personas" class="gt_row gt_right">2</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">12.60</td>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">15.98</td>
+<td headers="propina" class="gt_row gt_right">2.03</td>
+<td headers="fumador" class="gt_row gt_left">No</td>
+<td headers="dia" class="gt_row gt_left">Jue</td>
+<td headers="momento" class="gt_row gt_left">Comida</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">3.07</td>
 <td headers="propina" class="gt_row gt_right">1.00</td>
 <td headers="fumador" class="gt_row gt_left">Si</td>
 <td headers="dia" class="gt_row gt_left">Sab</td>
 <td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">2</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">34.30</td>
-<td headers="propina" class="gt_row gt_right">6.70</td>
+<td headers="num_personas" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">7.56</td>
+<td headers="propina" class="gt_row gt_right">1.44</td>
 <td headers="fumador" class="gt_row gt_left">No</td>
 <td headers="dia" class="gt_row gt_left">Jue</td>
 <td headers="momento" class="gt_row gt_left">Comida</td>
-<td headers="num_personas" class="gt_row gt_right">6</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">15.98</td>
-<td headers="propina" class="gt_row gt_right">3.00</td>
-<td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Vie</td>
-<td headers="momento" class="gt_row gt_left">Comida</td>
-<td headers="num_personas" class="gt_row gt_right">3</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">24.27</td>
-<td headers="propina" class="gt_row gt_right">2.03</td>
-<td headers="fumador" class="gt_row gt_left">Si</td>
-<td headers="dia" class="gt_row gt_left">Sab</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
 <td headers="num_personas" class="gt_row gt_right">2</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">29.93</td>
-<td headers="propina" class="gt_row gt_right">5.07</td>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">16.29</td>
+<td headers="propina" class="gt_row gt_right">3.71</td>
 <td headers="fumador" class="gt_row gt_left">No</td>
 <td headers="dia" class="gt_row gt_left">Dom</td>
 <td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">16.49</td>
-<td headers="propina" class="gt_row gt_right">2.00</td>
+<td headers="num_personas" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">8.51</td>
+<td headers="propina" class="gt_row gt_right">1.25</td>
 <td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Dom</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">4</td></tr>
+<td headers="dia" class="gt_row gt_left">Jue</td>
+<td headers="momento" class="gt_row gt_left">Comida</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
   </tbody>
   
   
@@ -602,18 +602,15 @@ separados según se fumó o no en la mesa, y temporalmente en dos partes:
 el día (Jueves, Viernes, Sábado o Domingo), cada uno separado por Cena y
 Comida.
 
-<div class="mathblock">
-<p>Denotamos por <span class="math inline">\(x\)</span> el valor de
-medición de una <em>unidad de observación.</em> Usualmente utilizamos
-sub-índices para identificar entre diferentes <em>puntos de datos</em>
-(observaciones), por ejemplo, <span class="math inline">\(x_n\)</span>
-para la <span class="math inline">\(n-\)</span>ésima observación. De tal
-forma que una colección de <span class="math inline">\(N\)</span>
-observaciones la escribimos como <span
-class="math display">\[\begin{align}
-\{x_1, \ldots, x_N\}.
-\end{align}\]</span></p>
-</div>
+<!-- ```{block, type='mathblock'} -->
+<!-- Denotamos por $x$ el valor de medición de una *unidad de observación.* -->
+<!-- Usualmente utilizamos sub-índices para identificar entre diferentes *puntos de -->
+<!-- datos* (observaciones), por ejemplo, $x_n$ para la $n-$ésima observación. De tal -->
+<!-- forma que una colección de $N$ observaciones la escribimos como -->
+<!-- \begin{align} -->
+<!-- \{x_1, \ldots, x_N\}. -->
+<!-- \end{align} -->
+<!-- ``` -->
 
 El primer tipo de comparaciones que nos interesa hacer es para una
 medición: ¿Varían mucho o poco los datos de un tipo de medición? ¿Cuáles
@@ -632,27 +629,28 @@ cuenta <- propinas |>
   select(orden_cuenta, f, cuenta_total) |> 
   arrange(f)
 bind_rows(head(cuenta), tail(cuenta)) |> 
-  gt() |> fmt_number(columns = f, decimals = 3)
+  gt() |> 
+  fmt_number(columns = f, decimals = 3)
 ```
 
 ```{=html}
-<div id="ntgmigrbhg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ntgmigrbhg table {
+<div id="ioqwoxzduj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ioqwoxzduj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ntgmigrbhg thead, #ntgmigrbhg tbody, #ntgmigrbhg tfoot, #ntgmigrbhg tr, #ntgmigrbhg td, #ntgmigrbhg th {
+#ioqwoxzduj thead, #ioqwoxzduj tbody, #ioqwoxzduj tfoot, #ioqwoxzduj tr, #ioqwoxzduj td, #ioqwoxzduj th {
   border-style: none;
 }
 
-#ntgmigrbhg p {
+#ioqwoxzduj p {
   margin: 0;
   padding: 0;
 }
 
-#ntgmigrbhg .gt_table {
+#ioqwoxzduj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -678,12 +676,12 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-left-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_caption {
+#ioqwoxzduj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ntgmigrbhg .gt_title {
+#ioqwoxzduj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -695,7 +693,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-bottom-width: 0;
 }
 
-#ntgmigrbhg .gt_subtitle {
+#ioqwoxzduj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -707,7 +705,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-top-width: 0;
 }
 
-#ntgmigrbhg .gt_heading {
+#ioqwoxzduj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -719,13 +717,13 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-right-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_bottom_border {
+#ioqwoxzduj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_col_headings {
+#ioqwoxzduj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -740,7 +738,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-right-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_col_heading {
+#ioqwoxzduj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -760,7 +758,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   overflow-x: hidden;
 }
 
-#ntgmigrbhg .gt_column_spanner_outer {
+#ioqwoxzduj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -772,15 +770,15 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 4px;
 }
 
-#ntgmigrbhg .gt_column_spanner_outer:first-child {
+#ioqwoxzduj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ntgmigrbhg .gt_column_spanner_outer:last-child {
+#ioqwoxzduj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ntgmigrbhg .gt_column_spanner {
+#ioqwoxzduj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -792,11 +790,11 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   width: 100%;
 }
 
-#ntgmigrbhg .gt_spanner_row {
+#ioqwoxzduj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ntgmigrbhg .gt_group_heading {
+#ioqwoxzduj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -822,7 +820,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   text-align: left;
 }
 
-#ntgmigrbhg .gt_empty_group_heading {
+#ioqwoxzduj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -837,15 +835,15 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   vertical-align: middle;
 }
 
-#ntgmigrbhg .gt_from_md > :first-child {
+#ioqwoxzduj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ntgmigrbhg .gt_from_md > :last-child {
+#ioqwoxzduj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ntgmigrbhg .gt_row {
+#ioqwoxzduj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -864,7 +862,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   overflow-x: hidden;
 }
 
-#ntgmigrbhg .gt_stub {
+#ioqwoxzduj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -877,7 +875,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#ntgmigrbhg .gt_stub_row_group {
+#ioqwoxzduj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -891,15 +889,15 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   vertical-align: top;
 }
 
-#ntgmigrbhg .gt_row_group_first td {
+#ioqwoxzduj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ntgmigrbhg .gt_row_group_first th {
+#ioqwoxzduj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ntgmigrbhg .gt_summary_row {
+#ioqwoxzduj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -909,16 +907,16 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#ntgmigrbhg .gt_first_summary_row {
+#ioqwoxzduj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_first_summary_row.thick {
+#ioqwoxzduj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ntgmigrbhg .gt_last_summary_row {
+#ioqwoxzduj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -928,7 +926,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-bottom-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_grand_summary_row {
+#ioqwoxzduj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -938,7 +936,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#ntgmigrbhg .gt_first_grand_summary_row {
+#ioqwoxzduj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +946,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-top-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_last_grand_summary_row_top {
+#ioqwoxzduj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -958,11 +956,11 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-bottom-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_striped {
+#ioqwoxzduj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ntgmigrbhg .gt_table_body {
+#ioqwoxzduj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -971,7 +969,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-bottom-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_footnotes {
+#ioqwoxzduj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -985,7 +983,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-right-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_footnote {
+#ioqwoxzduj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -994,7 +992,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#ntgmigrbhg .gt_sourcenotes {
+#ioqwoxzduj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1008,7 +1006,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-right-color: #D3D3D3;
 }
 
-#ntgmigrbhg .gt_sourcenote {
+#ioqwoxzduj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1016,72 +1014,72 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#ntgmigrbhg .gt_left {
+#ioqwoxzduj .gt_left {
   text-align: left;
 }
 
-#ntgmigrbhg .gt_center {
+#ioqwoxzduj .gt_center {
   text-align: center;
 }
 
-#ntgmigrbhg .gt_right {
+#ioqwoxzduj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ntgmigrbhg .gt_font_normal {
+#ioqwoxzduj .gt_font_normal {
   font-weight: normal;
 }
 
-#ntgmigrbhg .gt_font_bold {
+#ioqwoxzduj .gt_font_bold {
   font-weight: bold;
 }
 
-#ntgmigrbhg .gt_font_italic {
+#ioqwoxzduj .gt_font_italic {
   font-style: italic;
 }
 
-#ntgmigrbhg .gt_super {
+#ioqwoxzduj .gt_super {
   font-size: 65%;
 }
 
-#ntgmigrbhg .gt_footnote_marks {
+#ioqwoxzduj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ntgmigrbhg .gt_asterisk {
+#ioqwoxzduj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ntgmigrbhg .gt_indent_1 {
+#ioqwoxzduj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ntgmigrbhg .gt_indent_2 {
+#ioqwoxzduj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ntgmigrbhg .gt_indent_3 {
+#ioqwoxzduj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ntgmigrbhg .gt_indent_4 {
+#ioqwoxzduj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ntgmigrbhg .gt_indent_5 {
+#ioqwoxzduj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ntgmigrbhg .katex-display {
+#ioqwoxzduj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ntgmigrbhg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ioqwoxzduj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1140,7 +1138,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
 También podemos graficar los datos en orden, interpolando valores
 consecutivos.
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 A esta función le llamamos la **función de cuantiles** para la variable
 `cuenta_total`. Nos sirve para comparar directamente los distintos
@@ -1205,7 +1203,7 @@ gráfica:
     dispersión local o están más separados.
 
 **Observación**: Hay varias maneras de definir los cuantiles (ver
-[@cleveland93]): Supongamos que queremos definir $q(f)$, y denotamos los
+[@cleveland93], y [ejemplos](https://www.amherst.edu/media/view/129116/original/Sample+Quantiles.pdf): Supongamos que queremos definir $q(f)$, y denotamos los
 datos ordenados como $x_{(1)}, x_{(2)}, \ldots, x_{(N)}$, de forma que
 $x_{(1)}$ es el dato más chico y $x_{(N)}$ es el dato más grande. Para
 cada $x_{(i)}$ definimos\
@@ -1243,7 +1241,7 @@ g_acum <- ggplot(cuenta, aes(x = cuenta_total, y = dea_cuenta_total)) +
 g_cuantiles + g_acum
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 La función de distribución acumulada empírica es otra forma de graficar la dispersión de los datos. En su gráfica vemos que proporción de los datos que son iguales o están por debajo de cada valor en el eje horizontal.
 
@@ -1261,7 +1259,7 @@ dividimos el rango de la variable en cubetas o intervalos (en este caso
 de igual longitud), y graficamos por medio de barras cuántos datos caen
 en cada cubeta:
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-8-1.png" width="960" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-7-1.png" width="960" />
 
 Es una gráfica más popular, pero perdemos cierto nivel de detalle, y
 distintas particiones resaltan distintos aspectos de los datos.
@@ -1277,9 +1275,16 @@ g_1 <- ggplot(propinas, aes(sample = propina)) +
   geom_qq(distribution = stats::qunif) + 
   labs(x = "f", y = "propina")
 g_1
-```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-10-1.png" width="384" />
+binwidth_min <- 0.15
+h_1 <- ggplot(propinas, aes(x = propina)) + 
+  geom_histogram(binwidth = binwidth_min)
+h_2 <- ggplot(propinas, aes(x = propina)) + 
+  geom_histogram(binwidth = binwidth_min * 2)
+h_3 <- ggplot(propinas, aes(x = propina)) + 
+  geom_histogram(binwidth = binwidth_min * 5)
+h_1 + h_2 + h_3
+```
 
 Finalmente, una gráfica más compacta que resume la gráfica de cuantiles
 o el histograma es el **diagrama de caja y brazos**. Mostramos dos
@@ -1321,7 +1326,7 @@ g_1 + g_2 + g_3 + g_4 +
   plot_layout(widths = c(8, 2, 2, 2))
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-11-1.png" width="768" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-10-1.png" width="768" />
 
 
 El diagrama de abajo explica los elementos de la versión típica del
@@ -1351,8 +1356,6 @@ cuantiles:
 -   Es fácil comparar cuantiles de distintos bonches de datos en la
     misma escala
 
-**Nota:** Existen diferentes definiciones para calcular cuantiles de una muestra de 
-datos, puedes leer más en [este artículo](https://www.amherst.edu/media/view/129116/original/Sample+Quantiles.pdf).
 
 ### Media y desviación estándar {.unnumbered}
 
@@ -1456,7 +1459,7 @@ ggplot(casas, aes(x = nombre_zona, y = precio_miles)) +
   coord_flip()
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
 
 La primera pregunta que nos hacemos es cómo pueden variar las
 características de las casas dentro de cada zona. Para esto, podemos
@@ -1472,7 +1475,7 @@ ggplot(casas, aes(x = nombre_zona, y = precio_m2)) +
   coord_flip()
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" />
 
 Podemos cuantificar la variación que observamos de zona a zona y la
 variación que hay dentro de cada una de las zonas. Una primera
@@ -1552,7 +1555,7 @@ extremos.
 Podemos seguir con otro indicador importante: la calificación de calidad
 de los terminados de las casas. Como primer intento podríamos hacer:
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
 
 Lo que indica que las calificaciones de calidad están distribuidas de
 manera muy distinta a lo largo de las zonas, y que probablemente no va
@@ -2083,7 +2086,7 @@ los cuantiles 0.05, 0.25, 0.5, 0.75 y 0.95:
 ## generated.
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-26-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-25-1.png" width="95%" style="display: block; margin: auto;" />
 
 Se puede discutir qué tan apropiada es cada gráfica con el objetivo de
 realizar comparaciones. Sin duda, graficar más cuantiles es más útil
@@ -2102,7 +2105,7 @@ marginación del municipio donde se encuentra la escuela.
 Para este objetivo, podemos usar páneles (pequeños múltiplos útiles para
 hacer comparaciones) y graficar:
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-28-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-27-1.png" width="95%" style="display: block; margin: auto;" />
 
 Esta gráfica pone en contexto la pregunta inicial, y permite evidenciar
 la dificultad de contestarla. En particular:
@@ -2647,7 +2650,7 @@ ggplot(sat, aes(x = expend, y = sat, label = state)) +
   ylab("Calificación promedio en SAT")
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-30-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-29-1.png" width="95%" style="display: block; margin: auto;" />
 
 Estas comparaciones no son de alta calidad, solo estamos usando 2
 variables ---que son muy pocas--- y no hay mucho que podamos decir en
@@ -2670,7 +2673,7 @@ ggplot(sat, aes(x = expend, y = math, label=state, colour = frac)) +
   ylab("Calificación promedio en SAT")
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-31-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-30-1.png" width="95%" style="display: block; margin: auto;" />
 
 Esto nos permite entender por qué nuestra comparación inicial es
 relativamente pobre. Los estados con mejores resultados promedio en el
@@ -2696,7 +2699,7 @@ ggplot(sat, aes(x = rank_p, y = frac, label = state, colour = clase_media)) +
   geom_point(size = 2)
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-32-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-31-1.png" width="95%" style="display: block; margin: auto;" />
 
 Estos resultados indican que es más probable que buenos alumnos decidan
 hacer el SAT. Lo interesante es que esto ocurre de manera diferente en
@@ -2707,7 +2710,7 @@ Si hacemos *clusters* de estados según el % de alumnos, empezamos a ver
 otra historia. Para esto, ajustemos rectas de mínimos cuadrados como
 referencia:
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-33-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" />
 
 Esto da una imagen muy diferente a la que originalmente planteamos. Nota
 que dependiendo de cómo categorizamos, esta gráfica puede variar (puedes
@@ -3768,7 +3771,7 @@ ggplot(tabla_cruzada |> ungroup() |>
   geom_point() + coord_flip() + geom_line()
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-38-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-37-1.png" width="90%" style="display: block; margin: auto;" />
 
 En lugar de eso, calcularemos *perfiles columna*. Esto es, comparamos
 cada una de las columnas con la columna marginal (en la tabla de tipo de
@@ -3909,7 +3912,7 @@ g_perfil <- ggplot(tabla_graf,
 g_perfil
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-41-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-40-1.png" width="95%" style="display: block; margin: auto;" />
 
 **Observación**: hay dos maneras de construir la columna promedio:
 tomando los porcentajes sobre todos los datos, o promediando los
@@ -3966,7 +3969,7 @@ ggplot(ventas.sorteo, aes(x = premio, y = ventas.tot.1)) +
   scale_y_log10(breaks = c(10000, 15000, 22000, 33000))
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-42-1.png" width="345.6" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-41-1.png" width="345.6" style="display: block; margin: auto;" />
 
 
 
@@ -4002,7 +4005,7 @@ ggplot(ventas.sorteo, aes(x = premio, y = ventas.tot.1)) +
   scale_y_log10(breaks = c(10000, 15000, 22000, 33000))
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-44-1.png" width="345.6" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-43-1.png" width="345.6" style="display: block; margin: auto;" />
 
 Si observamos la gráfica notamos que este modelo lineal (en los
 logaritmos) no resumen adecuadamente estos datos. Podríamos experimentar
@@ -4096,7 +4099,7 @@ tricubo <- function(x) {
 curve(tricubo, from = -1.5, to = 1.5)
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-45-1.png" width="326.4" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-44-1.png" width="326.4" style="display: block; margin: auto;" />
 
 Finalmente, para cada valor de $x_k$ que está en el conjunto de datos
 $\{x_1,...,x_n\}$, ajustamos una recta de mínimos cuadrados ponderados
@@ -4183,7 +4186,7 @@ Consideremos los *datos agregados* del número de nacimientos
 ser hacer una gráfica de la serie de tiempo. Sin embargo, vemos que no
 es muy útil:
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-48-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-47-1.png" width="90%" style="display: block; margin: auto;" />
 
 Hay varias características que notamos. Primero, parece haber una
 tendencia ligeramente decreciente del número de nacimientos a lo largo
@@ -4232,7 +4235,7 @@ datos_dia <- natalidad |>
   mutate(res_1 = n - ajuste_1)
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-51-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-50-1.png" width="95%" style="display: block; margin: auto;" />
 
 Notemos que a principios de 2000 el suavizador está en niveles de
 alrededor de 7000 nacimientos diarios, hacia 2015 ese número es más
@@ -4253,7 +4256,7 @@ datos_dia <- datos_dia |> mutate(ajuste_2 = fitted(mod_anual)) |>
   mutate(res_2 = res_1 - ajuste_2)
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-53-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-52-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Día de la semana {.unnumbered}
 
@@ -4278,7 +4281,7 @@ datos_dia <- datos_dia |>
   ungroup()
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-55-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-54-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Residuales {.unnumbered}
 
@@ -4290,7 +4293,7 @@ ajustados:
 ## `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-56-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-55-1.png" width="90%" style="display: block; margin: auto;" />
 
 **Observación**: nótese que la distribución de estos residuales presenta
 irregularidades interesantes. La distribución es de *colas largas*, y no
@@ -4298,7 +4301,7 @@ se debe a unos cuantos datos atípicos. Esto generalmente es indicación
 que hay factores importantes que hay que examinar mas a detalle en los
 residuales:
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-57-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-56-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Reestimación {.unnumbered}
 
@@ -4320,15 +4323,15 @@ mod_1 <- loess(n_1 ~ as.numeric(fecha), data = datos_dia, span = 0.02, degree = 
                family = "symmetric")
 ```
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-59-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-58-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-61-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-60-1.png" width="90%" style="display: block; margin: auto;" />
 
 Y ahora repetimos con la componente de día de la semana:
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-62-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-61-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Análisis de componentes {.unnumbered}
 
@@ -4336,7 +4339,7 @@ Ahora comparamos las componentes estimadas y los residuales en una misma
 gráfica. Por definición, la suma de todas estas componentes da los datos
 originales.
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-63-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-62-1.png" width="90%" style="display: block; margin: auto;" />
 
 Este último paso nos permite diversas comparaciones que explican la
 variación que vimos en los datos. Una gran parte de los residuales está
@@ -4362,7 +4365,7 @@ quantile(datos_dia$res_6, c(00, .01,0.05, 0.10, 0.90, 0.95, 0.99, 1)) |> round()
 Podemos empezar con una curosidad. Los días Viernes o Martes 13, ¿nacen
 menos niños?
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-66-1.png" width="1152" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-65-1.png" width="1152" />
 
 Nótese que fue útil agregar el indicador de Semana santa por el Viernes
 13 de Semana Santa que se ve como un atípico en el panel de los viernes
@@ -4373,7 +4376,7 @@ Nótese que fue útil agregar el indicador de Semana santa por el Viernes
 Veamos primero una agregación sobre los años de los residuales. Lo
 primero es observar un cambio que sucedió repentinamente en 2006:
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-67-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-66-1.png" width="90%" style="display: block; margin: auto;" />
 
 La razón es un cambio en la ley acerca de cuándo pueden entrar los niños
 a la primaria. Antes era por edad y había poco margen. Ese exceso de
@@ -4396,7 +4399,7 @@ identificar ahora los residuales más grandes: se deben, por ejemplo, a
 días feriados, con consecuencias adicionales que tienen en días ajuntos
 (excesos de nacimientos):
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-68-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-67-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Semana santa {.unnumbered}
 
@@ -4406,7 +4409,7 @@ fuerte de nacimientos el Viernes de Semana Santa, y la característica
 forma de "valle con hombros" en días anteriores y posteriores estos
 Viernes. ¿Por qué ocurre este patrón?
 
-<img src="01-exploratorio_files/figure-html/unnamed-chunk-69-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="01-exploratorio_files/figure-html/unnamed-chunk-68-1.png" width="90%" style="display: block; margin: auto;" />
 
 Nótese un defecto de nuestro modelo: el patrón de "hombros" alrededor
 del Viernes Santo no es suficientemente fuerte para equilibrar los
