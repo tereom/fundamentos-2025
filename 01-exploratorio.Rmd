@@ -249,11 +249,12 @@ distintas particiones resaltan distintos aspectos de los datos.
 compara con distintos histogramas?
 ```
 
-```{r, fig.width = 4, fig.height = 3, eval = FALSE}
+```{r, fig.width = 4, fig.height = 3, eval = FALSE, echo=FALSE}
 g_1 <- ggplot(propinas, aes(sample = propina)) +
   geom_qq(distribution = stats::qunif) + 
   labs(x = "f", y = "propina")
 g_1
+
 
 binwidth_min <- 0.15
 h_1 <- ggplot(propinas, aes(x = propina)) + 
@@ -769,7 +770,7 @@ te <- tea |> select(how, price, sugar) |>
 ```
 
 ```{r}
-sample_n(te, 10)
+slice_sample(te, n = 10)
 ```
 
 Nos interesa ver qué personas compran té suelto, y de qué tipo.
@@ -792,7 +793,6 @@ de té (en términos de precio o marca) que compran es muy distinto
 dependiendo de la presentación:
 
 ```{r}
-tipo <- tipo |> select(presentacion, prop_presentacion = pct)
 tabla_cruzada <- te |>
   count(presentacion, precio) |>
   # porcentajes por presentación
