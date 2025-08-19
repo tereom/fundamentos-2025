@@ -8,11 +8,12 @@
 #### El cuarteto de Anscombe {-}
 
 En 1971 un estadístico llamado Frank Anscombe (fundador del departamento de
-Estadística de la Universidad de Yale) publicó cuatro conjuntos de dato. Cada
+Estadística de la Universidad de Yale) publicó cuatro conjuntos de datos. Cada
 uno consiste de 11 observaciones. La peculariedad de estos conjuntos es 
-que tienen las mismas propiedades estadísticas.
+que tienen las mismas propiedades estadísticas (media, mediana, varianza 
+y correlación).
 
-Sin embargo, cuando analizamos los datos de manera gráfica en un histograma
+Sin embargo, cuando analizamos los datos de manera gráfica
 encontramos rápidamente que los conjuntos de datos son muy distintos.
 
 <div style= "float:left;top:-10px;width:500px;">
@@ -58,9 +59,12 @@ las dos variables.
 </div>
 
 El cuarteto de Ascombe inspiró una técnica reciente para crear datos que comparten las
-mismas propiedades estadísticas al igual que en el cuarteto, pero que producen gráficas
+mismas propiedades estadísticas, igual que en el caso del cuarteto, pero que producen gráficas
 muy distintas ([Matejka,
 Fitzmaurice](https://www.autodeskresearch.com/publications/samestats)).
+
+El propósito de estos ejemplos de datos sintéticos es destacar la importancia
+de la visualización de datos.
 
 <div style="clear:both"></div>
 
@@ -77,7 +81,7 @@ El siguiente ejemplo de [@tufte06], ilustra claramente la diferencia entre estos
 dos enfoques. A la izquierda están gráficas (más o menos típicas de Powerpoint)
 basadas en la filosofía de simplificar, de intentar no “ahogar” al lector con
 datos. El resultado es una colección incoherente, de bajo contenido, que no
-tiene mucho qué decir y que es, “indeferente al contenido y la evidencia”.
+tiene mucho qué decir y que es, “indiferente al contenido y la evidencia”.
 A la derecha está una variación del rediseño de Tufte en forma de tabla, que en
 este caso particular es una manera eficiente de mostrar claramente los patrones
 que hay en este conjunto simple de datos.
@@ -108,12 +112,13 @@ adulto, lo graficado para el niño).
 ## Teoría de visualización de datos {-}
 
 Existe teoría fundamentada acerca de la visualización. Después del trabajo
-pionero de Tukey, los principios e indicadores de Tufte se basan en un estudio
-de la historia de la graficación y ejercicios de muestreo de la práctica gráfica
+pionero de Tukey, surgen aportaciones de Tufte que propone principios e indicadores 
+que se basan en un estudio
+de la historia de la graficación y en ejercicios de muestreo de la práctica gráfica
 a lo largo de varias disciplinas (¿cuáles son las mejores gráficas? ¿por qué?)
-El trabajo de Cleveland es orientado a la práctica del análisis de datos
+Por otra parte está el trabajo de Cleveland orientado a la práctica del análisis de datos
 (¿cuáles gráficas nos han ayudado a mostrar claramente los resultados del
-análisis?), por una parte, y a algunos estudios de percepción visual.
+análisis?), adicional Cleveland considera algunos estudios de percepción visual.
 
 En resumen, hablaremos de las siguientes guías:
 
@@ -154,7 +159,7 @@ confianza.<br />
 </div>
 
 ### Indicadores de calidad gráfica {-}
-Aplicables a cualquier gráfica en particular. Estas son guías concretas y
+Aplicables a cualquier gráfica. Estas son guías concretas y
 relativamente objetivas para evaluar la calidad de una gráfica [@tufte86].
 
 <div class="caja">
@@ -198,7 +203,7 @@ corresponde a variación en los datos (chartjunk).
 
 #### Crítica gráfica: Gráfica de *pie* {-}
 
-Todavía elementos que pueden mejorar la comprensión de nuestra
+Hay otros elementos que pueden mejorar la comprensión de nuestra
 gráfica de *pie*: se trata de la
 decodificiación que hay que hacer categoría - color - cuantificación. Podemos
 agregar las etiquetas como se muestra en la serie de la derecha, pero entonces:
@@ -238,14 +243,16 @@ patrones en los datos.
 La densidad de una gráfica es el tamaño del conjunto de datos que se grafica
 comparado con el área total de la gráfica. En el siguiente ejemplo, graficamos
 en logaritmo-10 de millones de cabezas de ganado en Francia (cerdos, res, ovejas y
-caballos). La gráfica de la izquierda es pobre en densidad pues sólo representa
+caballos). La gráfica de la izquierda es pobre en densidad pues ocupa mucho espacio
+para sólo representar
 4 datos. La manera más fácil de mejorar la densidad es hacer más chica la
 gráfica:
 
 
 <img src="images/france_plot.jpg" width="98%" />
 
-La razón de este encogimiento es una que tiene qué ver con las oportunidades perdidas de una gráfica grande. Si repetimos este mismo patrón (misma escala, mismos tipos de ganado) para distintos países obtenemos la siguiente gráfica:
+La razón por la que este encogimiento es relevante tiene qué ver con las oportunidades perdidas de una gráfica grande. 
+Si repetimos este mismo patrón (misma escala, mismos tipos de ganado) para distintos países obtenemos la siguiente gráfica:
 
 <div style= "float:left;top: -10px;width:500px">
 ![](images/europe_plot.jpg)
@@ -268,7 +275,7 @@ de radiación solar y niveles de ozono:
 
 <img src="88-visualizacion_files/figure-html/unnamed-chunk-10-1.png" width="45%" style="display: block; margin: auto;" />
 
-En el ejemplo anterior incluyendo
+En este caso, si incluimos
 una variable adicional (velocidad del viento) podemos entender más
 acerca de la relación de radiación solar y niveles de ozono:
 
@@ -291,11 +298,12 @@ tablas:
 
 ¿Por qué usar grises en lugar de negros? La respuesta tiene qué ver con el
 principio de tinta de datos: si marcamos las diferencias sutil pero claramente,
-tenemos más oportunidades abiertas para hacer énfasis en lo que nos interesa: a
+tenemos más oportunidades para hacer énfasis en lo que nos interesa: a
 una gráfica o tabla saturada no se le puede hacer más - es difícil agregar
-elementos adicionales que ayuden a la comprensión. Si comenzamos marcando con
+elementos adicionales que ayuden a la comprensión. Si por el contrario comenzamos marcando con
 sutileza, entonces se puede hacer más. Los mapas geográficos son un buen ejemplo
-de este principio.
+de este principio donde, en muchos casos, las fronteras geográficas o delimitaciones naturales se conforman por delgadas lineas que permiten
+sobreponer información adicional, ver por ejemplo [este mapa](https://www.sct.gob.mx/fileadmin/DireccionesGrales/DGP/Atlas/Mapas_2023/MAPA_NACIONAL_2023.pdf).
 
 El espacio en blanco es suficientemente bueno para indicar las fronteras en una
 tabla, y facilita la lectura:
@@ -328,7 +336,7 @@ una gráfica de pie.
 <img src="images/cleveland_tasks.png" width="95%" style="display: block; margin: auto;" />
 
 Los resultados de Cleveland y McGill fueron replicados por Heer y Bostock en
-2010 y los resultados se muestran en las gráficas de la derecha:
+2010, añadiendo algunas visualizaciones adicionales:
 
 <img src="images/heer-bostock_results.png" width="50%" style="display: block; margin: auto;" />
 
