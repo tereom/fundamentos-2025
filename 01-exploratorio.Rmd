@@ -905,7 +905,7 @@ trabajo analítico.
 ## Suavizamiento loess {.unnumbered}
 
 Las gráficas de dispersión son la herramienta básica para describir la
-relación entre dos variables cuantitativas, y como vimos en ejemplo
+relación entre dos variables cuantitativas, y como vimos en ejemplos
 anteriores, muchas veces podemos apreciar mejor la relación entre ellas
 si agregamos una curva `loess`.
 
@@ -954,16 +954,17 @@ menores. Este efecto se conoce como *bola de nieve*, y es frecuente en
 este tipo de loterías.
 
 Antes de adentrarnos a los modelos `loess` comenzamos explicando cómo se
-ajustan familias paramétricas de curvas a conjuntos de datos dados. El
-modelo de *regresion lineal* ajusta una recta a un conjunto de datos.
-Por ejemplo, consideremos la familia $$f_{a,b}(x) = a x + b,$$ para un
-conjunto de datos bivariados $\{ (x_1, y_1), \ldots, (x_N, y_N)\}$.
+ajustan familias paramétricas de curvas a conjuntos de datos dados.  a
+Por ejemplo, consideremos el modelo de *regresion lineal* para un conjunto 
+de datos bivariados, la familia paramétrica 
+es $$f_{a,b}(x) = a x + b,$$ 
+con $\{ (x_1, y_1), \ldots, (x_N, y_N)\}$.
 Buscamos encontrar $a$ y $b$ tales que $f_{a,b}$ de un ajuste *óptimo* a
 los datos. Para esto, se minimiza la suma de errores cuadráticos
 
 $$\frac1N \sum_{n = 1}^N ( y_n - a x_n - b)^2.$$
 
-En este caso, las constantes $a$ y $b$ se pueden encontrar diferenciando
+En este caso, las conhttps://tereom.github.io/fundamentos-2025/tipos-de-estudio-y-experimentos.htmlstantes $a$ y $b$ se pueden encontrar diferenciando
 la función de mínimos cuadrados. Nótese que podemos repetir el argumento
 con otras familias de funciones (por ejemplo cuadráticas).
 
@@ -1154,7 +1155,7 @@ tricubo <- function(x) {
 curve(tricubo, from = -1.5, to = 1.5)
 ```
 
-Finalmente, para cada valor de $x_k$ que está en el conjunto de datos
+Finalmente, para cada valor de $x$ que está en el rango del conjunto de datos
 $\{x_1,...,x_n\}$, ajustamos una recta de mínimos cuadrados ponderados
 por los pesos $w_n(x)$, es decir, minimizamos (en el caso lineal):
 
@@ -1252,7 +1253,7 @@ tendencia ligeramente decreciente del número de nacimientos a lo largo
 de los años. Segundo, la gráfica sugiere un patrón anual. Y por último,
 encontramos que hay dispersión producida por los días de la semana.
 
-Sólo estas características hacen que la comparación entre días sea
+Estas características hacen que la comparación entre días sea
 difícil de realizar. Supongamos que comparamos el número de nacimientos
 de dos miércoles dados. Esa comparación será diferente dependiendo: del
 año donde ocurrieron, el mes donde ocurrieron, si semana santa ocurrió
@@ -1620,3 +1621,6 @@ ggplot(datos_pascua, aes(x = dias_para_pascua, y = res_6)) +
 Nótese un defecto de nuestro modelo: el patrón de "hombros" alrededor
 del Viernes Santo no es suficientemente fuerte para equilibrar los
 nacimientos faltantes. ¿Cómo podríamos mejorar nuestra descomposición?
+
+Esta metodología para descomponer de series de tiempo a veces se conoce como
+STL por sus siglas en inglés (Seasonal and Trend decomposition using Loess).
