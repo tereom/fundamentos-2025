@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Apéndice II: Transformaciones | Fundamentos de Estadística con Remuestreo</title>
+  <meta name="description" content="Curso de Fundamentos de Estadística con Remuestreo, maestría en Ciencia de Datos, ITAM, Otoño 2025." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Apéndice II: Transformaciones | Fundamentos de Estadística con Remuestreo" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Curso de Fundamentos de Estadística con Remuestreo, maestría en Ciencia de Datos, ITAM, Otoño 2025." />
+  <meta name="github-repo" content="tereom/fundamentos-2025" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Apéndice II: Transformaciones | Fundamentos de Estadística con Remuestreo" />
+  
+  <meta name="twitter:description" content="Curso de Fundamentos de Estadística con Remuestreo, maestría en Ciencia de Datos, ITAM, Otoño 2025." />
+  
+
+<meta name="author" content="Teresa Ortiz, Felipe González" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="apéndice-i-principios-de-visualizacion.html"/>
+<link rel="next" href="referencias.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="icon" type="image/png" href="images/favicon-2.png" sizes="any">
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous">
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/fnaufel/smartify/smartify.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Fundamentos de Estadística con Remuestreo</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Información del curso</a></li>
+<li class="chapter" data-level="" data-path="temario.html"><a href="temario.html"><i class="fa fa-check"></i>Temario</a>
+<ul>
+<li class="chapter" data-level="" data-path="temario.html"><a href="temario.html#plan-semanal"><i class="fa fa-check"></i>Plan semanal</a></li>
+<li class="chapter" data-level="" data-path="temario.html"><a href="temario.html#evaluación"><i class="fa fa-check"></i>Evaluación</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html"><i class="fa fa-check"></i><b>1</b> Análisis exploratorio</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#el-papel-de-la-exploración-en-el-análisis-de-datos"><i class="fa fa-check"></i>El papel de la exploración en el análisis de datos</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#preguntas-y-datos"><i class="fa fa-check"></i>Preguntas y datos</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#algunos-conceptos-básicos"><i class="fa fa-check"></i>Algunos conceptos básicos</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#histogramas"><i class="fa fa-check"></i>Histogramas</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#media-y-desviación-estándar"><i class="fa fa-check"></i>Media y desviación estándar</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#precios-de-casas"><i class="fa fa-check"></i>Precios de casas</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#prueba-enlace"><i class="fa fa-check"></i>Prueba Enlace</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#estados-y-calificaciones-en-sat"><i class="fa fa-check"></i>Estados y calificaciones en SAT</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#tablas-de-conteos"><i class="fa fa-check"></i>Tablas de conteos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#suavizamiento-loess"><i class="fa fa-check"></i>Suavizamiento loess</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#opcional-cálculo-del-suavizador"><i class="fa fa-check"></i>Opcional: cálculo del suavizador</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#caso-de-estudio-nacimientos-en-méxico"><i class="fa fa-check"></i>Caso de estudio: nacimientos en México</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#datos-de-natalidad-para-méxico"><i class="fa fa-check"></i>Datos de natalidad para México</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#tendencia"><i class="fa fa-check"></i>Tendencia</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#componente-anual"><i class="fa fa-check"></i>Componente anual</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#día-de-la-semana"><i class="fa fa-check"></i>Día de la semana</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#residuales"><i class="fa fa-check"></i>Residuales</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#reestimación"><i class="fa fa-check"></i>Reestimación</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#análisis-de-componentes"><i class="fa fa-check"></i>Análisis de componentes</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#residuales-antes-y-después-de-2006"><i class="fa fa-check"></i>Residuales: antes y después de 2006</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#otros-días-especiales-más-de-residuales"><i class="fa fa-check"></i>Otros días especiales: más de residuales</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#semana-santa"><i class="fa fa-check"></i>Semana santa</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html"><i class="fa fa-check"></i><b>2</b> Tipos de estudio y experimentos</a>
+<ul>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#motivación"><i class="fa fa-check"></i>Motivación</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#proceso-generador-de-datos"><i class="fa fa-check"></i>Proceso Generador de Datos</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#ejemplo-prevalencia-de-anemia"><i class="fa fa-check"></i>Ejemplo: Prevalencia de anemia</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#muestreo-aleatorio"><i class="fa fa-check"></i>Muestreo aleatorio</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#pero-si-no-podemos-hacer-muestreo-aleatorio"><i class="fa fa-check"></i>Pero si no podemos hacer muestreo aleatorio?</a>
+<ul>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#ejemplo-policías-y-tráfico"><i class="fa fa-check"></i>Ejemplo: Policías y tráfico</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#el-estimador-estándar"><i class="fa fa-check"></i>El estimador estándar</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#experimentos-tradicionales"><i class="fa fa-check"></i>Experimentos tradicionales</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#bloqueo"><i class="fa fa-check"></i>Bloqueo</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#variables-desconocidas"><i class="fa fa-check"></i>Variables desconocidas</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#aleatorizando-el-tratamiento"><i class="fa fa-check"></i>Aleatorizando el tratamiento</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#selección-de-unidades-y-tratamiento"><i class="fa fa-check"></i>Selección de unidades y tratamiento</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#asignación-natural-del-tratamiento"><i class="fa fa-check"></i>Asignación natural del tratamiento</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html"><i class="fa fa-check"></i>Apéndice I: Principios de visualizacion</a>
+<ul>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#introducción"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#visualización-popular-de-datos"><i class="fa fa-check"></i>Visualización popular de datos</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#teoría-de-visualización-de-datos"><i class="fa fa-check"></i>Teoría de visualización de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#principios-generales-del-diseño-analítico"><i class="fa fa-check"></i>Principios generales del diseño analítico</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#técnicas-de-visualización"><i class="fa fa-check"></i>Técnicas de visualización</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#indicadores-de-calidad-gráfica"><i class="fa fa-check"></i>Indicadores de calidad gráfica</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#factor-de-engaño-y-chartjunk"><i class="fa fa-check"></i>Factor de engaño y Chartjunk</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#pequeños-múltiplos-y-densidad-gráfica"><i class="fa fa-check"></i>Pequeños múltiplos y densidad gráfica</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#tinta-de-datos"><i class="fa fa-check"></i>Tinta de datos</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#decoración"><i class="fa fa-check"></i>Decoración</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#percepción-de-escala"><i class="fa fa-check"></i>Percepción de escala</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#ejemplo-gráfica-de-minard"><i class="fa fa-check"></i>Ejemplo: gráfica de Minard</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="apéndice-ii-transformaciones.html"><a href="apéndice-ii-transformaciones.html"><i class="fa fa-check"></i>Apéndice II: Transformaciones</a></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/tereom/fundamentos-2025" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentos de Estadística con Remuestreo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="apéndice-ii-transformaciones" class="section level1 unnumbered hasAnchor">
+<h1>Apéndice II: Transformaciones<a href="apéndice-ii-transformaciones.html#apéndice-ii-transformaciones" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>En ocasiones es conveniente transformar los datos para el análisis, el
+objetivo de transformar es simplificar la interpretación y el análisis al
+eliminar fuentes de variación conocidas, también es común realizar
+transformaciones para simplificar los patrones.</p>
+<p>Algunos ejemplos donde eliminamos efectos conocidos:</p>
+<ol style="list-style-type: decimal">
+<li><p>Cuando analizamos el precio de venta de las casas podemos eliminar la variación
+debida al tamaño de las casas al pasar de precio de venta a precio de venta por metro cuadrado.
+De manera similar al analizar las propinas puede convenir considerar la propina como porcentaje de la cuenta.</p></li>
+<li><p>En series de tiempo cuando los datos están relacionados con el tamaño de la
+población podemos ajustar a mediciones per capita (en series de tiempo PIB). También es común ajustar por inflación, o poner cantidades monetarias en valor presente.</p></li>
+</ol>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="apéndice-ii-transformaciones.html#cb55-1" aria-hidden="true" tabindex="-1"></a>mex_dat <span class="ot">&lt;-</span> global_economy <span class="sc">|&gt;</span> </span>
+<span id="cb55-2"><a href="apéndice-ii-transformaciones.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Code <span class="sc">==</span> <span class="st">&quot;MEX&quot;</span>)</span>
+<span id="cb55-3"><a href="apéndice-ii-transformaciones.html#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="apéndice-ii-transformaciones.html#cb55-4" aria-hidden="true" tabindex="-1"></a>pib <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mex_dat, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> GDP <span class="sc">/</span> <span class="fl">1e6</span>)) <span class="sc">+</span></span>
+<span id="cb55-5"><a href="apéndice-ii-transformaciones.html#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb55-6"><a href="apéndice-ii-transformaciones.html#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="apéndice-ii-transformaciones.html#cb55-7" aria-hidden="true" tabindex="-1"></a>pib_pc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mex_dat, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> GDP <span class="sc">/</span> Population)) <span class="sc">+</span></span>
+<span id="cb55-8"><a href="apéndice-ii-transformaciones.html#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb55-9"><a href="apéndice-ii-transformaciones.html#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-10"><a href="apéndice-ii-transformaciones.html#cb55-10" aria-hidden="true" tabindex="-1"></a>pib <span class="sc">+</span> pib_pc</span></code></pre></div>
+<p><img src="89-transformaciones_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
+<p>Adicionalmente podemos recurrir a otras transformaciones matemáticas (e.g. logaritmo, raíz cuadrada) que simplifiquen
+el patrón en los datos y la interpretación.</p>
+<p>Veamos un ejemplo donde es apropiado la transformación logaritmo.</p>
+<p>Usamos los datos Animals con información de peso corporal promedio y peso cerebral
+promedio para 28 especies. Buscamos entender la relación entre estas dos
+variables, e inspeccionar que especies se desvían (residuales) del esperado.
+Comenzamos con un diagrama de dispersión usando las unidades originales</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="apéndice-ii-transformaciones.html#cb56-1" aria-hidden="true" tabindex="-1"></a>animals_tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Animals, <span class="at">rownames =</span> <span class="st">&quot;animal&quot;</span>)</span>
+<span id="cb56-2"><a href="apéndice-ii-transformaciones.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="apéndice-ii-transformaciones.html#cb56-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(animals_tbl, <span class="fu">aes</span>(<span class="at">x =</span> body, <span class="at">y =</span> brain, <span class="at">label =</span> animal)) <span class="sc">+</span></span>
+<span id="cb56-4"><a href="apéndice-ii-transformaciones.html#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb56-5"><a href="apéndice-ii-transformaciones.html#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;Unidades originales&quot;</span>)</span>
+<span id="cb56-6"><a href="apéndice-ii-transformaciones.html#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="apéndice-ii-transformaciones.html#cb56-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(animals_tbl, <span class="fu">aes</span>(<span class="at">x =</span> body, <span class="at">y =</span> brain, <span class="at">label =</span> animal)) <span class="sc">+</span></span>
+<span id="cb56-8"><a href="apéndice-ii-transformaciones.html#cb56-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">500</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1500</span>) <span class="sc">+</span></span>
+<span id="cb56-9"><a href="apéndice-ii-transformaciones.html#cb56-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>() <span class="sc">+</span> </span>
+<span id="cb56-10"><a href="apéndice-ii-transformaciones.html#cb56-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;Unidades originales, eliminando &#39;grandes&#39;&quot;</span>)</span>
+<span id="cb56-11"><a href="apéndice-ii-transformaciones.html#cb56-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-12"><a href="apéndice-ii-transformaciones.html#cb56-12" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">+</span> p2)</span></code></pre></div>
+<p><img src="89-transformaciones_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Incluso cuando nos limitamos a especies de menos de 500 kg de masa corporal, la
+relación no es fácil de descrubir.En la suguiente gráfica hacemos la transformación
+logaritmo y obtenemos una gráfica más fácil de
+leer, además los datos se modelarán con más facilidad.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="apéndice-ii-transformaciones.html#cb57-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(animals_tbl, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(body), <span class="at">y =</span> <span class="fu">log</span>(brain), <span class="at">label =</span> animal)) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="apéndice-ii-transformaciones.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="apéndice-ii-transformaciones.html#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb57-4"><a href="apéndice-ii-transformaciones.html#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>()  <span class="sc">+</span> </span>
+<span id="cb57-5"><a href="apéndice-ii-transformaciones.html#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_eq</span>(<span class="fu">use_label</span>(<span class="fu">c</span>(<span class="st">&quot;eq&quot;</span>))) </span>
+<span id="cb57-6"><a href="apéndice-ii-transformaciones.html#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-7"><a href="apéndice-ii-transformaciones.html#cb57-7" aria-hidden="true" tabindex="-1"></a>p3</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="89-transformaciones_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>La transformación logaritmo tiene también ventajas en interpretación, para diferencias
+chicas en escala log, las diferencias corresponden a diferencias porcentuales
+en la escala original, por ejempo consideremos la diferencia entre el peso en escala
+log de humano y borrego: 4.13 - 4.02 = 0.11.
+Confirmamos que el humano es aproximadamente 11% más pesado que el borrego en la
+escala original: 62/55.5 - 1 = 0.12</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="apéndice-ii-transformaciones.html#cb59-1" aria-hidden="true" tabindex="-1"></a>animals_tbl <span class="ot">&lt;-</span> animals_tbl <span class="sc">|&gt;</span>  </span>
+<span id="cb59-2"><a href="apéndice-ii-transformaciones.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_body =</span> <span class="fu">log</span>(body), </span>
+<span id="cb59-3"><a href="apéndice-ii-transformaciones.html#cb59-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">log_brain =</span> <span class="fu">log</span>(brain)) </span>
+<span id="cb59-4"><a href="apéndice-ii-transformaciones.html#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="apéndice-ii-transformaciones.html#cb59-5" aria-hidden="true" tabindex="-1"></a>animals_tbl <span class="sc">|&gt;</span> </span>
+<span id="cb59-6"><a href="apéndice-ii-transformaciones.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(animal <span class="sc">==</span> <span class="st">&quot;Human&quot;</span> <span class="sc">|</span> animal <span class="sc">==</span> <span class="st">&quot;Sheep&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb59-7"><a href="apéndice-ii-transformaciones.html#cb59-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(body) <span class="sc">|&gt;</span> </span>
+<span id="cb59-8"><a href="apéndice-ii-transformaciones.html#cb59-8" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb59-9"><a href="apéndice-ii-transformaciones.html#cb59-9" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>()</span></code></pre></div>
+<div id="ikyzghqwit" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ikyzghqwit table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ikyzghqwit thead, #ikyzghqwit tbody, #ikyzghqwit tfoot, #ikyzghqwit tr, #ikyzghqwit td, #ikyzghqwit th {
+  border-style: none;
+}
+
+#ikyzghqwit p {
+  margin: 0;
+  padding: 0;
+}
+
+#ikyzghqwit .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ikyzghqwit .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ikyzghqwit .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ikyzghqwit .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ikyzghqwit .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ikyzghqwit .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ikyzghqwit .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ikyzghqwit .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ikyzghqwit .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ikyzghqwit .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ikyzghqwit .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ikyzghqwit .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ikyzghqwit .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ikyzghqwit .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ikyzghqwit .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikyzghqwit .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ikyzghqwit .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ikyzghqwit .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ikyzghqwit .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikyzghqwit .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ikyzghqwit .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikyzghqwit .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ikyzghqwit .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikyzghqwit .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ikyzghqwit .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikyzghqwit .gt_left {
+  text-align: left;
+}
+
+#ikyzghqwit .gt_center {
+  text-align: center;
+}
+
+#ikyzghqwit .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ikyzghqwit .gt_font_normal {
+  font-weight: normal;
+}
+
+#ikyzghqwit .gt_font_bold {
+  font-weight: bold;
+}
+
+#ikyzghqwit .gt_font_italic {
+  font-style: italic;
+}
+
+#ikyzghqwit .gt_super {
+  font-size: 65%;
+}
+
+#ikyzghqwit .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ikyzghqwit .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ikyzghqwit .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ikyzghqwit .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ikyzghqwit .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ikyzghqwit .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ikyzghqwit .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ikyzghqwit .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ikyzghqwit div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="animal">animal</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="body">body</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="brain">brain</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="log_body">log_body</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="log_brain">log_brain</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="animal" class="gt_row gt_left">Sheep</td>
+<td headers="body" class="gt_row gt_right">55.50</td>
+<td headers="brain" class="gt_row gt_right">175.00</td>
+<td headers="log_body" class="gt_row gt_right">4.02</td>
+<td headers="log_brain" class="gt_row gt_right">5.16</td></tr>
+    <tr><td headers="animal" class="gt_row gt_left">Human</td>
+<td headers="body" class="gt_row gt_right">62.00</td>
+<td headers="brain" class="gt_row gt_right">1,320.00</td>
+<td headers="log_body" class="gt_row gt_right">4.13</td>
+<td headers="log_brain" class="gt_row gt_right">7.19</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p>Y podemos usarlo también para interpretar la recta de referencia <span class="math inline">\(y = 2.55 + 0.5 x\)</span>
+, para cambios chicos:
+<em>Un incremento de 10% en masa total corresponde en un incremento de 5% en masa cerebral.</em></p>
+<p>El coeficiente de la regresión log-log, en nuestro ejemplo 0.5, es la <a href="https://en.wikipedia.org/wiki/Elasticity_(economics)">elasticidad</a> y es un concepto
+común en economía.</p>
+<p><strong>Justificación</strong></p>
+<p>Para entender la interpretación como cambio porcentual recordemos primero
+que la representación con series de Taylor de la función exponencial es:</p>
+<p><span class="math display">\[e^x = \sum_{n=0}^\infty \frac{x^n}{n!}\]</span></p>
+<p>Más aún podemos tener una aproximación usando <a href="https://en.wikipedia.org/wiki/Taylor%27s_theorem">polinomios de Taylor</a>, en el caso de la
+exponencial el <span class="math inline">\(k\)</span>-ésimo polinomio de Taylor está dado por:</p>
+<p><span class="math display">\[e^\delta \approx 1 + \delta + \frac{1}{2!}\delta^2 + \dots +  \frac{1}{k!}\delta^k\]</span></p>
+<p>y si <span class="math inline">\(\delta\)</span> es chica (digamos menor a 0.15), entonces la aproximación de primer grado es
+razonable y tenemos:</p>
+<p><span class="math display">\[Ae^{\delta} \approx A(1+\delta)\]</span></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="apéndice-ii-transformaciones.html#cb60-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">delta =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>), <span class="at">exp_delta =</span> <span class="fu">exp</span>(delta), <span class="at">uno_mas_delta =</span> <span class="dv">1</span> <span class="sc">+</span> delta)</span>
+<span id="cb60-2"><a href="apéndice-ii-transformaciones.html#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="apéndice-ii-transformaciones.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> uno_mas_delta, <span class="at">y =</span> exp_delta)) <span class="sc">+</span></span>
+<span id="cb60-4"><a href="apéndice-ii-transformaciones.html#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb60-5"><a href="apéndice-ii-transformaciones.html#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb60-6"><a href="apéndice-ii-transformaciones.html#cb60-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="fl">1.50</span>, <span class="at">y =</span> <span class="fl">1.18</span>, <span class="at">label =</span> <span class="st">&quot;y = x&quot;</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">6</span>)</span></code></pre></div>
+<p><img src="89-transformaciones_files/figure-html/unnamed-chunk-7-1.png" width="432" /></p>
+
+</div>
+<script type="text/javascript">smartify();</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="apéndice-i-principios-de-visualizacion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/89-transformaciones.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["fundamentos-estadistica.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "depth": 1
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
