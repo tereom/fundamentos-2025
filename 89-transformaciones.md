@@ -5,41 +5,71 @@
 
 En ocasiones es conveniente transformar los datos para el análisis, el 
 objetivo de transformar es simplificar la interpretación y el análisis al 
-eliminar fuentes de variación conocidas, también es común realizar
-transformaciones para simplificar los patrones.
+eliminar fuentes de variación conocidas, cuando simplificamos los patrones 
+en los datos suele ser más fácil modelar y predecir.
 
-Algunos ejemplos donde eliminamos efectos conocidos: 
+<!-- The purpose of these adjustments and transformations is to simplify the patterns in the historical data by removing known sources of variation, or by making the pattern more consistent across the whole data set. Simpler patterns are usually easier to model and lead to more accurate forecasts. -->
+
+
+Algunos ejemplos donde eliminamos efectos conocidos:
 
 1. Cuando analizamos el precio de venta de las casas podemos eliminar la variación 
 debida al tamaño de las casas al pasar de precio de venta a precio de venta por metro cuadrado. 
-De manera similar al analizar las propinas puede convenir considerar la propina como porcentaje de la cuenta.
+De manera similar al analizar las propinas puede convenir considerar la propina 
+como porcentaje de la cuenta.
 
 2. En series de tiempo cuando los datos están relacionados con el tamaño de la 
-población podemos ajustar a mediciones per capita (en series de tiempo PIB). También es común ajustar por inflación, o poner cantidades monetarias en valor presente.
+población podemos ajustar a mediciones per capita (por ejemplo en series de tiempo PIB). También es común ajustar por inflación, o poner cantidades monetarias en valor presente.
 
 
 ``` r
-mex_dat <- global_economy |> 
-  filter(Code == "MEX")
+dat <- global_economy |> 
+  filter(Code == "MEX" | Code == "ARG" | Code == "BRA")
 
-pib <- ggplot(mex_dat, aes(x = Year, y = GDP / 1e6)) +
-  geom_line()
+pib <- ggplot(dat, aes(x = Year, y = GDP / 1e6, color = Code)) +
+  geom_line() +
+  labs(color  = "")
 
-pib_pc <- ggplot(mex_dat, aes(x = Year, y = GDP / Population)) +
-  geom_line()
+pib_pc <- ggplot(dat, aes(x = Year, y = GDP / Population, color = Code)) +
+  geom_line() +
+  labs(color  = "")
 
-pib + pib_pc
+pib / pib_pc
 ```
 
 <img src="89-transformaciones_files/figure-html/unnamed-chunk-2-1.png" width="576" />
 
 
-Adicionalmente podemos recurrir a otras transformaciones matemáticas (e.g. logaritmo, raíz cuadrada) que simplifiquen
-el patrón en los datos y la interpretación. 
+Adicionalmente podemos recurrir a otras transformaciones matemáticas (e.g. 
+logaritmo o raíz cuadrada) que simplifiquen
+el patrón en los datos y la interpretación.
 
-Veamos un ejemplo donde es apropiado la transformación logaritmo. 
+Comenzamos con una serie de tiempo del número de [pasajeros de avión](https://www.kaggle.com/datasets/ashfakyeafi/air-passenger-data-for-time-series-analysis) entre 1949 y 1960. Cuando los datos muestran variación que se incrementa con
+el valor de los datos, como en este ejemplo, suele ser apropiado hacer una transformación
+para simplificar el patrón, 
+Una familia de transformaciones es la de [transformaciones Box-Cox](https://en.wikipedia.org/wiki/Power_transform#Box%E2%80%93Cox_transformation)
+que incluye logaritmo y potencias.
 
-Usamos los datos Animals con información de peso corporal promedio y peso cerebral
+En este ejemplo notemos que al aplicar el logaritmo la variación estacional
+a lo largo de toda la serie es de tamaño similar, resultando en un patrón más 
+sencillo de describir: 
+
+
+``` r
+dat <- read_csv("data/AirPassengers.csv") |> 
+  mutate(year_month = ym(Month))
+p1 <- ggplot(dat, aes(x = year_month, y = `#Passengers`)) +
+  geom_path()
+
+p2 <- ggplot(dat, aes(x = year_month, y = log(`#Passengers`))) +
+  geom_path()
+
+p1 / p2
+```
+
+<img src="89-transformaciones_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+Ahora veamos los datos *Animals* con información de peso corporal promedio y peso cerebral
 promedio para 28 especies. Buscamos entender la relación entre estas dos
 variables, e inspeccionar que especies se desvían (residuales) del esperado. 
 Comenzamos con un diagrama de dispersión usando las unidades originales
@@ -60,7 +90,7 @@ p2 <- ggplot(animals_tbl, aes(x = body, y = brain, label = animal)) +
 (p1 + p2)
 ```
 
-<img src="89-transformaciones_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="89-transformaciones_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 Incluso cuando nos limitamos a especies de menos de 500 kg de masa corporal, la 
 relación no es fácil de descrubir.En la suguiente gráfica hacemos la transformación 
@@ -82,15 +112,25 @@ p3
 ## `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="89-transformaciones_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="89-transformaciones_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
-La transformación logaritmo tiene también ventajas en interpretación, para diferencias
+La transformación logaritmo tiene además ventajas en interpretación, para diferencias
 chicas en escala log, las diferencias corresponden a diferencias porcentuales
 en la escala original, por ejempo consideremos la diferencia entre el peso en escala
 log de humano y borrego: 4.13 - 4.02 = 0.11. 
 Confirmamos que el humano es aproximadamente 11% más pesado que el borrego en la 
 escala original: 62/55.5 - 1 = 0.12
 
+Esta interpretación es además mas narural para algunos conjuntos de datos donde es más
+natural considerar efectos multiplicativos. Notemos que en los pesos cerebrales 1 y 1.9 
+(hamster y rata), la cantidad importante es que la rata tiene un cerebro con un 
+peso casi del doble que el hamster, las dos especies varían mucho más que un 
+mono y un cerdo cuyos pesos cerebrales difieren en aproximadamente la misma 
+cantidad (179 y 180) pero donde el cerebro del cerdo es menos de 1% mas pesado. 
+En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
+
+
+<!-- Logarithms are useful because they are interpretable: changes in a log value are relative (or percentage) changes on the original scale. So if log base 10 is used, then an increase of 1 on the log scale corresponds to a multiplication of 10 on the original scale. Robert Hyndman-->
 
 
 ``` r
@@ -106,23 +146,23 @@ animals_tbl |>
 ```
 
 ```{=html}
-<div id="thfmtvormy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#thfmtvormy table {
+<div id="wbfhsqthvi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wbfhsqthvi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#thfmtvormy thead, #thfmtvormy tbody, #thfmtvormy tfoot, #thfmtvormy tr, #thfmtvormy td, #thfmtvormy th {
+#wbfhsqthvi thead, #wbfhsqthvi tbody, #wbfhsqthvi tfoot, #wbfhsqthvi tr, #wbfhsqthvi td, #wbfhsqthvi th {
   border-style: none;
 }
 
-#thfmtvormy p {
+#wbfhsqthvi p {
   margin: 0;
   padding: 0;
 }
 
-#thfmtvormy .gt_table {
+#wbfhsqthvi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -148,12 +188,12 @@ animals_tbl |>
   border-left-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_caption {
+#wbfhsqthvi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#thfmtvormy .gt_title {
+#wbfhsqthvi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -165,7 +205,7 @@ animals_tbl |>
   border-bottom-width: 0;
 }
 
-#thfmtvormy .gt_subtitle {
+#wbfhsqthvi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -177,7 +217,7 @@ animals_tbl |>
   border-top-width: 0;
 }
 
-#thfmtvormy .gt_heading {
+#wbfhsqthvi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -189,13 +229,13 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_bottom_border {
+#wbfhsqthvi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_col_headings {
+#wbfhsqthvi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -210,7 +250,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_col_heading {
+#wbfhsqthvi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -230,7 +270,7 @@ animals_tbl |>
   overflow-x: hidden;
 }
 
-#thfmtvormy .gt_column_spanner_outer {
+#wbfhsqthvi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -242,15 +282,15 @@ animals_tbl |>
   padding-right: 4px;
 }
 
-#thfmtvormy .gt_column_spanner_outer:first-child {
+#wbfhsqthvi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#thfmtvormy .gt_column_spanner_outer:last-child {
+#wbfhsqthvi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#thfmtvormy .gt_column_spanner {
+#wbfhsqthvi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -262,11 +302,11 @@ animals_tbl |>
   width: 100%;
 }
 
-#thfmtvormy .gt_spanner_row {
+#wbfhsqthvi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#thfmtvormy .gt_group_heading {
+#wbfhsqthvi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -292,7 +332,7 @@ animals_tbl |>
   text-align: left;
 }
 
-#thfmtvormy .gt_empty_group_heading {
+#wbfhsqthvi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -307,15 +347,15 @@ animals_tbl |>
   vertical-align: middle;
 }
 
-#thfmtvormy .gt_from_md > :first-child {
+#wbfhsqthvi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#thfmtvormy .gt_from_md > :last-child {
+#wbfhsqthvi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#thfmtvormy .gt_row {
+#wbfhsqthvi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -334,7 +374,7 @@ animals_tbl |>
   overflow-x: hidden;
 }
 
-#thfmtvormy .gt_stub {
+#wbfhsqthvi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -347,7 +387,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#thfmtvormy .gt_stub_row_group {
+#wbfhsqthvi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -361,15 +401,15 @@ animals_tbl |>
   vertical-align: top;
 }
 
-#thfmtvormy .gt_row_group_first td {
+#wbfhsqthvi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#thfmtvormy .gt_row_group_first th {
+#wbfhsqthvi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#thfmtvormy .gt_summary_row {
+#wbfhsqthvi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -379,16 +419,16 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#thfmtvormy .gt_first_summary_row {
+#wbfhsqthvi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_first_summary_row.thick {
+#wbfhsqthvi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#thfmtvormy .gt_last_summary_row {
+#wbfhsqthvi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -398,7 +438,7 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_grand_summary_row {
+#wbfhsqthvi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -408,7 +448,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#thfmtvormy .gt_first_grand_summary_row {
+#wbfhsqthvi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -418,7 +458,7 @@ animals_tbl |>
   border-top-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_last_grand_summary_row_top {
+#wbfhsqthvi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -428,11 +468,11 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_striped {
+#wbfhsqthvi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#thfmtvormy .gt_table_body {
+#wbfhsqthvi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -441,7 +481,7 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_footnotes {
+#wbfhsqthvi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -455,7 +495,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_footnote {
+#wbfhsqthvi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -464,7 +504,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#thfmtvormy .gt_sourcenotes {
+#wbfhsqthvi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -478,7 +518,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#thfmtvormy .gt_sourcenote {
+#wbfhsqthvi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -486,72 +526,72 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#thfmtvormy .gt_left {
+#wbfhsqthvi .gt_left {
   text-align: left;
 }
 
-#thfmtvormy .gt_center {
+#wbfhsqthvi .gt_center {
   text-align: center;
 }
 
-#thfmtvormy .gt_right {
+#wbfhsqthvi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#thfmtvormy .gt_font_normal {
+#wbfhsqthvi .gt_font_normal {
   font-weight: normal;
 }
 
-#thfmtvormy .gt_font_bold {
+#wbfhsqthvi .gt_font_bold {
   font-weight: bold;
 }
 
-#thfmtvormy .gt_font_italic {
+#wbfhsqthvi .gt_font_italic {
   font-style: italic;
 }
 
-#thfmtvormy .gt_super {
+#wbfhsqthvi .gt_super {
   font-size: 65%;
 }
 
-#thfmtvormy .gt_footnote_marks {
+#wbfhsqthvi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#thfmtvormy .gt_asterisk {
+#wbfhsqthvi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#thfmtvormy .gt_indent_1 {
+#wbfhsqthvi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#thfmtvormy .gt_indent_2 {
+#wbfhsqthvi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#thfmtvormy .gt_indent_3 {
+#wbfhsqthvi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#thfmtvormy .gt_indent_4 {
+#wbfhsqthvi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#thfmtvormy .gt_indent_5 {
+#wbfhsqthvi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#thfmtvormy .katex-display {
+#wbfhsqthvi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#thfmtvormy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wbfhsqthvi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -588,8 +628,8 @@ animals_tbl |>
 
 
 
-Y podemos usarlo también para interpretar la recta de referencia $y = 2.55 + 0.5 x$
-, para cambios chicos:
+Y podemos usarlo también para interpretar la recta de referencia $y = 2.55 + 0.5 x$, 
+para cambios chicos:
 *Un incremento de 10% en masa total corresponde en un incremento de 5% en masa cerebral.*
 
 El coeficiente de la regresión log-log, en nuestro ejemplo 0.5, es la [elasticidad](https://en.wikipedia.org/wiki/Elasticity_(economics)) y es un concepto
@@ -623,7 +663,7 @@ ggplot(dat, aes(x = uno_mas_delta, y = exp_delta)) +
   annotate("text", x = 1.50, y = 1.18, label = "y = x", color = "red", size = 6)
 ```
 
-<img src="89-transformaciones_files/figure-html/unnamed-chunk-7-1.png" width="432" />
+<img src="89-transformaciones_files/figure-html/unnamed-chunk-8-1.png" width="432" />
 
 
 
