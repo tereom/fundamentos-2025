@@ -409,8 +409,9 @@ estadística evaluada un cada una de nuestras muestras permutadas:
 
 
 ``` r
-g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + geom_qq(distribution = stats::qunif)  +
-  xlab("f") + ylab("diferencia") + labs(subtitle = "Distribución nula o de referencia")
+g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + 
+  geom_qq(distribution = stats::qunif)  +
+  labs(x = "f", y = "diferencia", subtitle = "Distribución nula o de referencia")
 g_2 <- ggplot(valores_ref, aes(x = diferencia)) + geom_histogram(binwidth = 0.04) +
   coord_flip() + xlab("") + labs(subtitle = " ")
 g_1 + g_2
@@ -435,14 +436,16 @@ percentil_obs <- dist_perm(dif_obs)
 
 
 ``` r
-g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + geom_qq(distribution = stats::qunif)  +
-  xlab("f") + ylab("diferencia") + labs(subtitle = "Distribución nula o de referencia") +
+g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + 
+  geom_qq(distribution = stats::qunif)  +
+  labs(x = "f", y = "diferencia", subtitle = "Distribución nula o de referencia") +
   geom_hline(yintercept = dif_obs, colour = "red") +
-  annotate("text", x = 0.35, y = dif_obs - 0.03, label = "diferencia observada", colour = "red")
+  annotate("text", x = 0.4, y = dif_obs - 0.015, label = "diferencia observada", colour = "red")
 g_2 <- ggplot(valores_ref, aes(x = diferencia)) + geom_histogram(binwidth = 0.04) +
-  coord_flip() + xlab("") + labs(subtitle = " ") +
+  coord_flip() + labs(x = "") +
   geom_vline(xintercept = dif_obs, colour = "red") +
-  annotate("text", x = dif_obs, y = N_rep * .3, label = percentil_obs,vjust = -0.2, colour = "red")
+  annotate("text", x = dif_obs, y = N_rep * .8, label = round(percentil_obs, 3), 
+           vjust = -0.2, colour = "red")
 g_1 + g_2
 ```
 
@@ -780,6 +783,10 @@ comparar la propina en cena vs en comidas.<br />
 
 ## Pruebas de permutación: implementación. {-}
 
+Notemos que las pruebas de permutación no requieren de supuestos distribucionales 
+de las poblaciones que se están evaluando. Por ejemplo, no hay ningún requisito 
+de normalidad.
+
 Hasta ahora nos hemos centrado en ejemplos de diferencias en medias. Podemos
 extender las pruebas de permutación a $\bar{X}$ (la media de la primera muestra),
 $n\bar{X}$ (la suma de las observaciones en la primera muestra), y más.
@@ -821,10 +828,13 @@ las que se refieren a una sola muestra: ¿los datos son consistentes con que su
 media es igual a 5?
 
 - Adicionalmente, en algunas ocasiones queremos probar aspectos más específicos
-de las diferencias: como ¿son iguales las medias o medianas de dos grupos de
+de las diferencias, por ejemplo ¿son iguales las medias o medianas de dos grupos de
 datos? ¿Tienen dispersión similar?
 
-Es común aplicar pruebas de permutaciones a este segundo problema, sin embargo, no están tan perfectamente adaptadas a el, pues prueban *todos* los aspectos de las distribuciones que se comparan, aún cuando escojamos una estadística particular que pretende medir.
+Es común aplicar pruebas de permutaciones a este segundo problema y en general 
+funcionan adecuadamente, sin embargo, no están tan perfectamente adaptadas a 
+comparaciones específicas pues prueban *todos* los aspectos de las distribuciones 
+que se comparan, aún cuando escojamos una estadística particular que pretende medir.
 Por ejemplo, cuando trabajamos con la diferencia de medias. Eso quiere decir que podemos 
 rechazar igualdad de medias, por ejemplo, cuando en realidad otra característica de las
 distribuciones es la que difiere mucho en las poblaciones.
@@ -894,51 +904,49 @@ para medir su diferencia
 
 
 ``` r
-# esta función hace permutaciones y calcula la diferencia para cada una
-permutaciones_est <- function(datos, variable, calc_diferencia, n = 1000){
-  # calcular estadística para cada grupo
-  permutar <- function(variable){
-    sample(variable, length(variable))
-  }
-  tbl_perms <- tibble(.sample = seq(1, n-1, 1)) |>
-    mutate(diferencia = map_dbl(.sample,
-                                ~ datos |> mutate({{variable}}:= permutar({{variable}})) |> calc_diferencia()))
-  bind_rows(tbl_perms, tibble(.sample = n, diferencia = calc_diferencia(datos)))
-}
-
-stat_fusion <- function(x){
-  (quantile(x, 0.75) + quantile(x, 0.25))/2
-}
-calc_fusion <- function(stat_fusion){
-  fun <- function(datos){
+calc_cociente <- function(datos){
     datos |>
       group_by(nv.vv) |>
       summarise(est = stat_fusion(time), .groups = 'drop') |>
       pivot_wider(names_from = nv.vv, values_from = est) |>
       mutate(dif = VV / NV ) |> pull(dif)
-  }
-  fun
+}
+stat_fusion <- function(x){
+  (quantile(x, 0.75) + quantile(x, 0.25))/2
 }
 ```
 
 
 ``` r
-calc_cociente <- calc_fusion(stat_fusion)
 dif_obs <- calc_cociente(fusion)
-# permutar
-valores_ref <- permutaciones_est(fusion, nv.vv, calc_cociente, n = N_rep)
-dist_perm_nv <- ecdf(valores_ref$diferencia)
+dif_obs
+```
+
+```
+##           
+## 0.6870229
+```
+
+
+
+``` r
+reps_fusion <- lineup(null_permute("nv.vv"), fusion, 1000)
+valores_ref <- reps_fusion |> 
+  group_split(.sample) |>
+  map_dbl(calc_cociente)
+
+dist_perm_nv <- ecdf(valores_ref)
 cuantil_obs <- dist_perm_nv(dif_obs)
 ```
 
 
-<img src="03-pruebas-de-hipotesis_files/figure-html/unnamed-chunk-45-1.png" width="576" style="display: block; margin: auto;" />
+<img src="03-pruebas-de-hipotesis_files/figure-html/unnamed-chunk-46-1.png" width="576" style="display: block; margin: auto;" />
 
 Y el valor *p* de dos colas es
 
 
 ``` r
-dist_perm_nv <- ecdf(valores_ref$diferencia)
+dist_perm_nv <- ecdf(valores_ref)
 2 * min(dist_perm_nv(dif_obs), 1 - dist_perm_nv(dif_obs))
 ```
 
@@ -985,7 +993,7 @@ datos en dimensión baja de forma que los grupos sean lo *más compactos y separ
 Para probar qué tan bien funciona este método, podemos hacer una prueba de permutación, aplicamos
 LDA y observamos los resultados.
 
-<img src="03-pruebas-de-hipotesis_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" />
+<img src="03-pruebas-de-hipotesis_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" />
 
 Y vemos que incluso permutando los grupos, es generalmente posible separarlos en grupos
 bien definidos: la búsqueda es suficientemente agresiva para encontrar 
@@ -1018,7 +1026,7 @@ ggplot(wasp_lda, aes(x = LD1, y = LD2, colour = grupo)) + geom_point(size = 3) +
   facet_wrap(~tipo)
 ```
 
-<img src="03-pruebas-de-hipotesis_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" />
+<img src="03-pruebas-de-hipotesis_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" />
 
 Aunque esta separación de datos es menos efectiva en este ejemplo por la muestra chica, podemos ver
 que la separación lograda en los datos de entrenamiento probablemente se debe a variación muestral.
