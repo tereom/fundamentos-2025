@@ -332,11 +332,12 @@ Los datos que obtuvimos en nuestra encuesta, en conteos, son:
 
 ```{r, echo=FALSE, message=FALSE}
 tea <- read_csv(("data/tea.csv"))
-te <- tea |> select(how, price, sugar)
+te <- tea |> dplyr::select(how, price, sugar)
 ```
 
 ```{r, echo = FALSE}
-te_azucar <- tea |> select(how, sugar) |>
+te_azucar <- tea |> 
+  dplyr::select(how, sugar) |>
   mutate(how = ifelse(how == "tea bag", "bolsa_exclusivo", "suelto o bolsa"))
 te_azucar |> count(how, sugar) |>
   pivot_wider(names_from = how, values_from = n) |>
@@ -346,10 +347,12 @@ te_azucar |> count(how, sugar) |>
 Y en proporciones tenemos que:
 
 ```{r, echo = FALSE}
-prop_azucar <- te_azucar |> count(how, sugar) |>
-  group_by(how) |> mutate(prop = n / sum(n), n = sum(n)) |>
+prop_azucar <- te_azucar |> 
+  count(how, sugar) |>
+  group_by(how) |> 
+  mutate(prop = n / sum(n), n = sum(n)) |>
   filter(sugar == "sugar") |>
-  select(how, prop_azucar = prop, n) |>
+  dplyr::select(how, prop_azucar = prop, n) |>
   mutate(prop_azucar = round(prop_azucar,2))
 prop_azucar |> formatear_tabla()
 ```
@@ -414,8 +417,9 @@ Y graficamos nuestros resultados (con un histograma y una gráfica de cuantiles,
 estadística evaluada un cada una de nuestras muestras permutadas:
 
 ```{r, fig.width = 6, fig.height = 3}
-g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + geom_qq(distribution = stats::qunif)  +
-  xlab("f") + ylab("diferencia") + labs(subtitle = "Distribución nula o de referencia")
+g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + 
+  geom_qq(distribution = stats::qunif)  +
+  labs(x = "f", y = "diferencia", subtitle = "Distribución nula o de referencia")
 g_2 <- ggplot(valores_ref, aes(x = diferencia)) + geom_histogram(binwidth = 0.04) +
   coord_flip() + xlab("") + labs(subtitle = " ")
 g_1 + g_2
@@ -436,14 +440,16 @@ percentil_obs <- dist_perm(dif_obs)
 ```
 
 ```{r, fig.width = 6, fig.height = 3}
-g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + geom_qq(distribution = stats::qunif)  +
-  xlab("f") + ylab("diferencia") + labs(subtitle = "Distribución nula o de referencia") +
+g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + 
+  geom_qq(distribution = stats::qunif)  +
+  labs(x = "f", y = "diferencia", subtitle = "Distribución nula o de referencia") +
   geom_hline(yintercept = dif_obs, colour = "red") +
-  annotate("text", x = 0.35, y = dif_obs - 0.03, label = "diferencia observada", colour = "red")
+  annotate("text", x = 0.4, y = dif_obs - 0.015, label = "diferencia observada", colour = "red")
 g_2 <- ggplot(valores_ref, aes(x = diferencia)) + geom_histogram(binwidth = 0.04) +
-  coord_flip() + xlab("") + labs(subtitle = " ") +
+  coord_flip() + labs(x = "") +
   geom_vline(xintercept = dif_obs, colour = "red") +
-  annotate("text", x = dif_obs, y = N_rep * .3, label = percentil_obs,vjust = -0.2, colour = "red")
+  annotate("text", x = dif_obs, y = N_rep * .8, label = round(percentil_obs, 3), 
+           vjust = -0.2, colour = "red")
 g_1 + g_2
 ```
 
@@ -693,7 +699,7 @@ percentil_obs <- dist_perm(dif_obs)
 
 ```{r, fig.width = 6, fig.height = 3, echo = FALSE}
 g_1 <- ggplot(valores_ref, aes(sample = diferencia)) + geom_qq(distribution = stats::qunif)  +
-  xlab("f") + ylab("diferencia") + labs(subtitle = "Distribución nula o de referencia") +
+  labs(x = "f", y = "diferencia", subtitle = "Distribución nula o de referencia") +
   geom_hline(yintercept = dif_obs, colour = "red") +
   annotate("text", x = 0.3, y = dif_obs - 0.02, label = "diferencia observada", colour = "red")
 g_2 <- ggplot(valores_ref, aes(x = diferencia)) + geom_histogram(binwidth = 0.04) +
@@ -717,6 +723,10 @@ propina en cena vs en comidas.
 
 
 ## Pruebas de permutación: implementación. {-}
+
+Notemos que las pruebas de permutación no requieren de supuestos distribucionales 
+de las poblaciones que se están evaluando. Por ejemplo, no hay ningún requisito 
+de normalidad.
 
 Hasta ahora nos hemos centrado en ejemplos de diferencias en medias. Podemos
 extender las pruebas de permutación a $\bar{X}$ (la media de la primera muestra),
@@ -756,10 +766,13 @@ las que se refieren a una sola muestra: ¿los datos son consistentes con que su
 media es igual a 5?
 
 - Adicionalmente, en algunas ocasiones queremos probar aspectos más específicos
-de las diferencias: como ¿son iguales las medias o medianas de dos grupos de
+de las diferencias, por ejemplo ¿son iguales las medias o medianas de dos grupos de
 datos? ¿Tienen dispersión similar?
 
-Es común aplicar pruebas de permutaciones a este segundo problema, sin embargo, no están tan perfectamente adaptadas a el, pues prueban *todos* los aspectos de las distribuciones que se comparan, aún cuando escojamos una estadística particular que pretende medir.
+Es común aplicar pruebas de permutaciones a este segundo problema y en general 
+funcionan adecuadamente, sin embargo, no están tan perfectamente adaptadas a 
+comparaciones específicas pues prueban *todos* los aspectos de las distribuciones 
+que se comparan, aún cuando escojamos una estadística particular que pretende medir.
 Por ejemplo, cuando trabajamos con la diferencia de medias. Eso quiere decir que podemos 
 rechazar igualdad de medias, por ejemplo, cuando en realidad otra característica de las
 distribuciones es la que difiere mucho en las poblaciones.
@@ -780,7 +793,9 @@ ayudan a fusionar más rápido el estereograma?
 
 ```{r, message = TRUE, echo = FALSE, fig.width =4, fig.height = 3}
 fusion <- read_table("./data/fusion_time.txt")
-ggplot(fusion, aes(x = nv.vv, y = time)) + geom_boxplot() + geom_jitter()
+ggplot(fusion, aes(x = nv.vv, y = time)) + 
+  geom_boxplot() + 
+  geom_jitter()
 ```
 
 La situación es la siguiente: considerando que hay mucha variación en el
@@ -801,7 +816,8 @@ set.seed(113)
 reps <- lineup(null_permute("nv.vv"), fusion, 20)
 ggplot(reps, aes(sample = time, colour = nv.vv)) +
   geom_qq(distribution = stats::qunif, size = 0.5) +
-  facet_wrap(~.sample) + scale_y_log10() +
+  facet_wrap(~.sample) + 
+  scale_y_log10() +
   scale_x_continuous(breaks = c(0, 0.5, 1))
 ```
 
@@ -827,54 +843,48 @@ superior e inferior de las dos distribuciones. Usaremos el cociente de estas dos
 para medir su diferencia
 
 ```{r, message = FALSE}
-# esta función hace permutaciones y calcula la diferencia para cada una
-permutaciones_est <- function(datos, variable, calc_diferencia, n = 1000){
-  # calcular estadística para cada grupo
-  permutar <- function(variable){
-    sample(variable, length(variable))
-  }
-  tbl_perms <- tibble(.sample = seq(1, n-1, 1)) |>
-    mutate(diferencia = map_dbl(.sample,
-                                ~ datos |> mutate({{variable}}:= permutar({{variable}})) |> calc_diferencia()))
-  bind_rows(tbl_perms, tibble(.sample = n, diferencia = calc_diferencia(datos)))
-}
-
-stat_fusion <- function(x){
-  (quantile(x, 0.75) + quantile(x, 0.25))/2
-}
-calc_fusion <- function(stat_fusion){
-  fun <- function(datos){
+calc_cociente <- function(datos){
     datos |>
       group_by(nv.vv) |>
       summarise(est = stat_fusion(time), .groups = 'drop') |>
       pivot_wider(names_from = nv.vv, values_from = est) |>
       mutate(dif = VV / NV ) |> pull(dif)
-  }
-  fun
 }
+stat_fusion <- function(x){
+  (quantile(x, 0.75) + quantile(x, 0.25))/2
+}
+
 ```
 
 ```{r}
-calc_cociente <- calc_fusion(stat_fusion)
 dif_obs <- calc_cociente(fusion)
-# permutar
-valores_ref <- permutaciones_est(fusion, nv.vv, calc_cociente, n = N_rep)
-dist_perm_nv <- ecdf(valores_ref$diferencia)
+dif_obs
+```
+
+
+```{r}
+reps_fusion <- lineup(null_permute("nv.vv"), fusion, 1000)
+valores_ref <- reps_fusion |> 
+  group_split(.sample) |>
+  map_dbl(calc_cociente)
+
+dist_perm_nv <- ecdf(valores_ref)
 cuantil_obs <- dist_perm_nv(dif_obs)
 ```
 
 
 ```{r, fig.width = 6, fig.height = 3, echo = FALSE}
-g_1 <- ggplot(valores_ref, aes(sample = diferencia)) +
+g_1 <- ggplot(tibble(diferencia = valores_ref), aes(sample = diferencia)) +
   geom_qq(distribution = stats::qunif)  +
-  xlab("f") + ylab("Cociente media intercuartil") +
-  labs(subtitle = "Distribución nula o de referencia") +
+  labs(x = "f", y = "Cociente media intercuartil", 
+       subtitle = "Distribución nula o de referencia") +
   geom_hline(yintercept = dif_obs, colour = "red") +
   annotate("text", x = 0.3, y = dif_obs - 0.05, label = "diferencia observada", colour = "red")
-g_2 <- ggplot(valores_ref, aes(x = diferencia)) + geom_histogram(binwidth = 0.04) +
+g_2 <- ggplot(tibble(diferencia = valores_ref), aes(x = diferencia)) +
+  geom_histogram(binwidth = 0.04) +
   coord_flip() + xlab("") + labs(subtitle = " ") +
   geom_vline(xintercept = dif_obs, colour = "red") +
-  annotate("text", x = dif_obs, y = N_rep * .3, label = cuantil_obs,vjust = 0,
+  annotate("text", x = dif_obs, y = N_rep * .15, label = cuantil_obs,vjust = 0,
            colour = "red")
 g_1 + g_2
 ```
@@ -882,7 +892,7 @@ g_1 + g_2
 Y el valor *p* de dos colas es
 
 ```{r}
-dist_perm_nv <- ecdf(valores_ref$diferencia)
+dist_perm_nv <- ecdf(valores_ref)
 2 * min(dist_perm_nv(dif_obs), 1 - dist_perm_nv(dif_obs))
 ```
 
