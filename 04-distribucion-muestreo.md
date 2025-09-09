@@ -831,7 +831,7 @@ attr(lineup_normal, "pos")
 Consideremos el problema de estimar el total poblacional de los precios de las casas
 que se vendieron. El estimador que usamos fue la suma muestral expandida por un 
 factor. Vamos a checar qué tan cerca de la normalidad está la distribución de
-meustreo de esta estadística ($n=250$):
+muestreo de esta estadística ($n=250$):
 
 
 ``` r
