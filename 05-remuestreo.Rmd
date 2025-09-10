@@ -13,7 +13,7 @@ En la sección anterior, vimos el concepto de distribución de muestreo
 de una estadística que queremos utilizar para estimar un valor poblacional, y
 vimos que con esta distribución podíamos evaluar **qué tan preciso es nuestro
 estimador** evaluando qué tan concentrada está esta distribución alrededor
-del valor poblacion que queremos estimar.
+del valor poblacional que queremos estimar.
 
 Sin embargo, en los ejemplos que vimos la población era conocida: ya sea que
 tuviéramos toda la población finita disponible (como el ejemplo de las casas), o
@@ -78,7 +78,7 @@ g_1 + g_2
 
 Donde: 
 
-- En rojo está nuestro = puntual de la mediana de cada
+- En rojo está nuestra estimación puntual de la mediana de cada
 grupo (la mediana muestral), y
 - Las segmentos muestran un intervalo de confianza del 95\% 
 para nuestra estimación de la mediana: esto quiere decir que 
@@ -503,7 +503,7 @@ prop_negro_tbl |>
 ```
 
 
-<!-- <!-- comentar --> -->
+<!-- comentar -->
 <!-- agregar entre cambio de clase -->
 <!-- ### Resumen -->
 
@@ -513,10 +513,10 @@ prop_negro_tbl |>
 <!-- * Es así que la distribución bootstrap de una estadística, basada en un número grande -->
 <!-- de remuestras, aproxima la distribución muestral de la estadística. -->
 
-<!-- * Para un gran número de estadísiticas, la distribuciones bootstrap aproximan la dispersón,  -->
+<!-- * Para un gran número de estadísiticas, la distribuciones bootstrap aproximan la dispersón, -->
 <!-- sesgo y forma de la distribución muestral. -->
 
-<!-- <!-- comentar --> -->
+<!-- comentar -->
 
 ## Discusión: propiedades de la distribución bootstrap {-}
 
@@ -749,7 +749,7 @@ basados en la distribución bootstrap.
 estadística $\hat{\theta} = t(X_1,\ldots, X_n)$, donde $X_1,\ldots, X_n$ es una muestra
 independiente e idénticamente distribuida de la población.
 
-- Suponemos además que la distribución muestral de $\hat{\theta}$ es aproximadamente normal (el teorema
+- Suponemos además que la distribución muestral de $\hat{\theta}$ es aproximadamente normal (es decir suponemos que el teorema
 central del límite aplica), y está centrada en el verdadero valor poblacional $\theta$.
 
 Ahora queremos construir un intervalo que tenga probabilidad 95\% de cubrir al
