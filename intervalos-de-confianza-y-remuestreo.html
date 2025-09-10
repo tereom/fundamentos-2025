@@ -360,7 +360,7 @@ div.csl-indent {
 de una estadística que queremos utilizar para estimar un valor poblacional, y
 vimos que con esta distribución podíamos evaluar <strong>qué tan preciso es nuestro
 estimador</strong> evaluando qué tan concentrada está esta distribución alrededor
-del valor poblacion que queremos estimar.</p>
+del valor poblacional que queremos estimar.</p>
 <p>Sin embargo, en los ejemplos que vimos la población era conocida: ya sea que
 tuviéramos toda la población finita disponible (como el ejemplo de las casas), o
 donde la población estaba definida por un modelo teórico de probabilidad (como
@@ -416,7 +416,7 @@ más adelante, por el momento consideramos la gŕafica resultante:</p>
 <p><img src="05-remuestreo_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Donde:</p>
 <ul>
-<li>En rojo está nuestro = puntual de la mediana de cada
+<li>En rojo está nuestra estimación puntual de la mediana de cada
 grupo (la mediana muestral), y</li>
 <li>Las segmentos muestran un intervalo de confianza del 95%
 para nuestra estimación de la mediana: esto quiere decir que
@@ -688,18 +688,16 @@ qué tan dispersa es la distribución bootstrap:</p>
 ## 2 ee         0.025
 ## 3 cuantil_75 0.263
 ## 4 cuantil_25 0.23</code></pre>
-<!-- <!-- comentar -->
-<p>–&gt;
+<!-- comentar -->
 <!-- agregar entre cambio de clase -->
-<!-- ### Resumen --></p>
+<!-- ### Resumen -->
 <!-- * La idea detrás del bootstrap (no paramétrico) es que la muestra original es -->
 <!-- representativa de la población. Entonces las remuestras de la muestra aproximan lo que obtendríamos si tomáramos muestras de la población. -->
 <!-- * Es así que la distribución bootstrap de una estadística, basada en un número grande -->
 <!-- de remuestras, aproxima la distribución muestral de la estadística. -->
-<!-- * Para un gran número de estadísiticas, la distribuciones bootstrap aproximan la dispersón,  -->
+<!-- * Para un gran número de estadísiticas, la distribuciones bootstrap aproximan la dispersón, -->
 <!-- sesgo y forma de la distribución muestral. -->
-<!-- <!-- comentar -->
-<p>–&gt;</p>
+<!-- comentar -->
 </div>
 </div>
 <div id="discusión-propiedades-de-la-distribución-bootstrap" class="section level2 unnumbered hasAnchor">
@@ -813,7 +811,7 @@ basados en la distribución bootstrap.</p>
 <li><p>Supongamos que queremos estimar una cantidad poblacional <span class="math inline">\(\theta\)</span> con una
 estadística <span class="math inline">\(\hat{\theta} = t(X_1,\ldots, X_n)\)</span>, donde <span class="math inline">\(X_1,\ldots, X_n\)</span> es una muestra
 independiente e idénticamente distribuida de la población.</p></li>
-<li><p>Suponemos además que la distribución muestral de <span class="math inline">\(\hat{\theta}\)</span> es aproximadamente normal (el teorema
+<li><p>Suponemos además que la distribución muestral de <span class="math inline">\(\hat{\theta}\)</span> es aproximadamente normal (es decir suponemos que el teorema
 central del límite aplica), y está centrada en el verdadero valor poblacional <span class="math inline">\(\theta\)</span>.</p></li>
 </ul>
 <p>Ahora queremos construir un intervalo que tenga probabilidad 95% de cubrir al

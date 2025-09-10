@@ -146,23 +146,23 @@ animals_tbl |>
 ```
 
 ```{=html}
-<div id="uxlrfuxapo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uxlrfuxapo table {
+<div id="upaqindhtp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#upaqindhtp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uxlrfuxapo thead, #uxlrfuxapo tbody, #uxlrfuxapo tfoot, #uxlrfuxapo tr, #uxlrfuxapo td, #uxlrfuxapo th {
+#upaqindhtp thead, #upaqindhtp tbody, #upaqindhtp tfoot, #upaqindhtp tr, #upaqindhtp td, #upaqindhtp th {
   border-style: none;
 }
 
-#uxlrfuxapo p {
+#upaqindhtp p {
   margin: 0;
   padding: 0;
 }
 
-#uxlrfuxapo .gt_table {
+#upaqindhtp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -188,12 +188,12 @@ animals_tbl |>
   border-left-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_caption {
+#upaqindhtp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uxlrfuxapo .gt_title {
+#upaqindhtp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -205,7 +205,7 @@ animals_tbl |>
   border-bottom-width: 0;
 }
 
-#uxlrfuxapo .gt_subtitle {
+#upaqindhtp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -217,7 +217,7 @@ animals_tbl |>
   border-top-width: 0;
 }
 
-#uxlrfuxapo .gt_heading {
+#upaqindhtp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -229,13 +229,13 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_bottom_border {
+#upaqindhtp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_col_headings {
+#upaqindhtp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -250,7 +250,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_col_heading {
+#upaqindhtp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -270,7 +270,7 @@ animals_tbl |>
   overflow-x: hidden;
 }
 
-#uxlrfuxapo .gt_column_spanner_outer {
+#upaqindhtp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -282,15 +282,15 @@ animals_tbl |>
   padding-right: 4px;
 }
 
-#uxlrfuxapo .gt_column_spanner_outer:first-child {
+#upaqindhtp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uxlrfuxapo .gt_column_spanner_outer:last-child {
+#upaqindhtp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uxlrfuxapo .gt_column_spanner {
+#upaqindhtp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -302,11 +302,11 @@ animals_tbl |>
   width: 100%;
 }
 
-#uxlrfuxapo .gt_spanner_row {
+#upaqindhtp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uxlrfuxapo .gt_group_heading {
+#upaqindhtp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -332,7 +332,7 @@ animals_tbl |>
   text-align: left;
 }
 
-#uxlrfuxapo .gt_empty_group_heading {
+#upaqindhtp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -347,15 +347,15 @@ animals_tbl |>
   vertical-align: middle;
 }
 
-#uxlrfuxapo .gt_from_md > :first-child {
+#upaqindhtp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uxlrfuxapo .gt_from_md > :last-child {
+#upaqindhtp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uxlrfuxapo .gt_row {
+#upaqindhtp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -374,7 +374,7 @@ animals_tbl |>
   overflow-x: hidden;
 }
 
-#uxlrfuxapo .gt_stub {
+#upaqindhtp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -387,7 +387,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#uxlrfuxapo .gt_stub_row_group {
+#upaqindhtp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -401,15 +401,15 @@ animals_tbl |>
   vertical-align: top;
 }
 
-#uxlrfuxapo .gt_row_group_first td {
+#upaqindhtp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uxlrfuxapo .gt_row_group_first th {
+#upaqindhtp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uxlrfuxapo .gt_summary_row {
+#upaqindhtp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -419,16 +419,16 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#uxlrfuxapo .gt_first_summary_row {
+#upaqindhtp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_first_summary_row.thick {
+#upaqindhtp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uxlrfuxapo .gt_last_summary_row {
+#upaqindhtp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -438,7 +438,7 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_grand_summary_row {
+#upaqindhtp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -448,7 +448,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#uxlrfuxapo .gt_first_grand_summary_row {
+#upaqindhtp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -458,7 +458,7 @@ animals_tbl |>
   border-top-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_last_grand_summary_row_top {
+#upaqindhtp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -468,11 +468,11 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_striped {
+#upaqindhtp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uxlrfuxapo .gt_table_body {
+#upaqindhtp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -481,7 +481,7 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_footnotes {
+#upaqindhtp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -495,7 +495,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_footnote {
+#upaqindhtp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -504,7 +504,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#uxlrfuxapo .gt_sourcenotes {
+#upaqindhtp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -518,7 +518,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#uxlrfuxapo .gt_sourcenote {
+#upaqindhtp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -526,72 +526,72 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#uxlrfuxapo .gt_left {
+#upaqindhtp .gt_left {
   text-align: left;
 }
 
-#uxlrfuxapo .gt_center {
+#upaqindhtp .gt_center {
   text-align: center;
 }
 
-#uxlrfuxapo .gt_right {
+#upaqindhtp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uxlrfuxapo .gt_font_normal {
+#upaqindhtp .gt_font_normal {
   font-weight: normal;
 }
 
-#uxlrfuxapo .gt_font_bold {
+#upaqindhtp .gt_font_bold {
   font-weight: bold;
 }
 
-#uxlrfuxapo .gt_font_italic {
+#upaqindhtp .gt_font_italic {
   font-style: italic;
 }
 
-#uxlrfuxapo .gt_super {
+#upaqindhtp .gt_super {
   font-size: 65%;
 }
 
-#uxlrfuxapo .gt_footnote_marks {
+#upaqindhtp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uxlrfuxapo .gt_asterisk {
+#upaqindhtp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uxlrfuxapo .gt_indent_1 {
+#upaqindhtp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uxlrfuxapo .gt_indent_2 {
+#upaqindhtp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uxlrfuxapo .gt_indent_3 {
+#upaqindhtp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uxlrfuxapo .gt_indent_4 {
+#upaqindhtp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uxlrfuxapo .gt_indent_5 {
+#upaqindhtp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uxlrfuxapo .katex-display {
+#upaqindhtp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uxlrfuxapo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#upaqindhtp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
