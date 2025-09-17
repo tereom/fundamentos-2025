@@ -1295,9 +1295,7 @@ de las casas en relación al tamaño del lote? Una manera de estimar esta cantid
 es dividiendo la suma del área habitable de nuestra muestra y dividirlo entre
 la suma del área de los lotes de nuestra muestra, como en la fórmula anterior. Esta
 fórmula es más difícil pues tanto numerador como denominador tienen variabilidad,
-y estas dos cantidades no varían independientemente.
-
-Con el bootstrap podemos atacar estos problemas
+y estas dos cantidades no varían independientemente. Con el bootstrap podemos atacar estos problemas.
 
 ### Ejemplo: estimadores de razón {-}
 
