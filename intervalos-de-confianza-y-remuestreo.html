@@ -1589,9 +1589,9 @@ Comenzaremos con definiciones para entender el problema.</p>
 <span id="cb226-9"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">media_escuela =</span> <span class="fu">rnorm</span>(n_escuelas, media_tipo, <span class="dv">30</span>), </span>
 <span id="cb226-10"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_estudiantes =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(n_escuelas, <span class="dv">30</span>, <span class="dv">4</span>)))</span>
 <span id="cb226-11"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-12"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-12" aria-hidden="true" tabindex="-1"></a>estudiantes <span class="ot">&lt;-</span> <span class="fu">uncount</span>(escuela, n_estudiantes, <span class="at">.id =</span> <span class="st">&quot;id_estudiante&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb226-13"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb226-14"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">calif =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, media_escuela, <span class="dv">70</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb226-12"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-12" aria-hidden="true" tabindex="-1"></a>estudiantes <span class="ot">&lt;-</span> <span class="fu">uncount</span>(escuela, n_estudiantes, <span class="at">.id =</span> <span class="st">&quot;id_estudiante&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb226-13"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb226-14"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">calif =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, media_escuela, <span class="dv">70</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb226-15"><a href="intervalos-de-confianza-y-remuestreo.html#cb226-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
 <p>Imaginemos que tenemos una población de 5000 escuelas,
 y queremos estimar la media de las calificaciones de los estudiantes en una prueba.</p>
@@ -1614,7 +1614,7 @@ esto y calculamos la media.</p>
 <pre><code>## [1] 466.73</code></pre>
 <p>Este número es muy cercano a la media verdadera de la población:
 466.51, pero esta es una de muchas posibles muestras.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb231-1" aria-hidden="true" tabindex="-1"></a>medias_mas <span class="ot">&lt;-</span> <span class="fu">rerun</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(estudiantes<span class="sc">$</span>calif, <span class="dv">60</span>))) <span class="sc">%&gt;%</span> <span class="fu">flatten_dbl</span>()</span>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb231-1" aria-hidden="true" tabindex="-1"></a>medias_mas <span class="ot">&lt;-</span> <span class="fu">rerun</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(estudiantes<span class="sc">$</span>calif, <span class="dv">60</span>))) <span class="sc">|&gt;</span><span class="fu">flatten_dbl</span>()</span>
 <span id="cb231-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(medias_mas)</span></code></pre></div>
 <pre><code>## [1] 14.75242</code></pre>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb233-1" aria-hidden="true" tabindex="-1"></a>hist_mas <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">tibble</span>(medias_mas), <span class="fu">aes</span>(<span class="at">x =</span> medias_mas)) <span class="sc">+</span></span>
@@ -1636,19 +1636,19 @@ indígena) y sabemos también que la calificación de los estudiantes de escuela
 escuelas rurales o indígenas.</p>
 <p>En esta caso un diseño más eficiente consiste en tomar muestras independientes
 dentro de cada estrato.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb234-1" aria-hidden="true" tabindex="-1"></a>muestra_estrat <span class="ot">&lt;-</span> estudiantes <span class="sc">%&gt;%</span> </span>
-<span id="cb234-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb234-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(tipo) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb234-1" aria-hidden="true" tabindex="-1"></a>muestra_estrat <span class="ot">&lt;-</span> estudiantes <span class="sc">|&gt;</span></span>
+<span id="cb234-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb234-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
 <span id="cb234-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb234-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_frac</span>(<span class="fl">0.0004</span>)</span>
 <span id="cb234-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb234-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(muestra_estrat)</span></code></pre></div>
 <pre><code>## [1] 60  6</code></pre>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-1" aria-hidden="true" tabindex="-1"></a>muestrea_estrat <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
-<span id="cb236-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-2" aria-hidden="true" tabindex="-1"></a>    muestra <span class="ot">&lt;-</span> estudiantes <span class="sc">%&gt;%</span> </span>
-<span id="cb236-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(tipo) <span class="sc">%&gt;%</span> </span>
+<span id="cb236-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-2" aria-hidden="true" tabindex="-1"></a>    muestra <span class="ot">&lt;-</span> estudiantes <span class="sc">|&gt;</span></span>
+<span id="cb236-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
 <span id="cb236-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sample_frac</span>(<span class="fl">0.0004</span>)</span>
 <span id="cb236-5"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(muestra<span class="sc">$</span>calif)</span>
 <span id="cb236-6"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb236-7"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb236-8"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-8" aria-hidden="true" tabindex="-1"></a>medias_estrat <span class="ot">&lt;-</span> <span class="fu">rerun</span>(<span class="dv">1000</span>, <span class="fu">muestrea_estrat</span>()) <span class="sc">%&gt;%</span> <span class="fu">flatten_dbl</span>()</span></code></pre></div>
+<span id="cb236-8"><a href="intervalos-de-confianza-y-remuestreo.html#cb236-8" aria-hidden="true" tabindex="-1"></a>medias_estrat <span class="ot">&lt;-</span> <span class="fu">rerun</span>(<span class="dv">1000</span>, <span class="fu">muestrea_estrat</span>()) <span class="sc">|&gt;</span><span class="fu">flatten_dbl</span>()</span></code></pre></div>
 <p>Notamos que la distribución muestral está más concentrada que el caso de
 MAS, el error estándar se reduce de 14.75 a</p>
 <p>10.2</p>
@@ -1677,23 +1677,23 @@ examinador a la escuela, y que una vez en la escuela el costo de evaluar a todo
 sexto, en lugar de a un único alumno, es relativamente bajo. Podemos
 imaginar que considerando estos costos por visita de escuela nos alcance para
 visitar 40 escuelas y en cada una examinar a todos los estudiantes.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-1" aria-hidden="true" tabindex="-1"></a>muestra_escuelas <span class="ot">&lt;-</span> escuela <span class="sc">%&gt;%</span> </span>
-<span id="cb240-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(tipo) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-1" aria-hidden="true" tabindex="-1"></a>muestra_escuelas <span class="ot">&lt;-</span> escuela <span class="sc">|&gt;</span></span>
+<span id="cb240-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
 <span id="cb240-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_frac</span>(<span class="at">size =</span> <span class="fl">0.008</span>)</span>
-<span id="cb240-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-4" aria-hidden="true" tabindex="-1"></a>muestra_cgl <span class="ot">&lt;-</span> muestra_escuelas <span class="sc">%&gt;%</span> </span>
+<span id="cb240-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-4" aria-hidden="true" tabindex="-1"></a>muestra_cgl <span class="ot">&lt;-</span> muestra_escuelas <span class="sc">|&gt;</span></span>
 <span id="cb240-5"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(estudiantes) </span>
 <span id="cb240-6"><a href="intervalos-de-confianza-y-remuestreo.html#cb240-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(muestra_cgl<span class="sc">$</span>calif)</span></code></pre></div>
 <pre><code>## [1] 462.5677</code></pre>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-1" aria-hidden="true" tabindex="-1"></a>muestrea_cgl <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
-<span id="cb242-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  muestra_escuelas <span class="ot">&lt;-</span> escuela <span class="sc">%&gt;%</span> </span>
-<span id="cb242-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(tipo) <span class="sc">%&gt;%</span> </span>
+<span id="cb242-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  muestra_escuelas <span class="ot">&lt;-</span> escuela <span class="sc">|&gt;</span></span>
+<span id="cb242-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(tipo) <span class="sc">|&gt;</span></span>
 <span id="cb242-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_frac</span>(<span class="at">size =</span> <span class="fl">0.008</span>)</span>
-<span id="cb242-5"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-5" aria-hidden="true" tabindex="-1"></a>  muestra_cgl <span class="ot">&lt;-</span> muestra_escuelas <span class="sc">%&gt;%</span> </span>
+<span id="cb242-5"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-5" aria-hidden="true" tabindex="-1"></a>  muestra_cgl <span class="ot">&lt;-</span> muestra_escuelas <span class="sc">|&gt;</span></span>
 <span id="cb242-6"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(estudiantes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;ind_escuela&quot;</span>, <span class="st">&quot;tipo&quot;</span>))</span>
 <span id="cb242-7"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(muestra_cgl<span class="sc">$</span>calif)</span>
 <span id="cb242-8"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb242-9"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-10"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-10" aria-hidden="true" tabindex="-1"></a>medias_cgl <span class="ot">&lt;-</span> <span class="fu">rerun</span>(<span class="dv">1000</span>, <span class="fu">muestrea_cgl</span>()) <span class="sc">%&gt;%</span> <span class="fu">flatten_dbl</span>()</span></code></pre></div>
+<span id="cb242-10"><a href="intervalos-de-confianza-y-remuestreo.html#cb242-10" aria-hidden="true" tabindex="-1"></a>medias_cgl <span class="ot">&lt;-</span> <span class="fu">rerun</span>(<span class="dv">1000</span>, <span class="fu">muestrea_cgl</span>()) <span class="sc">|&gt;</span><span class="fu">flatten_dbl</span>()</span></code></pre></div>
 <p>En este caso, el número de estudiantes examinados es mucho mayor que en MAS
 y muestreo estratificado, notemos que el número de estudiantes evaluados cambiará
 de muestra a muestra dependiendo del número de alumnos en las escuelas
@@ -1749,15 +1749,15 @@ población de INEGI.</p></li>
 <span id="cb246-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;conjunto_de_datos_concentradohogar_enigh_2018_ns.csv&quot;</span>))</span>
 <span id="cb246-5"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb246-6"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-6" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionar variable de ingreso corriente</span></span>
-<span id="cb246-7"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-7" aria-hidden="true" tabindex="-1"></a>hogar <span class="ot">&lt;-</span> concentrado_hogar <span class="sc">%&gt;%</span> </span>
+<span id="cb246-7"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-7" aria-hidden="true" tabindex="-1"></a>hogar <span class="ot">&lt;-</span> concentrado_hogar <span class="sc">|&gt;</span></span>
 <span id="cb246-8"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb246-9"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">upm =</span> <span class="fu">as.integer</span>(upm),</span>
 <span id="cb246-10"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">edo =</span> <span class="fu">str_sub</span>(ubica_geo, <span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb246-11"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-11" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span> </span>
+<span id="cb246-11"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-11" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
 <span id="cb246-12"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(folioviv, foliohog, est_dis, upm, factor, ing_cor, </span>
-<span id="cb246-13"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-13" aria-hidden="true" tabindex="-1"></a>       edad_jefe, edo) <span class="sc">%&gt;%</span> </span>
-<span id="cb246-14"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(est_dis) <span class="sc">%&gt;%</span> </span>
-<span id="cb246-15"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">n_distinct</span>(upm)) <span class="sc">%&gt;%</span> <span class="co"># número de upms por estrato</span></span>
+<span id="cb246-13"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-13" aria-hidden="true" tabindex="-1"></a>       edad_jefe, edo) <span class="sc">|&gt;</span></span>
+<span id="cb246-14"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(est_dis) <span class="sc">|&gt;</span></span>
+<span id="cb246-15"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">n_distinct</span>(upm)) <span class="sc">|&gt;</span><span class="co"># número de upms por estrato</span></span>
 <span id="cb246-16"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
 <span id="cb246-17"><a href="intervalos-de-confianza-y-remuestreo.html#cb246-17" aria-hidden="true" tabindex="-1"></a>hogar</span></code></pre></div>
 <pre><code>## # A tibble: 74,647 × 9
@@ -1819,32 +1819,32 @@ no están en la muestra tienen ponderador distinto a cero, si <span class="math 
 ponderador podría tomar valores negativos.</p>
 <p>Implementemos el bootstrap de Rao y Wu a la ENIGH, usaremos <span class="math inline">\(m_h=n_h-1\)</span></p>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creamos una tabla con los estratos y upms</span></span>
-<span id="cb252-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-2" aria-hidden="true" tabindex="-1"></a>est_upm <span class="ot">&lt;-</span> hogar <span class="sc">%&gt;%</span> </span>
-<span id="cb252-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(est_dis, upm, n) <span class="sc">%&gt;%</span> </span>
+<span id="cb252-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-2" aria-hidden="true" tabindex="-1"></a>est_upm <span class="ot">&lt;-</span> hogar <span class="sc">|&gt;</span> </span>
+<span id="cb252-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(est_dis, upm, n) <span class="sc">|&gt;</span> </span>
 <span id="cb252-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(est_dis, upm)</span>
 <span id="cb252-5"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb252-6"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-6" aria-hidden="true" tabindex="-1"></a>hogar_factor <span class="ot">&lt;-</span> est_upm <span class="sc">%&gt;%</span> </span>
-<span id="cb252-7"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(est_dis) <span class="sc">%&gt;%</span> <span class="co"># dentro de cada estrato tomamos muestra (n_h-1)</span></span>
-<span id="cb252-8"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="fu">first</span>(n) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb252-9"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_count</span>(est_dis, upm, <span class="at">name =</span> <span class="st">&quot;m_hi&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># calculamos m_hi*</span></span>
-<span id="cb252-10"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(hogar, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;est_dis&quot;</span>, <span class="st">&quot;upm&quot;</span>, <span class="st">&quot;n&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb252-6"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-6" aria-hidden="true" tabindex="-1"></a>hogar_factor <span class="ot">&lt;-</span> est_upm <span class="sc">|&gt;</span></span>
+<span id="cb252-7"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(est_dis) <span class="sc">|&gt;</span><span class="co"># dentro de cada estrato tomamos muestra (n_h-1)</span></span>
+<span id="cb252-8"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="fu">first</span>(n) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb252-9"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_count</span>(est_dis, upm, <span class="at">name =</span> <span class="st">&quot;m_hi&quot;</span>) <span class="sc">|&gt;</span> <span class="co"># calculamos m_hi*</span></span>
+<span id="cb252-10"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(hogar, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;est_dis&quot;</span>, <span class="st">&quot;upm&quot;</span>, <span class="st">&quot;n&quot;</span>), <span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb252-11"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">factor_b =</span> factor <span class="sc">*</span> m_hi <span class="sc">*</span> n <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>))</span>
 <span id="cb252-12"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb252-13"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-13" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb252-14"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-14" aria-hidden="true" tabindex="-1"></a><span class="co"># unimos los pasos anteriores en una función para replicar en cada muestra bootstrap</span></span>
 <span id="cb252-15"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-15" aria-hidden="true" tabindex="-1"></a>svy_boot <span class="ot">&lt;-</span> <span class="cf">function</span>(est_upm, hogar){</span>
-<span id="cb252-16"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-16" aria-hidden="true" tabindex="-1"></a>  m_hi <span class="ot">&lt;-</span> est_upm <span class="sc">%&gt;%</span> </span>
-<span id="cb252-17"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_split</span>(est_dis) <span class="sc">%&gt;%</span> </span>
-<span id="cb252-18"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(<span class="sc">~</span><span class="fu">sample</span>(.<span class="sc">$</span>upm, <span class="at">size =</span> <span class="fu">first</span>(.<span class="sc">$</span>n) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb252-19"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">flatten_int</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb252-20"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-20" aria-hidden="true" tabindex="-1"></a>    plyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb252-16"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-16" aria-hidden="true" tabindex="-1"></a>  m_hi <span class="ot">&lt;-</span> est_upm <span class="sc">|&gt;</span></span>
+<span id="cb252-17"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_split</span>(est_dis) <span class="sc">|&gt;</span></span>
+<span id="cb252-18"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(<span class="sc">~</span><span class="fu">sample</span>(.<span class="sc">$</span>upm, <span class="at">size =</span> <span class="fu">first</span>(.<span class="sc">$</span>n) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb252-19"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">flatten_int</span>() <span class="sc">|&gt;</span></span>
+<span id="cb252-20"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-20" aria-hidden="true" tabindex="-1"></a>    plyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">|&gt;</span></span>
 <span id="cb252-21"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="at">upm =</span> x, <span class="at">m_h =</span> freq)</span>
-<span id="cb252-22"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-22" aria-hidden="true" tabindex="-1"></a>  m_hi <span class="sc">%&gt;%</span> </span>
-<span id="cb252-23"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(hogar, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;upm&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb252-22"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-22" aria-hidden="true" tabindex="-1"></a>  m_hi <span class="sc">|&gt;</span></span>
+<span id="cb252-23"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(hogar, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;upm&quot;</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb252-24"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">factor_b =</span> factor <span class="sc">*</span> m_h <span class="sc">*</span> n <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>))</span>
 <span id="cb252-25"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-25" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb252-26"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-26" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1038984</span>)</span>
-<span id="cb252-27"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-27" aria-hidden="true" tabindex="-1"></a>boot_rep <span class="ot">&lt;-</span> <span class="fu">rerun</span>(<span class="dv">500</span>, <span class="fu">svy_boot</span>(est_upm, hogar))</span>
+<span id="cb252-27"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-27" aria-hidden="true" tabindex="-1"></a>boot_rep <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>, <span class="sc">~</span><span class="fu">svy_boot</span>(est_upm, hogar))</span>
 <span id="cb252-28"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb252-29"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicación a ingreso medio</span></span>
 <span id="cb252-30"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-30" aria-hidden="true" tabindex="-1"></a>wtd_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(w, x, <span class="at">na.rm =</span> <span class="cn">FALSE</span>) {</span>
@@ -1852,14 +1852,14 @@ ponderador podría tomar valores negativos.</p>
 <span id="cb252-32"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-32" aria-hidden="true" tabindex="-1"></a>} </span>
 <span id="cb252-33"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb252-34"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-34" aria-hidden="true" tabindex="-1"></a><span class="co"># La media es:</span></span>
-<span id="cb252-35"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-35" aria-hidden="true" tabindex="-1"></a>hogar <span class="sc">%&gt;%</span> </span>
+<span id="cb252-35"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-35" aria-hidden="true" tabindex="-1"></a>hogar <span class="sc">|&gt;</span></span>
 <span id="cb252-36"><a href="intervalos-de-confianza-y-remuestreo.html#cb252-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">media =</span> <span class="fu">wtd_mean</span>(factor, ing_cor))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##    media
 ##    &lt;dbl&gt;
 ## 1 49610.</code></pre>
 <p>Y el error estándar:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(boot_rep, <span class="sc">~</span><span class="fu">wtd_mean</span>(<span class="at">w =</span> .<span class="sc">$</span>factor_b, <span class="at">x =</span> .<span class="sc">$</span>ing_cor)) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(boot_rep, <span class="sc">~</span><span class="fu">wtd_mean</span>(<span class="at">w =</span> .<span class="sc">$</span>factor_b, <span class="at">x =</span> .<span class="sc">$</span>ing_cor)) <span class="sc">|&gt;</span></span>
 <span id="cb254-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
 <pre><code>##     2.5%    97.5% 
 ## 48742.12 50519.02</code></pre>
@@ -1870,30 +1870,30 @@ en <code>srvyr</code> que es una versión <em>tidy</em> que utiliza las funcione
 <span id="cb256-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
 <span id="cb256-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
 <span id="cb256-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb256-5"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-5" aria-hidden="true" tabindex="-1"></a>enigh_design <span class="ot">&lt;-</span> hogar <span class="sc">%&gt;%</span> </span>
+<span id="cb256-5"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-5" aria-hidden="true" tabindex="-1"></a>enigh_design <span class="ot">&lt;-</span> hogar <span class="sc">|&gt;</span></span>
 <span id="cb256-6"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(<span class="at">ids =</span> upm, <span class="at">weights =</span> factor, <span class="at">strata =</span> est_dis)</span>
 <span id="cb256-7"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb256-8"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Elegimos bootstrap como el método para el cálculo de errores estándar</span></span>
 <span id="cb256-9"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7398731</span>)</span>
-<span id="cb256-10"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-10" aria-hidden="true" tabindex="-1"></a>enigh_boot <span class="ot">&lt;-</span> enigh_design <span class="sc">%&gt;%</span> </span>
+<span id="cb256-10"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-10" aria-hidden="true" tabindex="-1"></a>enigh_boot <span class="ot">&lt;-</span> enigh_design <span class="sc">|&gt;</span></span>
 <span id="cb256-11"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_rep</span>(<span class="at">type =</span> <span class="st">&quot;bootstrap&quot;</span>, <span class="at">replicates =</span> <span class="dv">500</span>)</span>
 <span id="cb256-12"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb256-13"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Así calculamos la media</span></span>
-<span id="cb256-14"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-14" aria-hidden="true" tabindex="-1"></a>enigh_boot <span class="sc">%&gt;%</span> </span>
+<span id="cb256-14"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-14" aria-hidden="true" tabindex="-1"></a>enigh_boot <span class="sc">|&gt;</span></span>
 <span id="cb256-15"><a href="intervalos-de-confianza-y-remuestreo.html#cb256-15" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean_ingcor =</span> <span class="fu">survey_mean</span>(ing_cor))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   mean_ingcor mean_ingcor_se
 ##         &lt;dbl&gt;          &lt;dbl&gt;
 ## 1      49610.           468.</code></pre>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb258-1" aria-hidden="true" tabindex="-1"></a>enigh_boot <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb258-1" aria-hidden="true" tabindex="-1"></a>enigh_boot <span class="sc">|&gt;</span></span>
 <span id="cb258-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb258-2" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean_ingcor =</span> <span class="fu">survey_mean</span>(ing_cor, <span class="at">vartype =</span>  <span class="st">&quot;ci&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   mean_ingcor mean_ingcor_low mean_ingcor_upp
 ##         &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;
 ## 1      49610.          48690.          50530.</code></pre>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="intervalos-de-confianza-y-remuestreo.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="co"># por estado</span></span>
-<span id="cb260-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb260-2" aria-hidden="true" tabindex="-1"></a>enigh_boot <span class="sc">%&gt;%</span> </span>
-<span id="cb260-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb260-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(edo) <span class="sc">%&gt;%</span> </span>
+<span id="cb260-2"><a href="intervalos-de-confianza-y-remuestreo.html#cb260-2" aria-hidden="true" tabindex="-1"></a>enigh_boot <span class="sc">|&gt;</span></span>
+<span id="cb260-3"><a href="intervalos-de-confianza-y-remuestreo.html#cb260-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(edo) <span class="sc">|&gt;</span></span>
 <span id="cb260-4"><a href="intervalos-de-confianza-y-remuestreo.html#cb260-4" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean_ingcor =</span> <span class="fu">survey_mean</span>(ing_cor)) </span></code></pre></div>
 <pre><code>## # A tibble: 30 × 3
 ##    edo   mean_ingcor mean_ingcor_se

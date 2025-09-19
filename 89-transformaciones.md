@@ -146,23 +146,23 @@ animals_tbl |>
 ```
 
 ```{=html}
-<div id="xavivicbuj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xavivicbuj table {
+<div id="jjehaempcu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jjehaempcu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xavivicbuj thead, #xavivicbuj tbody, #xavivicbuj tfoot, #xavivicbuj tr, #xavivicbuj td, #xavivicbuj th {
+#jjehaempcu thead, #jjehaempcu tbody, #jjehaempcu tfoot, #jjehaempcu tr, #jjehaempcu td, #jjehaempcu th {
   border-style: none;
 }
 
-#xavivicbuj p {
+#jjehaempcu p {
   margin: 0;
   padding: 0;
 }
 
-#xavivicbuj .gt_table {
+#jjehaempcu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -188,12 +188,12 @@ animals_tbl |>
   border-left-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_caption {
+#jjehaempcu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xavivicbuj .gt_title {
+#jjehaempcu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -205,7 +205,7 @@ animals_tbl |>
   border-bottom-width: 0;
 }
 
-#xavivicbuj .gt_subtitle {
+#jjehaempcu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -217,7 +217,7 @@ animals_tbl |>
   border-top-width: 0;
 }
 
-#xavivicbuj .gt_heading {
+#jjehaempcu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -229,13 +229,13 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_bottom_border {
+#jjehaempcu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_col_headings {
+#jjehaempcu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -250,7 +250,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_col_heading {
+#jjehaempcu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -270,7 +270,7 @@ animals_tbl |>
   overflow-x: hidden;
 }
 
-#xavivicbuj .gt_column_spanner_outer {
+#jjehaempcu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -282,15 +282,15 @@ animals_tbl |>
   padding-right: 4px;
 }
 
-#xavivicbuj .gt_column_spanner_outer:first-child {
+#jjehaempcu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xavivicbuj .gt_column_spanner_outer:last-child {
+#jjehaempcu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xavivicbuj .gt_column_spanner {
+#jjehaempcu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -302,11 +302,11 @@ animals_tbl |>
   width: 100%;
 }
 
-#xavivicbuj .gt_spanner_row {
+#jjehaempcu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xavivicbuj .gt_group_heading {
+#jjehaempcu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -332,7 +332,7 @@ animals_tbl |>
   text-align: left;
 }
 
-#xavivicbuj .gt_empty_group_heading {
+#jjehaempcu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -347,15 +347,15 @@ animals_tbl |>
   vertical-align: middle;
 }
 
-#xavivicbuj .gt_from_md > :first-child {
+#jjehaempcu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xavivicbuj .gt_from_md > :last-child {
+#jjehaempcu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xavivicbuj .gt_row {
+#jjehaempcu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -374,7 +374,7 @@ animals_tbl |>
   overflow-x: hidden;
 }
 
-#xavivicbuj .gt_stub {
+#jjehaempcu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -387,7 +387,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#xavivicbuj .gt_stub_row_group {
+#jjehaempcu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -401,15 +401,15 @@ animals_tbl |>
   vertical-align: top;
 }
 
-#xavivicbuj .gt_row_group_first td {
+#jjehaempcu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xavivicbuj .gt_row_group_first th {
+#jjehaempcu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xavivicbuj .gt_summary_row {
+#jjehaempcu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -419,16 +419,16 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#xavivicbuj .gt_first_summary_row {
+#jjehaempcu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_first_summary_row.thick {
+#jjehaempcu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xavivicbuj .gt_last_summary_row {
+#jjehaempcu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -438,7 +438,7 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_grand_summary_row {
+#jjehaempcu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -448,7 +448,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#xavivicbuj .gt_first_grand_summary_row {
+#jjehaempcu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -458,7 +458,7 @@ animals_tbl |>
   border-top-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_last_grand_summary_row_top {
+#jjehaempcu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -468,11 +468,11 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_striped {
+#jjehaempcu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xavivicbuj .gt_table_body {
+#jjehaempcu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -481,7 +481,7 @@ animals_tbl |>
   border-bottom-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_footnotes {
+#jjehaempcu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -495,7 +495,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_footnote {
+#jjehaempcu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -504,7 +504,7 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#xavivicbuj .gt_sourcenotes {
+#jjehaempcu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -518,7 +518,7 @@ animals_tbl |>
   border-right-color: #D3D3D3;
 }
 
-#xavivicbuj .gt_sourcenote {
+#jjehaempcu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -526,72 +526,72 @@ animals_tbl |>
   padding-right: 5px;
 }
 
-#xavivicbuj .gt_left {
+#jjehaempcu .gt_left {
   text-align: left;
 }
 
-#xavivicbuj .gt_center {
+#jjehaempcu .gt_center {
   text-align: center;
 }
 
-#xavivicbuj .gt_right {
+#jjehaempcu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xavivicbuj .gt_font_normal {
+#jjehaempcu .gt_font_normal {
   font-weight: normal;
 }
 
-#xavivicbuj .gt_font_bold {
+#jjehaempcu .gt_font_bold {
   font-weight: bold;
 }
 
-#xavivicbuj .gt_font_italic {
+#jjehaempcu .gt_font_italic {
   font-style: italic;
 }
 
-#xavivicbuj .gt_super {
+#jjehaempcu .gt_super {
   font-size: 65%;
 }
 
-#xavivicbuj .gt_footnote_marks {
+#jjehaempcu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xavivicbuj .gt_asterisk {
+#jjehaempcu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xavivicbuj .gt_indent_1 {
+#jjehaempcu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xavivicbuj .gt_indent_2 {
+#jjehaempcu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xavivicbuj .gt_indent_3 {
+#jjehaempcu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xavivicbuj .gt_indent_4 {
+#jjehaempcu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xavivicbuj .gt_indent_5 {
+#jjehaempcu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xavivicbuj .katex-display {
+#jjehaempcu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xavivicbuj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jjehaempcu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

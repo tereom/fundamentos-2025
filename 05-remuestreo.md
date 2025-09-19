@@ -1577,9 +1577,9 @@ escuela <- tibble(ind_escuela = 1:n_escuelas, tipo,
     media_escuela = rnorm(n_escuelas, media_tipo, 30), 
     n_estudiantes = round(rnorm(n_escuelas, 30, 4)))
 
-estudiantes <- uncount(escuela, n_estudiantes, .id = "id_estudiante") %>% 
-    rowwise() %>% 
-    mutate(calif = rnorm(1, media_escuela, 70)) %>% 
+estudiantes <- uncount(escuela, n_estudiantes, .id = "id_estudiante") |>
+    rowwise() |>
+    mutate(calif = rnorm(1, media_escuela, 70)) |>
     ungroup()
 ```
 
@@ -1625,7 +1625,7 @@ Este número es muy cercano a la media verdadera de la población:
 
 
 ``` r
-medias_mas <- rerun(1000, mean(sample(estudiantes$calif, 60))) %>% flatten_dbl()
+medias_mas <- rerun(1000, mean(sample(estudiantes$calif, 60))) |>flatten_dbl()
 sd(medias_mas)
 ```
 
@@ -1661,8 +1661,8 @@ dentro de cada estrato.
 
 
 ``` r
-muestra_estrat <- estudiantes %>% 
-    group_by(tipo) %>% 
+muestra_estrat <- estudiantes |>
+    group_by(tipo) |>
     sample_frac(0.0004)
 dim(muestra_estrat)
 ```
@@ -1673,13 +1673,13 @@ dim(muestra_estrat)
 
 ``` r
 muestrea_estrat <- function(){
-    muestra <- estudiantes %>% 
-        group_by(tipo) %>% 
+    muestra <- estudiantes |>
+        group_by(tipo) |>
         sample_frac(0.0004)
     mean(muestra$calif)
 }
 
-medias_estrat <- rerun(1000, muestrea_estrat()) %>% flatten_dbl()
+medias_estrat <- rerun(1000, muestrea_estrat()) |>flatten_dbl()
 ```
 
 Notamos que la distribución muestral está más concentrada que el caso de
@@ -1731,10 +1731,10 @@ visitar 40 escuelas y en cada una examinar a todos los estudiantes.
 
 
 ``` r
-muestra_escuelas <- escuela %>% 
-    group_by(tipo) %>% 
+muestra_escuelas <- escuela |>
+    group_by(tipo) |>
     sample_frac(size = 0.008)
-muestra_cgl <- muestra_escuelas %>% 
+muestra_cgl <- muestra_escuelas |>
     left_join(estudiantes) 
 mean(muestra_cgl$calif)
 ```
@@ -1745,15 +1745,15 @@ mean(muestra_cgl$calif)
 
 ``` r
 muestrea_cgl <- function(){
-  muestra_escuelas <- escuela %>% 
-    group_by(tipo) %>% 
+  muestra_escuelas <- escuela |>
+    group_by(tipo) |>
     sample_frac(size = 0.008)
-  muestra_cgl <- muestra_escuelas %>% 
+  muestra_cgl <- muestra_escuelas |>
     left_join(estudiantes, by = c("ind_escuela", "tipo"))
   mean(muestra_cgl$calif)
 }
 
-medias_cgl <- rerun(1000, muestrea_cgl()) %>% flatten_dbl()
+medias_cgl <- rerun(1000, muestrea_cgl()) |>flatten_dbl()
 ```
 
 En este caso, el número de estudiantes examinados es mucho mayor que en MAS
@@ -1834,15 +1834,15 @@ concentrado_hogar <- read_csv(here::here("data",
     "conjunto_de_datos_concentradohogar_enigh_2018_ns.csv"))
 
 # seleccionar variable de ingreso corriente
-hogar <- concentrado_hogar %>% 
+hogar <- concentrado_hogar |>
     mutate(
         upm = as.integer(upm),
         edo = str_sub(ubica_geo, 1, 2)
-        ) %>% 
+        ) |>
     select(folioviv, foliohog, est_dis, upm, factor, ing_cor, 
-       edad_jefe, edo) %>% 
-    group_by(est_dis) %>% 
-    mutate(n = n_distinct(upm)) %>% # número de upms por estrato
+       edad_jefe, edo) |>
+    group_by(est_dis) |>
+    mutate(n = n_distinct(upm)) |># número de upms por estrato
     ungroup()
 hogar
 ```
@@ -1934,32 +1934,32 @@ Implementemos el bootstrap de Rao y Wu a la ENIGH, usaremos $m_h=n_h-1$
 
 ``` r
 # creamos una tabla con los estratos y upms
-est_upm <- hogar %>% 
-  distinct(est_dis, upm, n) %>% 
+est_upm <- hogar |> 
+  distinct(est_dis, upm, n) |> 
   arrange(est_dis, upm)
 
-hogar_factor <- est_upm %>% 
-  group_by(est_dis) %>% # dentro de cada estrato tomamos muestra (n_h-1)
-  sample_n(size = first(n) - 1, replace = TRUE) %>% 
-  add_count(est_dis, upm, name = "m_hi") %>% # calculamos m_hi*
-  left_join(hogar, by = c("est_dis", "upm", "n")) |> 
+hogar_factor <- est_upm |>
+  group_by(est_dis) |># dentro de cada estrato tomamos muestra (n_h-1)
+  sample_n(size = first(n) - 1, replace = TRUE) |>
+  add_count(est_dis, upm, name = "m_hi") |> # calculamos m_hi*
+  left_join(hogar, by = c("est_dis", "upm", "n"), relationship = "many-to-many") |> 
   mutate(factor_b = factor * m_hi * n / (n - 1))
 
   
 # unimos los pasos anteriores en una función para replicar en cada muestra bootstrap
 svy_boot <- function(est_upm, hogar){
-  m_hi <- est_upm %>% 
-    group_split(est_dis) %>% 
-    map(~sample(.$upm, size = first(.$n) - 1, replace = TRUE)) %>% 
-    flatten_int() %>% 
-    plyr::count() %>% 
+  m_hi <- est_upm |>
+    group_split(est_dis) |>
+    map(~sample(.$upm, size = first(.$n) - 1, replace = TRUE)) |>
+    flatten_int() |>
+    plyr::count() |>
     select(upm = x, m_h = freq)
-  m_hi %>% 
-    left_join(hogar, by = c("upm")) %>% 
+  m_hi |>
+    left_join(hogar, by = c("upm")) |>
     mutate(factor_b = factor * m_h * n / (n - 1))
 }
 set.seed(1038984)
-boot_rep <- rerun(500, svy_boot(est_upm, hogar))
+boot_rep <- map(1:500, ~svy_boot(est_upm, hogar))
 
 # Aplicación a ingreso medio
 wtd_mean <- function(w, x, na.rm = FALSE) {
@@ -1967,7 +1967,7 @@ wtd_mean <- function(w, x, na.rm = FALSE) {
 } 
 
 # La media es:
-hogar %>% 
+hogar |>
   summarise(media = wtd_mean(factor, ing_cor))
 ```
 
@@ -1982,7 +1982,7 @@ Y el error estándar:
 
 
 ``` r
-map_dbl(boot_rep, ~wtd_mean(w = .$factor_b, x = .$ing_cor)) %>% 
+map_dbl(boot_rep, ~wtd_mean(w = .$factor_b, x = .$ing_cor)) |>
   quantile(c(0.025, 0.975))
 ```
 
@@ -2004,16 +2004,16 @@ Podemos comparar nuestros resultados con la implementación en `survey`.
 library(survey)
 library(srvyr)
 
-enigh_design <- hogar %>% 
+enigh_design <- hogar |>
   as_survey_design(ids = upm, weights = factor, strata = est_dis)
 
 # 2. Elegimos bootstrap como el método para el cálculo de errores estándar
 set.seed(7398731)
-enigh_boot <- enigh_design %>% 
+enigh_boot <- enigh_design |>
   as_survey_rep(type = "bootstrap", replicates = 500)
 
 # 3. Así calculamos la media
-enigh_boot %>% 
+enigh_boot |>
   srvyr::summarise(mean_ingcor = survey_mean(ing_cor))
 ```
 
@@ -2025,7 +2025,7 @@ enigh_boot %>%
 ```
 
 ``` r
-enigh_boot %>% 
+enigh_boot |>
   srvyr::summarise(mean_ingcor = survey_mean(ing_cor, vartype =  "ci"))
 ```
 
@@ -2038,8 +2038,8 @@ enigh_boot %>%
 
 ``` r
 # por estado
-enigh_boot %>% 
-  group_by(edo) %>% 
+enigh_boot |>
+  group_by(edo) |>
   srvyr::summarise(mean_ingcor = survey_mean(ing_cor)) 
 ```
 
