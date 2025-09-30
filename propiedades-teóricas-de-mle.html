@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sección 8 Propiedades teóricas de MLE | Fundamentos de Estadística con Remuestreo</title>
+  <meta name="description" content="Curso de Fundamentos de Estadística con Remuestreo, maestría en Ciencia de Datos, ITAM, Otoño 2025." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sección 8 Propiedades teóricas de MLE | Fundamentos de Estadística con Remuestreo" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Curso de Fundamentos de Estadística con Remuestreo, maestría en Ciencia de Datos, ITAM, Otoño 2025." />
+  <meta name="github-repo" content="tereom/fundamentos-2025" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sección 8 Propiedades teóricas de MLE | Fundamentos de Estadística con Remuestreo" />
+  
+  <meta name="twitter:description" content="Curso de Fundamentos de Estadística con Remuestreo, maestría en Ciencia de Datos, ITAM, Otoño 2025." />
+  
+
+<meta name="author" content="Teresa Ortiz, Felipe González" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="bootstrap-paramétrico.html"/>
+<link rel="next" href="más-de-pruebas-de-hipótesis-e-intervalos.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="icon" type="image/png" href="images/favicon-2.png" sizes="any">
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous">
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/fnaufel/smartify/smartify.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Fundamentos de Estadística con Remuestreo</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Información del curso</a></li>
+<li class="chapter" data-level="" data-path="temario.html"><a href="temario.html"><i class="fa fa-check"></i>Temario</a>
+<ul>
+<li class="chapter" data-level="" data-path="temario.html"><a href="temario.html#plan-semanal"><i class="fa fa-check"></i>Plan semanal</a></li>
+<li class="chapter" data-level="" data-path="temario.html"><a href="temario.html#evaluación"><i class="fa fa-check"></i>Evaluación</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html"><i class="fa fa-check"></i><b>1</b> Análisis exploratorio</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#el-papel-de-la-exploración-en-el-análisis-de-datos"><i class="fa fa-check"></i>El papel de la exploración en el análisis de datos</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#preguntas-y-datos"><i class="fa fa-check"></i>Preguntas y datos</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#algunos-conceptos-básicos"><i class="fa fa-check"></i>Algunos conceptos básicos</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#histogramas"><i class="fa fa-check"></i>Histogramas</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#media-y-desviación-estándar"><i class="fa fa-check"></i>Media y desviación estándar</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#precios-de-casas"><i class="fa fa-check"></i>Precios de casas</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#prueba-enlace"><i class="fa fa-check"></i>Prueba Enlace</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#estados-y-calificaciones-en-sat"><i class="fa fa-check"></i>Estados y calificaciones en SAT</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#tablas-de-conteos"><i class="fa fa-check"></i>Tablas de conteos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#suavizamiento-loess"><i class="fa fa-check"></i>Suavizamiento loess</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#opcional-cálculo-del-suavizador"><i class="fa fa-check"></i>Opcional: cálculo del suavizador</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#caso-de-estudio-nacimientos-en-méxico"><i class="fa fa-check"></i>Caso de estudio: nacimientos en México</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#datos-de-natalidad-para-méxico"><i class="fa fa-check"></i>Datos de natalidad para México</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#tendencia"><i class="fa fa-check"></i>Tendencia</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#componente-anual"><i class="fa fa-check"></i>Componente anual</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#día-de-la-semana"><i class="fa fa-check"></i>Día de la semana</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#residuales"><i class="fa fa-check"></i>Residuales</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#reestimación"><i class="fa fa-check"></i>Reestimación</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#análisis-de-componentes"><i class="fa fa-check"></i>Análisis de componentes</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#residuales-antes-y-después-de-2006"><i class="fa fa-check"></i>Residuales: antes y después de 2006</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#otros-días-especiales-más-de-residuales"><i class="fa fa-check"></i>Otros días especiales: más de residuales</a></li>
+<li class="chapter" data-level="" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#semana-santa"><i class="fa fa-check"></i>Semana santa</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html"><i class="fa fa-check"></i><b>2</b> Tipos de estudio y experimentos</a>
+<ul>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#motivación"><i class="fa fa-check"></i>Motivación</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#proceso-generador-de-datos"><i class="fa fa-check"></i>Proceso Generador de Datos</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#ejemplo-prevalencia-de-anemia"><i class="fa fa-check"></i>Ejemplo: Prevalencia de anemia</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#muestreo-aleatorio"><i class="fa fa-check"></i>Muestreo aleatorio</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#pero-si-no-podemos-hacer-muestreo-aleatorio"><i class="fa fa-check"></i>Pero si no podemos hacer muestreo aleatorio?</a>
+<ul>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#ejemplo-policías-y-tráfico"><i class="fa fa-check"></i>Ejemplo: Policías y tráfico</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#el-estimador-estándar"><i class="fa fa-check"></i>El estimador estándar</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#experimentos-tradicionales"><i class="fa fa-check"></i>Experimentos tradicionales</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#bloqueo"><i class="fa fa-check"></i>Bloqueo</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#variables-desconocidas"><i class="fa fa-check"></i>Variables desconocidas</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#aleatorizando-el-tratamiento"><i class="fa fa-check"></i>Aleatorizando el tratamiento</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#selección-de-unidades-y-tratamiento"><i class="fa fa-check"></i>Selección de unidades y tratamiento</a></li>
+<li class="chapter" data-level="" data-path="tipos-de-estudio-y-experimentos.html"><a href="tipos-de-estudio-y-experimentos.html#asignación-natural-del-tratamiento"><i class="fa fa-check"></i>Asignación natural del tratamiento</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html"><i class="fa fa-check"></i><b>3</b> Pruebas de hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#comparación-con-poblaciones-de-referencia"><i class="fa fa-check"></i>Comparación con poblaciones de referencia</a>
+<ul>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#comparando-distribuciones"><i class="fa fa-check"></i>Comparando distribuciones</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#prueba-de-permutaciones-y-el-lineup"><i class="fa fa-check"></i>Prueba de permutaciones y el <em>lineup</em></a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#comparaciones-usando-lineup-continuación"><i class="fa fa-check"></i>Comparaciones usando <em>lineup</em> (continuación)</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#prueba-de-permutaciones-para-proporciones"><i class="fa fa-check"></i>Prueba de permutaciones para proporciones</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#pruebas-de-hipótesis-tradicionales"><i class="fa fa-check"></i>Pruebas de hipótesis tradicionales</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#tomadores-de-té-continuación"><i class="fa fa-check"></i>Tomadores de té (continuación)</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#pruebas-de-permutación-implementación."><i class="fa fa-check"></i>Pruebas de permutación: implementación.</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#ejemplo-tiempos-de-fusión"><i class="fa fa-check"></i>Ejemplo: tiempos de fusión</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#ejemplo-tiempos-de-fusión-continuación"><i class="fa fa-check"></i>Ejemplo: tiempos de fusión (continuación)</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#separación-de-grupos"><i class="fa fa-check"></i>Separación de grupos</a>
+<ul>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#avispas-opcional"><i class="fa fa-check"></i>Avispas (opcional)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#la-crisis-de-replicabilidad"><i class="fa fa-check"></i>La “crisis de replicabilidad”</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#el-jardín-de-los-senderos-que-se-bifurcan"><i class="fa fa-check"></i>El jardín de los senderos que se bifurcan</a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#ejemplo-decisiones-de-análisis-y-valores-p"><i class="fa fa-check"></i>Ejemplo: decisiones de análisis y valores <em>p</em></a></li>
+<li class="chapter" data-level="" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#alternativas-o-soluciones"><i class="fa fa-check"></i>Alternativas o soluciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html"><i class="fa fa-check"></i><b>4</b> Estimación y distribución de muestreo</a>
+<ul>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#ejemplo-precios-de-casas"><i class="fa fa-check"></i>Ejemplo: precios de casas</a></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#distribución-de-muestreo"><i class="fa fa-check"></i>Distribución de muestreo</a></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#más-ejemplos"><i class="fa fa-check"></i>Más ejemplos</a></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#el-error-estándar"><i class="fa fa-check"></i>El error estándar</a>
+<ul>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#ejemplo-valor-de-casas"><i class="fa fa-check"></i>Ejemplo: valor de casas</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#calculando-la-distribución-de-muestreo"><i class="fa fa-check"></i>Calculando la distribución de muestreo</a>
+<ul>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#teorema-central-del-límite"><i class="fa fa-check"></i>Teorema central del límite</a></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#normalidad-y-gráficas-de-cuantiles-normales"><i class="fa fa-check"></i>Normalidad y gráficas de cuantiles normales</a></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#prueba-de-hipótesis-de-normalidad"><i class="fa fa-check"></i>Prueba de hipótesis de normalidad</a>
+<ul>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="estimación-y-distribución-de-muestreo-1.html"><a href="estimación-y-distribución-de-muestreo-1.html#más-del-teorema-central-del-límite"><i class="fa fa-check"></i>Más del Teorema central del límite</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html"><i class="fa fa-check"></i><b>5</b> Intervalos de confianza y remuestreo</a>
+<ul>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-introductorio"><i class="fa fa-check"></i>Ejemplo introductorio</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#la-idea-del-bootstrap"><i class="fa fa-check"></i>La idea del bootstrap</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#el-principio-de-plug-in"><i class="fa fa-check"></i>El principio de plug-in</a>
+<ul>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#discusión-propiedades-de-la-distribución-bootstrap"><i class="fa fa-check"></i>Discusión: propiedades de la distribución bootstrap</a>
+<ul>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#variación-en-distribuciones-bootstrap"><i class="fa fa-check"></i>Variación en distribuciones bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#error-estándar-bootstrap-e-intervalos-normales"><i class="fa fa-check"></i>Error estándar bootstrap e intervalos normales</a>
+<ul>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-tomadores-de-té-negro"><i class="fa fa-check"></i>Ejemplo: tomadores de té negro</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-inventario-de-casas-vendidas"><i class="fa fa-check"></i>Ejemplo: inventario de casas vendidas</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#calibración-de-intervalos-de-confianza"><i class="fa fa-check"></i>Calibración de intervalos de confianza</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#interpretación-de-intervalos-de-confianza"><i class="fa fa-check"></i>Interpretación de intervalos de confianza</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#sesgo"><i class="fa fa-check"></i>Sesgo</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#intervalos-bootstrap-de-percentiles"><i class="fa fa-check"></i>Intervalos bootstrap de percentiles</a>
+<ul>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#bootstrap-para-dos-muestras"><i class="fa fa-check"></i>Bootstrap para dos muestras</a>
+<ul>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#datos-pareados"><i class="fa fa-check"></i>Datos pareados</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#bootstrap-y-otras-estadísticas"><i class="fa fa-check"></i>Bootstrap y otras estadísticas</a>
+<ul>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-estimadores-de-razón"><i class="fa fa-check"></i>Ejemplo: estimadores de razón</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#ejemplo-suavizadores"><i class="fa fa-check"></i>Ejemplo: suavizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#bootstrap-y-estimadores-complejos-tablas-de-perfiles"><i class="fa fa-check"></i>Bootstrap y estimadores complejos: tablas de perfiles</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#bootstrap-y-muestras-complejas"><i class="fa fa-check"></i>Bootstrap y muestras complejas</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#bootstrap-en-r"><i class="fa fa-check"></i>Bootstrap en R</a></li>
+<li class="chapter" data-level="" data-path="intervalos-de-confianza-y-remuestreo.html"><a href="intervalos-de-confianza-y-remuestreo.html#conclusiones-y-observaciones"><i class="fa fa-check"></i>Conclusiones y observaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="estimación-por-máxima-verosimilitud.html"><a href="estimación-por-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>6</b> Estimación por máxima verosimilitud</a>
+<ul>
+<li class="chapter" data-level="" data-path="estimación-por-máxima-verosimilitud.html"><a href="estimación-por-máxima-verosimilitud.html#introducción-a-estimación-por-máxima-verosimilitud"><i class="fa fa-check"></i>Introducción a estimación por máxima verosimilitud</a></li>
+<li class="chapter" data-level="" data-path="estimación-por-máxima-verosimilitud.html"><a href="estimación-por-máxima-verosimilitud.html#máxima-verosimilitud-para-observaciones-continuas"><i class="fa fa-check"></i>Máxima verosimilitud para observaciones continuas</a></li>
+<li class="chapter" data-level="" data-path="estimación-por-máxima-verosimilitud.html"><a href="estimación-por-máxima-verosimilitud.html#aspectos-numéricos"><i class="fa fa-check"></i>Aspectos numéricos</a></li>
+<li class="chapter" data-level="" data-path="estimación-por-máxima-verosimilitud.html"><a href="estimación-por-máxima-verosimilitud.html#máxima-verosimilitud-para-más-de-un-parámetro"><i class="fa fa-check"></i>Máxima verosimilitud para más de un parámetro</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="bootstrap-paramétrico.html"><a href="bootstrap-paramétrico.html"><i class="fa fa-check"></i><b>7</b> <em>Bootstrap</em> paramétrico</a>
+<ul>
+<li class="chapter" data-level="" data-path="bootstrap-paramétrico.html"><a href="bootstrap-paramétrico.html#ventajas-y-desventajas-de-bootstrap-paramétrico"><i class="fa fa-check"></i>Ventajas y desventajas de <em>bootstrap</em> paramétrico</a></li>
+<li class="chapter" data-level="" data-path="bootstrap-paramétrico.html"><a href="bootstrap-paramétrico.html#verificando-los-supuestos-distribucionales"><i class="fa fa-check"></i>Verificando los supuestos distribucionales</a></li>
+<li class="chapter" data-level="" data-path="bootstrap-paramétrico.html"><a href="bootstrap-paramétrico.html#modelos-mal-identificados"><i class="fa fa-check"></i>Modelos mal identificados</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html"><i class="fa fa-check"></i><b>8</b> Propiedades teóricas de MLE</a>
+<ul>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#consistencia"><i class="fa fa-check"></i>Consistencia</a>
+<ul>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#equivarianza-del-textsfmle"><i class="fa fa-check"></i>Equivarianza del <span class="math inline">\(\textsf{MLE}\)</span></a>
+<ul>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#ejemplo-12"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#normalidad-asintótica"><i class="fa fa-check"></i>Normalidad asintótica</a>
+<ul>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#ejemplo-información-de-fisher"><i class="fa fa-check"></i>Ejemplo: Información de Fisher</a></li>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#ejemplo-normalidad"><i class="fa fa-check"></i>Ejemplo: Normalidad</a></li>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#el-método-delta"><i class="fa fa-check"></i>El método delta</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="propiedades-teóricas-de-mle.html"><a href="propiedades-teóricas-de-mle.html#optimalidad-del-textsfmle"><i class="fa fa-check"></i>Optimalidad del <span class="math inline">\(\textsf{MLE}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html"><i class="fa fa-check"></i><b>9</b> Más de pruebas de hipótesis e intervalos</a>
+<ul>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#prueba-de-wald"><i class="fa fa-check"></i>Prueba de Wald</a></li>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#observación-pruebas-t-y-práctica-estadística"><i class="fa fa-check"></i>Observación: pruebas <span class="math inline">\(t\)</span> y práctica estadística</a></li>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#prueba-de-wald-para-dos-medias-o-proporciones"><i class="fa fa-check"></i>Prueba de Wald para dos medias o proporciones</a></li>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#datos-pareados-1"><i class="fa fa-check"></i>Datos pareados</a></li>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#pruebas-de-cociente-de-verosimilitud"><i class="fa fa-check"></i>Pruebas de cociente de verosimilitud</a>
+<ul>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#distribución-de-referencia-para-pruebas-de-cocientes"><i class="fa fa-check"></i>Distribución de referencia para pruebas de cocientes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#otro-tipo-de-pruebas"><i class="fa fa-check"></i>Otro tipo de pruebas</a></li>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#errores-tipo-i-y-tipo-ii"><i class="fa fa-check"></i>Errores tipo I y tipo II</a></li>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#consideraciones-prácticas"><i class="fa fa-check"></i>Consideraciones prácticas</a></li>
+<li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#pruebas-múltiples"><i class="fa fa-check"></i>Pruebas múltiples</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html"><i class="fa fa-check"></i>Apéndice I: Principios de visualizacion</a>
+<ul>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#introducción"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#visualización-popular-de-datos"><i class="fa fa-check"></i>Visualización popular de datos</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#teoría-de-visualización-de-datos"><i class="fa fa-check"></i>Teoría de visualización de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#principios-generales-del-diseño-analítico"><i class="fa fa-check"></i>Principios generales del diseño analítico</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#técnicas-de-visualización"><i class="fa fa-check"></i>Técnicas de visualización</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#indicadores-de-calidad-gráfica"><i class="fa fa-check"></i>Indicadores de calidad gráfica</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#factor-de-engaño-y-chartjunk"><i class="fa fa-check"></i>Factor de engaño y Chartjunk</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#pequeños-múltiplos-y-densidad-gráfica"><i class="fa fa-check"></i>Pequeños múltiplos y densidad gráfica</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#tinta-de-datos"><i class="fa fa-check"></i>Tinta de datos</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#decoración"><i class="fa fa-check"></i>Decoración</a></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#percepción-de-escala"><i class="fa fa-check"></i>Percepción de escala</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#ejemplo-gráfica-de-minard"><i class="fa fa-check"></i>Ejemplo: gráfica de Minard</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="apéndice-ii-transformaciones.html"><a href="apéndice-ii-transformaciones.html"><i class="fa fa-check"></i>Apéndice II: Transformaciones</a></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/tereom/fundamentos-2025" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentos de Estadística con Remuestreo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="propiedades-teóricas-de-mle" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Sección 8</span> Propiedades teóricas de MLE<a href="propiedades-teóricas-de-mle.html#propiedades-teóricas-de-mle" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>El método de máxima verosimiltud es uno de los métodos más utilizados en la
+inferencia estadística paramétrica. En esta sección estudiaremos las propiedades
+teóricas que cumplen los estimadores de máxima verosimilitud (<span class="math inline">\(\textsf{MLE}\)</span>) y que
+han ayudado en su <em>casi</em> adopción universal.</p>
+<p>Estas propiedades de los <span class="math inline">\(\textsf{MLE}\)</span> son válidas siempre y cuando el modelo
+<span class="math inline">\(f(x; \theta)\)</span> satisfaga ciertas condiciones de regularidad. En particular
+veremos las condiciones para que los estimadores de máxima verosimilitud sean:
+consistentes, asintóticamente normales, asintóticamente insesgados,
+asintóticamente eficientes, y equivariantes.</p>
+<div class="comentario">
+<p>
+Los estimadores <span class="math inline"><span class="math inline">\(\textsf{MLE}\)</span></span> en
+ocasiones son malinterpretados como una estimación puntual en la
+inferencia, y por ende, incapaces de cuantificar incertidumbre. A lo
+largo de estas notas hemos visto cómo extraer intervalos de confianza
+por medio de simulación y por lo tanto incorporar incertidumbre en la
+estimación. Sin embargo, hay otros maneras de reportar incertidumbre
+para <span class="math inline"><span class="math inline">\(\textsf{MLE}\)</span></span>. Y hablaremos de
+ello en esta sección.
+</p>
+</div>
+<p>A lo largo de esta sección asumiremos muestras de la forma
+<span class="math display">\[\begin{align}
+  X_1, \ldots, X_n \overset{\text{iid}}{\sim} f(x; \theta^*),
+\end{align}\]</span>
+donde <span class="math inline">\(\theta^*\)</span> es el valor verdadero —que suponemos desconocido pero fijo—
+del parámetro <span class="math inline">\(\theta \in \Theta\)</span>, y sea <span class="math inline">\(\hat \theta_n\)</span> el estimador de máxima
+verosimilitud de <span class="math inline">\(\theta.\)</span></p>
+<div id="ejemplo-10" class="section level3 unnumbered hasAnchor">
+<h3>Ejemplo<a href="propiedades-teóricas-de-mle.html#ejemplo-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Usaremos este ejemplo para ilustrar los diferentes puntos teóricos a lo largo de
+esta sección. Consideremos el caso de una muestra de variables binarias que
+registran el éxito o fracaso de un experimento. Es decir, <span class="math inline">\(X_1, \ldots, X_n \sim \textsf{Bernoulli}(p),\)</span> donde el párametro desconocido es el procentaje de
+éxitos. Éste último denotado por <span class="math inline">\(p.\)</span> Este ejemplo lo hemos estudiado en
+secciones pasadas, y sabemos que el <span class="math inline">\(\textsf{MLE}\)</span> es
+<span class="math display">\[\begin{align}
+  \hat p_n = \frac{S_n}{n} = \bar X_n,
+\end{align}\]</span>
+donde <span class="math inline">\(S_n= \sum_i X_i\)</span> es el número total de éxitos en la muestra.</p>
+<p>La figura siguiente ilustra el estimador <span class="math inline">\(\hat p_n\)</span> como función del número de
+observaciones en nuestra muestra. Podemos apreciar cómo el promedio parece
+estabilizarse alrededor del verdadero valor de <span class="math inline">\(p^* = 0.25\)</span> cuando tenemos una
+cantidad suficientemente grande de observaciones.</p>
+<p><img src="11-propiedades-mle_files/figure-html/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Como es de esperarse, diferentes muestras tendrán diferentes valores de <span class="math inline">\(n\)</span> dónde las
+trayectorias parezca que se haya estabilizado (Ver figura siguiente). Sin embargo,
+se puede notar que este comportamiento parece estar controlado y son <em>raras</em> las
+trayectorias que se encuentran más lejos.</p>
+<p><img src="11-propiedades-mle_files/figure-html/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;" />
+Los conceptos siguientes nos permitirán cuantificar el porcentaje de
+trayectorias que se mantienen cercanas a <span class="math inline">\(p^*,\)</span> en el caso límite de un número
+grande de observaciones, cuando trabajemos con estimadores de máxima
+verosimilitud. Más aún, nos permitirán cracterizar la distribución para dicho
+límite y aprenderemos de otras propiedades bajo este supuesto asintótico.</p>
+</div>
+<div id="consistencia" class="section level2 unnumbered hasAnchor">
+<h2>Consistencia<a href="propiedades-teóricas-de-mle.html#consistencia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es prudente pensar que para un estimador, lo que nos interesa es que conforme
+más información tengamos, más cerca esté del valor desconocido. Esta propiedad
+la representamos por medio del concepto de <em>consistencia</em>. Para hablar de
+esta propiedad necesitamos definir un tipo de convergencia para una
+secuencia de variables aleatorias, <strong>convergencia en probabilidad.</strong></p>
+
+<div class="mathblock">
+<strong>Definición.</strong> Una sucesión de variables aleatorias <span class="math inline">\(X_n\)</span> converge en
+probabilidad a la variable aleatoria <span class="math inline">\(X,\)</span> lo cual denotamos por
+<span class="math inline">\(X_n \overset{P}{\rightarrow} X\)</span>, si para toda <span class="math inline">\(\epsilon \gt 0\)</span>,
+</div>
+<p><span class="math display">\[\lim_{n \rightarrow \infty}  \mathbb{P}(|X_n - X| &gt; \epsilon) = 0.\]</span></p>
+Ahora, definimos un estimador consistente como:
+<div class="mathblock">
+<p>
+<strong>Definición.</strong> Un estimador <span class="math inline"><span class="math inline">\(\tilde \theta_n\)</span></span> es
+<strong>consistente</strong> si converge en probabilidad a <span class="math inline"><span class="math inline">\(\theta^*.\)</span></span> Donde <span class="math inline"><span class="math inline">\(\theta^*\)</span></span> denota el verdadero valor del
+parámetro, que asumimos fijo.
+</p>
+</div>
+En particular, los estimadores <span class="math inline">\(\textsf{MLE}\)</span> son consistentes.
+<div class="mathblock">
+<p>
+<strong>Teorema.</strong> Sea <span class="math inline"><span class="math inline">\(X_n \sim f(X; \theta^*),\)</span></span> una muestra iid, tal que <span class="math inline"><span class="math inline">\(f(X; \theta)\)</span></span> cumple con ciertas
+condiciones de regularidad. Entonces, <span class="math inline"><span class="math inline">\(\hat \theta_n,\)</span></span> el estimador de máxima verosimilitud, converge en
+probabilidad a <span class="math inline"><span class="math inline">\(\theta^*.\)</span></span> Es decir,
+<span class="math inline"><span class="math inline">\(\hat \theta_n\)</span></span> es consistente.
+</p>
+</div>
+<p>La demostración de este teorema la pueden encontrar en <span class="citation">Wasserman (<a href="#ref-Wasserman" role="doc-biblioref">2013</a>)</span>.</p>
+<div id="ejemplo-11" class="section level3 unnumbered hasAnchor">
+<h3>Ejemplo<a href="propiedades-teóricas-de-mle.html#ejemplo-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El estimador <span class="math inline">\(\hat p_n\)</span> es <strong>consistente.</strong> Esto quiere decir que el
+estimador se vuelve más preciso conforme obtengamos más información. En general
+esta es una propiedad que los estimadores deben satisfacer para ser
+útiles en la práctica. La figura siguiente muestra el estimador <span class="math inline">\(\hat p_n\)</span> como
+función del número de observaciones utilizado. Distintas curvas corresponden a
+distintas realizaciones de muestras obtenidas del modelo (<span class="math inline">\(B = 500\)</span>).</p>
+<p><img src="11-propiedades-mle_files/figure-html/consistency-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Nota que la banda definida por <span class="math inline">\(\epsilon\)</span> se puede hacer tan pequeña como se requiera,
+lo único que sucederá es que necesitaremos un mayor número de observaciones para garantizar
+que las trayectorias de los estimadores <span class="math inline">\(\hat p_n\)</span> se mantengan dentro de las bandas con
+alta probabilidad.</p>
+</div>
+</div>
+<div id="equivarianza-del-textsfmle" class="section level2 unnumbered hasAnchor">
+<h2>Equivarianza del <span class="math inline">\(\textsf{MLE}\)</span><a href="propiedades-teóricas-de-mle.html#equivarianza-del-textsfmle" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Muchas veces nos interesa reparametrizar la función de verosimilitud con el motivo
+de simplificar el problema de optimización asociado, o simplemente por conveniencia
+interpretativa. Por ejemplo, si el parámetro de interés es tal que <span class="math inline">\(\theta \in [a, b],\)</span> entonces
+encontrar el <span class="math inline">\(\textsf{MLE}\)</span> se traduce en optimizar la log-verosimilitud en el espacio restringido al
+intervalo <span class="math inline">\([a,b].\)</span> En este caso, los métodos tradicionales de búsqueda local por descenso en gradiente
+podrían tener problemas de estabilidad cuando la búsqueda se realice cerca de las cotas.</p>
+<p>El concepto de equivarianza nos dice que si el cambio de coordenadas
+parametrales está definida, y si este cambio de variable se realiza por medio de
+una función bien comportada (derivable y cuya derivada no es cero), entonces la solución de encontrar el <span class="math inline">\(\textsf{MLE}\)</span> en las
+coordenadas originales y transformar, es igual a realizar la inferencia en las
+coordenadas <em>fáciles.</em></p>
+<div class="mathblock">
+<p>
+<strong>Teorema.</strong> Sea <span class="math inline"><span class="math inline">\(\tau = g(\theta)\)</span></span> una función de <span class="math inline"><span class="math inline">\(\theta\)</span></span> bien comportada. Entonces si <span class="math inline"><span class="math inline">\(\hat \theta_n\)</span></span> es el <span class="math inline"><span class="math inline">\(\textsf{MLE}\)</span></span> de <span class="math inline"><span class="math inline">\(\theta,\)</span></span> entonces <span class="math inline"><span class="math inline">\(\hat \tau_n = g(\hat \theta_n)\)</span></span> es el
+<span class="math inline"><span class="math inline">\(\textsf{MLE}\)</span></span> de <span class="math inline"><span class="math inline">\(\tau.\)</span></span>
+</p>
+</div>
+<div id="ejemplo-12" class="section level3 unnumbered hasAnchor">
+<h3>Ejemplo<a href="propiedades-teóricas-de-mle.html#ejemplo-12" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El concepto de equivarianza lo ilustraremos para nuestro ejemplo de esta sección. En
+particular la parametrización la realizamos por cuestiones de interpretación como un
+factor de riesgo.</p>
+<p>Como hemos visto estimador <span class="math inline">\(\hat p_n\)</span> es <strong>equivariante.</strong> Es importante
+mencionar que esta propiedad es general para cualquier tamaño de muestra. Es
+decir, no descansa en supuestos de muestras grandes. Supongamos que nos interesa estimar
+el momio de éxitos (bastante común en casas de apuestas). El momio está definido
+como
+<span class="math display">\[ \theta = \frac{p}{1-p},\]</span>
+y podemos rescribir la función de verosimilitud en términos de este parámetro.
+Sustituyendo <span class="math inline">\(p = \frac{\theta}{1+\theta}\)</span> en <span class="math inline">\(\mathcal{L}_n(p)\)</span>
+obtenemos
+<span class="math display">\[\begin{align}
+  \mathcal{L}_n(\theta) = \left( \frac{\theta}{1 + \theta} \right)^{S_n} \left(\frac{1}{1 + \theta} \right)^{n - S_n},
+\end{align}\]</span>
+cuya función encuentra su máximo en
+<span class="math display">\[\begin{align}
+\hat \theta_n = \frac{\bar X_n}{ 1 - \bar X_n}.
+\end{align}\]</span></p>
+<div class="ejercicio">
+<p>
+Comprueba que el estimador de arriba para <span class="math inline"><span class="math inline">\(\theta\)</span></span> es el MLE.
+</p>
+</div>
+</div>
+</div>
+<div id="normalidad-asintótica" class="section level2 unnumbered hasAnchor">
+<h2>Normalidad asintótica<a href="propiedades-teóricas-de-mle.html#normalidad-asintótica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Está propiedad nos permite caracterizar la distribución asintótica del MLE. Es
+decir, nos permite caracterizar la incertidumbre asociada una muestra
+suficientemente grande por medio de una distribución Gaussiana. Esto es, bajo
+ciertas condiciones de regularidad,
+<span class="math display">\[\hat \theta_n \overset{.}{\sim} \mathsf{N}( \theta^*, \mathsf{ee}^2),\]</span></p>
+<p>donde <span class="math inline">\(\mathsf{ee}\)</span> denota el error estándar del <span class="math inline">\(\textsf{MLE},\)</span> <span class="math inline">\(\mathsf{ee} = \mathsf{ee}(\hat \theta_n) = \sqrt{\mathbb{V}(\hat \theta_n)}\)</span>.</p>
+<p>Esta distribución se puede caracterizar de manera aproximada por métodos analíticos.
+Para esto necesitamos las siguientes definiciones.</p>
+
+<div class="mathblock">
+<p><strong>Definición. </strong> La función de <em>score</em> está definida como
+<span class="math display">\[\begin{align}
+  s(X; \theta) = \frac{\partial \log f(X; \theta)}{\partial \theta}.
+\end{align}\]</span></p>
+<p>La <strong>información de Fisher</strong> está definida como
+<span class="math display">\[\begin{align}
+  I_n(\theta) &amp;= \mathbb{V}\left( \sum_{i = 1}^ns(X_i; \theta) \right) \\
+              &amp;= \sum_{i = 1}^n  \mathbb{V} \left(s(X_i; \theta) \right)
+\end{align}\]</span></p>
+</div>
+<p>Estas cantidades nos permiten evaluar qué tan fácil será identificar el mejor
+modelo dentro de la familia parámetrica <span class="math inline">\(f(X; \theta)\)</span>. La función de score nos
+dice qué tanto cambia locamente la distribución cuando cambiamos el valor del
+parámetro. Calcular la varianza, nos habla de la dispersión de dicho cambio a lo
+largo del soporte de la variable aleatoria <span class="math inline">\(X.\)</span> Si <span class="math inline">\(I_n(\theta)\)</span> es grande
+entonces el cambio de la distribución es muy importante. Esto quiere decir que
+la distribución es muy diferente de las <em>distribuciones cercanas</em> que se generen
+al evaluar en <span class="math inline">\(\theta\)</span>s diferentes. Por lo tanto, si <span class="math inline">\(I_n(\theta)\)</span> es grande, la
+distribución será fácil de identificar cuando hagamos observaciones.</p>
+<p>La información de Fisher también nos permite caracterizar de forma
+analítica la varianza asíntotica del <span class="math inline">\(\textsf{MLE}\)</span> pues la aproximación
+<span class="math inline">\(\mathsf{ee}^2 \approx \frac{1}{I_n(\theta^*)}\)</span> es válida.</p>
+<p>El siguiente resultado utiliza la propiedad de la función de score:
+<span class="math inline">\(\mathbb{E}[s(X; \theta)] = 0,\)</span> que implica que
+<span class="math inline">\(\mathbb{V} \left(s(X_i; \theta) \right) = \mathbb{E}[s^2(X; \theta)],\)</span> y
+permite a su vez un cómputo más sencillo de la información de Fisher.</p>
+<div class="mathblock">
+<p>
+<strong>Teorema.</strong> El cálculo de la información de Fisher para
+una muestra de tamaño <span class="math inline"><span class="math inline">\(n\)</span></span> se puede
+calcular de manera simplificada como <span class="math inline"><span class="math inline">\(I_n(\theta) = n \, I(\theta).\)</span></span> Por otro
+lado, tenemos la siguiente igualdad <span class="math display"><span class="math display">\[
+I(\theta) = - \mathbb{E}\left( \frac{\partial^2 \log f(X;
+\theta)}{\partial \theta^2}  \right).\]</span></span>
+</p>
+</div>
+<p>Con estas herramientas podemos formular el teorema siguiente.</p>
+<div class="mathblock">
+<p>
+<strong>Teorema.</strong> Bajo ciertas condiciones de regularidad se
+satisface que <span class="math inline"><span class="math inline">\(\mathsf{ee} \approx \sqrt{1/I_n(\theta^*)}\)</span></span> y <span class="math display"><span class="math display">\[ \hat
+\theta_n \overset{d}{\rightarrow} \mathsf{N}( \theta^*,
+\mathsf{ee}^2).\]</span></span>
+</p>
+</div>
+<p>El resultado anterior es teóricamente interesante y nos asegura un
+comportamiento controlado conforme tengamos más observaciones disponibles. Sin
+embargo, no es práctico pues no conocemos <span class="math inline">\(\theta^*\)</span> en la práctica y por
+consiguiente no conoceríamos la varianza. Sin embargo, también podemos aplicar
+el principio de <em>plug-in</em> y caracterizar la varianza de la distribución
+asintótica por medio de
+<span class="math display">\[\hat{\mathsf{ee}} = \sqrt{1/I_n(\hat \theta_n)}.\]</span></p>
+<p>Esto último nos permite constuir intervalos de confianza, por ejemplo al 95%, a través de
+<span class="math display">\[ \hat \theta_n \pm 2 \, \hat{\mathsf{ee}}.\]</span>
+Asimismo, el teorema de Normalidad asintótica nos permite establecer que el <span class="math inline">\(\textsf{MLE}\)</span> es <strong>asíntoticamente insesgado</strong>. Es decir,
+<span class="math display">\[\lim_{n \rightarrow \infty}\mathbb{E}[\hat \theta_n] =  \theta^*.\]</span></p>
+<div class="mathblock">
+<p>
+<strong>Definición.</strong> Sea una muestra <span class="math inline"><span class="math inline">\(X_1, \ldots, X_n \overset{iid}{\sim} f(X; \theta^*)\)</span></span>. Un estimador <span class="math inline"><span class="math inline">\(\tilde \theta_n\)</span></span> es insesgado si satisface que <span class="math display"><span class="math display">\[\mathbb{E}[\tilde \theta_n]
+=\theta^*.\]</span></span>
+</p>
+</div>
+<p>El sesgo del estimador es precisamente la diferencia: <span class="math inline">\(\textsf{Sesgo} = \mathbb{E}[\tilde \theta_n] - \theta^*.\)</span></p>
+<div id="ejemplo-información-de-fisher" class="section level3 unnumbered hasAnchor">
+<h3>Ejemplo: Información de Fisher<a href="propiedades-teóricas-de-mle.html#ejemplo-información-de-fisher" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En el caso Bernoulli obtenemos <span class="math inline">\(I_n(\theta) = \frac{n}{\theta(1-\theta)}\)</span>, si
+<span class="math inline">\(n = 20\)</span> podemos comparar con <span class="math inline">\(\theta=0.5, 0.7, 0.8\)</span>,</p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="propiedades-teóricas-de-mle.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb372-2"><a href="propiedades-teóricas-de-mle.html#cb372-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Verosimilitud X_1,...,X_n ~ Bernoulli(theta)</span></span>
+<span id="cb372-3"><a href="propiedades-teóricas-de-mle.html#cb372-3" aria-hidden="true" tabindex="-1"></a>L_bernoulli <span class="ot">&lt;-</span> <span class="cf">function</span>(n, S){</span>
+<span id="cb372-4"><a href="propiedades-teóricas-de-mle.html#cb372-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(theta){</span>
+<span id="cb372-5"><a href="propiedades-teóricas-de-mle.html#cb372-5" aria-hidden="true" tabindex="-1"></a>        theta <span class="sc">^</span> S <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> theta) <span class="sc">^</span> (n <span class="sc">-</span> S)</span>
+<span id="cb372-6"><a href="propiedades-teóricas-de-mle.html#cb372-6" aria-hidden="true" tabindex="-1"></a>    }  </span>
+<span id="cb372-7"><a href="propiedades-teóricas-de-mle.html#cb372-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb372-8"><a href="propiedades-teóricas-de-mle.html#cb372-8" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>)</span>
+<span id="cb372-9"><a href="propiedades-teóricas-de-mle.html#cb372-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb372-10"><a href="propiedades-teóricas-de-mle.html#cb372-10" aria-hidden="true" tabindex="-1"></a>l_b1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(xy, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb372-11"><a href="propiedades-teóricas-de-mle.html#cb372-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="fu">L_bernoulli</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">S =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb372-12"><a href="propiedades-teóricas-de-mle.html#cb372-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(theta)) <span class="sc">+</span></span>
+<span id="cb372-13"><a href="propiedades-teóricas-de-mle.html#cb372-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">L</span>(theta))) <span class="sc">+</span></span>
+<span id="cb372-14"><a href="propiedades-teóricas-de-mle.html#cb372-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Verosimilitud&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;n=20, S = 10&quot;</span>) <span class="sc">+</span></span>
+<span id="cb372-15"><a href="propiedades-teóricas-de-mle.html#cb372-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">5e-05</span>)</span>
+<span id="cb372-16"><a href="propiedades-teóricas-de-mle.html#cb372-16" aria-hidden="true" tabindex="-1"></a>l_b2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(xy, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb372-17"><a href="propiedades-teóricas-de-mle.html#cb372-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="fu">L_bernoulli</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">S =</span> <span class="dv">14</span>)) <span class="sc">+</span></span>
+<span id="cb372-18"><a href="propiedades-teóricas-de-mle.html#cb372-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(theta)) <span class="sc">+</span></span>
+<span id="cb372-19"><a href="propiedades-teóricas-de-mle.html#cb372-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">L</span>(theta))) <span class="sc">+</span></span>
+<span id="cb372-20"><a href="propiedades-teóricas-de-mle.html#cb372-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Verosimilitud&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;n=20, S = 14&quot;</span>) <span class="sc">+</span></span>
+<span id="cb372-21"><a href="propiedades-teóricas-de-mle.html#cb372-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">5e-05</span>)</span>
+<span id="cb372-22"><a href="propiedades-teóricas-de-mle.html#cb372-22" aria-hidden="true" tabindex="-1"></a>l_b3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(xy, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb372-23"><a href="propiedades-teóricas-de-mle.html#cb372-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="fu">L_bernoulli</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">S =</span> <span class="dv">16</span>)) <span class="sc">+</span></span>
+<span id="cb372-24"><a href="propiedades-teóricas-de-mle.html#cb372-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(theta)) <span class="sc">+</span></span>
+<span id="cb372-25"><a href="propiedades-teóricas-de-mle.html#cb372-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">L</span>(theta))) <span class="sc">+</span></span>
+<span id="cb372-26"><a href="propiedades-teóricas-de-mle.html#cb372-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Verosimilitud&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;n=20, S = 19&quot;</span>) <span class="sc">+</span></span>
+<span id="cb372-27"><a href="propiedades-teóricas-de-mle.html#cb372-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">5e-05</span>)</span>
+<span id="cb372-28"><a href="propiedades-teóricas-de-mle.html#cb372-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb372-29"><a href="propiedades-teóricas-de-mle.html#cb372-29" aria-hidden="true" tabindex="-1"></a>l_b1 <span class="sc">+</span> l_b2 <span class="sc">+</span> l_b3</span></code></pre></div>
+<p><img src="11-propiedades-mle_files/figure-html/unnamed-chunk-14-1.png" width="720" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ejemplo-normalidad" class="section level3 unnumbered hasAnchor">
+<h3>Ejemplo: Normalidad<a href="propiedades-teóricas-de-mle.html#ejemplo-normalidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Regresando a nuestro ejemplo. Veremos empiricamente que el
+estimador <span class="math inline">\(\hat \theta_n\)</span> es <strong>asintóticamente normal.</strong> Esta propiedad la
+hemos visto anteriormente para un caso muy particular. Lo vimos en el TLC para
+el caso de promedios, <span class="math inline">\(\bar X_n,\)</span> que en nuestro ejemplo corresponde a <span class="math inline">\(\hat p_n\)</span>.
+Como hemos visto, esta propiedad la satisface cualquier otro estimador que sea máximo
+verosímil. Por ejemplo, podemos utilizar el <span class="math inline">\(\mathsf{MLE}\)</span> de los momios. La
+figura que sigue muestra la distribución de <span class="math inline">\(\hat \theta_n\)</span> para distintas
+remuestras <span class="math inline">\((B = 500)\)</span> con distintos valores de <span class="math inline">\(n.\)</span></p>
+<p><img src="11-propiedades-mle_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>El gráfico anterior valida empíricamente la distribución asintótica para
+casos de muchas observaciones. A continuación ilustraremos cómo explotar
+este resultado para obtener intervalos de confianza.</p>
+<p>Para el caso de <span class="math inline">\(\hat p_n\)</span> hemos visto que el error estándar se calcula
+analíticamente como
+<span class="math display">\[\textsf{ee}_p^2 = \mathbb{V}(\hat p_n) = \mathbb{V}\left(\frac1n \sum_{i = 1}^n x_i\right)  = \frac{p^* (1 - p^*)}{n}.\]</span></p>
+<p>Éste empata con el valor del error estándar asintótico
+<span class="math display">\[\textsf{ee}_p^2 \approx \sqrt{\frac{1}{I_n(p^*)}},\]</span>
+pues la información de Fisher es igual a
+<span class="math display">\[I_n(p) = n \, I(p)  = \frac{n}{p (  1- p)}.\]</span>
+En este caso podemos utilizar el estimador <em>plug-in,</em>
+<span class="math inline">\(\hat{\textsf{ee}}_p = \textsf{ee}_p(\hat p_n).\)</span>
+Para estimar el momio, <span class="math inline">\(\theta,\)</span> el cálculo no es tan fácil pues tendríamos que calcular
+de manera analítica la varianza de un cociente
+<span class="math display">\[\textsf{ee}_\theta^2 = \mathbb{V}\left( \frac{\hat p_n}{1-\hat p_n}\right).\]</span>
+Utilizando la distirbución asintótica, el error estándar se puede calcular mediante
+<span class="math display">\[\textsf{ee}_\theta \approx \sqrt{\frac{1}{I_n(\theta^*)}} = \sqrt{\frac{\theta (1 + \theta)^2 }{n}}.\]</span>
+A continuación mostramos los errores estándar para nuestro ejemplo utilizando
+la distribución asintótica y por medio de la distribución de <em>bootstrap.</em>
+Como es de esperarse, ambos coinciden para muestras relativamente grandes.</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="propiedades-teóricas-de-mle.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Genero muestra </span></span>
+<span id="cb373-2"><a href="propiedades-teóricas-de-mle.html#cb373-2" aria-hidden="true" tabindex="-1"></a>muestras <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">tamanos =</span> <span class="dv">2</span><span class="sc">**</span><span class="fu">seq</span>(<span class="dv">4</span>,<span class="dv">7</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb373-3"><a href="propiedades-teóricas-de-mle.html#cb373-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">obs =</span> <span class="fu">map</span>(tamanos, <span class="sc">~</span><span class="fu">rbernoulli</span>(., <span class="at">p =</span> p_true)))</span>
+<span id="cb373-4"><a href="propiedades-teóricas-de-mle.html#cb373-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb373-5"><a href="propiedades-teóricas-de-mle.html#cb373-5" aria-hidden="true" tabindex="-1"></a>calcula_momio <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb373-6"><a href="propiedades-teóricas-de-mle.html#cb373-6" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> x)</span>
+<span id="cb373-7"><a href="propiedades-teóricas-de-mle.html#cb373-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb373-8"><a href="propiedades-teóricas-de-mle.html#cb373-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb373-9"><a href="propiedades-teóricas-de-mle.html#cb373-9" aria-hidden="true" tabindex="-1"></a>calcula_ee_momio <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb373-10"><a href="propiedades-teóricas-de-mle.html#cb373-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(((<span class="dv">1</span><span class="sc">+</span>x)<span class="sc">**</span><span class="dv">2</span>) <span class="sc">*</span> x)</span>
+<span id="cb373-11"><a href="propiedades-teóricas-de-mle.html#cb373-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb373-12"><a href="propiedades-teóricas-de-mle.html#cb373-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb373-13"><a href="propiedades-teóricas-de-mle.html#cb373-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo MLE</span></span>
+<span id="cb373-14"><a href="propiedades-teóricas-de-mle.html#cb373-14" aria-hidden="true" tabindex="-1"></a>muestras_est <span class="ot">&lt;-</span> muestras <span class="sc">%&gt;%</span> </span>
+<span id="cb373-15"><a href="propiedades-teóricas-de-mle.html#cb373-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tamanos) <span class="sc">%&gt;%</span> </span>
+<span id="cb373-16"><a href="propiedades-teóricas-de-mle.html#cb373-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">media_hat =</span> <span class="fu">map_dbl</span>(obs, mean), </span>
+<span id="cb373-17"><a href="propiedades-teóricas-de-mle.html#cb373-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">media_ee  =</span> <span class="fu">sqrt</span>(media_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> media_hat)<span class="sc">/</span>tamanos),</span>
+<span id="cb373-18"><a href="propiedades-teóricas-de-mle.html#cb373-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">momio_hat =</span> <span class="fu">calcula_momio</span>(media_hat), </span>
+<span id="cb373-19"><a href="propiedades-teóricas-de-mle.html#cb373-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">momio_ee  =</span> <span class="fu">calcula_ee_momio</span>(momio_hat)<span class="sc">/</span><span class="fu">sqrt</span>(tamanos))</span>
+<span id="cb373-20"><a href="propiedades-teóricas-de-mle.html#cb373-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb373-21"><a href="propiedades-teóricas-de-mle.html#cb373-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb373-22"><a href="propiedades-teóricas-de-mle.html#cb373-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo por bootstrap</span></span>
+<span id="cb373-23"><a href="propiedades-teóricas-de-mle.html#cb373-23" aria-hidden="true" tabindex="-1"></a>muestras_boot <span class="ot">&lt;-</span> muestras_est <span class="sc">%&gt;%</span></span>
+<span id="cb373-24"><a href="propiedades-teóricas-de-mle.html#cb373-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tamanos) <span class="sc">%&gt;%</span> </span>
+<span id="cb373-25"><a href="propiedades-teóricas-de-mle.html#cb373-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sims_muestras  =</span> <span class="fu">map</span>(tamanos, <span class="sc">~</span><span class="fu">rerun</span>(<span class="dv">1000</span>, <span class="fu">sample</span>(muestras <span class="sc">%&gt;%</span> <span class="fu">filter</span>(tamanos <span class="sc">==</span> ..<span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(obs) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(obs), </span>
+<span id="cb373-26"><a href="propiedades-teóricas-de-mle.html#cb373-26" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">size =</span> ., <span class="at">replace =</span> <span class="cn">TRUE</span>))), </span>
+<span id="cb373-27"><a href="propiedades-teóricas-de-mle.html#cb373-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">sims_medias =</span> <span class="fu">map</span>(sims_muestras, <span class="sc">~</span><span class="fu">map_dbl</span>(., mean)), </span>
+<span id="cb373-28"><a href="propiedades-teóricas-de-mle.html#cb373-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">sims_momios =</span> <span class="fu">map</span>(sims_medias, <span class="sc">~</span><span class="fu">map_dbl</span>(., calcula_momio)),</span>
+<span id="cb373-29"><a href="propiedades-teóricas-de-mle.html#cb373-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">media_boot    =</span> <span class="fu">map_dbl</span>(sims_medias, mean),</span>
+<span id="cb373-30"><a href="propiedades-teóricas-de-mle.html#cb373-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">momio_boot    =</span> <span class="fu">map_dbl</span>(sims_momios, mean), </span>
+<span id="cb373-31"><a href="propiedades-teóricas-de-mle.html#cb373-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">media_ee_boot =</span> <span class="fu">map_dbl</span>(sims_medias, sd), </span>
+<span id="cb373-32"><a href="propiedades-teóricas-de-mle.html#cb373-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">momio_ee_boot =</span> <span class="fu">map_dbl</span>(sims_momios, sd)</span>
+<span id="cb373-33"><a href="propiedades-teóricas-de-mle.html#cb373-33" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+## # Groups:   tamanos [4]
+##   tamanos momio_hat momio_boot momio_ee momio_ee_boot
+##     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
+## 1      16     0.333      0.367   0.192         0.236 
+## 2      32     0.333      0.342   0.136         0.140 
+## 3      64     0.123      0.123   0.0492        0.0498
+## 4     128     0.407      0.417   0.0793        0.0800</code></pre>
+<div class="ejercicio">
+<p>
+Comprueba las fórmulas para los errores estándar tanto para la
+probabilidad de éxito como para los momios.
+</p>
+</div>
+</div>
+<div id="el-método-delta" class="section level3 unnumbered hasAnchor">
+<h3>El método delta<a href="propiedades-teóricas-de-mle.html#el-método-delta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El ejercicio anterior nos sugiere una pregunta natural: Cómo establecer la
+distribución asintótica de un estimador cuando ya se conoce la de una pre-imagen
+de él? Es decir, si ya conocemos la distribución de <span class="math inline">\(\theta,\)</span> podemos establecer
+la distribución de <span class="math inline">\(\tau = g(\theta)?\)</span></p>
+<p>La respuesta es afirmativa y la enunciamos por medio de un teorema. El resultado se conoce como
+el <strong>método delta</strong>.</p>
+<p><strong>Teorema.</strong> Si <span class="math inline">\(\tau = g(\theta)\)</span> es una función diferenciable y <span class="math inline">\(g&#39;(\theta) \neq 0\)</span>, entonces</p>
+<span class="math display">\[\hat \tau_n \overset{d}{\rightarrow} \mathsf{N}( \tau^*, \hat{\mathsf{ee}}^2_\tau),\]</span>
+<div class="mathblock">
+<p>
+donde <span class="math inline"><span class="math inline">\(\hat \tau_n = g(\hat \theta_n)\)</span></span> y
+</p>
+</div>
+<p><span class="math display">\[\hat{\mathsf{ee}}_\tau = \bigg| g&#39;(\hat \theta_n) \bigg| \times \hat{\mathsf{ee}}_\theta(\hat \theta_n).\]</span></p>
+<p>Por ejemplo, este resultado lo podemos utilizar para nuestro experimento de Bernoullis.
+Pues <span class="math inline">\(g(p) = \frac{p}{1-p}\)</span> es una función diferenciable y por lo tanto
+<span class="math display">\[\hat{\mathsf{ee}}_\theta = \sqrt{\frac1n} \times \left[ \hat p_n^{1/2} (1-\hat p_n)^{-3/2}\right].\]</span></p>
+<div class="ejercicio">
+<p>
+Comprueba la fórmula del método delta para el momio en función de la
+fracción de éxitos, y también comprueba que de el mismo resultado
+analítico que habías calculado en el ejercicio anterior.
+</p>
+</div>
+</div>
+</div>
+<div id="optimalidad-del-textsfmle" class="section level2 unnumbered hasAnchor">
+<h2>Optimalidad del <span class="math inline">\(\textsf{MLE}\)</span><a href="propiedades-teóricas-de-mle.html#optimalidad-del-textsfmle" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consideremos el caso de una muestra iid <span class="math inline">\(X_1, \ldots, X_n \sim \mathsf{N}(\theta, \sigma^2).\)</span> Y consideremos dos estimadores para <span class="math inline">\(\theta.\)</span> El
+primero será la media muestral <span class="math inline">\(\bar X_n\)</span> y el segundo la mediana muestral, la
+cual denotaremos por <span class="math inline">\(\tilde \theta_n.\)</span> Sabemos que ambos son insesgados. Por lo
+tanto, en promedio emiten estimaciones correctas. Pero ¿cómo escogemos cual
+utilizar?</p>
+<p>Un criterio para comparar estimadores es el <strong>error cuadrático medio</strong>
+(<span class="math inline">\(\textsf{ECM}\)</span>, por sus siglas en inglés).</p>
+<div class="mathblock">
+<p>
+<strong>Definición.</strong> El error cuadrático medio de un
+estimador <span class="math inline"><span class="math inline">\(\tilde \theta_n\)</span></span> se
+calcula como <span class="math display"><span class="math display">\[\textsf{ECM}[\tilde \theta_n]
+= \mathbb{E}[(\tilde \theta_n - \theta^*)^2].\]</span></span>
+</p>
+</div>
+<p>Por lo tanto, el <span class="math inline">\(\textsf{ECM}\)</span> mide la distancia promedio entre el estimador y
+el valor verdadero valor del parámetro. La siguiente igualdad es bastante útil
+para comparar dos estimadores.</p>
+<div class="mathblock">
+<p>
+<span class="math display"><span class="math display">\[\textsf{ECM}[\tilde \theta_n] =
+\mathbb{V}\left(\tilde \theta_n\right) + \textsf{Sesgo}\left[\tilde
+\theta_n\right]^2.\]</span></span>
+</p>
+</div>
+<p>Por lo tanto si dos estimadores son insesgados, uno es más eficiente que el otro si
+su varianza es menor.</p>
+<p>La media sabemos que es el <span class="math inline">\(\textsf{MLE}\)</span> y por el TCL tenemos que
+<span class="math display">\[\sqrt{n} \left( \bar X_n - \theta \right) \overset{d}{\rightarrow} \mathsf{N}( 0, \sigma^2).\]</span></p>
+<p>La mediana, en contraste, tiene una distribución asintótica
+<span class="math display">\[\sqrt{n} \left( \tilde X_n - \theta \right) \overset{d}{\rightarrow} \mathsf{N}\left( 0, \sigma^2 \frac{\pi}{2}\right),\]</span></p>
+<p>es decir tiene una varianza ligeramente mayor. Por lo tanto, decimos que la
+mediana tiene una <em>eficiencia relativa</em> con respecto a la media del <span class="math inline">\(.63 \% (\approx 2/\pi)\)</span>. Es decir, la mediana sólo utliza una fracción de los datos
+comparado con la media.</p>
+<p>El siguiente teorema, <strong>la desigualdad de Cramer-Rao</strong>, nos permite establecer
+esta resultado de manera mas general para cualquier estimador insesgado.</p>
+<div class="mathblock">
+<p>
+<strong>Teorema.</strong> Sea <span class="math inline"><span class="math inline">\(\tilde \theta_n\)</span></span> <em>cualquier</em> estimador insesgado de <span class="math inline"><span class="math inline">\(\theta\)</span></span> cuyo valor verdadero es <span class="math inline"><span class="math inline">\(\theta^*,\)</span></span> entonces <span class="math display"><span class="math display">\[\begin{align}
+  \mathbb{V}(\tilde \theta_n) \geq \frac{1}{n I(\theta^*)}.
+\end{align}\]</span></span>
+</p>
+</div>
+<p>Un estimador insesgado que satisfaga esta desigualdad se dice que es
+<em>eficiente.</em> Nota que el lado derecho de la desigualdad es precisamente la
+varianza asintótica del <span class="math inline">\(\textsf{MLE}.\)</span> Por lo tanto, éste es <em>asintóticamente
+eficiente.</em></p>
+<div class="comentario">
+<p>
+Es importante hacer enfásis en que la optimalidad del <span class="math inline"><span class="math inline">\(\textsf{MLE}\)</span></span> es un resultado asintótico.
+Es decir, sólo se satisface cuando tenemos un número <em>suficiente</em>
+de observaciones. Qué tan grande debe ser el tamaño de muestra varia de
+problema a problema. Es por esto que para muestras de tamaño finito se
+prefieren estimadores que minimicen el <span class="math inline"><span class="math inline">\(\textsf{ECM},\)</span></span> como cuando hacemos
+regresión ridge o utilizamos el estimador James–Stein para un vector de
+medias.
+</p>
+</div>
+
+</div>
+</div>
+<h3>Referencias<a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Wasserman" class="csl-entry">
+Wasserman, Larry. 2013. <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer Science &amp; Business Media.
+</div>
+</div>
+<script type="text/javascript">smartify();</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="bootstrap-paramétrico.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="más-de-pruebas-de-hipótesis-e-intervalos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/11-propiedades-mle.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["fundamentos-estadistica.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "depth": 1
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
