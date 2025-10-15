@@ -100,5 +100,5 @@ Se evaluará mediante tareas semanales y dos exámenes:
 
 * Tareas semanales (20%)  
 * Examen parcial en clase y a casa (40%)  
-* Examen final a casa (40%)
+* Examen final en clase y a casa (40%)
 
