@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="propiedades-teóricas-de-mle.html"/>
-<link rel="next" href="apéndice-i-principios-de-visualizacion.html"/>
+<link rel="next" href="introducción-a-inferencia-bayesiana-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -361,6 +361,28 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#errores-tipo-i-y-tipo-ii"><i class="fa fa-check"></i>Errores tipo I y tipo II</a></li>
 <li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#consideraciones-prácticas"><i class="fa fa-check"></i>Consideraciones prácticas</a></li>
 <li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#pruebas-múltiples"><i class="fa fa-check"></i>Pruebas múltiples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html"><i class="fa fa-check"></i><b>10</b> Introducción a inferencia bayesiana</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#un-primer-ejemplo-completo-de-inferencia-bayesiana"><i class="fa fa-check"></i>Un primer ejemplo completo de inferencia bayesiana</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-estimando-una-proporción"><i class="fa fa-check"></i>Ejemplo: estimando una proporción</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-observaciones-uniformes"><i class="fa fa-check"></i>Ejemplo: observaciones uniformes</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#probabilidad-a-priori"><i class="fa fa-check"></i>Probabilidad a priori</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#análisis-conjugado"><i class="fa fa-check"></i>Análisis conjugado</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-13"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#pasos-de-un-análisis-de-datos-bayesiano"><i class="fa fa-check"></i>Pasos de un análisis de datos bayesiano</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#verificación-predictiva-posterior"><i class="fa fa-check"></i>Verificación predictiva posterior</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-estaturas-de-tenores"><i class="fa fa-check"></i>Ejemplo: estaturas de tenores</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-modelo-poisson"><i class="fa fa-check"></i>Ejemplo: modelo Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#predicción"><i class="fa fa-check"></i>Predicción</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-cantantes"><i class="fa fa-check"></i>Ejemplo: cantantes</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-posterior-predictiva-de-pareto-uniforme."><i class="fa fa-check"></i>Ejemplo: posterior predictiva de Pareto-Uniforme.</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html"><i class="fa fa-check"></i>Apéndice I: Principios de visualizacion</a>
 <ul>
@@ -777,7 +799,7 @@ Por ejemplo, podemos construir pruebas para <span class="math inline">\(\theta &
 <div class="mathblock">
 <p><strong>Definición</strong>. Consideramos la hipótesis nula <span class="math inline">\(\theta= \theta_0\)</span>.
 La <strong>estadística del cociente de verosimilitudes</strong> está dada por:</p>
-<p><span class="math display">\[\lambda = 2\log\left( \frac{\max_{\theta}\mathcal{L}(\theta)}{\max_{\theta=\theta_0}\mathcal{L}(\theta)}        \right ) = 2\log\left(  \frac{\mathcal{L}(\hat{\theta})}{\mathcal{L}(\theta_0)}  \right)\]</span></p>
+<p><span class="math display">\[\lambda = 2\log\left( \frac{\max_{\theta}\mathcal{L}(\theta)}{\mathcal{L}(\theta_0)}        \right ) = 2\log\left(  \frac{\mathcal{L}(\hat{\theta})}{\mathcal{L}(\theta_0)}  \right)\]</span></p>
 donde <span class="math inline">\(\hat{\theta}\)</span> es el estimador de máxima verosimilitud.
 </div>
 <p>Para construir una prueba asociada, como siempre, necesitamos una distribución de
@@ -822,7 +844,7 @@ estándar iugal a 1 se cumplen.</p>
 <span id="cb404-2"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb404-2" aria-hidden="true" tabindex="-1"></a>n_muestra <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb404-3"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb404-3" aria-hidden="true" tabindex="-1"></a>muestra_1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_muestra, <span class="fl">7.9</span>, <span class="dv">1</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb405-1" aria-hidden="true" tabindex="-1"></a>crear_log_p <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb405-2"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb405-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># crear log verosim para dos muestras normales independientes.</span></span>
+<span id="cb405-2"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb405-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># crear log verosim para muestras normales independientes.</span></span>
 <span id="cb405-3"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb405-3" aria-hidden="true" tabindex="-1"></a>  log_p <span class="ot">&lt;-</span> <span class="cf">function</span>(params){</span>
 <span id="cb405-4"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb405-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> params[<span class="dv">1</span>]</span>
 <span id="cb405-5"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb405-5" aria-hidden="true" tabindex="-1"></a>    log_vero <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">sum</span>()</span>
@@ -1156,9 +1178,10 @@ donde <span class="math inline">\(\Phi\)</span> es la función acumulada de la n
 de la función potencia es entonces</p>
 <div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb436-1" aria-hidden="true" tabindex="-1"></a>potencia_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">mu =</span> <span class="fu">seq</span>(<span class="dv">450</span>, <span class="dv">550</span>, <span class="fl">0.5</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb436-2"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb436-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">beta =</span> <span class="fu">pnorm</span>((<span class="dv">505</span> <span class="sc">-</span> mu)<span class="sc">/</span><span class="dv">13</span>)) <span class="sc">|&gt;</span> <span class="co"># probabilidad de rechazar</span></span>
-<span id="cb436-3"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb436-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nula_verdadera =</span> <span class="fu">factor</span>(mu <span class="sc">&gt;=</span> <span class="dv">515</span>)) <span class="co"># nula verdadera</span></span>
+<span id="cb436-3"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb436-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nula_verdadera =</span> <span class="fu">ifelse</span>(mu <span class="sc">&gt;=</span> <span class="dv">515</span>, <span class="st">&quot;nula verdadera&quot;</span>, <span class="st">&quot;nula falsa&quot;</span>)) </span>
 <span id="cb436-4"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb436-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(potencia_tbl, <span class="fu">aes</span>(<span class="at">x =</span> mu, <span class="at">y =</span> beta, <span class="at">colour =</span> nula_verdadera)) <span class="sc">+</span></span>
-<span id="cb436-5"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb436-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() </span></code></pre></div>
+<span id="cb436-5"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb436-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb436-6"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#cb436-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <p><img src="12-mas-hipotesis_files/figure-html/unnamed-chunk-44-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>Es decir, si la media <span class="math inline">\(\mu\)</span> de la ciudad es muy baja, con mucha seguridad rechazamos. Si
 es relativamente alta entonces no rechazamos. El tamaño de la prueba es el mayor
@@ -1285,7 +1308,7 @@ Wasserman, Larry. 2013. <em>All of Statistics: A Concise Course in Statistical I
         </div>
       </div>
 <a href="propiedades-teóricas-de-mle.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="apéndice-i-principios-de-visualizacion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introducción-a-inferencia-bayesiana-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

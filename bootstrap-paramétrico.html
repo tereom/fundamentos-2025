@@ -362,6 +362,28 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#consideraciones-prácticas"><i class="fa fa-check"></i>Consideraciones prácticas</a></li>
 <li class="chapter" data-level="" data-path="más-de-pruebas-de-hipótesis-e-intervalos.html"><a href="más-de-pruebas-de-hipótesis-e-intervalos.html#pruebas-múltiples"><i class="fa fa-check"></i>Pruebas múltiples</a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html"><i class="fa fa-check"></i><b>10</b> Introducción a inferencia bayesiana</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#un-primer-ejemplo-completo-de-inferencia-bayesiana"><i class="fa fa-check"></i>Un primer ejemplo completo de inferencia bayesiana</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-estimando-una-proporción"><i class="fa fa-check"></i>Ejemplo: estimando una proporción</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-observaciones-uniformes"><i class="fa fa-check"></i>Ejemplo: observaciones uniformes</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#probabilidad-a-priori"><i class="fa fa-check"></i>Probabilidad a priori</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#análisis-conjugado"><i class="fa fa-check"></i>Análisis conjugado</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-13"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#pasos-de-un-análisis-de-datos-bayesiano"><i class="fa fa-check"></i>Pasos de un análisis de datos bayesiano</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#verificación-predictiva-posterior"><i class="fa fa-check"></i>Verificación predictiva posterior</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-estaturas-de-tenores"><i class="fa fa-check"></i>Ejemplo: estaturas de tenores</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-modelo-poisson"><i class="fa fa-check"></i>Ejemplo: modelo Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#predicción"><i class="fa fa-check"></i>Predicción</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-cantantes"><i class="fa fa-check"></i>Ejemplo: cantantes</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-posterior-predictiva-de-pareto-uniforme."><i class="fa fa-check"></i>Ejemplo: posterior predictiva de Pareto-Uniforme.</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html"><i class="fa fa-check"></i>Apéndice I: Principios de visualizacion</a>
 <ul>
 <li class="chapter" data-level="" data-path="apéndice-i-principios-de-visualizacion.html"><a href="apéndice-i-principios-de-visualizacion.html#introducción"><i class="fa fa-check"></i>Introducción</a></li>
@@ -446,13 +468,10 @@ para nuestra muestra:</p>
 ## sigma  1.838421</code></pre>
 <p>Sustituimos estos parámetros en la distribución normal y simulamos una muestra del
 mismo tamaño que la original:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="bootstrap-paramétrico.html#cb330-1" aria-hidden="true" tabindex="-1"></a>simular_modelo <span class="ot">&lt;-</span> <span class="cf">function</span>(n, media, sigma){</span>
-<span id="cb330-2"><a href="bootstrap-paramétrico.html#cb330-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(n, media, sigma)</span>
-<span id="cb330-3"><a href="bootstrap-paramétrico.html#cb330-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb330-4"><a href="bootstrap-paramétrico.html#cb330-4" aria-hidden="true" tabindex="-1"></a>muestra_bootstrap <span class="ot">&lt;-</span> <span class="fu">simular_modelo</span>(<span class="fu">length</span>(muestra), </span>
-<span id="cb330-5"><a href="bootstrap-paramétrico.html#cb330-5" aria-hidden="true" tabindex="-1"></a>                                    est_mle[<span class="st">&quot;media&quot;</span>, <span class="st">&quot;estimador&quot;</span>],</span>
-<span id="cb330-6"><a href="bootstrap-paramétrico.html#cb330-6" aria-hidden="true" tabindex="-1"></a>                                    est_mle[<span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;estimador&quot;</span>])</span>
-<span id="cb330-7"><a href="bootstrap-paramétrico.html#cb330-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(muestra_bootstrap)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="bootstrap-paramétrico.html#cb330-1" aria-hidden="true" tabindex="-1"></a>muestra_bootstrap <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(muestra), </span>
+<span id="cb330-2"><a href="bootstrap-paramétrico.html#cb330-2" aria-hidden="true" tabindex="-1"></a>                           est_mle[<span class="st">&quot;media&quot;</span>, <span class="st">&quot;estimador&quot;</span>],</span>
+<span id="cb330-3"><a href="bootstrap-paramétrico.html#cb330-3" aria-hidden="true" tabindex="-1"></a>                           est_mle[<span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;estimador&quot;</span>])</span>
+<span id="cb330-4"><a href="bootstrap-paramétrico.html#cb330-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(muestra_bootstrap)</span></code></pre></div>
 <pre><code>## [1]  1.8583885  2.2084326  2.5852895  2.5174462 -0.7428032  0.5995989</code></pre>
 <p>Una vez que tenemos esta muestra <em>bootstrap</em> recalculamos los estimadores de máxima
 verosimlitud. Esto se hace optimizando:</p>
@@ -478,9 +497,9 @@ número grande de veces.</p>
 <p>Nótese que esta función envuelve el proceso de remuestreo,
 cálculo de la función de verosimilitud y optimización:</p>
 <div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="bootstrap-paramétrico.html#cb336-1" aria-hidden="true" tabindex="-1"></a>rep_boot <span class="ot">&lt;-</span> <span class="cf">function</span>(rep, crear_log_p, est_mle, n){</span>
-<span id="cb336-2"><a href="bootstrap-paramétrico.html#cb336-2" aria-hidden="true" tabindex="-1"></a>  muestra_bootstrap <span class="ot">&lt;-</span> <span class="fu">simular_modelo</span>(<span class="fu">length</span>(muestra), </span>
-<span id="cb336-3"><a href="bootstrap-paramétrico.html#cb336-3" aria-hidden="true" tabindex="-1"></a>                               est_mle[<span class="st">&quot;media&quot;</span>, <span class="st">&quot;estimador&quot;</span>], </span>
-<span id="cb336-4"><a href="bootstrap-paramétrico.html#cb336-4" aria-hidden="true" tabindex="-1"></a>                               est_mle[<span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;estimador&quot;</span>])</span>
+<span id="cb336-2"><a href="bootstrap-paramétrico.html#cb336-2" aria-hidden="true" tabindex="-1"></a>  muestra_bootstrap <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(muestra), </span>
+<span id="cb336-3"><a href="bootstrap-paramétrico.html#cb336-3" aria-hidden="true" tabindex="-1"></a>                             est_mle[<span class="st">&quot;media&quot;</span>, <span class="st">&quot;estimador&quot;</span>], </span>
+<span id="cb336-4"><a href="bootstrap-paramétrico.html#cb336-4" aria-hidden="true" tabindex="-1"></a>                             est_mle[<span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;estimador&quot;</span>])</span>
 <span id="cb336-5"><a href="bootstrap-paramétrico.html#cb336-5" aria-hidden="true" tabindex="-1"></a>  log_p_boot <span class="ot">&lt;-</span> <span class="fu">crear_log_p</span>(muestra_bootstrap)</span>
 <span id="cb336-6"><a href="bootstrap-paramétrico.html#cb336-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># optimizamos</span></span>
 <span id="cb336-7"><a href="bootstrap-paramétrico.html#cb336-7" aria-hidden="true" tabindex="-1"></a>  res_boot <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), log_p_boot, </span>

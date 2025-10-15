@@ -525,7 +525,7 @@ Por ejemplo, podemos construir pruebas para $\theta < 0.4$.
 \BeginKnitrBlock{mathblock}<div class="mathblock">**Definición**. Consideramos la hipótesis nula $\theta= \theta_0$. 
 La **estadística del cociente de verosimilitudes** está dada por:
   
-$$\lambda = 2\log\left( \frac{\max_{\theta}\mathcal{L}(\theta)}{\max_{\theta=\theta_0}\mathcal{L}(\theta)}        \right ) = 2\log\left(  \frac{\mathcal{L}(\hat{\theta})}{\mathcal{L}(\theta_0)}  \right)$$
+$$\lambda = 2\log\left( \frac{\max_{\theta}\mathcal{L}(\theta)}{\mathcal{L}(\theta_0)}        \right ) = 2\log\left(  \frac{\mathcal{L}(\hat{\theta})}{\mathcal{L}(\theta_0)}  \right)$$
 
   donde $\hat{\theta}$ es el estimador de máxima verosimilitud.</div>\EndKnitrBlock{mathblock}
 
@@ -596,7 +596,7 @@ muestra_1 <- rnorm(n_muestra, 7.9, 1)
 
 ``` r
 crear_log_p <- function(x){
-  # crear log verosim para dos muestras normales independientes.
+  # crear log verosim para muestras normales independientes.
   log_p <- function(params){
     mu <- params[1]
     log_vero <- dnorm(x, mean = mu, sd = 1, log = TRUE) |> sum()
@@ -632,6 +632,7 @@ tibble(lambda = lambda_nula_sim) |>
 ```
 
 <img src="12-mas-hipotesis_files/figure-html/unnamed-chunk-24-1.png" width="480" style="display: block; margin: auto;" />
+
 
 ``` r
 valor_p <- mean(lambda_nula_sim >= lambda)
@@ -1085,9 +1086,10 @@ de la función potencia es entonces
 ``` r
 potencia_tbl <- tibble(mu = seq(450, 550, 0.5)) |> 
   mutate(beta = pnorm((505 - mu)/13)) |> # probabilidad de rechazar
-  mutate(nula_verdadera = factor(mu >= 515)) # nula verdadera
+  mutate(nula_verdadera = ifelse(mu >= 515, "nula verdadera", "nula falsa")) 
 ggplot(potencia_tbl, aes(x = mu, y = beta, colour = nula_verdadera)) +
-  geom_line() 
+  geom_line() +
+  labs(colour = "")
 ```
 
 <img src="12-mas-hipotesis_files/figure-html/unnamed-chunk-44-1.png" width="480" style="display: block; margin: auto;" />
