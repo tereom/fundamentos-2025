@@ -102,12 +102,12 @@ dif <- (resumen |> pull(media)) - 454
 ee <- resumen |> pull(ee)
 w <- dif / ee
 
-p <- 2 * (1 - pt(abs(w), 179))
+p <- 2 * (1 - pnorm(abs(w)))
 p
 ```
 
 ```
-## [1] 0.8413082
+## [1] 0.8410806
 ```
 y vemos que esta muestra es consistente con la media nacional. No tenemos
 evidencia en contra de que la media del estado de México es muy similar 
