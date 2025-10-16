@@ -99,7 +99,7 @@ dif <- (resumen |> pull(media)) - 454
 ee <- resumen |> pull(ee)
 w <- dif / ee
 
-p <- 2 * (1 - pt(abs(w), 179))
+p <- 2 * (1 - pnorm(abs(w)))
 p
 ```
 y vemos que esta muestra es consistente con la media nacional. No tenemos
