@@ -827,7 +827,6 @@ de crucero, 3 con policía y 3 sin policía):
 <td headers="n" class="gt_row gt_right">3</td></tr>
   </tbody>
   
-  
 </table>
 </div>
 ```

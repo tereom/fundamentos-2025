@@ -332,7 +332,7 @@ quantile(sim_inicial$theta, c(0.025, 0.975)) |> round(2)
 
 ```
 ##  2.5% 97.5% 
-##  0.15  0.85
+##  0.15  0.86
 ```
 
 Es difícil justificar en abstracto por qué escogeriamos una inicial con esta
@@ -388,8 +388,8 @@ sims |> group_by(dist) |>
 ## # A tibble: 2 × 2
 ##   dist      theta_hat
 ##   <chr>         <dbl>
-## 1 inicial       0.502
-## 2 posterior     0.612
+## 1 inicial       0.501
+## 2 posterior     0.61
 ```
 Nota que el estimador de máxima verosimilitud es $\hat{p} = 19/30 = 0.63$, que
 es ligeramente diferente de la media posterior. ¿Por qué?
@@ -410,7 +410,7 @@ sims |> group_by(dist) |>
 ## # Groups:   dist [2]
 ##   dist      `0.025` `0.975`
 ##   <chr>       <dbl>   <dbl>
-## 1 inicial      0.15    0.85
+## 1 inicial      0.15    0.86
 ## 2 posterior    0.45    0.76
 ```
 El segundo renglón nos da un intervalo posterior para $\theta$ de *credibilidad*
@@ -576,7 +576,8 @@ ggplot(sims_theta) +
   geom_histogram(aes(x = theta, fill = dist),
                  bins = 70, alpha = 0.5, position = "identity",
                  boundary = max(muestra_loteria$numero))  +
-  xlim(0, 15000) + scale_y_sqrt() +
+  xlim(0, 15000) + 
+  scale_y_sqrt() +
   geom_rug(data = muestra_loteria, aes(x = numero))
 ```
 
@@ -726,7 +727,7 @@ usar este valor para simular de $\mu$: el par de valores resultantes son una sim
 de la conjunta.
 
 2. Los parámetros $\alpha,\beta$ para la inicial de $\tau$ pueden interpretarse como sigue: $\sqrt{\beta/\alpha}$ es
-un valor "típico" a priori para la varianza poblacional, y $a$ indica qué tan seguros estamos de
+un valor "típico" a priori para la varianza poblacional, y $\alpha$ indica qué tan seguros estamos de
 este valor típico.
 
 3. Nótese que para que funcionen las fórmulas de la manera más simple,
@@ -763,7 +764,7 @@ sigma_0 <- 7
 # seleccionamos un valor para a, por ejemplo: si es más chico sigma tendrá más
 # disperisón
 a <- 3
-# ponemos 7 = sqrt(b/a) -> b = a * 64
+# ponemos 7 = sqrt(b/a) -> b = a * 49
 b <- a * sigma_0 ^ 2
 c(a = a, b = b)
 ```
@@ -803,6 +804,7 @@ quantile(sigma, c(0.05, 0.95))
 ##        5%       95% 
 ##  4.869653 13.151520
 ```
+
 Que es dispersión considerable: con poca probabilidad la desviación estándar
 es menor a 4 centímetros, y también creemos que es poco creíble la desviación
 estándar sea de más de 13 centímetros.
@@ -865,7 +867,7 @@ ggplot(sims_tbl, aes(x = estatura)) + geom_histogram() +
   geom_vline(xintercept = c(150, 180), colour = "red")
 ```
 
-<img src="14-intro-bayesiana_files/figure-html/unnamed-chunk-25-1.png" width="768" style="display: block; margin: auto;" />
+<img src="14-intro-bayesiana_files/figure-html/unnamed-chunk-25-1.png" width="835.2" style="display: block; margin: auto;" />
 
 Pusimos líneas de referencia en 150 y 180. Vemos que nuestras iniciales no producen
 simulaciones totalmente fuera del contexto, y parecen cubrir apropiadamente el
@@ -1171,7 +1173,7 @@ ggplot(lineup_tbl, aes(x = estatura_cm)) + geom_histogram(binwidth = 2.5) +
   facet_wrap(~.sample)
 ```
 
-<img src="14-intro-bayesiana_files/figure-html/unnamed-chunk-35-1.png" width="480" style="display: block; margin: auto;" />
+<img src="14-intro-bayesiana_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" />
 
 Con este tipo de gráficas podemos checar desajustes potenciales de nuestro modelo.
 
@@ -1264,6 +1266,7 @@ posterior predictiva. En este caso, tenemos que considerar
 Es decir, tenemos que simular sobre todos las combinaciones factibles de los
 parámetros.
 
+
 ### Ejemplo: cantantes {-}
 
 Si un nuevo tenor llega a un coro, ¿cómo hacemos una predicción de su estatura? Como
@@ -1288,6 +1291,7 @@ sims_posterior |> head()
 ## 5 0.0297  5.80  175.   169.
 ## 6 0.0282  5.96  177.   170.
 ```
+
 
 ``` r
 f <- c(0.025, 0.5, 0.975)
@@ -1329,8 +1333,10 @@ qt(c(0.025, 0.5, 0.975), 2 * alpha_post) * s + mu_post
 
 
 
-\BeginKnitrBlock{ejercicio}<div class="ejercicio">- Calcula la posterior predictiva del modelo Beta-Bernoulli y Beta-Binomial.
-- (Más difícil) Calcula la posterior predictiva del modelo Poisson-Gamma.</div>\EndKnitrBlock{ejercicio}
+# ```{block2, type='ejercicio'}
+# - Calcula la posterior predictiva del modelo Beta-Bernoulli y Beta-Binomial.
+# - (Más difícil) Calcula la posterior predictiva del modelo Poisson-Gamma.
+# ```
 
 
 
@@ -1360,6 +1366,6 @@ ggplot(sims_post_pred, aes(x = x_pred)) +
   geom_vline(xintercept = lim_inf_post, colour = "red")
 ```
 
-<img src="14-intro-bayesiana_files/figure-html/unnamed-chunk-43-1.png" width="480" style="display: block; margin: auto;" />
+<img src="14-intro-bayesiana_files/figure-html/unnamed-chunk-42-1.png" width="480" style="display: block; margin: auto;" />
 
 Que es una mezcla de una uniforme con una Pareto.
