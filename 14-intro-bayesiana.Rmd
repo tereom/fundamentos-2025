@@ -497,7 +497,8 @@ ggplot(sims_theta) +
   geom_histogram(aes(x = theta, fill = dist),
                  bins = 70, alpha = 0.5, position = "identity",
                  boundary = max(muestra_loteria$numero))  +
-  xlim(0, 15000) + scale_y_sqrt() +
+  xlim(0, 15000) + 
+  scale_y_sqrt() +
   geom_rug(data = muestra_loteria, aes(x = numero))
 ```
 
@@ -629,7 +630,7 @@ usar este valor para simular de $\mu$: el par de valores resultantes son una sim
 de la conjunta.
 
 2. Los parámetros $\alpha,\beta$ para la inicial de $\tau$ pueden interpretarse como sigue: $\sqrt{\beta/\alpha}$ es
-un valor "típico" a priori para la varianza poblacional, y $a$ indica qué tan seguros estamos de
+un valor "típico" a priori para la varianza poblacional, y $\alpha$ indica qué tan seguros estamos de
 este valor típico.
 
 3. Nótese que para que funcionen las fórmulas de la manera más simple,
@@ -665,7 +666,7 @@ sigma_0 <- 7
 # seleccionamos un valor para a, por ejemplo: si es más chico sigma tendrá más
 # disperisón
 a <- 3
-# ponemos 7 = sqrt(b/a) -> b = a * 64
+# ponemos 7 = sqrt(b/a) -> b = a * 49
 b <- a * sigma_0 ^ 2
 c(a = a, b = b)
 ```
@@ -679,6 +680,7 @@ sigma <- 1 / sqrt(tau)
 mean(sigma)
 quantile(sigma, c(0.05, 0.95))
 ```
+
 Que es dispersión considerable: con poca probabilidad la desviación estándar
 es menor a 4 centímetros, y también creemos que es poco creíble la desviación
 estándar sea de más de 13 centímetros.
@@ -712,7 +714,7 @@ la media poblacional de los cantantes.
 Podemos checar nuestros supuestos simulando posibles muestras usando
 sólo nuestra información previa:
 
-```{r, fig.width = 8, fig.height = 6}
+```{r, fig.width = 8.7, fig.height = 6}
 simular_normal_invgamma <- function(n, pars){
   mu_0 <- pars[1]
   n_0 <- pars[2]
@@ -953,7 +955,7 @@ muestra_sim |> round(0)
 
 Podemos simular varias muestras y hacer una prueba de lineup:
 
-```{r}
+```{r, fig.width=7, fig.height=5}
 library(nullabor)
 set.seed(9921)
 sims_obs <- tibble(.n = 1:19) |>
@@ -1052,6 +1054,7 @@ posterior predictiva. En este caso, tenemos que considerar
 Es decir, tenemos que simular sobre todos las combinaciones factibles de los
 parámetros.
 
+
 ### Ejemplo: cantantes {-}
 
 Si un nuevo tenor llega a un coro, ¿cómo hacemos una predicción de su estatura? Como
@@ -1063,6 +1066,7 @@ sims_posterior <- sim_params(50000, pars_posterior) |>
   mutate(y_pred = rnorm(n(), mu, sigma))
 sims_posterior |> head()
 ```
+
 ```{r}
 f <- c(0.025, 0.5, 0.975)
 sims_posterior |> summarise(f = f, y_pred = quantile(y_pred, f))
@@ -1089,10 +1093,10 @@ qt(c(0.025, 0.5, 0.975), 2 * alpha_post) * s + mu_post
 
 
 
-```{block2, type='ejercicio'}
-- Calcula la posterior predictiva del modelo Beta-Bernoulli y Beta-Binomial.
-- (Más difícil) Calcula la posterior predictiva del modelo Poisson-Gamma.
-```
+# ```{block2, type='ejercicio'}
+# - Calcula la posterior predictiva del modelo Beta-Bernoulli y Beta-Binomial.
+# - (Más difícil) Calcula la posterior predictiva del modelo Poisson-Gamma.
+# ```
 
 
 
