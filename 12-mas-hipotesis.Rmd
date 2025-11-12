@@ -793,7 +793,7 @@ lo tanto los grados de libertad son $1 = 4 -3$.
 **Ejemplo** En nuestro ejemplo de prueba de igualdad de medias,
 usaríamos
 ```{r}
-pchisq(lambda, df =1, lower.tail = FALSE)
+pchisq(lambda, df = 1, lower.tail = FALSE)
 ```
 que es similar al que obtuvimos con la estrategia del bootstrap paramétrico.
 
