@@ -1093,11 +1093,6 @@ qt(c(0.025, 0.5, 0.975), 2 * alpha_post) * s + mu_post
 
 
 
-<!-- ```{block2, type='ejercicio'} -->
-<!--  - Calcula la posterior predictiva del modelo Beta-Bernoulli y Beta-Binomial. -->
-<!--  - (Más difícil) Calcula la posterior predictiva del modelo Poisson-Gamma. -->
-<!-- ``` -->
-
 
 
 ### Ejemplo: posterior predictiva de Pareto-Uniforme. {-}
