@@ -278,7 +278,7 @@ por la población?
 ```
 
 
-## Simulando de la posterior {-}
+### Simulando de la posterior {-}
 
 Hemos establecido que podemos contestar varias preguntas de inferencia
 usando simulación Monte Carlo, y que este enfoque es potencialmente
@@ -290,16 +290,24 @@ el problema que necesitamos resolver es el siguiente:
 simulador estándar.
 - ¿Cómo simulamos de esta posterior cuando sólo sabemos calcular $p(x|\theta)p(\theta)$?
 
-Hay varias maneras de hacer esto. Presentaremos los algoritmos en términos
+
+## Algoritmos Metropolis-Hastings
+
+Uno de los primeros algoritmos MCMC fue el de Metropolis-Hastings,
+que veremos primero en algunos ejemplos. Veremos también por qué 
+ahora tenemos mejores opciones que MH para estimar posteriores de
+nuestros modelos.
+
+Introducimos los algoritmos en términos
 de una distribución cualquiera $p(\theta) = K f(\theta)$, donde sólo conocemos
 la función $f(\theta)$.
 
 
-## Ejemplo de islas {-}
+### Ejemplo de islas {-}
 
 Comenzamos revisando el ejemplo de las islas en @Kruschke (7.2) para tener más intuición de cómo funciona este algoritmo.
 
-## ¿Por qué funciona Metrópolis? {-}
+### Idea de Metrópolis {-}
 
 Supongamos que un vendedor de *Yakult* trabaja a lo largo de una cadena de
 islas:
@@ -399,42 +407,52 @@ wrap_plots(plots_list)
 ```
 
 
-Escribamos el algoritmo, para esto indexamos las islas por el valor
-$\theta$, es así que la isla del extremo oeste corresponde a $\theta=1$ y la 
-población relativa de cada isla es $P(\theta)$:
+Escribamos el algoritmo con notación de distribuciones de probabilidad, 
+en este ejemplo queremos simular de una variable 
+aleatoria $X$ con distribución discreta sobre los
+valores $1,2\ldots, k$ con probabilidades $p(1),p(2),\ldots,p(k)$. 
 
-1. El vendedor se ubica en $\theta^{(i)}$ y propone moverse a la izquierda
-o derecha con probabilidad $0.5$.  
-El rango de los posibles valores para moverse, y la probabilidad de proponer 
-cada uno se conoce como **distribución propuesta**, en nuestro ejemplo sólo 
+0. Para $i=1$, comenzamos fijando un valor $x^(1)$ en $1,2,\ldots, k$. 
+
+Para cada $i$,
+
+1. Si $1< x^{(i)}<k$, escogemos al azar un salto a la derecha o al izquierda con
+igual probabilidad 1/2. En los extremos $x^{(i)}=1$ o $x^{(i)}=k$ escogemos entre
+$1,2$ o $k-1,k$ respectivamente. El rango de los posibles valores para moverse, y la probabilidad de proponer 
+cada uno se conoce como **distribución propuesta**. En este ejemplo sólo 
 toma dos valores cada uno con probabilidad $0.5$. 
 
-2. Una vez que se propone un movimiento, decidimos si aceptarlo. La decisión de
-aceptar se basa en el valor de la distribución **objetivo** en la posición
-propuesta, relativo al valor de la distribución objetivo en la posición actual:
-$$\alpha=\min\bigg\{\frac{P(\theta^*)}{P(\theta^{(i)})},1\bigg\},$$
+2. Una vez que se propone un nuevo valor $x^*$, decidimos si aceptarlo. La decisión de
+aceptar se basa en el valor de la distribución **objetivo** en la valor propuesto,
+relativo al valor de la distribución objetivo en el valor actual:
+$$\alpha=\min\bigg\{\frac{p(x^*)}{p(x^{(i)})},1\bigg\},$$
 donde $\alpha$ denota la probabilidad de hacer el cambio de isla. 
 
-Notemos que la distribución objetivo $P(\theta)$ no necesita estar normalizada, 
-esto es porque lo que nos interesa es el cociente $P(\theta^*)/P(\theta^{(i)})$.
+Notemos que la distribución objetivo $p(x)$ no necesita estar normalizada, 
+esto es porque lo que nos interesa es el cociente $p(x^*)/P(x^{(i)})$.
 
 3. Una vez que propusimos un movimiento y calculamos la probabilidad de aceptar
 el movimiento aceptamos o rechazamos el movimiento generando un valor de una
 distribución uniforme, si dicho valor es menor a la probabilidad de cambio,
 $\alpha,$ entonces hacemos el movimiento.
 
-Entonces, para utilizar el algoritmo necesitamos ser capaces de:
+Es así que para utilizar el algoritmo necesitamos ser capaces de:
 
-* Generar un valor de la distribución propuesta, que hemos denotado por $q,$
-(para crear $\theta^*$).
+* Generar un valor de la distribución propuesta, que hemos denotado por $q$
+(para generar $x^*$).
 
 * Evaluar la distribución objetivo en cualquier valor propuesto (para calcular
-$P(\theta^*)/P(\theta^{(i)})$).
+$p(x^*)/p(x_{(i)})$).
 
 * Generar un valor uniforme (para movernos con probabilidad $\alpha$).
 
-Las $3$ puntos anteriores nos permiten generar muestras aleatorias de la
-distribución objetivo, sin importar si esta está normalizada. Esta técnica es
+El resultado es una sucesión de valores $x_1,x_2,\ldots, x_M$. Es posible
+demostrar que la distribución de estas $x_i$ converge a la distribución
+$p(1),\ldots, p(k)$ si $M$ es suficientemente grande. Es un método de Monte Carlo, y como podemos ver, se trata de una **cadena de Markov**, pues la distribución cada
+siguiente lugar $x^{i+1}$, condicionada al valor actual $x^{i}$ no depende
+de valores anteriores de las $x$.
+
+Esta técnica es
 particularmente útil cuando cuando la distribución objetivo es una posterior
 proporcional a $p(x|\theta)p(\theta)$.
 
@@ -500,19 +518,19 @@ ggplot(exp_t, aes(x = as.numeric(theta), y = P)) +
 
 ## Método de Metrópolis {-}
 
-En el método de Metrópolis, uno de los más antiguos, comenzamos
-con un valor inicial de los parámetros $\theta^{(0)}$ en el soporte de $p(\theta)$,
-es decir $p(\theta^{(0)})>0.$
+En el método de Metrópolis, uno de los más antiguos, enunciémoslo en términos de la posterior $p(\theta|x) \propto p(\theta)p(x|\theta)$.
+
+Comenzamos con un valor inicial de los parámetros $\theta^{(0)}$ en el soporte de $p(\theta|x)$, es decir $p(\theta^{(0)}|x)>0.$
 
 Para $i=1, \ldots, M$, hacemos:
 
 1. Partiendo de $\theta^{(i)}$, hacemos un salto
 corto en una dirección al azar para obtener una propuesta $\theta^* \sim q(\theta \, |\, \theta^{(i)}).$
 2. Aceptamos or rechazamos el salto:
-  - Si $\alpha = \frac{f(\theta^*)}{f(\theta^{(i)})} \geq 1$, aceptamos el salto
+  - Si $\alpha = \frac{p(\theta^*|x)}{p(\theta^{(i)}|x)} \geq 1$, aceptamos el salto
   y ponemos $\theta^{(i+1)}=\theta^*$. Regresamos a 1 para la siguiente
   iteración $i\leftarrow i + 1.$
-  - Si $\alpha = \frac{f(\theta^*)}{f(\theta^{(i)})} < 1$, entonces aceptamos
+  - Si $\alpha = \frac{p(\theta^*|x)}{p(\theta^{(i)}|x)} < 1$, entonces aceptamos
   con probabilidad $\alpha$ el salto, ponemos $\theta^{(i+1)}=\theta^*$ y
   regresamos a 1 para la siguiente iteración $i\leftarrow i + 1$. Si rechazamos
   el salto, ponemos entonces $\theta^{(i+1)}=\theta^{(i)}$ y regresamos a 1 para
@@ -523,10 +541,8 @@ decir, $q(\theta^*|\theta^{(i)})$ debe ser igual a $q(\theta^{(i)}|\theta^*)$.
 Se puede modificar el algoritmo para tratar con una propuesta que no sea
 simétrica.
 
-Una elección común es escoger $q(\theta^* |\theta^{(i)})$ como
-una $\mathsf{N}(\theta^{(i)}, \sigma_{salto})$.
 
-```{block,type="comentario"}
+```{block,type="mathblock"}
 En este curso, escribiremos varios métodos de cadenas de Markov para estimación
 Monte Carlo (*Markov Chain Monte Carlo*, MCMC) desde cero para entender los
 básicos de cómo funciona. Sin embargo, **en la práctica no hacemos esto**, sino
@@ -541,7 +557,10 @@ garantizando resultados correctos.
 En resumen, todo el código de esta sección es de carácter ilustrativo.
 Utiliza implementaciones establecidas en las aplicaciones.
 
-Abajo implementamos el algoritmo con un salto de tipo normal:
+Abajo implementamos el algoritmo con un salto de tipo normal. En la versión
+de Metroplois
+Una elección común es escoger $q(\theta^* |\theta^{(i)})$ como
+una $\mathsf{N}(\theta^{(i)}, \sigma_{salto})$.
 
 ```{r}
 crear_metropolis <- function(fun_log, sigma_salto = 0.1){
