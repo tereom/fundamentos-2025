@@ -623,8 +623,7 @@ simular_muestra <- function(rep, mu_0, n_0, a_0, b_0){
     sample_n(5, replace = FALSE)
   pars_posterior <- calcular_pars_posterior(cantantes$estatura_cm,
                                             c(mu_0, n_0, a_0, b_0))
-  medias_post <- 
-    sim_params(1000, pars_posterior) |> 
+  medias_post <- sim_params(1000, pars_posterior) |> 
     summarise(across(everything(), mean)) |> 
     select(mu, sigma)
   media <- mean(cantantes$estatura_cm)
@@ -656,8 +655,10 @@ ggplot(errores, aes(x = error, fill = tipo)) +
 ```
 
 <img src="15-bayesiana-calibracion_files/figure-html/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" />
+
 Vemos claramente que la estimación de la desviación estándar de
 nuestro modelo es claramente superior a la de máxima verosimilitud. En resumen:
+
 
 ``` r
 errores |> 
@@ -698,6 +699,7 @@ ggplot(aes(x = max_verosim, y = media_post)) +
   xlab("Estimador MV de sigma") +
   ylab("Media posterior de sigma") +
   coord_fixed() + 
+  ylim(0, 13) + xlim(0, 13) +
   geom_segment(aes(x = 13, y = 11, xend = 13, yend = sqrt(b/(a - 1))), 
                colour='red', size=1, arrow =arrow(length = unit(0.5, "cm"))) + 
   geom_segment(aes(x = .5, y = 6, xend = .5, yend = sqrt(b/(a - 1))), 
@@ -765,7 +767,9 @@ estimadores_sim_ag <- estimadores_sim |>
   group_by(k, est_mv, media_post) |> 
   summarise(n = n())
 ggplot(estimadores_sim_ag, aes(x = est_mv, media_post, size = n)) + geom_point() +
-  geom_abline()
+  geom_abline() +
+  xlim(0, 0.08) +
+  ylim(0, 0.08)
 ```
 
 <img src="15-bayesiana-calibracion_files/figure-html/unnamed-chunk-35-1.png" width="576" style="display: block; margin: auto;" />

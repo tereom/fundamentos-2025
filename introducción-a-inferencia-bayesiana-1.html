@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="más-de-pruebas-de-hipótesis-e-intervalos.html"/>
-<link rel="next" href="block2-typeejercicio---calcula-la-posterior-predictiva-del-modelo-beta-bernoulli-y-beta-binomial.---más-difícil-calcula-la-posterior-predictiva-del-modelo-poisson-gamma..html"/>
+<link rel="next" href="calibración-bayesiana-y-regularización.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -381,13 +381,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#predicción"><i class="fa fa-check"></i>Predicción</a>
 <ul>
 <li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-cantantes"><i class="fa fa-check"></i>Ejemplo: cantantes</a></li>
+<li class="chapter" data-level="" data-path="introducción-a-inferencia-bayesiana-1.html"><a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-posterior-predictiva-de-pareto-uniforme."><i class="fa fa-check"></i>Ejemplo: posterior predictiva de Pareto-Uniforme.</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="block2-typeejercicio---calcula-la-posterior-predictiva-del-modelo-beta-bernoulli-y-beta-binomial.---más-difícil-calcula-la-posterior-predictiva-del-modelo-poisson-gamma..html"><a href="block2-typeejercicio---calcula-la-posterior-predictiva-del-modelo-beta-bernoulli-y-beta-binomial.---más-difícil-calcula-la-posterior-predictiva-del-modelo-poisson-gamma..html"><i class="fa fa-check"></i><b>11</b> <code>{block2, type='ejercicio'} # - Calcula la posterior predictiva del modelo Beta-Bernoulli y Beta-Binomial. # - (Más difícil) Calcula la posterior predictiva del modelo Poisson-Gamma. #</code></a>
-<ul>
-<li class="chapter" data-level="" data-path="block2-typeejercicio---calcula-la-posterior-predictiva-del-modelo-beta-bernoulli-y-beta-binomial.---más-difícil-calcula-la-posterior-predictiva-del-modelo-poisson-gamma..html"><a href="block2-typeejercicio---calcula-la-posterior-predictiva-del-modelo-beta-bernoulli-y-beta-binomial.---más-difícil-calcula-la-posterior-predictiva-del-modelo-poisson-gamma..html#ejemplo-posterior-predictiva-de-pareto-uniforme."><i class="fa fa-check"></i>Ejemplo: posterior predictiva de Pareto-Uniforme.</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="calibración-bayesiana-y-regularización.html"><a href="calibración-bayesiana-y-regularización.html"><i class="fa fa-check"></i><b>12</b> Calibración bayesiana y Regularización</a>
+<li class="chapter" data-level="11" data-path="calibración-bayesiana-y-regularización.html"><a href="calibración-bayesiana-y-regularización.html"><i class="fa fa-check"></i><b>11</b> Calibración bayesiana y Regularización</a>
 <ul>
 <li class="chapter" data-level="" data-path="calibración-bayesiana-y-regularización.html"><a href="calibración-bayesiana-y-regularización.html#enfoque-bayesiano-y-frecuentista"><i class="fa fa-check"></i>Enfoque bayesiano y frecuentista</a></li>
 <li class="chapter" data-level="" data-path="calibración-bayesiana-y-regularización.html"><a href="calibración-bayesiana-y-regularización.html#ejemplo-estimación-de-una-proporción"><i class="fa fa-check"></i>Ejemplo: estimación de una proporción</a></li>
@@ -409,7 +406,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="calibración-bayesiana-y-regularización.html"><a href="calibración-bayesiana-y-regularización.html#ejemplo-14"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html"><i class="fa fa-check"></i><b>13</b> Métodos de Cadenas de Markov Monte Carlo</a>
+<li class="chapter" data-level="12" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html"><i class="fa fa-check"></i><b>12</b> Métodos de Cadenas de Markov Monte Carlo</a>
 <ul>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#integrales-mediante-subdivisiones"><i class="fa fa-check"></i>Integrales mediante subdivisiones</a>
 <ul>
@@ -790,7 +787,7 @@ valor no tan lejano de 0.5. Por ejemplo, con probabilidad 0.95 creemos
 que <span class="math inline">\(\theta\)</span> está en el intervalo</p>
 <div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="introducción-a-inferencia-bayesiana-1.html#cb448-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(sim_inicial<span class="sc">$</span>theta, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##  2.5% 97.5% 
-##  0.15  0.86</code></pre>
+##  0.14  0.85</code></pre>
 <p>Es difícil justificar en abstracto por qué escogeriamos una inicial con esta
 forma. <em>Aunque esto los detallaremos más adelante</em>, puedes pensar, por el
 momento, que alguien observó algunos casos de esta población, y quizá vio tres éxitos y tres fracasos. Esto sugeriría que es poco probable que la probablidad
@@ -825,8 +822,8 @@ usamos la media posterior:</p>
 <pre><code>## # A tibble: 2 × 2
 ##   dist      theta_hat
 ##   &lt;chr&gt;         &lt;dbl&gt;
-## 1 inicial       0.501
-## 2 posterior     0.61</code></pre>
+## 1 inicial       0.496
+## 2 posterior     0.612</code></pre>
 <p>Nota que el estimador de máxima verosimilitud es <span class="math inline">\(\hat{p} = 19/30 = 0.63\)</span>, que
 es ligeramente diferente de la media posterior. ¿Por qué?</p>
 <p>Y podemos construir intervalos de percentiles, que en esta situación
@@ -839,7 +836,7 @@ suelen llamarse <em>intervalos de credibilidad</em>, por ejemplo:</p>
 ## # Groups:   dist [2]
 ##   dist      `0.025` `0.975`
 ##   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;
-## 1 inicial      0.15    0.86
+## 1 inicial      0.14    0.85
 ## 2 posterior    0.45    0.76</code></pre>
 <p>El segundo renglón nos da un intervalo posterior para <span class="math inline">\(\theta\)</span> de <em>credibilidad</em>
 95%. En inferencia bayesiana esto sustituye a los intervalos de confianza.</p>
@@ -1549,6 +1546,31 @@ pues sería demasiado corto.</p>
 <span id="cb501-6"><a href="introducción-a-inferencia-bayesiana-1.html#cb501-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dv">2</span> <span class="sc">*</span> alpha_post) <span class="sc">*</span> s <span class="sc">+</span> mu_post</span></code></pre></div>
 <pre><code>## [1] 162.6832 175.8000 188.9168</code></pre>
 </div>
+<div id="ejemplo-posterior-predictiva-de-pareto-uniforme." class="section level3 unnumbered hasAnchor">
+<h3>Ejemplo: posterior predictiva de Pareto-Uniforme.<a href="introducción-a-inferencia-bayesiana-1.html#ejemplo-posterior-predictiva-de-pareto-uniforme." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La posterior predictiva del modelo Pareto-Uniforme no tiene un nombre estándar, pero
+podemos aproximarla usando simulación. Usando los mismos datos del ejercicio de la lotería, haríamos:</p>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-1" aria-hidden="true" tabindex="-1"></a>rpareto <span class="ot">&lt;-</span> <span class="cf">function</span>(n, theta_0, alpha){</span>
+<span id="cb503-2"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># usar el método de inverso de distribución acumulada</span></span>
+<span id="cb503-3"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-3" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb503-4"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-4" aria-hidden="true" tabindex="-1"></a>  theta_0 <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> u)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span>alpha)</span>
+<span id="cb503-5"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb503-6"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulamos de la posterior de los parámetros</span></span>
+<span id="cb503-7"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-7" aria-hidden="true" tabindex="-1"></a>lim_inf_post <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">300</span>, muestra_loteria<span class="sc">$</span>numero))</span>
+<span id="cb503-8"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-8" aria-hidden="true" tabindex="-1"></a>k_posterior <span class="ot">&lt;-</span> <span class="fu">nrow</span>(muestra_loteria) <span class="sc">+</span> <span class="fl">1.1</span></span>
+<span id="cb503-9"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-9" aria-hidden="true" tabindex="-1"></a>sims_pareto_posterior <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb503-10"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta =</span> <span class="fu">rpareto</span>(<span class="dv">100000</span>, lim_inf_post, k_posterior))</span>
+<span id="cb503-11"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulamos una observación para cada una de las anteriores:</span></span>
+<span id="cb503-12"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-12" aria-hidden="true" tabindex="-1"></a>sims_post_pred <span class="ot">&lt;-</span> sims_pareto_posterior <span class="sc">|</span><span class="er">&gt;</span></span>
+<span id="cb503-13"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x_pred =</span> <span class="fu">map_dbl</span>(theta, <span class="sc">~</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, .x)))</span>
+<span id="cb503-14"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficamos</span></span>
+<span id="cb503-15"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sims_post_pred, <span class="fu">aes</span>(<span class="at">x =</span> x_pred)) <span class="sc">+</span></span>
+<span id="cb503-16"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb503-17"><a href="introducción-a-inferencia-bayesiana-1.html#cb503-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> lim_inf_post, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="14-intro-bayesiana_files/figure-html/unnamed-chunk-42-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Que es una mezcla de una uniforme con una Pareto.</p>
+
+</div>
 </div>
 </div>
 <h3>Referencias<a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1567,7 +1589,7 @@ Kruschke, John. 2015. <em>Doing Bayesian Data Analysis (Second Edition)</em>. Ac
         </div>
       </div>
 <a href="más-de-pruebas-de-hipótesis-e-intervalos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="block2-typeejercicio---calcula-la-posterior-predictiva-del-modelo-beta-bernoulli-y-beta-binomial.---más-difícil-calcula-la-posterior-predictiva-del-modelo-poisson-gamma..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="calibración-bayesiana-y-regularización.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

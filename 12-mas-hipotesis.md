@@ -940,7 +940,7 @@ lo tanto los grados de libertad son $1 = 4 -3$.
 usaríamos
 
 ``` r
-pchisq(lambda, df =1, lower.tail = FALSE)
+pchisq(lambda, df = 1, lower.tail = FALSE)
 ```
 
 ```

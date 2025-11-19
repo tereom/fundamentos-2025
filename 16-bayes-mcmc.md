@@ -189,7 +189,7 @@ c(media_post, momento_2_post)
 ```
 
 ```
-## [1] 0.7167613 0.5385823
+## [1] 0.7128584 0.5336152
 ```
 
 Y podemos aproximar de esta manera cualquier cantidad de interés que esté basada
@@ -202,7 +202,7 @@ mean(exp(theta) > 2)
 ```
 
 ```
-## [1] 0.6003
+## [1] 0.5934
 ```
 y así sucesivamente. 
 
@@ -286,10 +286,10 @@ simular_conjunta(1, datos)
 ## # A tibble: 4 × 2
 ##   sabor     valor_sim
 ##   <chr>         <dbl>
-## 1 fresa         0.727
-## 2 limón         0.813
-## 3 mango         0.848
-## 4 guanábana     0.665
+## 1 fresa         0.650
+## 2 limón         0.862
+## 3 mango         0.754
+## 4 guanábana     0.726
 ```
 
 
@@ -306,16 +306,16 @@ sims_posterior
 ## # A tibble: 20,000 × 3
 ##      rep sabor     valor_sim
 ##    <int> <chr>         <dbl>
-##  1     1 fresa         0.709
-##  2     1 limón         0.851
-##  3     1 mango         0.655
-##  4     1 guanábana     0.753
-##  5     2 fresa         0.699
-##  6     2 limón         0.833
-##  7     2 mango         0.839
-##  8     2 guanábana     0.534
-##  9     3 fresa         0.718
-## 10     3 limón         0.756
+##  1     1 fresa         0.846
+##  2     1 limón         0.603
+##  3     1 mango         0.860
+##  4     1 guanábana     0.459
+##  5     2 fresa         0.721
+##  6     2 limón         0.848
+##  7     2 mango         0.856
+##  8     2 guanábana     0.420
+##  9     3 fresa         0.792
+## 10     3 limón         0.814
 ## # ℹ 19,990 more rows
 ```
 
@@ -337,10 +337,10 @@ sims_posterior %>%
 ## # A tibble: 4 × 3
 ##   sabor         n   prop
 ##   <chr>     <int>  <dbl>
-## 1 fresa      1236 0.0618
-## 2 guanábana     4 0.0002
-## 3 limón      5584 0.279 
-## 4 mango     13176 0.659
+## 1 fresa      1256 0.0628
+## 2 guanábana     8 0.0004
+## 3 limón      5344 0.267 
+## 4 mango     13392 0.670
 ```
 Y vemos que los mejores sabores son mango y limón. La probabilidad posterior de
 que mango sea el sabor preferido por la población es de 66%. La integral correspondiente
@@ -746,8 +746,8 @@ tibble(metodo = c("sim Metrópolis", "sim Independiente", "exacto"),
 ## # A tibble: 3 × 2
 ##   metodo            media_post
 ##   <chr>                  <dbl>
-## 1 sim Metrópolis         0.614
-## 2 sim Independiente      0.599
+## 1 sim Metrópolis         0.596
+## 2 sim Independiente      0.600
 ## 3 exacto                 0.6
 ```
 
@@ -895,7 +895,7 @@ estimaciones_media %>% bind_rows(tibble(tipo = "exacta", media = 20/100)) %>%
 ## # A tibble: 4 × 2
 ##   tipo            media
 ##   <chr>           <dbl>
-## 1 salto chico     0.132
+## 1 salto chico     0.103
 ## 2 salto grande    0.190
 ## 3 salto apropiado 0.203
 ## 4 exacta          0.2
