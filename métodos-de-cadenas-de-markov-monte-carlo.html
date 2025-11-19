@@ -863,47 +863,69 @@ dicha isla.</p></li>
 <span id="cb588-7"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb588-7" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb588-8"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb588-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plots_list)</span></code></pre></div>
 <p><img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>Escribamos el algoritmo con notación de distribuciones de probabilidad,
-en este ejemplo queremos simular de una variable
-aleatoria <span class="math inline">\(X\)</span> con distribución discreta sobre los
-valores <span class="math inline">\(1,2\ldots, k\)</span> con probabilidades <span class="math inline">\(p(1),p(2),\ldots,p(k)\)</span>.</p>
-<ol start="0" style="list-style-type: decimal">
-<li>Para <span class="math inline">\(i=1\)</span>, comenzamos fijando un valor <span class="math inline">\(x^(1)\)</span> en <span class="math inline">\(1,2,\ldots, k\)</span>.</li>
-</ol>
-<p>Para cada <span class="math inline">\(i\)</span>,</p>
+<p>Escribamos el algoritmo, para esto indexamos las islas por el valor
+<span class="math inline">\(\theta\)</span>, es así que la isla del extremo oeste corresponde a <span class="math inline">\(\theta=1\)</span> y la
+población relativa de cada isla es <span class="math inline">\(P(\theta)\)</span>:</p>
 <ol style="list-style-type: decimal">
-<li><p>Si <span class="math inline">\(1&lt; x^{(i)}&lt;k\)</span>, escogemos al azar un salto a la derecha o al izquierda con
-igual probabilidad 1/2. En los extremos <span class="math inline">\(x^{(i)}=1\)</span> o <span class="math inline">\(x^{(i)}=k\)</span> escogemos entre
-<span class="math inline">\(1,2\)</span> o <span class="math inline">\(k-1,k\)</span> respectivamente. El rango de los posibles valores para moverse, y la probabilidad de proponer
-cada uno se conoce como <strong>distribución propuesta</strong>. En este ejemplo sólo
+<li><p>El vendedor se ubica en <span class="math inline">\(\theta^{(i)}\)</span> y propone moverse a la izquierda
+o derecha con probabilidad <span class="math inline">\(0.5\)</span>.<br />
+El rango de los posibles valores para moverse, y la probabilidad de proponer
+cada uno se conoce como <strong>distribución propuesta</strong>, en nuestro ejemplo sólo
 toma dos valores cada uno con probabilidad <span class="math inline">\(0.5\)</span>.</p></li>
-<li><p>Una vez que se propone un nuevo valor <span class="math inline">\(x^*\)</span>, decidimos si aceptarlo. La decisión de
-aceptar se basa en el valor de la distribución <strong>objetivo</strong> en la valor propuesto,
-relativo al valor de la distribución objetivo en el valor actual:
-<span class="math display">\[\alpha=\min\bigg\{\frac{p(x^*)}{p(x^{(i)})},1\bigg\},\]</span>
+<li><p>Una vez que se propone un movimiento, decidimos si aceptarlo. La decisión de
+aceptar se basa en el valor de la distribución <strong>objetivo</strong> en la posición
+propuesta, relativo al valor de la distribución objetivo en la posición actual:
+<span class="math display">\[\alpha=\min\bigg\{\frac{P(\theta^*)}{P(\theta^{(i)})},1\bigg\},\]</span>
 donde <span class="math inline">\(\alpha\)</span> denota la probabilidad de hacer el cambio de isla.</p></li>
 </ol>
-<p>Notemos que la distribución objetivo <span class="math inline">\(p(x)\)</span> no necesita estar normalizada,
-esto es porque lo que nos interesa es el cociente <span class="math inline">\(p(x^*)/P(x^{(i)})\)</span>.</p>
+<p>Notemos que la distribución objetivo <span class="math inline">\(P(\theta)\)</span> no necesita estar normalizada,
+esto es porque lo que nos interesa es el cociente <span class="math inline">\(P(\theta^*)/P(\theta^{(i)})\)</span>.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Una vez que propusimos un movimiento y calculamos la probabilidad de aceptar
 el movimiento aceptamos o rechazamos el movimiento generando un valor de una
 distribución uniforme, si dicho valor es menor a la probabilidad de cambio,
 <span class="math inline">\(\alpha,\)</span> entonces hacemos el movimiento.</li>
 </ol>
-<p>Es así que para utilizar el algoritmo necesitamos ser capaces de:</p>
+<p>Entonces, para utilizar el algoritmo necesitamos ser capaces de:</p>
 <ul>
-<li><p>Generar un valor de la distribución propuesta, que hemos denotado por <span class="math inline">\(q\)</span>
-(para generar <span class="math inline">\(x^*\)</span>).</p></li>
+<li><p>Generar un valor de la distribución propuesta, que hemos denotado por <span class="math inline">\(q,\)</span>
+(para crear <span class="math inline">\(\theta^*\)</span>).</p></li>
 <li><p>Evaluar la distribución objetivo en cualquier valor propuesto (para calcular
-<span class="math inline">\(p(x^*)/p(x_{(i)})\)</span>).</p></li>
+<span class="math inline">\(P(\theta^*)/P(\theta^{(i)})\)</span>).</p></li>
 <li><p>Generar un valor uniforme (para movernos con probabilidad <span class="math inline">\(\alpha\)</span>).</p></li>
 </ul>
-<p>El resultado es una sucesión de valores <span class="math inline">\(x_1,x_2,\ldots, x_M\)</span>. Es posible
-demostrar que la distribución de estas <span class="math inline">\(x_i\)</span> converge a la distribución
-<span class="math inline">\(p(1),\ldots, p(k)\)</span> si <span class="math inline">\(M\)</span> es suficientemente grande. Es un método de Monte Carlo, y como podemos ver, se trata de una <strong>cadena de Markov</strong>, pues la distribución cada
-siguiente lugar <span class="math inline">\(x^{i+1}\)</span>, condicionada al valor actual <span class="math inline">\(x^{i}\)</span> no depende
-de valores anteriores de las <span class="math inline">\(x\)</span>.</p>
+<!-- Escribamos el algoritmo con notación de distribuciones de probabilidad,  -->
+<!-- en este ejemplo queremos simular de una variable  -->
+<!-- aleatoria $X$ con distribución discreta sobre los -->
+<!-- valores $1,2\ldots, k$ con probabilidades $p(1),p(2),\ldots,p(k)$.  -->
+<!-- 0. Para $i=1$, comenzamos fijando un valor $x^(1)$ en $1,2,\ldots, k$.  -->
+<!-- Para cada $i$, -->
+<!-- 1. Si $1< x^{(i)}<k$, escogemos al azar un salto a la derecha o al izquierda con -->
+<!-- igual probabilidad 1/2. En los extremos $x^{(i)}=1$ o $x^{(i)}=k$ escogemos entre -->
+<!-- $1,2$ o $k-1,k$ respectivamente. El rango de los posibles valores para moverse, y la probabilidad de proponer  -->
+<!-- cada uno se conoce como **distribución propuesta**. En este ejemplo sólo  -->
+<!-- toma dos valores cada uno con probabilidad $0.5$.  -->
+<!-- 2. Una vez que se propone un nuevo valor $x^*$, decidimos si aceptarlo. La decisión de -->
+<!-- aceptar se basa en el valor de la distribución **objetivo** en la valor propuesto, -->
+<!-- relativo al valor de la distribución objetivo en el valor actual: -->
+<!-- $$\alpha=\min\bigg\{\frac{p(x^*)}{p(x^{(i)})},1\bigg\},$$ -->
+<!-- donde $\alpha$ denota la probabilidad de hacer el cambio de isla.  -->
+<!-- Notemos que la distribución objetivo $p(x)$ no necesita estar normalizada,  -->
+<!-- esto es porque lo que nos interesa es el cociente $p(x^*)/p(x^{(i)})$. -->
+<!-- 3. Una vez que propusimos un movimiento y calculamos la probabilidad de aceptar -->
+<!-- el movimiento aceptamos o rechazamos el movimiento generando un valor de una -->
+<!-- distribución uniforme, si dicho valor es menor a la probabilidad de cambio, -->
+<!-- $\alpha,$ entonces hacemos el movimiento. -->
+<!-- Es así que para utilizar el algoritmo necesitamos ser capaces de: -->
+<!-- * Generar un valor de la distribución propuesta, que hemos denotado por $q$ -->
+<!-- (para generar $x^*$). -->
+<!-- * Evaluar la distribución objetivo en cualquier valor propuesto (para calcular -->
+<!-- $p(x^*)/p(x_{(i)})$). -->
+<!-- * Generar un valor uniforme (para movernos con probabilidad $\alpha$). -->
+<p>El resultado es una sucesión de valores <span class="math inline">\(\theta^{(1)},\theta^{(2)},\ldots, \theta^{(B)}\)</span>. Es posible
+demostrar que la distribución de estas <span class="math inline">\(\theta_i\)</span> converge a la distribución de la población en las islas, si <span class="math inline">\(B\)</span> es suficientemente grande. Es un método de Monte Carlo, y como podemos ver, se trata de una <strong>cadena de Markov</strong>, pues la distribución para cada
+siguiente lugar <span class="math inline">\(x^{(i+1)}\)</span>, condicionada al valor actual <span class="math inline">\(\theta^{(i)}\)</span> no depende
+de valores anteriores de las <span class="math inline">\(\theta\)</span>’s.</p>
 <p>Esta técnica es
 particularmente útil cuando cuando la distribución objetivo es una posterior
 proporcional a <span class="math inline">\(p(x|\theta)p(\theta)\)</span>.</p>
@@ -912,8 +934,8 @@ puntos, primero que la distribución objetivo es <strong>estable</strong>: si la
 <em>actual</em> de ubicarse en una posición coincide con la probabilidad en la
 distribución objetivo, entonces el algoritmo preserva las probabilidades.</p>
 <div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(expm)</span>
-<span id="cb589-2"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb589-2" aria-hidden="true" tabindex="-1"></a>transMat <span class="ot">&lt;-</span> <span class="cf">function</span>(P){ <span class="co"># recibe vector de probabilidades (o población)</span></span>
-<span id="cb589-3"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb589-3" aria-hidden="true" tabindex="-1"></a>    T <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb589-2"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb589-2" aria-hidden="true" tabindex="-1"></a>transMat <span class="ot">&lt;-</span> <span class="cf">function</span>(P){ <span class="co"># recibe vector de probabilidades no normalizado (o población)</span></span>
+<span id="cb589-3"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb589-3" aria-hidden="true" tabindex="-1"></a>    T <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="fu">length</span>(P), <span class="fu">length</span>(P))</span>
 <span id="cb589-4"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb589-4" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(P <span class="sc">-</span> <span class="dv">1</span>) <span class="co"># número de estados</span></span>
 <span id="cb589-5"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb589-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n <span class="sc">-</span> <span class="dv">1</span>) { <span class="co"># llenamos por fila</span></span>
 <span id="cb589-6"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb589-6" aria-hidden="true" tabindex="-1"></a>        T[j, j <span class="sc">-</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">min</span>(P[j <span class="sc">-</span> <span class="dv">1</span>] <span class="sc">/</span> P[j], <span class="dv">1</span>)</span>
@@ -980,10 +1002,6 @@ regresamos a 1 para la siguiente iteración <span class="math inline">\(i\leftar
 el salto, ponemos entonces <span class="math inline">\(\theta^{(i+1)}=\theta^{(i)}\)</span> y regresamos a 1 para
 la siguiente iteración <span class="math inline">\(i\leftarrow i + 1.\)</span></li>
 </ul>
-<p>Requerimos también que la función que propone los saltos sea simétrica: es
-decir, <span class="math inline">\(q(\theta^*|\theta^{(i)})\)</span> debe ser igual a <span class="math inline">\(q(\theta^{(i)}|\theta^*)\)</span>.
-Se puede modificar el algoritmo para tratar con una propuesta que no sea
-simétrica.</p>
 <div class="mathblock">
 <p>
 En este curso, escribiremos varios métodos de cadenas de Markov para

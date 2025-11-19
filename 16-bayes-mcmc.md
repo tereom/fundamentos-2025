@@ -489,51 +489,84 @@ wrap_plots(plots_list)
 
 <img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" />
 
+Escribamos el algoritmo, para esto indexamos las islas por el valor
+$\theta$, es así que la isla del extremo oeste corresponde a $\theta=1$ y la 
+población relativa de cada isla es $P(\theta)$:
 
-Escribamos el algoritmo con notación de distribuciones de probabilidad, 
-en este ejemplo queremos simular de una variable 
-aleatoria $X$ con distribución discreta sobre los
-valores $1,2\ldots, k$ con probabilidades $p(1),p(2),\ldots,p(k)$. 
-
-0. Para $i=1$, comenzamos fijando un valor $x^(1)$ en $1,2,\ldots, k$. 
-
-Para cada $i$,
-
-1. Si $1< x^{(i)}<k$, escogemos al azar un salto a la derecha o al izquierda con
-igual probabilidad 1/2. En los extremos $x^{(i)}=1$ o $x^{(i)}=k$ escogemos entre
-$1,2$ o $k-1,k$ respectivamente. El rango de los posibles valores para moverse, y la probabilidad de proponer 
-cada uno se conoce como **distribución propuesta**. En este ejemplo sólo 
+1. El vendedor se ubica en $\theta^{(i)}$ y propone moverse a la izquierda
+o derecha con probabilidad $0.5$.  
+El rango de los posibles valores para moverse, y la probabilidad de proponer 
+cada uno se conoce como **distribución propuesta**, en nuestro ejemplo sólo 
 toma dos valores cada uno con probabilidad $0.5$. 
 
-2. Una vez que se propone un nuevo valor $x^*$, decidimos si aceptarlo. La decisión de
-aceptar se basa en el valor de la distribución **objetivo** en la valor propuesto,
-relativo al valor de la distribución objetivo en el valor actual:
-$$\alpha=\min\bigg\{\frac{p(x^*)}{p(x^{(i)})},1\bigg\},$$
+2. Una vez que se propone un movimiento, decidimos si aceptarlo. La decisión de
+aceptar se basa en el valor de la distribución **objetivo** en la posición
+propuesta, relativo al valor de la distribución objetivo en la posición actual:
+$$\alpha=\min\bigg\{\frac{P(\theta^*)}{P(\theta^{(i)})},1\bigg\},$$
 donde $\alpha$ denota la probabilidad de hacer el cambio de isla. 
 
-Notemos que la distribución objetivo $p(x)$ no necesita estar normalizada, 
-esto es porque lo que nos interesa es el cociente $p(x^*)/P(x^{(i)})$.
+Notemos que la distribución objetivo $P(\theta)$ no necesita estar normalizada, 
+esto es porque lo que nos interesa es el cociente $P(\theta^*)/P(\theta^{(i)})$.
 
 3. Una vez que propusimos un movimiento y calculamos la probabilidad de aceptar
 el movimiento aceptamos o rechazamos el movimiento generando un valor de una
 distribución uniforme, si dicho valor es menor a la probabilidad de cambio,
 $\alpha,$ entonces hacemos el movimiento.
 
-Es así que para utilizar el algoritmo necesitamos ser capaces de:
+Entonces, para utilizar el algoritmo necesitamos ser capaces de:
 
-* Generar un valor de la distribución propuesta, que hemos denotado por $q$
-(para generar $x^*$).
+* Generar un valor de la distribución propuesta, que hemos denotado por $q,$
+(para crear $\theta^*$).
 
 * Evaluar la distribución objetivo en cualquier valor propuesto (para calcular
-$p(x^*)/p(x_{(i)})$).
+$P(\theta^*)/P(\theta^{(i)})$).
 
 * Generar un valor uniforme (para movernos con probabilidad $\alpha$).
 
-El resultado es una sucesión de valores $x_1,x_2,\ldots, x_M$. Es posible
-demostrar que la distribución de estas $x_i$ converge a la distribución
-$p(1),\ldots, p(k)$ si $M$ es suficientemente grande. Es un método de Monte Carlo, y como podemos ver, se trata de una **cadena de Markov**, pues la distribución cada
-siguiente lugar $x^{i+1}$, condicionada al valor actual $x^{i}$ no depende
-de valores anteriores de las $x$.
+
+<!-- Escribamos el algoritmo con notación de distribuciones de probabilidad,  -->
+<!-- en este ejemplo queremos simular de una variable  -->
+<!-- aleatoria $X$ con distribución discreta sobre los -->
+<!-- valores $1,2\ldots, k$ con probabilidades $p(1),p(2),\ldots,p(k)$.  -->
+
+<!-- 0. Para $i=1$, comenzamos fijando un valor $x^(1)$ en $1,2,\ldots, k$.  -->
+
+<!-- Para cada $i$, -->
+
+<!-- 1. Si $1< x^{(i)}<k$, escogemos al azar un salto a la derecha o al izquierda con -->
+<!-- igual probabilidad 1/2. En los extremos $x^{(i)}=1$ o $x^{(i)}=k$ escogemos entre -->
+<!-- $1,2$ o $k-1,k$ respectivamente. El rango de los posibles valores para moverse, y la probabilidad de proponer  -->
+<!-- cada uno se conoce como **distribución propuesta**. En este ejemplo sólo  -->
+<!-- toma dos valores cada uno con probabilidad $0.5$.  -->
+
+<!-- 2. Una vez que se propone un nuevo valor $x^*$, decidimos si aceptarlo. La decisión de -->
+<!-- aceptar se basa en el valor de la distribución **objetivo** en la valor propuesto, -->
+<!-- relativo al valor de la distribución objetivo en el valor actual: -->
+<!-- $$\alpha=\min\bigg\{\frac{p(x^*)}{p(x^{(i)})},1\bigg\},$$ -->
+<!-- donde $\alpha$ denota la probabilidad de hacer el cambio de isla.  -->
+
+<!-- Notemos que la distribución objetivo $p(x)$ no necesita estar normalizada,  -->
+<!-- esto es porque lo que nos interesa es el cociente $p(x^*)/p(x^{(i)})$. -->
+
+<!-- 3. Una vez que propusimos un movimiento y calculamos la probabilidad de aceptar -->
+<!-- el movimiento aceptamos o rechazamos el movimiento generando un valor de una -->
+<!-- distribución uniforme, si dicho valor es menor a la probabilidad de cambio, -->
+<!-- $\alpha,$ entonces hacemos el movimiento. -->
+
+<!-- Es así que para utilizar el algoritmo necesitamos ser capaces de: -->
+
+<!-- * Generar un valor de la distribución propuesta, que hemos denotado por $q$ -->
+<!-- (para generar $x^*$). -->
+
+<!-- * Evaluar la distribución objetivo en cualquier valor propuesto (para calcular -->
+<!-- $p(x^*)/p(x_{(i)})$). -->
+
+<!-- * Generar un valor uniforme (para movernos con probabilidad $\alpha$). -->
+
+El resultado es una sucesión de valores $\theta^{(1)},\theta^{(2)},\ldots, \theta^{(B)}$. Es posible
+demostrar que la distribución de estas $\theta_i$ converge a la distribución de la población en las islas, si $B$ es suficientemente grande. Es un método de Monte Carlo, y como podemos ver, se trata de una **cadena de Markov**, pues la distribución para cada
+siguiente lugar $x^{(i+1)}$, condicionada al valor actual $\theta^{(i)}$ no depende
+de valores anteriores de las $\theta$'s.
 
 Esta técnica es
 particularmente útil cuando cuando la distribución objetivo es una posterior
@@ -548,8 +581,8 @@ distribución objetivo, entonces el algoritmo preserva las probabilidades.
 
 ``` r
 library(expm)
-transMat <- function(P){ # recibe vector de probabilidades (o población)
-    T <- matrix(0, 10, 10)
+transMat <- function(P){ # recibe vector de probabilidades no normalizado (o población)
+    T <- matrix(0, length(P), length(P))
     n <- length(P - 1) # número de estados
     for (j in 2:n - 1) { # llenamos por fila
         T[j, j - 1] <- 0.5 * min(P[j - 1] / P[j], 1)
@@ -624,11 +657,6 @@ corto en una dirección al azar para obtener una propuesta $\theta^* \sim q(\the
   regresamos a 1 para la siguiente iteración $i\leftarrow i + 1$. Si rechazamos
   el salto, ponemos entonces $\theta^{(i+1)}=\theta^{(i)}$ y regresamos a 1 para
   la siguiente iteración $i\leftarrow i + 1.$
-
-Requerimos también que la función que propone los saltos sea simétrica: es
-decir, $q(\theta^*|\theta^{(i)})$ debe ser igual a $q(\theta^{(i)}|\theta^*)$.
-Se puede modificar el algoritmo para tratar con una propuesta que no sea
-simétrica.
 
 
 <div class="mathblock">
