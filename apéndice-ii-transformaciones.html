@@ -417,10 +417,13 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#ejemplo-15"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#ejemplo-varias-pruebas-independientes"><i class="fa fa-check"></i>Ejemplo: varias pruebas independientes</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#simulando-de-la-posterior"><i class="fa fa-check"></i>Simulando de la posterior</a></li>
+</ul></li>
+<li class="chapter" data-level="12.1" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#algoritmos-metropolis-hastings"><i class="fa fa-check"></i><b>12.1</b> Algoritmos Metropolis-Hastings</a>
+<ul>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#ejemplo-de-islas"><i class="fa fa-check"></i>Ejemplo de islas</a></li>
-<li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#por-qué-funciona-metrópolis"><i class="fa fa-check"></i>¿Por qué funciona Metrópolis?</a></li>
+<li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#idea-de-metrópolis"><i class="fa fa-check"></i>Idea de Metrópolis</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#método-de-metrópolis"><i class="fa fa-check"></i>Método de Metrópolis</a></li>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#ajustando-el-tamaño-de-salto"><i class="fa fa-check"></i>Ajustando el tamaño de salto</a>
 <ul>
@@ -590,23 +593,23 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
 <span id="cb674-7"><a href="apéndice-ii-transformaciones.html#cb674-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(body) <span class="sc">|</span><span class="er">&gt;</span> </span>
 <span id="cb674-8"><a href="apéndice-ii-transformaciones.html#cb674-8" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|</span><span class="er">&gt;</span> </span>
 <span id="cb674-9"><a href="apéndice-ii-transformaciones.html#cb674-9" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">fmt_number</span>()</span></code></pre></div>
-<div id="xmiesjqaiz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xmiesjqaiz table {
+<div id="cfbggzqylk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cfbggzqylk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xmiesjqaiz thead, #xmiesjqaiz tbody, #xmiesjqaiz tfoot, #xmiesjqaiz tr, #xmiesjqaiz td, #xmiesjqaiz th {
+#cfbggzqylk thead, #cfbggzqylk tbody, #cfbggzqylk tfoot, #cfbggzqylk tr, #cfbggzqylk td, #cfbggzqylk th {
   border-style: none;
 }
 
-#xmiesjqaiz p {
+#cfbggzqylk p {
   margin: 0;
   padding: 0;
 }
 
-#xmiesjqaiz .gt_table {
+#cfbggzqylk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -632,12 +635,12 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-left-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_caption {
+#cfbggzqylk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xmiesjqaiz .gt_title {
+#cfbggzqylk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -649,7 +652,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-bottom-width: 0;
 }
 
-#xmiesjqaiz .gt_subtitle {
+#cfbggzqylk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -661,7 +664,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-top-width: 0;
 }
 
-#xmiesjqaiz .gt_heading {
+#cfbggzqylk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -673,13 +676,13 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-right-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_bottom_border {
+#cfbggzqylk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_col_headings {
+#cfbggzqylk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -694,7 +697,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-right-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_col_heading {
+#cfbggzqylk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -714,7 +717,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   overflow-x: hidden;
 }
 
-#xmiesjqaiz .gt_column_spanner_outer {
+#cfbggzqylk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -726,15 +729,15 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   padding-right: 4px;
 }
 
-#xmiesjqaiz .gt_column_spanner_outer:first-child {
+#cfbggzqylk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xmiesjqaiz .gt_column_spanner_outer:last-child {
+#cfbggzqylk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xmiesjqaiz .gt_column_spanner {
+#cfbggzqylk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -746,11 +749,11 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   width: 100%;
 }
 
-#xmiesjqaiz .gt_spanner_row {
+#cfbggzqylk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xmiesjqaiz .gt_group_heading {
+#cfbggzqylk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -776,7 +779,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   text-align: left;
 }
 
-#xmiesjqaiz .gt_empty_group_heading {
+#cfbggzqylk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -791,15 +794,15 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   vertical-align: middle;
 }
 
-#xmiesjqaiz .gt_from_md > :first-child {
+#cfbggzqylk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xmiesjqaiz .gt_from_md > :last-child {
+#cfbggzqylk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xmiesjqaiz .gt_row {
+#cfbggzqylk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -818,7 +821,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   overflow-x: hidden;
 }
 
-#xmiesjqaiz .gt_stub {
+#cfbggzqylk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -831,7 +834,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   padding-right: 5px;
 }
 
-#xmiesjqaiz .gt_stub_row_group {
+#cfbggzqylk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -845,15 +848,15 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   vertical-align: top;
 }
 
-#xmiesjqaiz .gt_row_group_first td {
+#cfbggzqylk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xmiesjqaiz .gt_row_group_first th {
+#cfbggzqylk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xmiesjqaiz .gt_summary_row {
+#cfbggzqylk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -863,16 +866,16 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   padding-right: 5px;
 }
 
-#xmiesjqaiz .gt_first_summary_row {
+#cfbggzqylk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_first_summary_row.thick {
+#cfbggzqylk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xmiesjqaiz .gt_last_summary_row {
+#cfbggzqylk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -882,7 +885,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-bottom-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_grand_summary_row {
+#cfbggzqylk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -892,7 +895,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   padding-right: 5px;
 }
 
-#xmiesjqaiz .gt_first_grand_summary_row {
+#cfbggzqylk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -902,7 +905,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-top-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_last_grand_summary_row_top {
+#cfbggzqylk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -912,11 +915,11 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-bottom-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_striped {
+#cfbggzqylk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xmiesjqaiz .gt_table_body {
+#cfbggzqylk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -925,7 +928,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-bottom-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_footnotes {
+#cfbggzqylk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -939,7 +942,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-right-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_footnote {
+#cfbggzqylk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -948,7 +951,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   padding-right: 5px;
 }
 
-#xmiesjqaiz .gt_sourcenotes {
+#cfbggzqylk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -962,7 +965,7 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   border-right-color: #D3D3D3;
 }
 
-#xmiesjqaiz .gt_sourcenote {
+#cfbggzqylk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -970,72 +973,72 @@ En escala log, diferencias iguales equivalen a factores multiplicativos iguales.
   padding-right: 5px;
 }
 
-#xmiesjqaiz .gt_left {
+#cfbggzqylk .gt_left {
   text-align: left;
 }
 
-#xmiesjqaiz .gt_center {
+#cfbggzqylk .gt_center {
   text-align: center;
 }
 
-#xmiesjqaiz .gt_right {
+#cfbggzqylk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xmiesjqaiz .gt_font_normal {
+#cfbggzqylk .gt_font_normal {
   font-weight: normal;
 }
 
-#xmiesjqaiz .gt_font_bold {
+#cfbggzqylk .gt_font_bold {
   font-weight: bold;
 }
 
-#xmiesjqaiz .gt_font_italic {
+#cfbggzqylk .gt_font_italic {
   font-style: italic;
 }
 
-#xmiesjqaiz .gt_super {
+#cfbggzqylk .gt_super {
   font-size: 65%;
 }
 
-#xmiesjqaiz .gt_footnote_marks {
+#cfbggzqylk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xmiesjqaiz .gt_asterisk {
+#cfbggzqylk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xmiesjqaiz .gt_indent_1 {
+#cfbggzqylk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xmiesjqaiz .gt_indent_2 {
+#cfbggzqylk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xmiesjqaiz .gt_indent_3 {
+#cfbggzqylk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xmiesjqaiz .gt_indent_4 {
+#cfbggzqylk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xmiesjqaiz .gt_indent_5 {
+#cfbggzqylk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xmiesjqaiz .katex-display {
+#cfbggzqylk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xmiesjqaiz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cfbggzqylk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

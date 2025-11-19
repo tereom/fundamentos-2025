@@ -417,10 +417,13 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#ejemplo-15"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#ejemplo-varias-pruebas-independientes"><i class="fa fa-check"></i>Ejemplo: varias pruebas independientes</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#simulando-de-la-posterior"><i class="fa fa-check"></i>Simulando de la posterior</a></li>
+</ul></li>
+<li class="chapter" data-level="12.1" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#algoritmos-metropolis-hastings"><i class="fa fa-check"></i><b>12.1</b> Algoritmos Metropolis-Hastings</a>
+<ul>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#ejemplo-de-islas"><i class="fa fa-check"></i>Ejemplo de islas</a></li>
-<li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#por-qué-funciona-metrópolis"><i class="fa fa-check"></i>¿Por qué funciona Metrópolis?</a></li>
+<li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#idea-de-metrópolis"><i class="fa fa-check"></i>Idea de Metrópolis</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#método-de-metrópolis"><i class="fa fa-check"></i>Método de Metrópolis</a></li>
 <li class="chapter" data-level="" data-path="métodos-de-cadenas-de-markov-monte-carlo.html"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#ajustando-el-tamaño-de-salto"><i class="fa fa-check"></i>Ajustando el tamaño de salto</a>
 <ul>
@@ -743,9 +746,8 @@ por la población?</li>
 </div></li>
 </ul>
 </div>
-</div>
-<div id="simulando-de-la-posterior" class="section level2 unnumbered hasAnchor">
-<h2>Simulando de la posterior<a href="métodos-de-cadenas-de-markov-monte-carlo.html#simulando-de-la-posterior" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="simulando-de-la-posterior" class="section level3 unnumbered hasAnchor">
+<h3>Simulando de la posterior<a href="métodos-de-cadenas-de-markov-monte-carlo.html#simulando-de-la-posterior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Hemos establecido que podemos contestar varias preguntas de inferencia
 usando simulación Monte Carlo, y que este enfoque es potencialmente
 escalable (en contraste con métodos de integración numérica por cuadrícula). Ahora
@@ -756,16 +758,23 @@ el problema que necesitamos resolver es el siguiente:</p>
 simulador estándar.</li>
 <li>¿Cómo simulamos de esta posterior cuando sólo sabemos calcular <span class="math inline">\(p(x|\theta)p(\theta)\)</span>?</li>
 </ul>
-<p>Hay varias maneras de hacer esto. Presentaremos los algoritmos en términos
+</div>
+</div>
+<div id="algoritmos-metropolis-hastings" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Algoritmos Metropolis-Hastings<a href="métodos-de-cadenas-de-markov-monte-carlo.html#algoritmos-metropolis-hastings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Uno de los primeros algoritmos MCMC fue el de Metropolis-Hastings,
+que veremos primero en algunos ejemplos. Veremos también por qué
+ahora tenemos mejores opciones que MH para estimar posteriores de
+nuestros modelos.</p>
+<p>Introducimos los algoritmos en términos
 de una distribución cualquiera <span class="math inline">\(p(\theta) = K f(\theta)\)</span>, donde sólo conocemos
 la función <span class="math inline">\(f(\theta)\)</span>.</p>
-</div>
-<div id="ejemplo-de-islas" class="section level2 unnumbered hasAnchor">
-<h2>Ejemplo de islas<a href="métodos-de-cadenas-de-markov-monte-carlo.html#ejemplo-de-islas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ejemplo-de-islas" class="section level3 unnumbered hasAnchor">
+<h3>Ejemplo de islas<a href="métodos-de-cadenas-de-markov-monte-carlo.html#ejemplo-de-islas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Comenzamos revisando el ejemplo de las islas en <span class="citation">Kruschke (<a href="#ref-Kruschke" role="doc-biblioref">2015</a>)</span> (7.2) para tener más intuición de cómo funciona este algoritmo.</p>
 </div>
-<div id="por-qué-funciona-metrópolis" class="section level2 unnumbered hasAnchor">
-<h2>¿Por qué funciona Metrópolis?<a href="métodos-de-cadenas-de-markov-monte-carlo.html#por-qué-funciona-metrópolis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="idea-de-metrópolis" class="section level3 unnumbered hasAnchor">
+<h3>Idea de Metrópolis<a href="métodos-de-cadenas-de-markov-monte-carlo.html#idea-de-metrópolis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Supongamos que un vendedor de <em>Yakult</em> trabaja a lo largo de una cadena de
 islas:</p>
 <ul>
@@ -854,39 +863,48 @@ dicha isla.</p></li>
 <span id="cb588-7"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb588-7" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb588-8"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb588-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plots_list)</span></code></pre></div>
 <p><img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>Escribamos el algoritmo, para esto indexamos las islas por el valor
-<span class="math inline">\(\theta\)</span>, es así que la isla del extremo oeste corresponde a <span class="math inline">\(\theta=1\)</span> y la
-población relativa de cada isla es <span class="math inline">\(P(\theta)\)</span>:</p>
+<p>Escribamos el algoritmo con notación de distribuciones de probabilidad,
+en este ejemplo queremos simular de una variable
+aleatoria <span class="math inline">\(X\)</span> con distribución discreta sobre los
+valores <span class="math inline">\(1,2\ldots, k\)</span> con probabilidades <span class="math inline">\(p(1),p(2),\ldots,p(k)\)</span>.</p>
+<ol start="0" style="list-style-type: decimal">
+<li>Para <span class="math inline">\(i=1\)</span>, comenzamos fijando un valor <span class="math inline">\(x^(1)\)</span> en <span class="math inline">\(1,2,\ldots, k\)</span>.</li>
+</ol>
+<p>Para cada <span class="math inline">\(i\)</span>,</p>
 <ol style="list-style-type: decimal">
-<li><p>El vendedor se ubica en <span class="math inline">\(\theta^{(i)}\)</span> y propone moverse a la izquierda
-o derecha con probabilidad <span class="math inline">\(0.5\)</span>.<br />
-El rango de los posibles valores para moverse, y la probabilidad de proponer
-cada uno se conoce como <strong>distribución propuesta</strong>, en nuestro ejemplo sólo
+<li><p>Si <span class="math inline">\(1&lt; x^{(i)}&lt;k\)</span>, escogemos al azar un salto a la derecha o al izquierda con
+igual probabilidad 1/2. En los extremos <span class="math inline">\(x^{(i)}=1\)</span> o <span class="math inline">\(x^{(i)}=k\)</span> escogemos entre
+<span class="math inline">\(1,2\)</span> o <span class="math inline">\(k-1,k\)</span> respectivamente. El rango de los posibles valores para moverse, y la probabilidad de proponer
+cada uno se conoce como <strong>distribución propuesta</strong>. En este ejemplo sólo
 toma dos valores cada uno con probabilidad <span class="math inline">\(0.5\)</span>.</p></li>
-<li><p>Una vez que se propone un movimiento, decidimos si aceptarlo. La decisión de
-aceptar se basa en el valor de la distribución <strong>objetivo</strong> en la posición
-propuesta, relativo al valor de la distribución objetivo en la posición actual:
-<span class="math display">\[\alpha=\min\bigg\{\frac{P(\theta^*)}{P(\theta^{(i)})},1\bigg\},\]</span>
+<li><p>Una vez que se propone un nuevo valor <span class="math inline">\(x^*\)</span>, decidimos si aceptarlo. La decisión de
+aceptar se basa en el valor de la distribución <strong>objetivo</strong> en la valor propuesto,
+relativo al valor de la distribución objetivo en el valor actual:
+<span class="math display">\[\alpha=\min\bigg\{\frac{p(x^*)}{p(x^{(i)})},1\bigg\},\]</span>
 donde <span class="math inline">\(\alpha\)</span> denota la probabilidad de hacer el cambio de isla.</p></li>
 </ol>
-<p>Notemos que la distribución objetivo <span class="math inline">\(P(\theta)\)</span> no necesita estar normalizada,
-esto es porque lo que nos interesa es el cociente <span class="math inline">\(P(\theta^*)/P(\theta^{(i)})\)</span>.</p>
+<p>Notemos que la distribución objetivo <span class="math inline">\(p(x)\)</span> no necesita estar normalizada,
+esto es porque lo que nos interesa es el cociente <span class="math inline">\(p(x^*)/P(x^{(i)})\)</span>.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Una vez que propusimos un movimiento y calculamos la probabilidad de aceptar
 el movimiento aceptamos o rechazamos el movimiento generando un valor de una
 distribución uniforme, si dicho valor es menor a la probabilidad de cambio,
 <span class="math inline">\(\alpha,\)</span> entonces hacemos el movimiento.</li>
 </ol>
-<p>Entonces, para utilizar el algoritmo necesitamos ser capaces de:</p>
+<p>Es así que para utilizar el algoritmo necesitamos ser capaces de:</p>
 <ul>
-<li><p>Generar un valor de la distribución propuesta, que hemos denotado por <span class="math inline">\(q,\)</span>
-(para crear <span class="math inline">\(\theta^*\)</span>).</p></li>
+<li><p>Generar un valor de la distribución propuesta, que hemos denotado por <span class="math inline">\(q\)</span>
+(para generar <span class="math inline">\(x^*\)</span>).</p></li>
 <li><p>Evaluar la distribución objetivo en cualquier valor propuesto (para calcular
-<span class="math inline">\(P(\theta^*)/P(\theta^{(i)})\)</span>).</p></li>
+<span class="math inline">\(p(x^*)/p(x_{(i)})\)</span>).</p></li>
 <li><p>Generar un valor uniforme (para movernos con probabilidad <span class="math inline">\(\alpha\)</span>).</p></li>
 </ul>
-<p>Las <span class="math inline">\(3\)</span> puntos anteriores nos permiten generar muestras aleatorias de la
-distribución objetivo, sin importar si esta está normalizada. Esta técnica es
+<p>El resultado es una sucesión de valores <span class="math inline">\(x_1,x_2,\ldots, x_M\)</span>. Es posible
+demostrar que la distribución de estas <span class="math inline">\(x_i\)</span> converge a la distribución
+<span class="math inline">\(p(1),\ldots, p(k)\)</span> si <span class="math inline">\(M\)</span> es suficientemente grande. Es un método de Monte Carlo, y como podemos ver, se trata de una <strong>cadena de Markov</strong>, pues la distribución cada
+siguiente lugar <span class="math inline">\(x^{i+1}\)</span>, condicionada al valor actual <span class="math inline">\(x^{i}\)</span> no depende
+de valores anteriores de las <span class="math inline">\(x\)</span>.</p>
+<p>Esta técnica es
 particularmente útil cuando cuando la distribución objetivo es una posterior
 proporcional a <span class="math inline">\(p(x|\theta)p(\theta)\)</span>.</p>
 <p>Para entender porque funciona el algoritmo de Metrópolis hace falta entender <span class="math inline">\(2\)</span>
@@ -941,11 +959,11 @@ se alcanza la distribución objetivo.</p>
 <span id="cb590-14"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb590-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="fu">expression</span>(theta), <span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">11</span>))</span></code></pre></div>
 <p><img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
+</div>
 <div id="método-de-metrópolis" class="section level2 unnumbered hasAnchor">
 <h2>Método de Metrópolis<a href="métodos-de-cadenas-de-markov-monte-carlo.html#método-de-metrópolis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En el método de Metrópolis, uno de los más antiguos, comenzamos
-con un valor inicial de los parámetros <span class="math inline">\(\theta^{(0)}\)</span> en el soporte de <span class="math inline">\(p(\theta)\)</span>,
-es decir <span class="math inline">\(p(\theta^{(0)})&gt;0.\)</span></p>
+<p>En el método de Metrópolis, uno de los más antiguos, enunciémoslo en términos de la posterior <span class="math inline">\(p(\theta|x) \propto p(\theta)p(x|\theta)\)</span>.</p>
+<p>Comenzamos con un valor inicial de los parámetros <span class="math inline">\(\theta^{(0)}\)</span> en el soporte de <span class="math inline">\(p(\theta|x)\)</span>, es decir <span class="math inline">\(p(\theta^{(0)}|x)&gt;0.\)</span></p>
 <p>Para <span class="math inline">\(i=1, \ldots, M\)</span>, hacemos:</p>
 <ol style="list-style-type: decimal">
 <li>Partiendo de <span class="math inline">\(\theta^{(i)}\)</span>, hacemos un salto
@@ -953,10 +971,10 @@ corto en una dirección al azar para obtener una propuesta <span class="math inl
 <li>Aceptamos or rechazamos el salto:</li>
 </ol>
 <ul>
-<li>Si <span class="math inline">\(\alpha = \frac{f(\theta^*)}{f(\theta^{(i)})} \geq 1\)</span>, aceptamos el salto
+<li>Si <span class="math inline">\(\alpha = \frac{p(\theta^*|x)}{p(\theta^{(i)}|x)} \geq 1\)</span>, aceptamos el salto
 y ponemos <span class="math inline">\(\theta^{(i+1)}=\theta^*\)</span>. Regresamos a 1 para la siguiente
 iteración <span class="math inline">\(i\leftarrow i + 1.\)</span></li>
-<li>Si <span class="math inline">\(\alpha = \frac{f(\theta^*)}{f(\theta^{(i)})} &lt; 1\)</span>, entonces aceptamos
+<li>Si <span class="math inline">\(\alpha = \frac{p(\theta^*|x)}{p(\theta^{(i)}|x)} &lt; 1\)</span>, entonces aceptamos
 con probabilidad <span class="math inline">\(\alpha\)</span> el salto, ponemos <span class="math inline">\(\theta^{(i+1)}=\theta^*\)</span> y
 regresamos a 1 para la siguiente iteración <span class="math inline">\(i\leftarrow i + 1\)</span>. Si rechazamos
 el salto, ponemos entonces <span class="math inline">\(\theta^{(i+1)}=\theta^{(i)}\)</span> y regresamos a 1 para
@@ -966,9 +984,7 @@ la siguiente iteración <span class="math inline">\(i\leftarrow i + 1.\)</span><
 decir, <span class="math inline">\(q(\theta^*|\theta^{(i)})\)</span> debe ser igual a <span class="math inline">\(q(\theta^{(i)}|\theta^*)\)</span>.
 Se puede modificar el algoritmo para tratar con una propuesta que no sea
 simétrica.</p>
-<p>Una elección común es escoger <span class="math inline">\(q(\theta^* |\theta^{(i)})\)</span> como
-una <span class="math inline">\(\mathsf{N}(\theta^{(i)}, \sigma_{salto})\)</span>.</p>
-<div class="comentario">
+<div class="mathblock">
 <p>
 En este curso, escribiremos varios métodos de cadenas de Markov para
 estimación Monte Carlo (<em>Markov Chain Monte Carlo</em>, MCMC) desde
@@ -985,7 +1001,10 @@ no es trivial de hacer garantizando resultados correctos.
 </div>
 <p>En resumen, todo el código de esta sección es de carácter ilustrativo.
 Utiliza implementaciones establecidas en las aplicaciones.</p>
-<p>Abajo implementamos el algoritmo con un salto de tipo normal:</p>
+<p>Abajo implementamos el algoritmo con un salto de tipo normal. En la versión
+de Metroplois
+Una elección común es escoger <span class="math inline">\(q(\theta^* |\theta^{(i)})\)</span> como
+una <span class="math inline">\(\mathsf{N}(\theta^{(i)}, \sigma_{salto})\)</span>.</p>
 <div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb591-1" aria-hidden="true" tabindex="-1"></a>crear_metropolis <span class="ot">&lt;-</span> <span class="cf">function</span>(fun_log, <span class="at">sigma_salto =</span> <span class="fl">0.1</span>){</span>
 <span id="cb591-2"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb591-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># la entrada es la log posterior</span></span>
 <span id="cb591-3"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb591-3" aria-hidden="true" tabindex="-1"></a>  iterar_metropolis <span class="ot">&lt;-</span> <span class="cf">function</span>(theta_inicial, n){</span>
