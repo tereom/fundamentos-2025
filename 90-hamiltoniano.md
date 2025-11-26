@@ -44,10 +44,14 @@ Comenzamos considerando distribuciones propuesta $q_0(x|y)$, y supondremos que n
 * Entonces, cuando $p(y)/p(x) > 1$, queremos transicionar de $x$ a $y$ con más frecuencia que de $y$ a $x$.  Tiene sentido entonces que, comenzando en $x$, 
 si la propuesta de $q_0(y|x)$ es $y$, pongamos que el sistema transicione con probabilidad 1. 
 
-* Sin embargo, si empezamos en $y$ y la propuesta es $x$, ponemos que el sistema sólo transiciona de  $y$ a $x$  con probabilidad $p(x)/p(y)$ (esto es justamente la descripción de Metropolis Hastings).
+* Sin embargo, si empezamos en $y$ y la propuesta es $x$, ponemos que el sistema sólo transiciona de  $y$ a $x$  con probabilidad $p(x)/p(y)$ (esto es justamente la descripción de Metropolis que vimos).
 
 * De esta manera, obtenemos que bajo $q(y|x)$, $x$ transiciona a $y$ 
-con probabilidad $q_0(y|x)$ multiplicada por $\min\{1, p(y)/p(x)\}$. Entonces, el cociente
+con probabilidad:
+
+$$q_0(y|x) \cdot \min\{1, p(y)/p(x)\}$$
+
+Entonces, el cociente
 $\frac{q(y|x)}{q(x|y)}$ (usando también la simetría de $q_0(y|x)$), es igual a $\frac{p(y)}{p(x)}$ si $p(y)>p(x)$.
 Si $p(x)>p(y)$, entonces siguiendo el mismo argumento, y por simetría de $q_0(y|x)$, se
 cumple que el cociente de probabilidades es tambien igual a $\frac{p(y)}{p(x)}$. Esto demuestra
@@ -60,12 +64,12 @@ estacionaria $p(x)$, que es la distribución objetivo.
 Recordemos también que
 **basta con conocer $p(x)$ módulo una constante de proporcionalidad** para poder
 usar este algoritmo. Cuando lo usamos para simular posteriores esto es importante, pues
-podemos utilizar $p(\theta|D)\propto p(D|\theta)p(\theta)$ sin tener que calcular
-la integral $p(D)$ que normaliza el lado derecha de esta ecuación.
+podemos utilizar $p(\theta|x)\propto p(x|\theta)p(\theta)$ sin tener que calcular
+la integral $p(x)$ que normaliza el lado derecha de esta ecuación.
 
 ### Ejemplo: Metropolis bivariado {-}
 
-Recordemos el ejemplo en que simulamos de una normal multivariada
+Retomamos el ejemplo en que simulamos de una normal biivariada, en este caso
 con media en c(2,3) y matriz de covarianza $\Sigma$, que supondremos
 es tal que la desviación estándar de cada variable es 1 y la correlación es
 0.8. La matriz $\Sigma$ tiene 1 en la diagonal y 0.8 fuera de la diagonal.
@@ -118,7 +122,7 @@ z_tbl <- metropolis_mc(M, c(2.5, 3.5), log_p, 1.0, 1.0)
 ```
 
 ```
-## [1] 0.60186
+## [1] 0.59854
 ```
 
 
@@ -171,7 +175,7 @@ z_tbl <- metropolis_mc(M, c(2.5, 3.5), log_p, 0.2, 0.2)
 ```
 
 ```
-## [1] 0.15698
+## [1] 0.15686
 ```
 
 ``` r
@@ -374,9 +378,9 @@ usando un argumento similar, es igual a
 
 $$p(y)p(\rho^*) = p(y)p(-\rho^*) = p(y) q(x|y)$$
 La segunda igualdad se da porque $p(\rho)$ es Gaussiana (simétrica). Y finalmente,
-la última igualdad se da porque si necesitamos momento $\rho$ para llegar de $x$ a $(\rho^*, y)$, entonces necesitamos $-\rho^*$ (volteamos la velocidad ifnal) para llegar de $y$ a $(\rho, x)$, pues el sistema físico es reversible.
+la última igualdad se da porque si necesitamos momento $\rho$ para llegar de $x$ a $(\rho^*, y)$, entonces necesitamos $-\rho^*$ (volteamos la velocidad final) para llegar de $y$ a $(\rho, x)$, pues el sistema físico es reversible.
 
-Nótese que este argumento se rompe si por ejemplo si es imposible transicionar
+Nótese que este argumento se rompe si por ejemplo es imposible transicionar
 de un punto a otro (por ejemplo, cuando la distribución objetivo $p$ tiene dos
 regiones separadas de probabilidad positiva).
 
@@ -651,7 +655,7 @@ system.time(metropolis_2 <- metropolis_mc(1000, c(1,2), log_p, 1, 1))
 
 ```
 ##    user  system elapsed 
-##   0.015   0.000   0.016
+##   0.016   0.000   0.016
 ```
 
 
@@ -864,7 +868,7 @@ ajuste_embudo <- mod_embudo$sample(
 ## Chain 1 Iteration: 11000 / 31000 [ 35%]  (Sampling) 
 ## Chain 1 Iteration: 21000 / 31000 [ 67%]  (Sampling) 
 ## Chain 1 Iteration: 31000 / 31000 [100%]  (Sampling) 
-## Chain 1 finished in 0.6 seconds.
+## Chain 1 finished in 0.7 seconds.
 ```
 
 ```

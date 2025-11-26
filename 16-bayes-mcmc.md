@@ -368,7 +368,7 @@ simulador estándar.
 - ¿Cómo simulamos de esta posterior cuando sólo sabemos calcular $p(x|\theta)p(\theta)$?
 
 
-## Algoritmos Metropolis-Hastings
+## Algoritmos Metropolis-Hastings {-}
 
 Uno de los primeros algoritmos MCMC fue el de Metropolis-Hastings,
 que veremos primero en algunos ejemplos. Veremos también por qué 
@@ -627,7 +627,7 @@ Para tener una intuición de porque converge a la distribución objetivo conside
 se visitará proporcional a su valor en la distribución objetivo.
 
 Entonces, supongamos que estamos en la posición $\theta$, la probabilidad de moverse a
-$$\theta^´$$ es la probabilidad de proponer ese movimiento por la probabilidad de que se acepte:
+$\theta^´$ (adyacente) es la probabilidad de proponer ese movimiento por la probabilidad de que se acepte:
 
 $$\frac{P(\theta \to \theta^´)}{P(\theta^´ \to \theta)} = \frac{0.5 \space min\{P(\theta^´)/P(\theta), 1\}}{0.5 \space min\{P(\theta)/P(\theta^´), 1\}} \\ = \left\{
 \begin{array}{l}
@@ -980,8 +980,8 @@ Veamos otra corrida:
 
 ``` r
 set.seed(6222131)
-sims_chica_tbl <- iterador_metro_chico(c(theta = 0.02), 5000)
-sims_grande_tbl <- iterador_metro_grande(c(theta = 0.02), 5000)
+sims_chica_tbl <- iterador_metro_chico(c(theta = 0.45), 5000)
+sims_grande_tbl <- iterador_metro_grande(c(theta = 0.45), 5000)
 estimaciones_media <- map_dfr(
     list(sims_chica_tbl, sims_grande_tbl, sims_tbl), 
     ~ filter(.x, iter_num < 3000) %>% 
@@ -995,8 +995,8 @@ estimaciones_media %>% bind_rows(tibble(tipo = "exacta", media = 20/100)) %>%
 ## # A tibble: 4 × 2
 ##   tipo            media
 ##   <chr>           <dbl>
-## 1 salto chico     0.124
-## 2 salto grande    0.229
+## 1 salto chico     0.396
+## 2 salto grande    0.214
 ## 3 salto apropiado 0.203
 ## 4 exacta          0.2
 ```

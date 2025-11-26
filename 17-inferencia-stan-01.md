@@ -425,7 +425,7 @@ ajuste <- mod$sample(
 ```
 
 ```
-## Chain 3 Exception: gamma_lpdf: Random variable is inf, but must be positive finite! (in '/tmp/RtmpfB83Pc/model-4b104b1bd738.stan', line 17, column 2 to column 27)
+## Chain 3 Exception: gamma_lpdf: Random variable is inf, but must be positive finite! (in '/tmp/RtmpFo2v3i/model-4b021503c17c.stan', line 17, column 2 to column 27)
 ```
 
 ```
@@ -1017,7 +1017,7 @@ ajuste <- mod_no_inf$sample(
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 3.3 seconds.
-## Total execution time: 13.2 seconds.
+## Total execution time: 13.5 seconds.
 ```
 
 ```
@@ -1111,7 +1111,7 @@ ajuste <- mod_informado$sample(
 ## Chain 2 Iteration: 4001 / 8000 [ 50%]  (Sampling) 
 ## Chain 2 Iteration: 6000 / 8000 [ 75%]  (Sampling) 
 ## Chain 2 Iteration: 8000 / 8000 [100%]  (Sampling) 
-## Chain 2 finished in 2.0 seconds.
+## Chain 2 finished in 2.1 seconds.
 ## Chain 3 Iteration:    1 / 8000 [  0%]  (Warmup) 
 ## Chain 3 Iteration: 2000 / 8000 [ 25%]  (Warmup) 
 ## Chain 3 Iteration: 4000 / 8000 [ 50%]  (Warmup) 
