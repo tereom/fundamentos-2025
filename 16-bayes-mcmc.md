@@ -418,7 +418,7 @@ la isla.
 
 
 ``` r
-islas <- tibble(islas = 1:10, pob = 1:10)
+islas <- tibble(islas = 1:10, pob = c(1:10))
 camina_isla <- function(i){ # i: isla actual
     u <- runif(1) # volado
     v <- ifelse(u < 0.5, i - 1, i + 1)  # isla vecina (índice)
@@ -476,6 +476,12 @@ simplemente contando el número relativo de veces que el vendedor visitó
 dicha isla.
 
 
+La trayectoria que mostramos en la gráfica de arriba es únicamente una posibilidad, notemos que en cada paso la dirección se selecciona al azar y la nueva posición se acepta con cierta probabilidad. Sin embargo, sin importar
+la trayectoria particular a la larga la frecuencia relativa de visitas coincidirá con la población relativa de cada isla  (distribución objetivo).
+
+La gráfica de abajo muestra la probabilidad de que el vendedor se ubique en cada isla en función del tiempo $t$.
+
+
 ``` r
 t <- c(1:10, 20, 50, 100, 200, 1000, 5000)
 plots_list <- map(t, function(i){
@@ -522,7 +528,6 @@ Entonces, para utilizar el algoritmo necesitamos ser capaces de:
 $P(\theta^*)/P(\theta^{(i)})$).
 
 * Generar un valor uniforme (para movernos con probabilidad $\alpha$).
-
 
 <!-- Escribamos el algoritmo con notación de distribuciones de probabilidad,  -->
 <!-- en este ejemplo queremos simular de una variable  -->
@@ -573,14 +578,14 @@ particularmente útil cuando cuando la distribución objetivo es una posterior
 proporcional a $p(x|\theta)p(\theta)$.
 
 
-Para entender porque funciona el algoritmo de Metrópolis hace falta entender $2$
-puntos, primero que la distribución objetivo es **estable**: si la probabilidad
-_actual_ de ubicarse en una posición coincide con la probabilidad en la 
-distribución objetivo, entonces el algoritmo preserva las probabilidades.
+Para entender porque funciona el algoritmo de Metrópolis hace falta entender $2$ puntos, el primero es que el proceso converge a la distribución objetivo. 
+Podemos ver, (en nuestro ejemplo sencillo) que sin importar el punto de inicio
+se alcanza la distribución objetivo.
 
 
 ``` r
 library(expm)
+# Cálculo de la matriz de transición
 transMat <- function(P){ # recibe vector de probabilidades no normalizado (o población)
     T <- matrix(0, length(P), length(P))
     n <- length(P - 1) # número de estados
@@ -598,26 +603,8 @@ transMat <- function(P){ # recibe vector de probabilidades no normalizado (o pob
     T
 }
 T <- transMat(islas$pob)
-w <- c(0, 1, rep(0, 8))
-t <- c(1:10, 20, 50, 100, 200, 1000, 5000)
-expT <- map_df(t, ~data.frame(t = ., w %*% (T %^% .)))
-expT_long <- expT %>%
-    gather(theta, P, -t) %>% 
-    mutate(theta = parse_number(theta))
-ggplot(expT_long, aes(x = theta, y = P)) +
-    geom_bar(stat = "identity", fill = "darkgray") + 
-    facet_wrap(~ t) +
-    scale_x_continuous(expression(theta), breaks = 1:10, limits = c(0, 11))
-```
 
-<img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" />
-
-El segundo punto es que el proceso converge a la distribución objetivo. 
-Podemos ver, (en nuestro ejemplo sencillo) que sin importar el punto de inicio
-se alcanza la distribución objetivo.
-
-
-``` r
+# probabilidad de estar en cada estado al paso 1, 10, 50, 100
 inicio_p <- function(i){
     w <- rep(0, 10)
     w[i] <- 1
@@ -634,13 +621,54 @@ ggplot(exp_t, aes(x = as.numeric(theta), y = P)) +
     scale_x_continuous(expression(theta), breaks = 1:10, limits = c(0, 11))
 ```
 
+<img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" />
+
+Para tener una intuición de porque converge a la distribución objetivo consideremos nuestro ejemplo y la probabilidad de moverse de una otra posición en dos islas adyacentes. Veremos que **las probabilidades de transición relativas coinciden con las probabilidades relativas de la distribución objetivo**. Si luego extrapolamos este resultado a todas las posiciones veremos que, a la larga, cada posición 
+se visitará proporcional a su valor en la distribución objetivo.
+
+Entonces, supongamos que estamos en la posición $\theta$, la probabilidad de moverse a
+$$\theta^´$$ es la probabilidad de proponer ese movimiento por la probabilidad de que se acepte:
+
+$$\frac{P(\theta \to \theta^´)}{P(\theta^´ \to \theta)} = \frac{0.5 \space min\{P(\theta^´)/P(\theta), 1\}}{0.5 \space min\{P(\theta)/P(\theta^´), 1\}} \\ = \left\{
+\begin{array}{l}
+\frac{1}{P(\theta)/P(\theta^´)} \text{ if }P(\theta^´)>P(\theta)   \\
+\frac {P(\theta^´)/P(\theta)}{1} \text{ if }P(\theta^´) < P(\theta)
+\end{array}
+\right. \\
+=P(\theta^´)/P(\theta)$$
+
+
+Esto es, a lo largo de las transiciones de un estado a otro las probabilidad
+relativa de las transiciones corresponde a los valores relativos de la
+distribución objetivo. Intuitivamente entonces, las posiciones adyacentes (en este ejemplo) se visitarán de forma proporcional a sus valores en la distribución objetivo.
+
+
+
+El segundo punto importante es que la distribución objetivo es **estable**: si la probabilidad _actual_ de ubicarse en una posición coincide con la probabilidad en la 
+distribución objetivo, entonces el algoritmo preserva las probabilidades.
+
+
+``` r
+w <- c(0, 1, rep(0, 8))
+t <- c(1:10, 20, 50, 100, 200, 1000, 5000)
+expT <- map_df(t, ~data.frame(t = ., w %*% (T %^% .)))
+expT_long <- expT %>%
+    gather(theta, P, -t) %>% 
+    mutate(theta = parse_number(theta))
+ggplot(expT_long, aes(x = theta, y = P)) +
+    geom_bar(stat = "identity", fill = "darkgray") + 
+    facet_wrap(~ t) +
+    scale_x_continuous(expression(theta), breaks = 1:10, limits = c(0, 11))
+```
+
 <img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" />
+
 
 
 
 ## Método de Metrópolis {-}
 
-En el método de Metrópolis, uno de los más antiguos, enunciémoslo en términos de la posterior $p(\theta|x) \propto p(\theta)p(x|\theta)$.
+El método de Metrópolis es uno de los más antiguos, enunciémoslo en términos de la posterior $p(\theta|x) \propto p(\theta)p(x|\theta)$.
 
 Comenzamos con un valor inicial de los parámetros $\theta^{(0)}$ en el soporte de $p(\theta|x)$, es decir $p(\theta^{(0)}|x)>0.$
 
@@ -657,7 +685,6 @@ corto en una dirección al azar para obtener una propuesta $\theta^* \sim q(\the
   regresamos a 1 para la siguiente iteración $i\leftarrow i + 1$. Si rechazamos
   el salto, ponemos entonces $\theta^{(i+1)}=\theta^{(i)}$ y regresamos a 1 para
   la siguiente iteración $i\leftarrow i + 1.$
-
 
 <div class="mathblock">
 <p>En este curso, escribiremos varios métodos de cadenas de Markov para
@@ -1754,6 +1781,7 @@ Y obtenemos un resultado similar a los anteriores.
     corregir por esta asimetría debemos calcular $\alpha$ como sigue:
     
     $$\alpha=\min\bigg\{ \frac{p(\theta^*)}{g(\theta^*|\theta^{(i)})} \cdot  \frac{g(\theta^{(i)}|\theta^*)}{p(\theta^{(i)})},1\bigg\}$$
+    
 La generalización de Metrópolis-Hastings puede resultar en algoritmos más 
 veloces.
 
@@ -1821,6 +1849,7 @@ estimaciones sean precisas y estables.
 
 En la práctica intentamos cumplir lo más posible estos objetivos, pues aunque en principio los métodos MCMC garantizan que una cadena infinitamente larga logrará  una representación perfecta, siempre debemos tener un criterio para cortar la cadena y evaluar la calidad de las simulaciones. 
 
+
 ### Representatividad {-}
 
 **Burn-in e iteraciones iniciales**- En primer lugar, en muchas ocasiones las condiciones iniciales de las
@@ -1853,6 +1882,10 @@ en su estado estable explorando la posterior. En la práctica, y
 con pocas iteraciones, puede ayudar un poco a mejorar la precisión
 numérica de las cantidades que queramos calcular.
 
+En Stan se utiliza el concepto de *warm-up* que se utiliza para afinación de los
+parámetros del muestreador. Lo diferencían de *burn-in* para enfatizar que 
+mas que "olvidar" el estado incial se trata de afinar el muestreador.
+
 
 ``` r
 sim_g <- sim_tbl %>% pivot_longer(-iter_num, 
@@ -1873,16 +1906,15 @@ todas + sin_burnin
 
 <img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" />
 
-
-
-
 **Convergencia a estado límite**. Para determinar la convergencia es conveniente
 realizar **más de una cadena**:  buscamos ver si realmente se ha olvidado el
 estado inicial, si las distribuciones de cada cadena son consistentes unas con
 otras, y revisar  que algunas cadenas no hayan quedado *atoradas* en regiones
 inusuales del espacio de parámetros.
 
-Inicializamos las cadenas con valores al azar en rangos
+### Diagnóstico: Trazas de cadenas
+
+Inicializamos varias cadenas con valores al azar en rangos
 razonables (por ejemplo simulando de la inicial):
 
 
@@ -1922,7 +1954,7 @@ ggplot(sims_tbl, aes(x = iter_num, y = sigma, colour = factor(cadena))) +
 
 Y este resultado se ve mejor. La parte *transición* hacia las zonas
 de alta probabilidad pasa antes de unas 1000 iteraciones. Podemos
-hacer más simulaciones, o eliminar como *burn-in* las primiras iteraciones:
+hacer más simulaciones, o eliminar como *burn-in* las primeras iteraciones:
 
 
 ``` r
@@ -1973,30 +2005,107 @@ sims_tbl %>%
 ## 1  176.  6.77
 ```
 
+<div class="mathblock">
+<p><strong>Traza de cadenas</strong></p>
+<p>El diagnóstico de traza consiste en graficar las cadenas de los
+parámetros en el orden de la iteración. Buscamos ver que:</p>
+<ol style="list-style-type: decimal">
+<li>Las cadenas no tienen tendencia o oscilaciones de frecuencia muy
+baja.</li>
+<li>Las cadenas no se atoran en valores específicos.</li>
+<li>Las distintas cadenas exploran de manera similar el espacio de
+parámetros.</li>
+</ol>
+<p>Cuando falla alguna de estas, en el mejor de los casos las cadenas
+son ineficientes (veremos que requerimos un número mucho mayor de
+iteraciones), y en el peor de los casos dan resultados sesgados que no
+son confiables.</p>
+</div>
 
 
+### Diagnóstico: valores R-hat {-}
 
+Cuando nuestro método de simulación converge a la distribución posterior, esperamos
+que las cadenas, durante todo su proceso, exploran la misma región del espacio
+de parámetros.
 
-Además de realizar gráficas podemos usar la medida de convergencia $\hat{R}$. La medida $\hat{R}$ se conoce como el **factor de reducción potencial de 
-escala** o *diagnóstico de convergencia de Gelman-Rubin*, esta es una estimación 
-de la posible reducción en la longitud de un intervalo de confianza si las 
-simulaciones continuaran infinitamente. $\hat{R}$ es aproximadamente la raíz 
-cuadrada de la varianza de todas las 
-cadenas juntas dividida entre la varianza dentro de cada cadena. Si $\hat{R}$ es
-mucho mayor a 1 esto indica que las cadenas no se han mezclado bien. Una regla
-usual es iterar hasta alcanzar un valor $\hat{R} \leq 1.1$ para todos los 
-parámetros.
+Podemos entonces considerar, para cada parámetro:
 
-$$\hat{R} \approx \sqrt{\frac{\hat{V}}{W}}$$
+- Cuánta variación hay en cada cadena.
+- Qué tan distintas son las cadenas entre ellas.
 
-donde $B$ es la varianza entre las cadenas, $W$ es la varianza dentro de las cadenas 
+Esperamos que la variación entre cadenas sea chica, y la variación dentro de cada cadena
+similar para todas las cadenas. Calculamos entonces un cociente de varianzas: la varianza
+total sobre todas las simulaciones de todas las cadenas, y el promedio de varianzas de las cadenas.
+Si las cadenas están explorando regiones similares, esperamos que este cociente de varianzas sea cercano a 1.
 
-$$B = \frac{N}{M-1}\sum_m (\hat{\theta}_m - \hat{\theta})^2$$
-$$W = \frac{1}{M}\sum_m \hat{\sigma}_m^2$$
+Escribiremos ahora esta idea para entender cómo se calculan estas cantidades. Supongamos
+que cada cadena se denota por $\theta_m$, para $M$ cadenas, y las iteraciones de cada cadena
+son $\theta_m^{(i)}$ para $i=1,\ldots, N$ iteraciones. Definimos
+(ver [el manual de Stan](https://mc-stan.org/docs/) por ejemplo) primero
+la varianza entre cadenas, que es:
 
-Y $\hat{V}$ es una estimación del varianza de posterior de $\theta$:
+$$B=\frac{N}{M-1}\sum_{m=1}^M (\bar{\theta}_m - \bar{\theta})^2$$
+donde $\bar{\theta}_m$ es el promedio de las iteraciones de la cadena $m$, y $\bar{\theta}$ es el promedio
+del las $\bar{\theta}_m$.
 
-$$\hat{V} = \frac{N-1}{N}W + \frac{M+1}{MN}B$$
+Definimos también la varianza dentro de las cadenas, que es el promedio de la varianza
+de cada cadena:
+
+$$W=\frac{1}{M}\sum_{m=1}^M \frac{1}{N-1}\sum_{i=1}^N (\theta_m^{(i)} - \bar{\theta}_m)^2$$
+Finalmente, la $R$-hat, o estadística de *potencial de reducción de escala*, es
+(para $N$ grande),
+
+$$\hat{R} = \sqrt{\frac{\frac{N-1}{N} W + \frac{1}{N} B}{W}}$$
+
+Buscamos entonces que este valor **sea cercano a 1**. Si es mayor a 1.05, es señal
+de posibles problemas de convergencia (pocas iteraciones u otras fallas en la convergencia).
+Si es menor que 1.01, generalmente decimos que "pasamos" esta prueba. Esto *no es garantía*
+de que la convergencia se ha alcanzado: la primera razón es que este diagnóstico, por ejemplo,
+sólo considera media y varianza, de forma que en principio podríamos pasar esta prueba aún 
+cuando las cadenas tengan comportamiento distinto en otras estadísticas de orden más alto
+(por ejemplo, una cadena que oscila poco y de vez en cuando salta a un atípico vs otra que
+tiene variación moderada pueden ser similares en medias y varianzas).
+
+En Stan, adicionalmente, se divide cada cadena en dos mitades, y el análisis se hace
+sobre $2M$ medias cadenas. Esto ayuda a detectar por ejemplo problemas donde una cadena
+sube y luego baja, por ejemplo, de modo que puede tener el mismo promedio que otras que exploran
+correctamente. 
+
+<div class="mathblock">
+<p><strong>Diagnóstico de R-hat</strong></p>
+<p>El diagnóstico de R-hat compara la varianza dentro de las cadenas y
+de cadena a cadena. Cuando este valor es relativamente grande (por
+ejemplo mayor a 1.05), es señal de que las cadenas no han explorado
+apropiadamente el espacio de parámetros (o decimos que no están
+“mezclando”). En general, buscamos que este valor sea menor a 1.02.</p>
+<p>Se llama también potencial de reducción a escala porque busca indicar
+cuánto se podría reducir la varianza de la distribución actual si
+dejáramos correr las cadenas por más iteraciones (pues a largo plazo no
+debe haber varianza entre cadenas).</p>
+</div>
+
+<!-- Además de realizar trazas podemos usar la medida de convergencia $\hat{R}$. La medida $\hat{R}$ se conoce como el **factor de reducción potencial de  -->
+<!-- escala** o *diagnóstico de convergencia de Gelman-Rubin*, esta es una estimación  -->
+<!-- de la posible reducción en la longitud de un intervalo de confianza si las  -->
+<!-- simulaciones continuaran infinitamente. $\hat{R}$ es aproximadamente la raíz  -->
+<!-- cuadrada de la varianza de todas las  -->
+<!-- cadenas juntas dividida entre la varianza dentro de cada cadena. Si $\hat{R}$ es -->
+<!-- mucho mayor a 1 esto indica que las cadenas no se han mezclado bien. Una regla -->
+<!-- usual es iterar hasta alcanzar un valor $\hat{R} \leq 1.1$ para todos los  -->
+<!-- parámetros. -->
+
+<!-- $$\hat{R} \approx \sqrt{\frac{\hat{V}}{W}}$$ -->
+
+<!-- donde $B$ es la varianza entre las cadenas, $W$ es la varianza dentro de las cadenas  -->
+
+<!-- $$B = \frac{N}{M-1}\sum_m (\hat{\theta}_m - \hat{\theta})^2$$ -->
+<!-- $$W = \frac{1}{M}\sum_m \hat{\sigma}_m^2$$ -->
+
+<!-- Y $\hat{V}$ es una estimación del varianza de posterior de $\theta$: -->
+
+<!-- $$\hat{V} = \frac{N-1}{N}W + \frac{M+1}{MN}B$$ -->
+
 #### Ejemplo {-}
 
 En nuestro ejemplo anterior, tenemos
@@ -2022,6 +2131,7 @@ sims_tbl %>%
 ## 1 mu        20000     4 1281.  4.29  4.37  1.01
 ## 2 sigma     20000     4  121.  1.31  1.32  1.00
 ```
+
 Y verificamos que los valores de $\hat{R}$ son cercanos a uno, lo
 cual indica que este diagnóstico es aceptable. Si hubiéramos
 trabajado con las primeras 300 iteraciones
@@ -2048,6 +2158,7 @@ sims_tbl %>%
 ## 1 mu          299     4 32334.  40.4 175.   2.08
 ## 2 sigma       299     4  7394.  11.9  42.8  1.89
 ```
+
 Y estos valores indican problemas en la convergencia de las cadenas. Es
 necesario diagnosticar el problema, que en este caso resolvemos
 incrementando el número de iteraciones.
@@ -2072,7 +2183,7 @@ autocorrelación chicos:
 acf(rgamma(1000,1,1))
 ```
 
-<img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-72-1.png" width="480" style="display: block; margin: auto;" />
+<img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-74-1.png" width="480" style="display: block; margin: auto;" />
 Sin embargo, los valores que simulamos tienen el siguiente perfil de
 autocorrelación:
 
@@ -2082,7 +2193,7 @@ sigma_metro_sims <- sims_tbl %>% filter(cadena==4) %>% pull(mu)
 acf(sigma_metro_sims)
 ```
 
-<img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-73-1.png" width="480" style="display: block; margin: auto;" />
+<img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-75-1.png" width="480" style="display: block; margin: auto;" />
 
 El tamaño efectivo de muestra nos dice qué tamaño de 
 muestra de observaciones independientes nos daría la misma información que las
