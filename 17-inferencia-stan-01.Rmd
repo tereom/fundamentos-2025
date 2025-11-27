@@ -12,7 +12,26 @@ En esta parte veremos cómo correr y diagnosticar en Stan varios ejemplos vistos
 library(cmdstanr)
 library(posterior)
 library(tidyverse)
+library(bayesplot)
 ```
+
+Hay dos pasos escenciales para hacer análisis con Stan: 1) Definir la estructura del modelo usando notacion de stan (recomendado hacerlo en un archivo de texto independiente) y 2)
+simular de la posterior. 
+
+Al definir la estructura debemos especificar 3 aspectos:
+
+1. Los datos (`data`): son las observaciones, a diferencia de R, stan es un lenguaje 
+ti hay cotas y la dimensión de los vectores o matrices.ros o reales, también establecemos
+si hay cotas y la dimensión de los vectores, matrices o valores.
+
+2. Los parámetrros (`parameters`) de los que depende el modelo, nuevamente especificando
+dimensión, si es acotado y el tipo de dato.
+parameters.
+
+3. El modelo (`model`), especificamos la verosimilitud y las inciales.
+
+
+Veamos el ejemplo beta biomial para la estimación de una proporción
 
 
 ## Estimación de una proporción {-}
@@ -58,32 +77,86 @@ ajuste$summary()
 Donde verificamos que el tamaño de muestra efectivo (ess) y el diagnóstico de
 $\hat{R}$ son apropiados.
 
+Adicional a los bloques de data, parameters y model hay opciones que nos dan 
+más funcionalidad, por ejemplo `generated quantities`. Este bloque se puede utlizar 
+para simular de una distribución dada (como abajo), de la predictiva posterior o 
+para transformar la salida. Corre después de cada iteración.
+
+Usémoslo para simular de la incial.
+
+```{r, message=FALSE}
+archivo_stan <- file.path("stan/modelo-1b.stan")
+# compilar
+mod <- cmdstan_model(archivo_stan)
+```
+
+
+```{r, message=FALSE}
+mod
+```
+
 Podemos ver las cadenas de la siguiente forma:
 
 ```{r}
-theta_tbl <- ajuste$draws(c("theta", "theta_inicial")) %>% as_draws_df()
+ajuste <- mod$sample(
+  data = datos_lista,
+  seed = 1234,
+  chains = 4,
+  parallel_chains = 4,
+  refresh = 500)
+
+theta_tbl <- ajuste$draws(c("theta", "theta_inicial")) |> as_draws_df()
+
+# Podemos graficar manual 
 ggplot(theta_tbl, aes(x = .iteration, y = theta)) +
   geom_line() +
   facet_wrap(~.chain, ncol = 1)
+
+# O podemos usar las funciones del paquete bayesplot
+# mcmc_trace(ajuste$draws(c("theta")))
 ```
 
 Y replicamos la gráfica de las notas haciendo:
 
 ```{r, fig.width=6, fig.height = 4}
-sims_tbl <- theta_tbl %>% pivot_longer(theta:theta_inicial, names_to = "dist", values_to = "theta")
+mcmc_dens(bb_sim, pars = "pi") + 
+  yaxis_text(TRUE) + 
+  ylab("density")
+
+sims_tbl <- theta_tbl |> pivot_longer(theta:theta_inicial, names_to = "dist", values_to = "theta")
 ggplot(sims_tbl, aes(x = theta, fill = dist)) + 
   geom_histogram(aes(x = theta), bins = 30, alpha = 0.5, position = "identity")
 ```
+
+Nota, hay muchas funciones útiles en `bayesplot`.
+
+```{r, fig.width=5, fig.height = 3.5}
+# Histogramas y densidades
+mcmc_hist(ajuste$draws(c("theta", "theta_inicial"))) + 
+  yaxis_text(TRUE) + 
+  ylab("count")
+mcmc_dens(ajuste$draws(), pars = c("theta", "theta_inicial")) + 
+  yaxis_text(TRUE) + 
+  ylab("density")
+
+# Densidades por cadena
+mcmc_dens_overlay(ajuste$draws(c("theta", "theta_inicial"))) + 
+  ylab("count")
+
+# ACF
+mcmc_acf(ajuste$draws(c("theta", "theta_inicial"))) 
+```
+
 
 ## Estimación del máximo de una uniforme {-}
 
 Tomamos el ejemplo de los boletos de lotería,
 
 ```{r}
-loteria_tbl <- read_csv("data/nums_loteria_avion.csv", col_names = c("id", "numero")) %>% 
+loteria_tbl <- read_csv("data/nums_loteria_avion.csv", col_names = c("id", "numero")) |> 
   mutate(numero = as.integer(numero))
 set.seed(334)
-muestra_loteria <- sample_n(loteria_tbl, 25) %>% 
+muestra_loteria <- sample_n(loteria_tbl, 25) |> 
   mutate(numero = numero/1000)
 ```
 
@@ -128,7 +201,7 @@ resumen
 El intervalo 95% que obtenemos es:
 
 ```{r}
-ajuste$draws("theta") %>% as_draws_df() %>% 
+ajuste$draws("theta") |> as_draws_df() |> 
   summarise(theta_inf = quantile(theta, 0.025), 
             theta_mediana = quantile(theta, 0.5),
             theta_sup = quantile(theta, 0.975))
@@ -177,7 +250,8 @@ resumen
 El intervalo 95% que obtenemos es:
 
 ```{r}
-ajuste$draws("theta") %>% as_draws_df() %>% 
+ajuste$draws("theta") |> 
+  as_draws_df() |> 
   summarise(theta_inf = quantile(theta, 0.025), 
             theta_mediana = quantile(theta, 0.5),
             theta_sup = quantile(theta, 0.975))
@@ -186,8 +260,9 @@ ajuste$draws("theta") %>% as_draws_df() %>%
 Y la posterior se ve como sigue:
 
 ```{r}
-theta_post_sim <- ajuste$draws("theta") %>% as.numeric
-qplot(theta_post_sim)
+theta_post_sim <- ajuste$draws("theta") |> as_draws_df()
+ggplot(theta_post_sim, aes(x = theta)) +
+  geom_histogram()
 ```
 
 ## Ejemplo de cantantes {-}
@@ -210,9 +285,9 @@ Pasamos datos y muestreamos
 
 ```{r}
 set.seed(3413)
-cantantes <- lattice::singer %>% 
-  mutate(estatura_cm = (2.54 * height)) %>% 
-  filter(str_detect(voice.part, "Tenor")) %>% 
+cantantes <- lattice::singer |> 
+  mutate(estatura_cm = (2.54 * height)) |> 
+  filter(str_detect(voice.part, "Tenor")) |> 
   sample_n(20)
 datos_lista <- list(n = nrow(cantantes), y = cantantes$estatura_cm)
 ajuste <- mod$sample(
@@ -240,7 +315,7 @@ resumen
 El intervalo 95% que obtenemos es:
 
 ```{r}
-ajuste$draws(c("mu", "sigma")) %>% as_draws_df() %>% 
+ajuste$draws(c("mu", "sigma")) |> as_draws_df() |> 
 ggplot(aes(x = mu, y = sigma)) + geom_point(alpha = 0.1) +
   coord_equal()
 ```
@@ -249,12 +324,10 @@ ggplot(aes(x = mu, y = sigma)) + geom_point(alpha = 0.1) +
 Y ahora extraemos algunas replicaciones de la posterior predictiva:
 
 ```{r}
-y_sim_tbl <- ajuste$draws("y_sim") %>% as_draws_df() %>% 
-  pivot_longer(cols = starts_with("y_sim"), "nombre") %>% 
-  separate(nombre, c("nombre", "n_obs", "vacio"), "[\\[\\]]") %>% 
-  select(-nombre, -vacio) %>% 
-  filter(.chain == 1, .iteration < 12) %>% 
-  select(.iteration, value) %>% 
+y_sim_tbl <- ajuste$draws("y_sim") |> as_draws_df() |> 
+  pivot_longer(cols = starts_with("y_sim")) |> 
+  filter(.chain == 1, .iteration < 12) |> 
+  select(.iteration, value) |> 
   bind_rows(tibble(.iteration = 12, value = round(cantantes$estatura_cm, 0)))
 ggplot(y_sim_tbl, aes(sample = value)) +
   geom_qq() +
@@ -321,7 +394,7 @@ resumen
 
 ```{r}
 sims_theta_tbl <- 
-  ajuste$draws(c("theta_azar", "theta_corr")) %>% 
+  ajuste$draws(c("theta_azar", "theta_corr")) |> 
   as_draws_df()  
 ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
@@ -376,7 +449,7 @@ ajuste$cmdstan_diagnose()
 
 ```{r}
 sims_theta_tbl <- 
-  ajuste$draws(c("theta_azar", "theta_corr")) %>% 
+  ajuste$draws(c("theta_azar", "theta_corr")) |> 
   as_draws_df()  
 ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
@@ -415,7 +488,7 @@ No tenemos problemas numéricos, y la posterior se ve como sigue:
 
 ```{r}
 sims_theta_tbl <- 
-  ajuste$draws(c("theta_azar", "theta_corr")) %>% 
+  ajuste$draws(c("theta_azar", "theta_corr")) |> 
   as_draws_df()  
 ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
