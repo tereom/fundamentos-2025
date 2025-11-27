@@ -67,23 +67,23 @@ slice_sample(propinas, n = 10) |> gt()
 ```
 
 ```{=html}
-<div id="fsnqqojrfn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fsnqqojrfn table {
+<div id="vggunmnpmm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vggunmnpmm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fsnqqojrfn thead, #fsnqqojrfn tbody, #fsnqqojrfn tfoot, #fsnqqojrfn tr, #fsnqqojrfn td, #fsnqqojrfn th {
+#vggunmnpmm thead, #vggunmnpmm tbody, #vggunmnpmm tfoot, #vggunmnpmm tr, #vggunmnpmm td, #vggunmnpmm th {
   border-style: none;
 }
 
-#fsnqqojrfn p {
+#vggunmnpmm p {
   margin: 0;
   padding: 0;
 }
 
-#fsnqqojrfn .gt_table {
+#vggunmnpmm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -109,12 +109,12 @@ slice_sample(propinas, n = 10) |> gt()
   border-left-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_caption {
+#vggunmnpmm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fsnqqojrfn .gt_title {
+#vggunmnpmm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -126,7 +126,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-bottom-width: 0;
 }
 
-#fsnqqojrfn .gt_subtitle {
+#vggunmnpmm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -138,7 +138,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-top-width: 0;
 }
 
-#fsnqqojrfn .gt_heading {
+#vggunmnpmm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -150,13 +150,13 @@ slice_sample(propinas, n = 10) |> gt()
   border-right-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_bottom_border {
+#vggunmnpmm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_col_headings {
+#vggunmnpmm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -171,7 +171,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-right-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_col_heading {
+#vggunmnpmm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -191,7 +191,7 @@ slice_sample(propinas, n = 10) |> gt()
   overflow-x: hidden;
 }
 
-#fsnqqojrfn .gt_column_spanner_outer {
+#vggunmnpmm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -203,15 +203,15 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 4px;
 }
 
-#fsnqqojrfn .gt_column_spanner_outer:first-child {
+#vggunmnpmm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fsnqqojrfn .gt_column_spanner_outer:last-child {
+#vggunmnpmm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fsnqqojrfn .gt_column_spanner {
+#vggunmnpmm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -223,11 +223,11 @@ slice_sample(propinas, n = 10) |> gt()
   width: 100%;
 }
 
-#fsnqqojrfn .gt_spanner_row {
+#vggunmnpmm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fsnqqojrfn .gt_group_heading {
+#vggunmnpmm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -253,7 +253,7 @@ slice_sample(propinas, n = 10) |> gt()
   text-align: left;
 }
 
-#fsnqqojrfn .gt_empty_group_heading {
+#vggunmnpmm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -268,15 +268,15 @@ slice_sample(propinas, n = 10) |> gt()
   vertical-align: middle;
 }
 
-#fsnqqojrfn .gt_from_md > :first-child {
+#vggunmnpmm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fsnqqojrfn .gt_from_md > :last-child {
+#vggunmnpmm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fsnqqojrfn .gt_row {
+#vggunmnpmm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -295,7 +295,7 @@ slice_sample(propinas, n = 10) |> gt()
   overflow-x: hidden;
 }
 
-#fsnqqojrfn .gt_stub {
+#vggunmnpmm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -308,7 +308,7 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#fsnqqojrfn .gt_stub_row_group {
+#vggunmnpmm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -322,15 +322,15 @@ slice_sample(propinas, n = 10) |> gt()
   vertical-align: top;
 }
 
-#fsnqqojrfn .gt_row_group_first td {
+#vggunmnpmm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fsnqqojrfn .gt_row_group_first th {
+#vggunmnpmm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fsnqqojrfn .gt_summary_row {
+#vggunmnpmm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -340,16 +340,16 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#fsnqqojrfn .gt_first_summary_row {
+#vggunmnpmm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_first_summary_row.thick {
+#vggunmnpmm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fsnqqojrfn .gt_last_summary_row {
+#vggunmnpmm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -359,7 +359,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-bottom-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_grand_summary_row {
+#vggunmnpmm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -369,7 +369,7 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#fsnqqojrfn .gt_first_grand_summary_row {
+#vggunmnpmm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -379,7 +379,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-top-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_last_grand_summary_row_top {
+#vggunmnpmm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -389,11 +389,11 @@ slice_sample(propinas, n = 10) |> gt()
   border-bottom-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_striped {
+#vggunmnpmm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fsnqqojrfn .gt_table_body {
+#vggunmnpmm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -402,7 +402,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-bottom-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_footnotes {
+#vggunmnpmm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -416,7 +416,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-right-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_footnote {
+#vggunmnpmm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -425,7 +425,7 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#fsnqqojrfn .gt_sourcenotes {
+#vggunmnpmm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -439,7 +439,7 @@ slice_sample(propinas, n = 10) |> gt()
   border-right-color: #D3D3D3;
 }
 
-#fsnqqojrfn .gt_sourcenote {
+#vggunmnpmm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -447,72 +447,72 @@ slice_sample(propinas, n = 10) |> gt()
   padding-right: 5px;
 }
 
-#fsnqqojrfn .gt_left {
+#vggunmnpmm .gt_left {
   text-align: left;
 }
 
-#fsnqqojrfn .gt_center {
+#vggunmnpmm .gt_center {
   text-align: center;
 }
 
-#fsnqqojrfn .gt_right {
+#vggunmnpmm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fsnqqojrfn .gt_font_normal {
+#vggunmnpmm .gt_font_normal {
   font-weight: normal;
 }
 
-#fsnqqojrfn .gt_font_bold {
+#vggunmnpmm .gt_font_bold {
   font-weight: bold;
 }
 
-#fsnqqojrfn .gt_font_italic {
+#vggunmnpmm .gt_font_italic {
   font-style: italic;
 }
 
-#fsnqqojrfn .gt_super {
+#vggunmnpmm .gt_super {
   font-size: 65%;
 }
 
-#fsnqqojrfn .gt_footnote_marks {
+#vggunmnpmm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fsnqqojrfn .gt_asterisk {
+#vggunmnpmm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fsnqqojrfn .gt_indent_1 {
+#vggunmnpmm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fsnqqojrfn .gt_indent_2 {
+#vggunmnpmm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fsnqqojrfn .gt_indent_3 {
+#vggunmnpmm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fsnqqojrfn .gt_indent_4 {
+#vggunmnpmm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fsnqqojrfn .gt_indent_5 {
+#vggunmnpmm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fsnqqojrfn .katex-display {
+#vggunmnpmm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fsnqqojrfn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vggunmnpmm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -528,64 +528,64 @@ slice_sample(propinas, n = 10) |> gt()
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="cuenta_total" class="gt_row gt_right">32.40</td>
-<td headers="propina" class="gt_row gt_right">6.00</td>
-<td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Dom</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">38.73</td>
-<td headers="propina" class="gt_row gt_right">3.00</td>
-<td headers="fumador" class="gt_row gt_left">Si</td>
-<td headers="dia" class="gt_row gt_left">Sab</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">35.83</td>
-<td headers="propina" class="gt_row gt_right">4.67</td>
-<td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Sab</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">3</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">20.76</td>
-<td headers="propina" class="gt_row gt_right">2.24</td>
-<td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Dom</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">2</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">12.46</td>
-<td headers="propina" class="gt_row gt_right">1.50</td>
-<td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Vie</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">2</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">9.94</td>
-<td headers="propina" class="gt_row gt_right">1.56</td>
-<td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Dom</td>
-<td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">2</td></tr>
     <tr><td headers="cuenta_total" class="gt_row gt_right">17.47</td>
 <td headers="propina" class="gt_row gt_right">3.50</td>
 <td headers="fumador" class="gt_row gt_left">No</td>
 <td headers="dia" class="gt_row gt_left">Jue</td>
 <td headers="momento" class="gt_row gt_left">Comida</td>
 <td headers="num_personas" class="gt_row gt_right">2</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">29.93</td>
-<td headers="propina" class="gt_row gt_right">5.07</td>
-<td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Dom</td>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">10.59</td>
+<td headers="propina" class="gt_row gt_right">1.61</td>
+<td headers="fumador" class="gt_row gt_left">Si</td>
+<td headers="dia" class="gt_row gt_left">Sab</td>
 <td headers="momento" class="gt_row gt_left">Cena</td>
-<td headers="num_personas" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">24.55</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">13.81</td>
+<td headers="propina" class="gt_row gt_right">2.00</td>
+<td headers="fumador" class="gt_row gt_left">Si</td>
+<td headers="dia" class="gt_row gt_left">Sab</td>
+<td headers="momento" class="gt_row gt_left">Cena</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">11.38</td>
 <td headers="propina" class="gt_row gt_right">2.00</td>
 <td headers="fumador" class="gt_row gt_left">No</td>
+<td headers="dia" class="gt_row gt_left">Jue</td>
+<td headers="momento" class="gt_row gt_left">Comida</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">11.69</td>
+<td headers="propina" class="gt_row gt_right">2.31</td>
+<td headers="fumador" class="gt_row gt_left">No</td>
+<td headers="dia" class="gt_row gt_left">Jue</td>
+<td headers="momento" class="gt_row gt_left">Comida</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">17.46</td>
+<td headers="propina" class="gt_row gt_right">2.54</td>
+<td headers="fumador" class="gt_row gt_left">No</td>
+<td headers="dia" class="gt_row gt_left">Dom</td>
+<td headers="momento" class="gt_row gt_left">Cena</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">26.88</td>
+<td headers="propina" class="gt_row gt_right">3.12</td>
+<td headers="fumador" class="gt_row gt_left">No</td>
 <td headers="dia" class="gt_row gt_left">Dom</td>
 <td headers="momento" class="gt_row gt_left">Cena</td>
 <td headers="num_personas" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="cuenta_total" class="gt_row gt_right">17.07</td>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">12.66</td>
+<td headers="propina" class="gt_row gt_right">2.50</td>
+<td headers="fumador" class="gt_row gt_left">No</td>
+<td headers="dia" class="gt_row gt_left">Dom</td>
+<td headers="momento" class="gt_row gt_left">Cena</td>
+<td headers="num_personas" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">15.98</td>
 <td headers="propina" class="gt_row gt_right">3.00</td>
 <td headers="fumador" class="gt_row gt_left">No</td>
-<td headers="dia" class="gt_row gt_left">Sab</td>
+<td headers="dia" class="gt_row gt_left">Vie</td>
+<td headers="momento" class="gt_row gt_left">Comida</td>
+<td headers="num_personas" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="cuenta_total" class="gt_row gt_right">28.55</td>
+<td headers="propina" class="gt_row gt_right">2.05</td>
+<td headers="fumador" class="gt_row gt_left">No</td>
+<td headers="dia" class="gt_row gt_left">Dom</td>
 <td headers="momento" class="gt_row gt_left">Cena</td>
 <td headers="num_personas" class="gt_row gt_right">3</td></tr>
   </tbody>
@@ -633,23 +633,23 @@ bind_rows(head(cuenta), tail(cuenta)) |>
 ```
 
 ```{=html}
-<div id="elnxehpuij" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#elnxehpuij table {
+<div id="jjzsorgqor" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jjzsorgqor table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#elnxehpuij thead, #elnxehpuij tbody, #elnxehpuij tfoot, #elnxehpuij tr, #elnxehpuij td, #elnxehpuij th {
+#jjzsorgqor thead, #jjzsorgqor tbody, #jjzsorgqor tfoot, #jjzsorgqor tr, #jjzsorgqor td, #jjzsorgqor th {
   border-style: none;
 }
 
-#elnxehpuij p {
+#jjzsorgqor p {
   margin: 0;
   padding: 0;
 }
 
-#elnxehpuij .gt_table {
+#jjzsorgqor .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -675,12 +675,12 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-left-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_caption {
+#jjzsorgqor .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#elnxehpuij .gt_title {
+#jjzsorgqor .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -692,7 +692,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-bottom-width: 0;
 }
 
-#elnxehpuij .gt_subtitle {
+#jjzsorgqor .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -704,7 +704,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-top-width: 0;
 }
 
-#elnxehpuij .gt_heading {
+#jjzsorgqor .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -716,13 +716,13 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-right-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_bottom_border {
+#jjzsorgqor .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_col_headings {
+#jjzsorgqor .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -737,7 +737,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-right-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_col_heading {
+#jjzsorgqor .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -757,7 +757,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   overflow-x: hidden;
 }
 
-#elnxehpuij .gt_column_spanner_outer {
+#jjzsorgqor .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -769,15 +769,15 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 4px;
 }
 
-#elnxehpuij .gt_column_spanner_outer:first-child {
+#jjzsorgqor .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#elnxehpuij .gt_column_spanner_outer:last-child {
+#jjzsorgqor .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#elnxehpuij .gt_column_spanner {
+#jjzsorgqor .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -789,11 +789,11 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   width: 100%;
 }
 
-#elnxehpuij .gt_spanner_row {
+#jjzsorgqor .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#elnxehpuij .gt_group_heading {
+#jjzsorgqor .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -819,7 +819,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   text-align: left;
 }
 
-#elnxehpuij .gt_empty_group_heading {
+#jjzsorgqor .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -834,15 +834,15 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   vertical-align: middle;
 }
 
-#elnxehpuij .gt_from_md > :first-child {
+#jjzsorgqor .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#elnxehpuij .gt_from_md > :last-child {
+#jjzsorgqor .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#elnxehpuij .gt_row {
+#jjzsorgqor .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -861,7 +861,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   overflow-x: hidden;
 }
 
-#elnxehpuij .gt_stub {
+#jjzsorgqor .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -874,7 +874,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#elnxehpuij .gt_stub_row_group {
+#jjzsorgqor .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -888,15 +888,15 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   vertical-align: top;
 }
 
-#elnxehpuij .gt_row_group_first td {
+#jjzsorgqor .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#elnxehpuij .gt_row_group_first th {
+#jjzsorgqor .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#elnxehpuij .gt_summary_row {
+#jjzsorgqor .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -906,16 +906,16 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#elnxehpuij .gt_first_summary_row {
+#jjzsorgqor .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_first_summary_row.thick {
+#jjzsorgqor .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#elnxehpuij .gt_last_summary_row {
+#jjzsorgqor .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -925,7 +925,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-bottom-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_grand_summary_row {
+#jjzsorgqor .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -935,7 +935,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#elnxehpuij .gt_first_grand_summary_row {
+#jjzsorgqor .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -945,7 +945,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-top-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_last_grand_summary_row_top {
+#jjzsorgqor .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -955,11 +955,11 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-bottom-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_striped {
+#jjzsorgqor .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#elnxehpuij .gt_table_body {
+#jjzsorgqor .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -968,7 +968,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-bottom-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_footnotes {
+#jjzsorgqor .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -982,7 +982,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-right-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_footnote {
+#jjzsorgqor .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -991,7 +991,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#elnxehpuij .gt_sourcenotes {
+#jjzsorgqor .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1005,7 +1005,7 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   border-right-color: #D3D3D3;
 }
 
-#elnxehpuij .gt_sourcenote {
+#jjzsorgqor .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1013,72 +1013,72 @@ bind_rows(head(cuenta), tail(cuenta)) |>
   padding-right: 5px;
 }
 
-#elnxehpuij .gt_left {
+#jjzsorgqor .gt_left {
   text-align: left;
 }
 
-#elnxehpuij .gt_center {
+#jjzsorgqor .gt_center {
   text-align: center;
 }
 
-#elnxehpuij .gt_right {
+#jjzsorgqor .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#elnxehpuij .gt_font_normal {
+#jjzsorgqor .gt_font_normal {
   font-weight: normal;
 }
 
-#elnxehpuij .gt_font_bold {
+#jjzsorgqor .gt_font_bold {
   font-weight: bold;
 }
 
-#elnxehpuij .gt_font_italic {
+#jjzsorgqor .gt_font_italic {
   font-style: italic;
 }
 
-#elnxehpuij .gt_super {
+#jjzsorgqor .gt_super {
   font-size: 65%;
 }
 
-#elnxehpuij .gt_footnote_marks {
+#jjzsorgqor .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#elnxehpuij .gt_asterisk {
+#jjzsorgqor .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#elnxehpuij .gt_indent_1 {
+#jjzsorgqor .gt_indent_1 {
   text-indent: 5px;
 }
 
-#elnxehpuij .gt_indent_2 {
+#jjzsorgqor .gt_indent_2 {
   text-indent: 10px;
 }
 
-#elnxehpuij .gt_indent_3 {
+#jjzsorgqor .gt_indent_3 {
   text-indent: 15px;
 }
 
-#elnxehpuij .gt_indent_4 {
+#jjzsorgqor .gt_indent_4 {
   text-indent: 20px;
 }
 
-#elnxehpuij .gt_indent_5 {
+#jjzsorgqor .gt_indent_5 {
   text-indent: 25px;
 }
 
-#elnxehpuij .katex-display {
+#jjzsorgqor .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#elnxehpuij div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jjzsorgqor div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

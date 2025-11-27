@@ -1072,6 +1072,7 @@ log_p <- crear_log_posterior_norm(cantantes$estatura_cm, mu_0, n_0, a, b)
 log_post <- function(pars) { log_p(pars[1], pars[2]) }
 set.seed(823)
 metro_normal <- crear_metropolis(log_post, sigma_salto = 0.5)
+
 sim_tbl <- metro_normal(c(mu = 172, sigma = 3), 50000) 
 ggplot(sim_tbl %>% filter(iter_num < 100), 
        aes(x = mu, y = sigma)) + 
@@ -1830,8 +1831,7 @@ propuestas suelen ser más eficientes, y por consiguiente no necesita muestras
 tan grandes. En particular cuando se ajustan modelos grandes y complejos (por 
 ejemplo, con variables con correlación alta) HMC supera a otros.
 
-
-
+En el *Apéndice III* se introduce Monte Carlo Hamiltoniano.
 
 
 ## Diagnósticos generales para MCMC {-}

@@ -1190,11 +1190,12 @@ Sabemos como calcular la posterior:</p>
 <span id="cb607-2"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-2" aria-hidden="true" tabindex="-1"></a>log_post <span class="ot">&lt;-</span> <span class="cf">function</span>(pars) { <span class="fu">log_p</span>(pars[<span class="dv">1</span>], pars[<span class="dv">2</span>]) }</span>
 <span id="cb607-3"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">823</span>)</span>
 <span id="cb607-4"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-4" aria-hidden="true" tabindex="-1"></a>metro_normal <span class="ot">&lt;-</span> <span class="fu">crear_metropolis</span>(log_post, <span class="at">sigma_salto =</span> <span class="fl">0.5</span>)</span>
-<span id="cb607-5"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-5" aria-hidden="true" tabindex="-1"></a>sim_tbl <span class="ot">&lt;-</span> <span class="fu">metro_normal</span>(<span class="fu">c</span>(<span class="at">mu =</span> <span class="dv">172</span>, <span class="at">sigma =</span> <span class="dv">3</span>), <span class="dv">50000</span>) </span>
-<span id="cb607-6"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sim_tbl <span class="sc">%&gt;%</span> <span class="fu">filter</span>(iter_num <span class="sc">&lt;</span> <span class="dv">100</span>), </span>
-<span id="cb607-7"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> mu, <span class="at">y =</span> sigma)) <span class="sc">+</span> </span>
-<span id="cb607-8"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
-<span id="cb607-9"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<span id="cb607-5"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb607-6"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-6" aria-hidden="true" tabindex="-1"></a>sim_tbl <span class="ot">&lt;-</span> <span class="fu">metro_normal</span>(<span class="fu">c</span>(<span class="at">mu =</span> <span class="dv">172</span>, <span class="at">sigma =</span> <span class="dv">3</span>), <span class="dv">50000</span>) </span>
+<span id="cb607-7"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sim_tbl <span class="sc">%&gt;%</span> <span class="fu">filter</span>(iter_num <span class="sc">&lt;</span> <span class="dv">100</span>), </span>
+<span id="cb607-8"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> mu, <span class="at">y =</span> sigma)) <span class="sc">+</span> </span>
+<span id="cb607-9"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb607-10"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb607-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="16-bayes-mcmc_files/figure-html/unnamed-chunk-33-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>Y ahora vemos todas las simulaciones:</p>
 <div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="métodos-de-cadenas-de-markov-monte-carlo.html#cb608-1" aria-hidden="true" tabindex="-1"></a>g_normal <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sim_tbl, <span class="fu">aes</span>(<span class="at">x =</span> mu, <span class="at">y =</span> sigma)) <span class="sc">+</span> </span>
@@ -1708,6 +1709,7 @@ es computacionalmente más costoso que Metrópolis o Gibbs, sin embargo, sus
 propuestas suelen ser más eficientes, y por consiguiente no necesita muestras
 tan grandes. En particular cuando se ajustan modelos grandes y complejos (por
 ejemplo, con variables con correlación alta) HMC supera a otros.</p>
+<p>En el <em>Apéndice III</em> se introduce Monte Carlo Hamiltoniano.</p>
 </div>
 <div id="diagnósticos-generales-para-mcmc" class="section level2 unnumbered hasAnchor">
 <h2>Diagnósticos generales para MCMC<a href="métodos-de-cadenas-de-markov-monte-carlo.html#diagnósticos-generales-para-mcmc" class="anchor-section" aria-label="Anchor link to header"></a></h2>

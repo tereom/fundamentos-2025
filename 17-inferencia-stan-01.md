@@ -11,7 +11,30 @@ En esta parte veremos cómo correr y diagnosticar en Stan varios ejemplos vistos
 library(cmdstanr)
 library(posterior)
 library(tidyverse)
+library(bayesplot)
 ```
+
+```
+## Error in library(bayesplot): there is no package called 'bayesplot'
+```
+
+Hay dos pasos escenciales para hacer análisis con Stan: 1) Definir la estructura del modelo usando notacion de stan (recomendado hacerlo en un archivo de texto independiente) y 2)
+simular de la posterior. 
+
+Al definir la estructura debemos especificar 3 aspectos:
+
+1. Los datos (`data`): son las observaciones, a diferencia de R, stan es un lenguaje 
+ti hay cotas y la dimensión de los vectores o matrices.ros o reales, también establecemos
+si hay cotas y la dimensión de los vectores, matrices o valores.
+
+2. Los parámetrros (`parameters`) de los que depende el modelo, nuevamente especificando
+dimensión, si es acotado y el tipo de dato.
+parameters.
+
+3. El modelo (`model`), especificamos la verosimilitud y las inciales.
+
+
+Veamos el ejemplo beta biomial para la estimación de una proporción
 
 
 ## Estimación de una proporción {-}
@@ -148,23 +171,133 @@ ajuste$summary()
 Donde verificamos que el tamaño de muestra efectivo (ess) y el diagnóstico de
 $\hat{R}$ son apropiados.
 
+Adicional a los bloques de data, parameters y model hay opciones que nos dan 
+más funcionalidad, por ejemplo `generated quantities`. Este bloque se puede utlizar 
+para simular de una distribución dada (como abajo), de la predictiva posterior o 
+para transformar la salida. Corre después de cada iteración.
+
+Usémoslo para simular de la incial.
+
+
+``` r
+archivo_stan <- file.path("stan/modelo-1b.stan")
+# compilar
+mod <- cmdstan_model(archivo_stan)
+```
+
+```
+## Error in initialize(...): Assertion on 'stan_file' failed: File does not exist: 'stan/modelo-1b.stan'.
+```
+
+
+
+``` r
+mod
+```
+
+```
+## // Ejemplo de estimación de una proporcion
+## data {
+##   int n; // número de pruebas
+##   int y; //numero de éxitos y fracasos
+## }
+## 
+## parameters {
+##   real<lower=0,upper=1> theta;
+## }
+## 
+## model {
+##   // inicial
+##   theta ~ beta(3, 3);
+##   y ~ binomial(n, theta);
+## }
+## 
+## generated quantities {
+##   real theta_inicial;
+##   theta_inicial = beta_rng(3, 3);
+## }
+```
+
 Podemos ver las cadenas de la siguiente forma:
 
 
 ``` r
-theta_tbl <- ajuste$draws(c("theta", "theta_inicial")) %>% as_draws_df()
+ajuste <- mod$sample(
+  data = datos_lista,
+  seed = 1234,
+  chains = 4,
+  parallel_chains = 4,
+  refresh = 500)
+```
+
+```
+## Running MCMC with 4 parallel chains...
+## 
+## Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+## Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+## Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+## Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
+## Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
+## Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+## Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+## Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+## Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+## Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
+## Chain 3 Iteration:    1 / 2000 [  0%]  (Warmup) 
+## Chain 3 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+## Chain 3 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+## Chain 3 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+## Chain 3 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+## Chain 3 Iteration: 2000 / 2000 [100%]  (Sampling) 
+## Chain 4 Iteration:    1 / 2000 [  0%]  (Warmup) 
+## Chain 4 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+## Chain 4 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+## Chain 4 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+## Chain 4 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+## Chain 4 Iteration: 2000 / 2000 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Chain 2 finished in 0.0 seconds.
+## Chain 3 finished in 0.0 seconds.
+## Chain 4 finished in 0.0 seconds.
+## 
+## All 4 chains finished successfully.
+## Mean chain execution time: 0.0 seconds.
+## Total execution time: 0.2 seconds.
+```
+
+``` r
+theta_tbl <- ajuste$draws(c("theta", "theta_inicial")) |> as_draws_df()
+
+# Podemos graficar manual 
 ggplot(theta_tbl, aes(x = .iteration, y = theta)) +
   geom_line() +
   facet_wrap(~.chain, ncol = 1)
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+``` r
+# O podemos usar las funciones del paquete bayesplot
+# mcmc_trace(ajuste$draws(c("theta")))
+```
 
 Y replicamos la gráfica de las notas haciendo:
 
 
 ``` r
-sims_tbl <- theta_tbl %>% pivot_longer(theta:theta_inicial, names_to = "dist", values_to = "theta")
+mcmc_dens(bb_sim, pars = "pi") + 
+  yaxis_text(TRUE) + 
+  ylab("density")
+```
+
+```
+## Error in mcmc_dens(bb_sim, pars = "pi"): could not find function "mcmc_dens"
+```
+
+``` r
+sims_tbl <- theta_tbl |> pivot_longer(theta:theta_inicial, names_to = "dist", values_to = "theta")
 ```
 
 ```
@@ -176,7 +309,51 @@ ggplot(sims_tbl, aes(x = theta, fill = dist)) +
   geom_histogram(aes(x = theta), bins = 30, alpha = 0.5, position = "identity")
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-9-1.png" width="576" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-11-1.png" width="576" />
+
+Nota, hay muchas funciones útiles en `bayesplot`.
+
+
+``` r
+# Histogramas y densidades
+mcmc_hist(ajuste$draws(c("theta", "theta_inicial"))) + 
+  yaxis_text(TRUE) + 
+  ylab("count")
+```
+
+```
+## Error in mcmc_hist(ajuste$draws(c("theta", "theta_inicial"))): could not find function "mcmc_hist"
+```
+
+``` r
+mcmc_dens(ajuste$draws(), pars = c("theta", "theta_inicial")) + 
+  yaxis_text(TRUE) + 
+  ylab("density")
+```
+
+```
+## Error in mcmc_dens(ajuste$draws(), pars = c("theta", "theta_inicial")): could not find function "mcmc_dens"
+```
+
+``` r
+# Densidades por cadena
+mcmc_dens_overlay(ajuste$draws(c("theta", "theta_inicial"))) + 
+  ylab("count")
+```
+
+```
+## Error in mcmc_dens_overlay(ajuste$draws(c("theta", "theta_inicial"))): could not find function "mcmc_dens_overlay"
+```
+
+``` r
+# ACF
+mcmc_acf(ajuste$draws(c("theta", "theta_inicial"))) 
+```
+
+```
+## Error in mcmc_acf(ajuste$draws(c("theta", "theta_inicial"))): could not find function "mcmc_acf"
+```
+
 
 ## Estimación del máximo de una uniforme {-}
 
@@ -184,7 +361,7 @@ Tomamos el ejemplo de los boletos de lotería,
 
 
 ``` r
-loteria_tbl <- read_csv("data/nums_loteria_avion.csv", col_names = c("id", "numero")) %>% 
+loteria_tbl <- read_csv("data/nums_loteria_avion.csv", col_names = c("id", "numero")) |> 
   mutate(numero = as.integer(numero))
 ```
 
@@ -201,7 +378,7 @@ loteria_tbl <- read_csv("data/nums_loteria_avion.csv", col_names = c("id", "nume
 
 ``` r
 set.seed(334)
-muestra_loteria <- sample_n(loteria_tbl, 25) %>% 
+muestra_loteria <- sample_n(loteria_tbl, 25) |> 
   mutate(numero = numero/1000)
 ```
 
@@ -332,7 +509,7 @@ El intervalo 95% que obtenemos es:
 
 
 ``` r
-ajuste$draws("theta") %>% as_draws_df() %>% 
+ajuste$draws("theta") |> as_draws_df() |> 
   summarise(theta_inf = quantile(theta, 0.025), 
             theta_mediana = quantile(theta, 0.5),
             theta_sup = quantile(theta, 0.975))
@@ -425,7 +602,7 @@ ajuste <- mod$sample(
 ```
 
 ```
-## Chain 3 Exception: gamma_lpdf: Random variable is inf, but must be positive finite! (in '/tmp/RtmpFo2v3i/model-4b021503c17c.stan', line 17, column 2 to column 27)
+## Chain 3 Exception: gamma_lpdf: Random variable is inf, but must be positive finite! (in '/tmp/RtmpwPPPRB/model-4b547eb99bc2.stan', line 17, column 2 to column 27)
 ```
 
 ```
@@ -502,7 +679,8 @@ El intervalo 95% que obtenemos es:
 
 
 ``` r
-ajuste$draws("theta") %>% as_draws_df() %>% 
+ajuste$draws("theta") |> 
+  as_draws_df() |> 
   summarise(theta_inf = quantile(theta, 0.025), 
             theta_mediana = quantile(theta, 0.5),
             theta_sup = quantile(theta, 0.975))
@@ -519,22 +697,16 @@ Y la posterior se ve como sigue:
 
 
 ``` r
-theta_post_sim <- ajuste$draws("theta") %>% as.numeric
-qplot(theta_post_sim)
-```
-
-```
-## Warning: `qplot()` was deprecated in ggplot2 3.4.0.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.
+theta_post_sim <- ajuste$draws("theta") |> as_draws_df()
+ggplot(theta_post_sim, aes(x = theta)) +
+  geom_histogram()
 ```
 
 ```
 ## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 ## Ejemplo de cantantes {-}
 
@@ -582,9 +754,9 @@ Pasamos datos y muestreamos
 
 ``` r
 set.seed(3413)
-cantantes <- lattice::singer %>% 
-  mutate(estatura_cm = (2.54 * height)) %>% 
-  filter(str_detect(voice.part, "Tenor")) %>% 
+cantantes <- lattice::singer |> 
+  mutate(estatura_cm = (2.54 * height)) |> 
+  filter(str_detect(voice.part, "Tenor")) |> 
   sample_n(20)
 datos_lista <- list(n = nrow(cantantes), y = cantantes$estatura_cm)
 ajuste <- mod$sample(
@@ -714,7 +886,7 @@ El intervalo 95% que obtenemos es:
 
 
 ``` r
-ajuste$draws(c("mu", "sigma")) %>% as_draws_df() %>% 
+ajuste$draws(c("mu", "sigma")) |> as_draws_df() |> 
 ggplot(aes(x = mu, y = sigma)) + geom_point(alpha = 0.1) +
   coord_equal()
 ```
@@ -728,25 +900,15 @@ Y ahora extraemos algunas replicaciones de la posterior predictiva:
 
 
 ``` r
-y_sim_tbl <- ajuste$draws("y_sim") %>% as_draws_df() %>% 
-  pivot_longer(cols = starts_with("y_sim"), "nombre") %>% 
-  separate(nombre, c("nombre", "n_obs", "vacio"), "[\\[\\]]") %>% 
-  select(-nombre, -vacio) %>% 
-  filter(.chain == 1, .iteration < 12) %>% 
-  select(.iteration, value) %>% 
+y_sim_tbl <- ajuste$draws("y_sim") |> as_draws_df() |> 
+  pivot_longer(cols = starts_with("y_sim")) |> 
+  filter(.chain == 1, .iteration < 12) |> 
+  select(.iteration, value) |> 
   bind_rows(tibble(.iteration = 12, value = round(cantantes$estatura_cm, 0)))
 ```
 
 ```
 ## Error: No chains finished successfully. Unable to retrieve the draws.
-```
-
-```
-## Error in `pivot_longer()`:
-## ! Arguments in `...` must be used.
-## ✖ Problematic argument:
-## • ..1 = "nombre"
-## ℹ Did you misspell an argument name?
 ```
 
 ``` r
@@ -911,13 +1073,13 @@ resumen
 
 ``` r
 sims_theta_tbl <- 
-  ajuste$draws(c("theta_azar", "theta_corr")) %>% 
+  ajuste$draws(c("theta_azar", "theta_corr")) |> 
   as_draws_df()  
 ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 
 
@@ -1017,7 +1179,7 @@ ajuste <- mod_no_inf$sample(
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 3.3 seconds.
-## Total execution time: 13.5 seconds.
+## Total execution time: 13.2 seconds.
 ```
 
 ```
@@ -1057,13 +1219,13 @@ ajuste$cmdstan_diagnose()
 
 ``` r
 sims_theta_tbl <- 
-  ajuste$draws(c("theta_azar", "theta_corr")) %>% 
+  ajuste$draws(c("theta_azar", "theta_corr")) |> 
   as_draws_df()  
 ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-43-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-46-1.png" width="672" />
 
 Donde vemos que el problema es serio: cuando $\theta_{azar}$ es chico, los
 datos son consistentes con valores de $\theta_{corr}$ cercanos a 0.2. Pero
@@ -1111,7 +1273,7 @@ ajuste <- mod_informado$sample(
 ## Chain 2 Iteration: 4001 / 8000 [ 50%]  (Sampling) 
 ## Chain 2 Iteration: 6000 / 8000 [ 75%]  (Sampling) 
 ## Chain 2 Iteration: 8000 / 8000 [100%]  (Sampling) 
-## Chain 2 finished in 2.1 seconds.
+## Chain 2 finished in 2.0 seconds.
 ## Chain 3 Iteration:    1 / 8000 [  0%]  (Warmup) 
 ## Chain 3 Iteration: 2000 / 8000 [ 25%]  (Warmup) 
 ## Chain 3 Iteration: 4000 / 8000 [ 50%]  (Warmup) 
@@ -1137,10 +1299,10 @@ No tenemos problemas numéricos, y la posterior se ve como sigue:
 
 ``` r
 sims_theta_tbl <- 
-  ajuste$draws(c("theta_azar", "theta_corr")) %>% 
+  ajuste$draws(c("theta_azar", "theta_corr")) |> 
   as_draws_df()  
 ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-45-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-48-1.png" width="672" />
