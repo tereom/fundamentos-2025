@@ -3,6 +3,8 @@
 
 
 
+## Revisión de Métropolis {-}
+
 Recordemos la idea básica de MCMC
 
 
@@ -122,7 +124,7 @@ z_tbl <- metropolis_mc(M, c(2.5, 3.5), log_p, 1.0, 1.0)
 ```
 
 ```
-## [1] 0.6014
+## [1] 0.5994
 ```
 
 
@@ -175,7 +177,7 @@ z_tbl <- metropolis_mc(M, c(2.5, 3.5), log_p, 0.2, 0.2)
 ```
 
 ```
-## [1] 0.15472
+## [1] 0.15914
 ```
 
 ``` r
@@ -629,7 +631,7 @@ system.time(hmc_1 <- hamilton_mc(1000, c(1,2), log_p, grad_log_p, 0.2, 12))
 
 ```
 ##    user  system elapsed 
-##   0.067   0.001   0.066
+##   0.066   0.001   0.066
 ```
 
 ``` r
@@ -655,7 +657,7 @@ system.time(metropolis_2 <- metropolis_mc(1000, c(1,2), log_p, 1, 1))
 
 ```
 ##    user  system elapsed 
-##   0.016   0.000   0.016
+##   0.015   0.000   0.015
 ```
 
 

@@ -331,6 +331,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="apéndice-ii-transformaciones.html"><a href="apéndice-ii-transformaciones.html"><i class="fa fa-check"></i>Apéndice II: Transformaciones</a></li>
 <li class="chapter" data-level="" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html"><i class="fa fa-check"></i>Apéndice III: Monte Carlo Hamiltoniano</a>
 <ul>
+<li class="chapter" data-level="" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#revisión-de-métropolis"><i class="fa fa-check"></i>Revisión de Métropolis</a></li>
 <li class="chapter" data-level="" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#monte-carlo-hamiltoniano"><i class="fa fa-check"></i>Monte Carlo Hamiltoniano</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
@@ -2058,13 +2059,8 @@ correr mucho tiempo antes de descubrir el problema.</p></li>
 a <span class="math inline">\(500\)</span> ó <span class="math inline">\(1000\)</span> de tal forma que las corridas tarden segundos o unos cuantos
 minutos.</p></li>
 <li><p>Si tarda más que unos cuantos minutos (para problemas del tamaño que
-veremos en la clase) y aún así no alcanza convergencia
-entonces <em>juega</em> un poco con el modelo (por ejemplo intenta transformaciones lineales), para JAGS Gelman
-sugiere más técnicas para acelerar la convergencia en el
-capitulo <span class="math inline">\(19\)</span> del libro
-<em>Data Analysis Using Regression and Multilevel/Hierarchical models</em>. En el
-caso de Stan veremos ejemplos de reparametrización, y se puede leer más en
-la <a href="https://mc-stan.org/docs/2_21/stan-users-guide/reparameterization-section.html">guía</a>.</p></li>
+veremos en la clase) y aún así no alcanza convergencia la reparametrización
+puede ayudar <a href="https://mc-stan.org/docs/2_21/stan-users-guide/reparameterization-section.html">guía</a>.</p></li>
 <li><p>Otra técnica conveniente cuando se trabaja con bases de datos grandes
 (sobre todo en la parte exploratoria) es trabajar con un
 subconjunto de los datos, quizá la mitad o una quinta parte.</p></li>

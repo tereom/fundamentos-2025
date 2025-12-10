@@ -14,10 +14,6 @@ library(tidyverse)
 library(bayesplot)
 ```
 
-```
-## Error in library(bayesplot): there is no package called 'bayesplot'
-```
-
 Hay dos pasos escenciales para hacer análisis con Stan: 1) Definir la estructura del modelo usando notacion de stan (recomendado hacerlo en un archivo de texto independiente) y 2)
 simular de la posterior. 
 
@@ -132,7 +128,7 @@ ajuste <- mod$sample(
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 0.0 seconds.
-## Total execution time: 0.4 seconds.
+## Total execution time: 0.3 seconds.
 ```
 
 Checamos diagnósticos:
@@ -280,10 +276,14 @@ ggplot(theta_tbl, aes(x = .iteration, y = theta)) +
 
 <img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
+
+
 ``` r
 # O podemos usar las funciones del paquete bayesplot
-# mcmc_trace(ajuste$draws(c("theta")))
+mcmc_trace(ajuste$draws(c("theta")))
 ```
+
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 Y replicamos la gráfica de las notas haciendo:
 
@@ -301,7 +301,7 @@ ggplot(sims_tbl, aes(x = theta, fill = dist)) +
   geom_histogram(aes(x = theta), bins = 30, alpha = 0.5, position = "identity")
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-11-1.png" width="576" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-12-1.png" width="576" />
 
 Nota, hay muchas funciones útiles en `bayesplot`.
 
@@ -314,8 +314,10 @@ mcmc_hist(ajuste$draws(c("theta", "theta_inicial"))) +
 ```
 
 ```
-## Error in mcmc_hist(ajuste$draws(c("theta", "theta_inicial"))): could not find function "mcmc_hist"
+## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
+
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-13-1.png" width="480" />
 
 ``` r
 mcmc_dens(ajuste$draws(), pars = c("theta", "theta_inicial")) + 
@@ -323,9 +325,7 @@ mcmc_dens(ajuste$draws(), pars = c("theta", "theta_inicial")) +
   ylab("density")
 ```
 
-```
-## Error in mcmc_dens(ajuste$draws(), pars = c("theta", "theta_inicial")): could not find function "mcmc_dens"
-```
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-13-2.png" width="480" />
 
 ``` r
 # Densidades por cadena
@@ -333,18 +333,14 @@ mcmc_dens_overlay(ajuste$draws(c("theta", "theta_inicial"))) +
   ylab("count")
 ```
 
-```
-## Error in mcmc_dens_overlay(ajuste$draws(c("theta", "theta_inicial"))): could not find function "mcmc_dens_overlay"
-```
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-13-3.png" width="480" />
 
 ``` r
 # ACF
 mcmc_acf(ajuste$draws(c("theta", "theta_inicial"))) 
 ```
 
-```
-## Error in mcmc_acf(ajuste$draws(c("theta", "theta_inicial"))): could not find function "mcmc_acf"
-```
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-13-4.png" width="480" />
 
 
 ## Estimación del máximo de una uniforme {-}
@@ -393,6 +389,7 @@ mod
 ##   real y_max;
 ##   y_max = max(y);
 ## }
+## 
 ## parameters {
 ##   real<lower=y_max> theta;
 ## }
@@ -421,50 +418,89 @@ ajuste <- mod$sample(
 
 ```
 ## Running MCMC with 4 parallel chains...
+## 
+## Chain 1 Iteration:     1 / 25000 [  0%]  (Warmup) 
+## Chain 1 Iteration:  5000 / 25000 [ 20%]  (Warmup) 
+## Chain 1 Iteration:  5001 / 25000 [ 20%]  (Sampling) 
+## Chain 1 Iteration: 10000 / 25000 [ 40%]  (Sampling) 
+## Chain 1 Iteration: 15000 / 25000 [ 60%]  (Sampling) 
+## Chain 2 Iteration:     1 / 25000 [  0%]  (Warmup) 
+## Chain 2 Iteration:  5000 / 25000 [ 20%]  (Warmup) 
+## Chain 2 Iteration:  5001 / 25000 [ 20%]  (Sampling) 
+## Chain 2 Iteration: 10000 / 25000 [ 40%]  (Sampling) 
+## Chain 2 Iteration: 15000 / 25000 [ 60%]  (Sampling) 
+## Chain 3 Iteration:     1 / 25000 [  0%]  (Warmup) 
+## Chain 3 Iteration:  5000 / 25000 [ 20%]  (Warmup) 
+## Chain 3 Iteration:  5001 / 25000 [ 20%]  (Sampling) 
+## Chain 3 Iteration: 10000 / 25000 [ 40%]  (Sampling) 
+## Chain 3 Iteration: 15000 / 25000 [ 60%]  (Sampling)
 ```
 
 ```
-## Chain 1 ./modelo-2: 1: Syntax error: word unexpected (expecting ")")
+## Chain 3 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
 ```
 
 ```
-## Chain 2 ./modelo-2: 1: Syntax error: word unexpected (expecting ")")
+## Chain 3 Exception: uniform_lpdf: Upper bound parameter is inf, but must be finite! (in '/tmp/RtmpBTfO0T/model-4dbc4bf964c9.stan', line 19, column 2 to column 24)
 ```
 
 ```
-## Chain 3 ./modelo-2: 1: Syntax error: word unexpected (expecting ")")
+## Chain 3 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
 ```
 
 ```
-## Chain 4 ./modelo-2: 1: Syntax error: word unexpected (expecting ")")
+## Chain 3 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
 ```
 
 ```
-## Warning: Chain 1 finished unexpectedly!
+## Chain 3
 ```
 
 ```
-## Warning: Chain 2 finished unexpectedly!
+## Chain 4 Iteration:     1 / 25000 [  0%]  (Warmup) 
+## Chain 4 Iteration:  5000 / 25000 [ 20%]  (Warmup) 
+## Chain 4 Iteration:  5001 / 25000 [ 20%]  (Sampling) 
+## Chain 4 Iteration: 10000 / 25000 [ 40%]  (Sampling) 
+## Chain 4 Iteration: 15000 / 25000 [ 60%]  (Sampling)
 ```
 
 ```
-## Warning: Chain 3 finished unexpectedly!
+## Chain 4 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
 ```
 
 ```
-## Warning: Chain 4 finished unexpectedly!
+## Chain 4 Exception: uniform_lpdf: Upper bound parameter is inf, but must be finite! (in '/tmp/RtmpBTfO0T/model-4dbc4bf964c9.stan', line 19, column 2 to column 24)
 ```
 
 ```
-## Warning: All chains finished unexpectedly! Use the $output(chain_id) method for more information.
+## Chain 4 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
 ```
 
 ```
-## Warning: Use read_cmdstan_csv() to read the results of the failed chains.
+## Chain 4 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
 ```
 
 ```
-## Warning: No chains finished successfully. Unable to retrieve the fit.
+## Chain 4
+```
+
+```
+## Chain 1 Iteration: 20000 / 25000 [ 80%]  (Sampling) 
+## Chain 1 Iteration: 25000 / 25000 [100%]  (Sampling) 
+## Chain 1 finished in 0.2 seconds.
+## Chain 2 Iteration: 20000 / 25000 [ 80%]  (Sampling) 
+## Chain 2 Iteration: 25000 / 25000 [100%]  (Sampling) 
+## Chain 3 Iteration: 20000 / 25000 [ 80%]  (Sampling) 
+## Chain 3 Iteration: 25000 / 25000 [100%]  (Sampling) 
+## Chain 4 Iteration: 20000 / 25000 [ 80%]  (Sampling) 
+## Chain 4 Iteration: 25000 / 25000 [100%]  (Sampling) 
+## Chain 2 finished in 0.2 seconds.
+## Chain 3 finished in 0.3 seconds.
+## Chain 4 finished in 0.3 seconds.
+## 
+## All 4 chains finished successfully.
+## Mean chain execution time: 0.2 seconds.
+## Total execution time: 0.4 seconds.
 ```
 
 Checamos diagnósticos:
@@ -475,7 +511,20 @@ ajuste$cmdstan_diagnose()
 ```
 
 ```
-## Error: No CmdStan runs finished successfully. Unable to run bin/diagnose.
+## Checking sampler transitions treedepth.
+## Treedepth satisfactory for all transitions.
+## 
+## Checking sampler transitions for divergences.
+## No divergent transitions found.
+## 
+## Checking E-BFMI - sampler transitions HMC potential energy.
+## E-BFMI satisfactory.
+## 
+## Rank-normalized split effective sample size satisfactory for all parameters.
+## 
+## Rank-normalized split R-hat values satisfactory for all parameters.
+## 
+## Processing complete, no problems detected.
 ```
 
 Si no hay problemas, podemos ver el resumen:
@@ -483,18 +532,15 @@ Si no hay problemas, podemos ver el resumen:
 
 ``` r
 resumen <- ajuste$summary()
-```
-
-```
-## Error: No chains finished successfully. Unable to retrieve the draws.
-```
-
-``` r
 resumen
 ```
 
 ```
-## Error: object 'resumen' not found
+## # A tibble: 2 × 10
+##   variable  mean median      sd     mad    q5   q95  rhat ess_bulk ess_tail
+##   <chr>    <dbl>  <dbl>   <dbl>   <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
+## 1 lp__     -231.  -231.   0.801   0.356 -233. -231.  1.00   21789.   20474.
+## 2 theta    6083.  6009. 239.    162.    5863. 6555.  1.00   19514.   18273.
 ```
 
 El intervalo 95% que obtenemos es:
@@ -508,7 +554,10 @@ ajuste$draws("theta") |> as_draws_df() |>
 ```
 
 ```
-## Error: No chains finished successfully. Unable to retrieve the draws.
+## # A tibble: 1 × 3
+##   theta_inf theta_mediana theta_sup
+##       <dbl>         <dbl>     <dbl>
+## 1     5858.         6009.     6726.
 ```
 
 Podemos ahora intentar con la inicial gamma que nos pareció 
@@ -594,7 +643,7 @@ ajuste <- mod$sample(
 ```
 
 ```
-## Chain 3 Exception: gamma_lpdf: Random variable is inf, but must be positive finite! (in '/tmp/RtmpNBchFn/model-4df63d5f6a0d.stan', line 17, column 2 to column 27)
+## Chain 3 Exception: gamma_lpdf: Random variable is inf, but must be positive finite! (in '/tmp/RtmpBTfO0T/model-4dbc53cef9ed.stan', line 17, column 2 to column 27)
 ```
 
 ```
@@ -698,7 +747,7 @@ ggplot(theta_post_sim, aes(x = theta)) +
 ## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 ## Ejemplo de cantantes {-}
 
@@ -762,82 +811,39 @@ ajuste <- mod$sample(
 
 ```
 ## Running MCMC with 4 sequential chains...
-```
-
-```
-## Chain 1 ./modelo-cantantes: 1: !H__PAGEZERO__TEXT@@__text__TEXTAA__stubs__TEXT$: not found
-```
-
-```
-## Chain 1 ./modelo-cantantes: 1: P__eh_frame__TEXT: not found
-```
-
-```
-## Chain 1 ./modelo-cantantes: 2: Syntax error: word unexpected (expecting ")")
-```
-
-```
-## Warning: Chain 1 finished unexpectedly!
-```
-
-```
-## Chain 2 ./modelo-cantantes: 1: !H__PAGEZERO__TEXT@@__text__TEXTAA__stubs__TEXT$: not found
-```
-
-```
-## Chain 2 ./modelo-cantantes: 1: P__eh_frame__TEXT: not found
-```
-
-```
-## Chain 2 ./modelo-cantantes: 2: Syntax error: word unexpected (expecting ")")
-```
-
-```
-## Warning: Chain 2 finished unexpectedly!
-```
-
-```
-## Chain 3 ./modelo-cantantes: 1: !H__PAGEZERO__TEXT@@__text__TEXTAA__stubs__TEXT$: not found
-```
-
-```
-## Chain 3 ./modelo-cantantes: 1: P__eh_frame__TEXT: not found
-```
-
-```
-## Chain 3 ./modelo-cantantes: 2: Syntax error: word unexpected (expecting ")")
-```
-
-```
-## Warning: Chain 3 finished unexpectedly!
-```
-
-```
-## Chain 4 ./modelo-cantantes: 1: !H__PAGEZERO__TEXT@@__text__TEXTAA__stubs__TEXT$: not found
-```
-
-```
-## Chain 4 ./modelo-cantantes: 1: P__eh_frame__TEXT: not found
-```
-
-```
-## Chain 4 ./modelo-cantantes: 2: Syntax error: word unexpected (expecting ")")
-```
-
-```
-## Warning: Chain 4 finished unexpectedly!
-```
-
-```
-## Warning: All chains finished unexpectedly! Use the $output(chain_id) method for more information.
-```
-
-```
-## Warning: Use read_cmdstan_csv() to read the results of the failed chains.
-```
-
-```
-## Warning: No chains finished successfully. Unable to retrieve the fit.
+## 
+## Chain 1 Iteration:    1 / 8000 [  0%]  (Warmup) 
+## Chain 1 Iteration: 2000 / 8000 [ 25%]  (Warmup) 
+## Chain 1 Iteration: 4000 / 8000 [ 50%]  (Warmup) 
+## Chain 1 Iteration: 4001 / 8000 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 6000 / 8000 [ 75%]  (Sampling) 
+## Chain 1 Iteration: 8000 / 8000 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Chain 2 Iteration:    1 / 8000 [  0%]  (Warmup) 
+## Chain 2 Iteration: 2000 / 8000 [ 25%]  (Warmup) 
+## Chain 2 Iteration: 4000 / 8000 [ 50%]  (Warmup) 
+## Chain 2 Iteration: 4001 / 8000 [ 50%]  (Sampling) 
+## Chain 2 Iteration: 6000 / 8000 [ 75%]  (Sampling) 
+## Chain 2 Iteration: 8000 / 8000 [100%]  (Sampling) 
+## Chain 2 finished in 0.1 seconds.
+## Chain 3 Iteration:    1 / 8000 [  0%]  (Warmup) 
+## Chain 3 Iteration: 2000 / 8000 [ 25%]  (Warmup) 
+## Chain 3 Iteration: 4000 / 8000 [ 50%]  (Warmup) 
+## Chain 3 Iteration: 4001 / 8000 [ 50%]  (Sampling) 
+## Chain 3 Iteration: 6000 / 8000 [ 75%]  (Sampling) 
+## Chain 3 Iteration: 8000 / 8000 [100%]  (Sampling) 
+## Chain 3 finished in 0.1 seconds.
+## Chain 4 Iteration:    1 / 8000 [  0%]  (Warmup) 
+## Chain 4 Iteration: 2000 / 8000 [ 25%]  (Warmup) 
+## Chain 4 Iteration: 4000 / 8000 [ 50%]  (Warmup) 
+## Chain 4 Iteration: 4001 / 8000 [ 50%]  (Sampling) 
+## Chain 4 Iteration: 6000 / 8000 [ 75%]  (Sampling) 
+## Chain 4 Iteration: 8000 / 8000 [100%]  (Sampling) 
+## Chain 4 finished in 0.1 seconds.
+## 
+## All 4 chains finished successfully.
+## Mean chain execution time: 0.1 seconds.
+## Total execution time: 0.5 seconds.
 ```
 
 Checamos diagnósticos:
@@ -848,7 +854,20 @@ ajuste$cmdstan_diagnose()
 ```
 
 ```
-## Error: No CmdStan runs finished successfully. Unable to run bin/diagnose.
+## Checking sampler transitions treedepth.
+## Treedepth satisfactory for all transitions.
+## 
+## Checking sampler transitions for divergences.
+## No divergent transitions found.
+## 
+## Checking E-BFMI - sampler transitions HMC potential energy.
+## E-BFMI satisfactory.
+## 
+## Rank-normalized split effective sample size satisfactory for all parameters.
+## 
+## Rank-normalized split R-hat values satisfactory for all parameters.
+## 
+## Processing complete, no problems detected.
 ```
 
 Si no hay problemas, podemos ver el resumen:
@@ -856,22 +875,24 @@ Si no hay problemas, podemos ver el resumen:
 
 ``` r
 resumen <- ajuste$summary()
-```
-
-```
-## Error: No chains finished successfully. Unable to retrieve the draws.
-```
-
-``` r
 resumen
 ```
 
 ```
-## # A tibble: 2 × 10
-##   variable  mean median      sd     mad    q5   q95  rhat ess_bulk ess_tail
-##   <chr>    <dbl>  <dbl>   <dbl>   <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
-## 1 lp__     -179.  -178.   0.808   0.357 -180. -178.  1.00   11590.   10732.
-## 2 theta    6147.  6050. 314.    204.    5867. 6768.  1.00    9933.    9188.
+## # A tibble: 23 × 10
+##    variable   mean median    sd   mad     q5    q95  rhat ess_bulk ess_tail
+##    <chr>     <dbl>  <dbl> <dbl> <dbl>  <dbl>  <dbl> <dbl>    <dbl>    <dbl>
+##  1 lp__     -46.2  -45.8   1.05 0.753 -48.2  -45.2  1.00     6583.    8196.
+##  2 mu       176.   176.    1.33 1.30  174.   178.   1.00    10005.    9087.
+##  3 sigma      6.71   6.55  1.18 1.09    5.09   8.86 1.00     9927.    8352.
+##  4 y_sim[1] 176.   176.    6.94 6.66  164.   187.   1.00    14414.   15187.
+##  5 y_sim[2] 176.   176.    6.98 6.64  164.   187.   1.000   15189.   15317.
+##  6 y_sim[3] 176.   176.    6.90 6.60  165.   187.   1.00    15498.   15447.
+##  7 y_sim[4] 176.   176.    6.90 6.63  165.   187.   1.00    15421.   15051.
+##  8 y_sim[5] 176.   176.    6.89 6.69  165.   187.   1.00    14356.   15532.
+##  9 y_sim[6] 176.   176.    6.98 6.67  164.   187.   1.00    15073.   15233.
+## 10 y_sim[7] 176.   176.    6.99 6.83  164.   187.   1.00    14656.   15308.
+## # ℹ 13 more rows
 ```
 
 El intervalo 95% que obtenemos es:
@@ -883,9 +904,7 @@ ggplot(aes(x = mu, y = sigma)) + geom_point(alpha = 0.1) +
   coord_equal()
 ```
 
-```
-## Error: No chains finished successfully. Unable to retrieve the draws.
-```
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 
 Y ahora extraemos algunas replicaciones de la posterior predictiva:
@@ -900,7 +919,7 @@ y_sim_tbl <- ajuste$draws("y_sim") |> as_draws_df() |>
 ```
 
 ```
-## Error: No chains finished successfully. Unable to retrieve the draws.
+## Warning: Dropping 'draws_df' class as required metadata was removed.
 ```
 
 ``` r
@@ -909,9 +928,7 @@ ggplot(y_sim_tbl, aes(sample = value)) +
   facet_wrap(~ .iteration)
 ```
 
-```
-## Error: object 'y_sim_tbl' not found
-```
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 
 ### Ejemplo: exámenes
@@ -1071,7 +1088,7 @@ ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-41-1.png" width="672" />
 
 
 
@@ -1217,7 +1234,7 @@ ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-46-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-47-1.png" width="672" />
 
 Donde vemos que el problema es serio: cuando $\theta_{azar}$ es chico, los
 datos son consistentes con valores de $\theta_{corr}$ cercanos a 0.2. Pero
@@ -1233,7 +1250,6 @@ si se hace más grande, entonces aparecen problemas numéricos y rechazos en los
 una proporción considerable de estudiantes **no** contesta al azar.
 
 Si corremos el modelo informado con la muestra de esta población, obtenemos:
-
 
 
 
@@ -1279,11 +1295,11 @@ ajuste <- mod_informado$sample(
 ## Chain 4 Iteration: 4001 / 8000 [ 50%]  (Sampling) 
 ## Chain 4 Iteration: 6000 / 8000 [ 75%]  (Sampling) 
 ## Chain 4 Iteration: 8000 / 8000 [100%]  (Sampling) 
-## Chain 4 finished in 2.2 seconds.
+## Chain 4 finished in 2.1 seconds.
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 2.1 seconds.
-## Total execution time: 8.8 seconds.
+## Total execution time: 8.7 seconds.
 ```
 
 No tenemos problemas numéricos, y la posterior se ve como sigue:
@@ -1297,4 +1313,4 @@ ggplot(sims_theta_tbl, aes(x = theta_azar, y = theta_corr)) +
   geom_point(alpha = 0.1)
 ```
 
-<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-48-1.png" width="672" />
+<img src="17-inferencia-stan-01_files/figure-html/unnamed-chunk-49-1.png" width="672" />
