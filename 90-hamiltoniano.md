@@ -122,7 +122,7 @@ z_tbl <- metropolis_mc(M, c(2.5, 3.5), log_p, 1.0, 1.0)
 ```
 
 ```
-## [1] 0.59376
+## [1] 0.59962
 ```
 
 
@@ -175,7 +175,7 @@ z_tbl <- metropolis_mc(M, c(2.5, 3.5), log_p, 0.2, 0.2)
 ```
 
 ```
-## [1] 0.16138
+## [1] 0.15636
 ```
 
 ``` r
@@ -629,7 +629,7 @@ system.time(hmc_1 <- hamilton_mc(1000, c(1,2), log_p, grad_log_p, 0.2, 12))
 
 ```
 ##    user  system elapsed 
-##   0.067   0.000   0.067
+##   0.066   0.000   0.065
 ```
 
 ``` r
@@ -642,7 +642,7 @@ system.time(metropolis_1 <- metropolis_mc(1000, c(1,2), log_p, 0.2, 0.2))
 
 ```
 ##    user  system elapsed 
-##   0.015   0.000   0.016
+##   0.015   0.000   0.015
 ```
 
 ``` r
@@ -655,7 +655,7 @@ system.time(metropolis_2 <- metropolis_mc(1000, c(1,2), log_p, 1, 1))
 
 ```
 ##    user  system elapsed 
-##   0.016   0.000   0.015
+##   0.015   0.000   0.016
 ```
 
 
@@ -868,7 +868,7 @@ ajuste_embudo <- mod_embudo$sample(
 ## Chain 1 Iteration: 11000 / 31000 [ 35%]  (Sampling) 
 ## Chain 1 Iteration: 21000 / 31000 [ 67%]  (Sampling) 
 ## Chain 1 Iteration: 31000 / 31000 [100%]  (Sampling) 
-## Chain 1 finished in 0.7 seconds.
+## Chain 1 finished in 0.6 seconds.
 ```
 
 ```

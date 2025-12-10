@@ -1808,13 +1808,12 @@ bloque se actualiza con Gibbs y otro con Metrópolis.
 parámetros, reparametrizar puede ayudar, o se pueden usar otros algoritmos.
 
 * [JAGS](http://mcmc-jags.sourceforge.net) (Just Another Gibbs Sampler), WinBUGS
-y OpenBUGS son programas que implementan métodos MCMC para generar simulaciones 
+y OpenBUGS son programas que implementan (o implementaban en el caso de los BUGS) 
+métodos MCMC para generar simulaciones 
 de distribuciones posteriores. Los paquetes `rjags` y `R2jags` permiten ajustar 
 modelos en JAGS desde `R`. Es muy fácil utilizar estos programas pues uno 
 simplemente debe especificar las distribuciones iniciales, la verosimilitud y 
-los datos observados. Para aprender a usar JAGS se puede revisar la sección 
-correspondiente en las [notas de 2018](https://tereom.github.io/est-computacional-2018/jags.html),
-ahora nos concentraremos en el uso de Stan.
+los datos observados.
 
 ## HMC y Stan {-}
 

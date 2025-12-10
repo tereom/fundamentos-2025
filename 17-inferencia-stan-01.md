@@ -71,11 +71,6 @@ mod
 ##   theta ~ beta(3, 3);
 ##   y ~ binomial(n, theta);
 ## }
-## 
-## generated quantities {
-##   real theta_inicial;
-##   theta_inicial = beta_rng(3, 3);
-## }
 ```
 
 Pasamos datos y muestreamos
@@ -88,35 +83,47 @@ ajuste <- mod$sample(
   seed = 1234,
   chains = 4,
   parallel_chains = 4,
-  refresh = 500)
+  refresh = 300)
 ```
 
 ```
 ## Running MCMC with 4 parallel chains...
 ## 
 ## Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
-## Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-## Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+## Chain 1 Iteration:  300 / 2000 [ 15%]  (Warmup) 
+## Chain 1 Iteration:  600 / 2000 [ 30%]  (Warmup) 
+## Chain 1 Iteration:  900 / 2000 [ 45%]  (Warmup) 
 ## Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-## Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+## Chain 1 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
+## Chain 1 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
+## Chain 1 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
 ## Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
 ## Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
-## Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-## Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+## Chain 2 Iteration:  300 / 2000 [ 15%]  (Warmup) 
+## Chain 2 Iteration:  600 / 2000 [ 30%]  (Warmup) 
+## Chain 2 Iteration:  900 / 2000 [ 45%]  (Warmup) 
 ## Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-## Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+## Chain 2 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
+## Chain 2 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
+## Chain 2 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
 ## Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
 ## Chain 3 Iteration:    1 / 2000 [  0%]  (Warmup) 
-## Chain 3 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-## Chain 3 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+## Chain 3 Iteration:  300 / 2000 [ 15%]  (Warmup) 
+## Chain 3 Iteration:  600 / 2000 [ 30%]  (Warmup) 
+## Chain 3 Iteration:  900 / 2000 [ 45%]  (Warmup) 
 ## Chain 3 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-## Chain 3 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+## Chain 3 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
+## Chain 3 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
+## Chain 3 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
 ## Chain 3 Iteration: 2000 / 2000 [100%]  (Sampling) 
 ## Chain 4 Iteration:    1 / 2000 [  0%]  (Warmup) 
-## Chain 4 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-## Chain 4 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+## Chain 4 Iteration:  300 / 2000 [ 15%]  (Warmup) 
+## Chain 4 Iteration:  600 / 2000 [ 30%]  (Warmup) 
+## Chain 4 Iteration:  900 / 2000 [ 45%]  (Warmup) 
 ## Chain 4 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-## Chain 4 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+## Chain 4 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
+## Chain 4 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
+## Chain 4 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
 ## Chain 4 Iteration: 2000 / 2000 [100%]  (Sampling) 
 ## Chain 1 finished in 0.0 seconds.
 ## Chain 2 finished in 0.0 seconds.
@@ -160,12 +167,11 @@ ajuste$summary()
 ```
 
 ```
-## # A tibble: 3 × 10
+## # A tibble: 2 × 10
 ##   variable    mean  median     sd    mad      q5     q95  rhat ess_bulk ess_tail
 ##   <chr>      <dbl>   <dbl>  <dbl>  <dbl>   <dbl>   <dbl> <dbl>    <dbl>    <dbl>
-## 1 lp__     -24.6   -24.3   0.695  0.317  -26.0   -24.1   1.00     1874.    2083.
-## 2 theta      0.613   0.616 0.0802 0.0819   0.475   0.738 1.00     1676.    1842.
-## 3 theta_i…   0.500   0.498 0.192  0.215    0.184   0.819 1.000    3873.    3928.
+## 1 lp__     -24.6   -24.3   0.729  0.324  -26.1   -24.1    1.00    2071.    2263.
+## 2 theta      0.614   0.617 0.0809 0.0817   0.475   0.741  1.00    1574.    1995.
 ```
 
 Donde verificamos que el tamaño de muestra efectivo (ess) y el diagnóstico de
@@ -183,10 +189,6 @@ Usémoslo para simular de la incial.
 archivo_stan <- file.path("stan/modelo-1b.stan")
 # compilar
 mod <- cmdstan_model(archivo_stan)
-```
-
-```
-## Error in initialize(...): Assertion on 'stan_file' failed: File does not exist: 'stan/modelo-1b.stan'.
 ```
 
 
@@ -285,16 +287,6 @@ ggplot(theta_tbl, aes(x = .iteration, y = theta)) +
 
 Y replicamos la gráfica de las notas haciendo:
 
-
-``` r
-mcmc_dens(bb_sim, pars = "pi") + 
-  yaxis_text(TRUE) + 
-  ylab("density")
-```
-
-```
-## Error in mcmc_dens(bb_sim, pars = "pi"): could not find function "mcmc_dens"
-```
 
 ``` r
 sims_tbl <- theta_tbl |> pivot_longer(theta:theta_inicial, names_to = "dist", values_to = "theta")
@@ -602,7 +594,7 @@ ajuste <- mod$sample(
 ```
 
 ```
-## Chain 3 Exception: gamma_lpdf: Random variable is inf, but must be positive finite! (in '/tmp/RtmpwPPPRB/model-4b547eb99bc2.stan', line 17, column 2 to column 27)
+## Chain 3 Exception: gamma_lpdf: Random variable is inf, but must be positive finite! (in '/tmp/RtmpPkgown/model-4df4440a7a33.stan', line 17, column 2 to column 27)
 ```
 
 ```
@@ -1026,7 +1018,7 @@ ajuste <- mod_informado$sample(
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 2.1 seconds.
-## Total execution time: 8.8 seconds.
+## Total execution time: 8.7 seconds.
 ```
 Checamos diagnósticos:
 
@@ -1161,7 +1153,7 @@ ajuste <- mod_no_inf$sample(
 ## Chain 2 Iteration: 4001 / 8000 [ 50%]  (Sampling) 
 ## Chain 2 Iteration: 6000 / 8000 [ 75%]  (Sampling) 
 ## Chain 2 Iteration: 8000 / 8000 [100%]  (Sampling) 
-## Chain 2 finished in 3.1 seconds.
+## Chain 2 finished in 3.2 seconds.
 ## Chain 3 Iteration:    1 / 8000 [  0%]  (Warmup) 
 ## Chain 3 Iteration: 2000 / 8000 [ 25%]  (Warmup) 
 ## Chain 3 Iteration: 4000 / 8000 [ 50%]  (Warmup) 
@@ -1179,7 +1171,7 @@ ajuste <- mod_no_inf$sample(
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 3.3 seconds.
-## Total execution time: 13.2 seconds.
+## Total execution time: 13.4 seconds.
 ```
 
 ```
