@@ -225,7 +225,7 @@ no siempre es posible. Veremos más el segundo, donde usaremos información
 del gradiente de la distribución objetivo para proponer exploración más eficiente.
 
 
-## Monte Carlo Hamiltoniano
+## Monte Carlo Hamiltoniano {-}
 
 Una manera de mejorar la exploración de Metropolis es utilizar una distribución
 de propuestas más apropiada. La intuición en el caso anterior es: 
@@ -616,118 +616,6 @@ estimar posteriores de manera eficiente:
 la documentación de Stan.
 
 
-
-
-## Diagnósticos adicionales
-
-Adicional a los diagnósticos que vimos en la sección de MCMC, Stan
-provee diagnóstivos adicionales relacionados al HMC. Cuando una 
-trayectoria tuvo un cambio grande en energía $H$ desde
-su valor actual a la propuesta final, usualmente del orden de 10^3 por ejemplo, esto implica un rechazo
-"fuerte" en el nuevo punto de la trayectoria, e implica que la el integrador numérico
-falló de manera grave. 
-
-### Transiciones divergentes {-}
-
-Cuando en Stan obtenemos un número considerable de transiciones divergentes, generalmente
-esto indica que el integrador numérico de Stan no está funcionando bien, y por lo tanto
-la exploración puede ser deficiente y/o puede estar sesgada al espacio de parámetros donde
-no ocurren estos rechazos.
-
-
-Esto puede pasar cuando encontramos zonas de alta curvatura en el espacio de parámetros.
-Que una posterior esté altamente concentrada o más dispersa generalmente no es un problema,
-pero si la concentración varía fuertemente (curvatura) entonces puede ser difícil encontrar la
-escala correcta para que el integrador funcione apropiadamente.
-
-#### El embudo de Neal {-}
-
-Para ver un ejemplo, consideremos un ejemplo de una distribución cuya forma 
-es común en modelos jerárquicos. Primero, la marginal de $y$ es normal con media
-0 y desviación estándar 3. La distribución condicional $p(x|y)$ 
-de $x = c(x_1,\ldots, x_9)$ dado $y$ es normal multivariada, todas con media
-cero y desviación estándar $e^{y/2}$. Veamos qué pasa si intentamos simular de 
-esta distribución en Stan:
-
-
-```{r}
-library(cmdstanr)
-
-mod_embudo <- cmdstan_model("stan/embudo-neal.stan")
-ajuste_embudo <- mod_embudo$sample(
-  chains = 1,
-  iter_warmup = 1000,
-  iter_sampling = 3000,
-  refresh = 1000)
-```
-
-Y vemos que aparecen algunos problemas.
-
-```{r}
-simulaciones <- ajuste_embudo$draws(format = "df")
-diagnosticos <- ajuste_embudo$sampler_diagnostics(format = "df")
-sims_diag <- simulaciones |> inner_join(diagnosticos, by = c(".draw", ".iteration", ".chain"))
-ajuste_embudo$summary() |>
-  select(variable, mean, rhat, contains("ess"))
-ggplot(sims_diag, aes(y = y, x = `x[1]`)) +
-  geom_point(alpha = 0.1) +
-  geom_point(data = sims_diag |> filter(divergent__ == 1), color = "red", size = 2) +
-  geom_hline(yintercept = -2.5, linetype = 2)
-```
-
-Y vemos que hay transiciones divergentes. Cuando el muestreador entra en el cuello
-del embudo, es muy fácil que se "despeñe" en probabilidad y que no pueda
-explorar correctamente la forma del cuello. Esto lo podemos ver, por ejemplo, si
-hacemos más simulaciones:
-
-
-```{r}
-mod_embudo <- cmdstan_model("stan/embudo-neal.stan")
-print(mod_embudo)
-ajuste_embudo <- mod_embudo$sample(
-  chains = 1,
-  iter_warmup = 1000,
-  iter_sampling = 30000,
-  refresh = 10000)
-ajuste_embudo$summary() |>
-  select(variable, mean, rhat, contains("ess"))
-simulaciones <- ajuste_embudo$draws(format = "df")
-diagnosticos <- ajuste_embudo$sampler_diagnostics(format = "df")
-sims_diag <- simulaciones |> inner_join(diagnosticos, by = c(".draw", ".iteration", ".chain"))
-ggplot(sims_diag, aes(y = y, x = `x[1]`)) +
-  geom_point(alpha = 0.1) +
-  geom_point(data = sims_diag |> filter(divergent__ == 1), color = "red", size = 2) +
-  geom_hline(yintercept = -2.5, linetype = 2)
-```
-
-Y vemos que ahora que en el primer ejemplo estábamos probablemente sobreestimando
-la media de $y$. Las divergencias indican que esto puede estar ocurriendo. En este ejemplo
-particular, también vemos que las R-hat y los tamaños efectivos de muestra son bajos.
-
-Este es un ejemplo extremo. Sin embargo, podemos *reparametrizar* para hacer las cosas más
-fáciles para el muestreador. Podemos simular $y$, y después, simular
-$x$ como $x \sim e^{y/2} z$ donde $z$ es normal estándar.
-
-
-
-```{r}
-mod_embudo_reparam <- cmdstan_model("stan/embudo-neal-reparam.stan")
-print(mod_embudo_reparam)
-ajuste_embudo <- mod_embudo_reparam$sample(
-  chains = 4,
-  iter_warmup = 1000,
-  iter_sampling = 10000,
-  refresh = 1000)
-```
-
-Y con este truco de reparametrización el muestreador funciona correctamente
-(observa que la media de $y$ está estimada correctamente, y no hay divergencias).
-
-```{r}
-ajuste_embudo$summary() |>
-  select(variable, mean, rhat, contains("ess")) |>
-  mutate(across(c(mean, rhat, ess_bulk, ess_tail), ~round(., 3)))
-```
 
 
 
