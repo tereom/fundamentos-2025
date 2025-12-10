@@ -5,6 +5,8 @@ library(tidyverse)
 ```
 
 
+## Revisión de Métropolis {-}
+
 Recordemos la idea básica de MCMC
 
 

@@ -8,6 +8,7 @@ transformed data{
   real y_max;
   y_max = max(y);
 }
+
 parameters {
   real<lower=y_max> theta;
 }

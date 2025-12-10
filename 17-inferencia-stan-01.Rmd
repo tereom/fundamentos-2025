@@ -111,9 +111,12 @@ theta_tbl <- ajuste$draws(c("theta", "theta_inicial")) |> as_draws_df()
 ggplot(theta_tbl, aes(x = .iteration, y = theta)) +
   geom_line() +
   facet_wrap(~.chain, ncol = 1)
+```
 
+
+```{r, fig.height=3}
 # O podemos usar las funciones del paquete bayesplot
-# mcmc_trace(ajuste$draws(c("theta")))
+mcmc_trace(ajuste$draws(c("theta")))
 ```
 
 Y replicamos la gráfica de las notas haciendo:
@@ -465,7 +468,6 @@ si se hace más grande, entonces aparecen problemas numéricos y rechazos en los
 una proporción considerable de estudiantes **no** contesta al azar.
 
 Si corremos el modelo informado con la muestra de esta población, obtenemos:
-
 
 
 ```{r}

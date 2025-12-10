@@ -1914,13 +1914,8 @@ a $500$ ó $1000$ de tal forma que las corridas tarden segundos o unos cuantos
 minutos.
 
 3. Si tarda más que unos cuantos minutos (para problemas del tamaño que 
-veremos en la clase) y aún así no alcanza convergencia 
-entonces _juega_ un poco con el modelo (por ejemplo intenta transformaciones lineales), para JAGS Gelman 
-sugiere más técnicas para acelerar la convergencia en el 
-capitulo $19$ del libro 
-*Data Analysis Using Regression and Multilevel/Hierarchical models*. En el 
-caso de Stan veremos ejemplos de reparametrización, y se puede leer más en 
-la [guía](https://mc-stan.org/docs/2_21/stan-users-guide/reparameterization-section.html).
+veremos en la clase) y aún así no alcanza convergencia la reparametrización 
+puede ayudar [guía](https://mc-stan.org/docs/2_21/stan-users-guide/reparameterization-section.html).
 
 4. Otra técnica conveniente cuando se trabaja con bases de datos grandes 
 (sobre todo en la parte exploratoria) es trabajar con un 

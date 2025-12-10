@@ -1,7 +1,6 @@
 ---
 title: "Fundamentos de Estadística con Remuestreo"
 author: "Teresa Ortiz, Felipe González"
-site: bookdown::bookdown_site
 documentclass: book
 bibliography:
 - bibs/book.bib
