@@ -59,7 +59,7 @@ ajuste <- mod$sample(
   seed = 1234,
   chains = 4,
   parallel_chains = 4,
-  refresh = 500)
+  refresh = 300)
 ```
 
 Checamos diagnósticos:
@@ -119,10 +119,6 @@ ggplot(theta_tbl, aes(x = .iteration, y = theta)) +
 Y replicamos la gráfica de las notas haciendo:
 
 ```{r, fig.width=6, fig.height = 4}
-mcmc_dens(bb_sim, pars = "pi") + 
-  yaxis_text(TRUE) + 
-  ylab("density")
-
 sims_tbl <- theta_tbl |> pivot_longer(theta:theta_inicial, names_to = "dist", values_to = "theta")
 ggplot(sims_tbl, aes(x = theta, fill = dist)) + 
   geom_histogram(aes(x = theta), bins = 30, alpha = 0.5, position = "identity")

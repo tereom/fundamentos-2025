@@ -13,3 +13,8 @@ model {
   theta ~ beta(3, 3);
   y ~ binomial(n, theta);
 }
+
+generated quantities {
+  real theta_inicial;
+  theta_inicial = beta_rng(3, 3);
+}
