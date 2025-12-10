@@ -331,8 +331,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="apéndice-ii-transformaciones.html"><a href="apéndice-ii-transformaciones.html"><i class="fa fa-check"></i>Apéndice II: Transformaciones</a></li>
 <li class="chapter" data-level="" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html"><i class="fa fa-check"></i>Apéndice III: Monte Carlo Hamiltoniano</a>
 <ul>
-<li class="chapter" data-level="13.2" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#monte-carlo-hamiltoniano"><i class="fa fa-check"></i><b>13.2</b> Monte Carlo Hamiltoniano</a></li>
-<li class="chapter" data-level="13.3" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#diagnósticos-adicionales"><i class="fa fa-check"></i><b>13.3</b> Diagnósticos adicionales</a></li>
+<li class="chapter" data-level="" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#monte-carlo-hamiltoniano"><i class="fa fa-check"></i>Monte Carlo Hamiltoniano</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
 <li class="divider"></li>
@@ -454,7 +453,7 @@ de proporcionalidad):</p>
 <span id="cb808-23"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb808-23" aria-hidden="true" tabindex="-1"></a>  z_tbl</span>
 <span id="cb808-24"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb808-24" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb808-25"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb808-25" aria-hidden="true" tabindex="-1"></a>z_tbl <span class="ot">&lt;-</span> <span class="fu">metropolis_mc</span>(M, <span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">3.5</span>), log_p, <span class="fl">1.0</span>, <span class="fl">1.0</span>)</span></code></pre></div>
-<pre><code>## [1] 0.59962</code></pre>
+<pre><code>## [1] 0.6014</code></pre>
 <p>Vemos que tenemos una tasa alta de rechazos. ¿Por qué? Veamos cómo se ven las simulaciones hasta 500 iteraciones:</p>
 <div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb810-1" aria-hidden="true" tabindex="-1"></a>graf_tbl <span class="ot">&lt;-</span> <span class="fu">map_df</span>(<span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">500</span>, <span class="dv">20</span>), <span class="cf">function</span>(i){</span>
 <span id="cb810-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb810-2" aria-hidden="true" tabindex="-1"></a>  z_tbl <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">filter</span>(n_sim <span class="sc">&lt;=</span> i) <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">mutate</span>(<span class="at">num_sims =</span> i)</span>
@@ -486,7 +485,7 @@ de proporcionalidad):</p>
 </ul>
 <p>Podemos entonces proponer saltos más chicos, por ejemplo:</p>
 <div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb812-1" aria-hidden="true" tabindex="-1"></a>z_tbl <span class="ot">&lt;-</span> <span class="fu">metropolis_mc</span>(M, <span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">3.5</span>), log_p, <span class="fl">0.2</span>, <span class="fl">0.2</span>)</span></code></pre></div>
-<pre><code>## [1] 0.15636</code></pre>
+<pre><code>## [1] 0.15472</code></pre>
 <div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb814-1" aria-hidden="true" tabindex="-1"></a>graf_tbl <span class="ot">&lt;-</span> <span class="fu">map_df</span>(<span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">500</span>, <span class="dv">20</span>), <span class="cf">function</span>(i){</span>
 <span id="cb814-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb814-2" aria-hidden="true" tabindex="-1"></a>  z_tbl <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">filter</span>(n_sim <span class="sc">&lt;=</span> i) <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">mutate</span>(<span class="at">num_sims =</span> i)</span>
 <span id="cb814-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb814-3" aria-hidden="true" tabindex="-1"></a>})</span>
@@ -534,8 +533,8 @@ requiere poder simular fácilmente de cada parámetro dados los otros, y esto
 no siempre es posible. Veremos más el segundo, donde usaremos información
 del gradiente de la distribución objetivo para proponer exploración más eficiente.</p>
 </div>
-<div id="monte-carlo-hamiltoniano" class="section level2 hasAnchor" number="13.2">
-<h2><span class="header-section-number">13.2</span> Monte Carlo Hamiltoniano<a href="apéndice-iii-monte-carlo-hamiltoniano.html#monte-carlo-hamiltoniano" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="monte-carlo-hamiltoniano" class="section level2 unnumbered hasAnchor">
+<h2>Monte Carlo Hamiltoniano<a href="apéndice-iii-monte-carlo-hamiltoniano.html#monte-carlo-hamiltoniano" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Una manera de mejorar la exploración de Metropolis es utilizar una distribución
 de propuestas más apropiada. La intuición en el caso anterior es:</p>
 <ul>
@@ -839,7 +838,7 @@ Utilizaremos otra normal bivariada con más correlación.</p>
 <span id="cb828-6"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb828-6" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(hmc_1 <span class="ot">&lt;-</span> <span class="fu">hamilton_mc</span>(<span class="dv">1000</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), log_p, grad_log_p, <span class="fl">0.2</span>, <span class="dv">12</span>))</span></code></pre></div>
 <pre><code>## [1] 0.042</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.066   0.000   0.065</code></pre>
+##   0.067   0.001   0.066</code></pre>
 <div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb831-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(metropolis_1 <span class="ot">&lt;-</span> <span class="fu">metropolis_mc</span>(<span class="dv">1000</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), log_p, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span></code></pre></div>
 <pre><code>## [1] 0.204</code></pre>
 <pre><code>##    user  system elapsed 
@@ -847,7 +846,7 @@ Utilizaremos otra normal bivariada con más correlación.</p>
 <div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb834-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb834-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(metropolis_2 <span class="ot">&lt;-</span> <span class="fu">metropolis_mc</span>(<span class="dv">1000</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), log_p, <span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## [1] 0.692</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.015   0.000   0.016</code></pre>
+##   0.016   0.000   0.016</code></pre>
 <div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb837-1" aria-hidden="true" tabindex="-1"></a>sims_hmc <span class="ot">&lt;-</span> hmc_1<span class="sc">$</span>sims <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">mutate</span>(<span class="at">n_sim =</span> <span class="fu">row_number</span>()) <span class="sc">|</span><span class="er">&gt;</span> </span>
 <span id="cb837-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb837-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">algoritmo =</span> <span class="st">&quot;hmc&quot;</span>)</span>
 <span id="cb837-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb837-3" aria-hidden="true" tabindex="-1"></a>sims_metropolis_1 <span class="ot">&lt;-</span> metropolis_1 <span class="sc">|</span><span class="er">&gt;</span> </span>
@@ -887,263 +886,7 @@ estimar posteriores de manera eficiente:</p>
 <li>Implementación de HMC sin vueltas en U (NUTS): una afinación adicional es dinámicamente adaptar el número de pasos de integración para evitar “regresos”, como vimos que sucedía en los ejemplos de arriba. Ver por ejemplo <a href="https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/">aquí</a>, o
 la documentación de Stan.</li>
 </ol>
-</div>
-</div>
-<div id="diagnósticos-adicionales" class="section level2 hasAnchor" number="13.3">
-<h2><span class="header-section-number">13.3</span> Diagnósticos adicionales<a href="apéndice-iii-monte-carlo-hamiltoniano.html#diagnósticos-adicionales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Adicional a los diagnósticos que vimos en la sección de MCMC, Stan
-provee diagnóstivos adicionales relacionados al HMC. Cuando una
-trayectoria tuvo un cambio grande en energía <span class="math inline">\(H\)</span> desde
-su valor actual a la propuesta final, usualmente del orden de 10^3 por ejemplo, esto implica un rechazo
-“fuerte” en el nuevo punto de la trayectoria, e implica que la el integrador numérico
-falló de manera grave.</p>
-<div id="transiciones-divergentes" class="section level3 unnumbered hasAnchor">
-<h3>Transiciones divergentes<a href="apéndice-iii-monte-carlo-hamiltoniano.html#transiciones-divergentes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Cuando en Stan obtenemos un número considerable de transiciones divergentes, generalmente
-esto indica que el integrador numérico de Stan no está funcionando bien, y por lo tanto
-la exploración puede ser deficiente y/o puede estar sesgada al espacio de parámetros donde
-no ocurren estos rechazos.</p>
-<p>Esto puede pasar cuando encontramos zonas de alta curvatura en el espacio de parámetros.
-Que una posterior esté altamente concentrada o más dispersa generalmente no es un problema,
-pero si la concentración varía fuertemente (curvatura) entonces puede ser difícil encontrar la
-escala correcta para que el integrador funcione apropiadamente.</p>
-<div id="el-embudo-de-neal" class="section level4 unnumbered hasAnchor">
-<h4>El embudo de Neal<a href="apéndice-iii-monte-carlo-hamiltoniano.html#el-embudo-de-neal" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Para ver un ejemplo, consideremos un ejemplo de una distribución cuya forma
-es común en modelos jerárquicos. Primero, la marginal de <span class="math inline">\(y\)</span> es normal con media
-0 y desviación estándar 3. La distribución condicional <span class="math inline">\(p(x|y)\)</span>
-de <span class="math inline">\(x = c(x_1,\ldots, x_9)\)</span> dado <span class="math inline">\(y\)</span> es normal multivariada, todas con media
-cero y desviación estándar <span class="math inline">\(e^{y/2}\)</span>. Veamos qué pasa si intentamos simular de
-esta distribución en Stan:</p>
-<div class="sourceCode" id="cb838"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb838-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb838-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span></code></pre></div>
-<pre><code>## This is cmdstanr version 0.9.0</code></pre>
-<pre><code>## - CmdStanR documentation and vignettes: mc-stan.org/cmdstanr</code></pre>
-<pre><code>## - CmdStan path: /home/runner/.cmdstan/cmdstan-2.37.0</code></pre>
-<pre><code>## - CmdStan version: 2.37.0</code></pre>
-<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb843-1" aria-hidden="true" tabindex="-1"></a>mod_embudo <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">&quot;stan/embudo-neal.stan&quot;</span>)</span>
-<span id="cb843-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb843-2" aria-hidden="true" tabindex="-1"></a>ajuste_embudo <span class="ot">&lt;-</span> mod_embudo<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb843-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb843-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
-<span id="cb843-4"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb843-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb843-5"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb843-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">3000</span>,</span>
-<span id="cb843-6"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb843-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">1000</span>)</span></code></pre></div>
-<pre><code>## Running MCMC with 1 chain...
-## 
-## Chain 1 Iteration:    1 / 4000 [  0%]  (Warmup) 
-## Chain 1 Iteration: 1000 / 4000 [ 25%]  (Warmup) 
-## Chain 1 Iteration: 1001 / 4000 [ 25%]  (Sampling) 
-## Chain 1 Iteration: 2000 / 4000 [ 50%]  (Sampling) 
-## Chain 1 Iteration: 3000 / 4000 [ 75%]  (Sampling) 
-## Chain 1 Iteration: 4000 / 4000 [100%]  (Sampling) 
-## Chain 1 finished in 0.1 seconds.</code></pre>
-<pre><code>## Warning: 2 of 3000 (0.0%) transitions ended with a divergence.
-## See https://mc-stan.org/misc/warnings for details.</code></pre>
-<pre><code>## Warning: 12 of 3000 (0.0%) transitions hit the maximum treedepth limit of 10.
-## See https://mc-stan.org/misc/warnings for details.</code></pre>
-<pre><code>## Warning: 1 of 1 chains had an E-BFMI less than 0.3.
-## See https://mc-stan.org/misc/warnings for details.</code></pre>
-<p>Y vemos que aparecen algunos problemas.</p>
-<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb848-1" aria-hidden="true" tabindex="-1"></a>simulaciones <span class="ot">&lt;-</span> ajuste_embudo<span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">&quot;df&quot;</span>)</span>
-<span id="cb848-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb848-2" aria-hidden="true" tabindex="-1"></a>diagnosticos <span class="ot">&lt;-</span> ajuste_embudo<span class="sc">$</span><span class="fu">sampler_diagnostics</span>(<span class="at">format =</span> <span class="st">&quot;df&quot;</span>)</span>
-<span id="cb848-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb848-3" aria-hidden="true" tabindex="-1"></a>sims_diag <span class="ot">&lt;-</span> simulaciones <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">inner_join</span>(diagnosticos, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;.draw&quot;</span>, <span class="st">&quot;.iteration&quot;</span>, <span class="st">&quot;.chain&quot;</span>))</span>
-<span id="cb848-4"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb848-4" aria-hidden="true" tabindex="-1"></a>ajuste_embudo<span class="sc">$</span><span class="fu">summary</span>() <span class="sc">|</span><span class="er">&gt;</span></span>
-<span id="cb848-5"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb848-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(variable, mean, rhat, <span class="fu">contains</span>(<span class="st">&quot;ess&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 11 × 5
-##    variable    mean  rhat ess_bulk ess_tail
-##    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 lp__     -8.56   1.00      50.5     81.0
-##  2 y         0.820  1.00      48.8     78.9
-##  3 x[1]     -0.114  1.00    2026.     330. 
-##  4 x[2]      0.120  1.00    3797.     357. 
-##  5 x[3]      0.0282 1.00    3538.     349. 
-##  6 x[4]     -0.259  1.000   3563.     351. 
-##  7 x[5]     -0.0866 1.00    4109.     363. 
-##  8 x[6]     -0.0835 1.00    3332.     351. 
-##  9 x[7]     -0.0956 1.000   4139.     397. 
-## 10 x[8]     -0.0514 1.00    4162.     338. 
-## 11 x[9]      0.235  1.00    2349.     358.</code></pre>
-<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb850-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb850-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sims_diag, <span class="fu">aes</span>(<span class="at">y =</span> y, <span class="at">x =</span> <span class="st">`</span><span class="at">x[1]</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb850-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb850-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb850-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb850-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sims_diag <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">filter</span>(divergent__ <span class="sc">==</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb850-4"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb850-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fl">2.5</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="90-hamiltoniano_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<p>Y vemos que hay transiciones divergentes. Cuando el muestreador entra en el cuello
-del embudo, es muy fácil que se “despeñe” en probabilidad y que no pueda
-explorar correctamente la forma del cuello. Esto lo podemos ver, por ejemplo, si
-hacemos más simulaciones:</p>
-<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb851-1" aria-hidden="true" tabindex="-1"></a>mod_embudo <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">&quot;stan/embudo-neal.stan&quot;</span>)</span>
-<span id="cb851-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb851-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mod_embudo)</span></code></pre></div>
-<pre><code>## parameters {
-##   real y;
-##   vector[9] x;
-## }
-## model {
-##   y ~ normal(0, 3);
-##   x ~ normal(0, exp(y/2));
-## }</code></pre>
-<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb853-1" aria-hidden="true" tabindex="-1"></a>ajuste_embudo <span class="ot">&lt;-</span> mod_embudo<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb853-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb853-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
-<span id="cb853-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb853-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb853-4"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb853-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">30000</span>,</span>
-<span id="cb853-5"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb853-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">10000</span>)</span></code></pre></div>
-<pre><code>## Running MCMC with 1 chain...
-## 
-## Chain 1 Iteration:     1 / 31000 [  0%]  (Warmup) 
-## Chain 1 Iteration:  1001 / 31000 [  3%]  (Sampling) 
-## Chain 1 Iteration: 11000 / 31000 [ 35%]  (Sampling) 
-## Chain 1 Iteration: 21000 / 31000 [ 67%]  (Sampling) 
-## Chain 1 Iteration: 31000 / 31000 [100%]  (Sampling) 
-## Chain 1 finished in 0.6 seconds.</code></pre>
-<pre><code>## Warning: 974 of 30000 (3.0%) transitions ended with a divergence.
-## See https://mc-stan.org/misc/warnings for details.</code></pre>
-<pre><code>## Warning: 5 of 30000 (0.0%) transitions hit the maximum treedepth limit of 10.
-## See https://mc-stan.org/misc/warnings for details.</code></pre>
-<pre><code>## Warning: 1 of 1 chains had an E-BFMI less than 0.3.
-## See https://mc-stan.org/misc/warnings for details.</code></pre>
-<div class="sourceCode" id="cb858"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb858-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb858-1" aria-hidden="true" tabindex="-1"></a>ajuste_embudo<span class="sc">$</span><span class="fu">summary</span>() <span class="sc">|</span><span class="er">&gt;</span></span>
-<span id="cb858-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb858-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(variable, mean, rhat, <span class="fu">contains</span>(<span class="st">&quot;ess&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 11 × 5
-##    variable     mean  rhat ess_bulk ess_tail
-##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 lp__     -13.3     1.01     54.0   137.  
-##  2 y          1.82    1.02     27.8     7.39
-##  3 x[1]       0.132   1.01  21431.   3128.  
-##  4 x[2]       0.172   1.01  18710.   2898.  
-##  5 x[3]       0.0412  1.03  21071.   3070.  
-##  6 x[4]      -0.0104  1.03  25308.   3119.  
-##  7 x[5]      -0.0179  1.00   5497.   2928.  
-##  8 x[6]      -0.0719  1.01  21830.   3026.  
-##  9 x[7]      -0.0360  1.00   1799.   3048.  
-## 10 x[8]      -0.130   1.00   1343.   3168.  
-## 11 x[9]      -0.0263  1.02  22626.   3093.</code></pre>
-<div class="sourceCode" id="cb860"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb860-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb860-1" aria-hidden="true" tabindex="-1"></a>simulaciones <span class="ot">&lt;-</span> ajuste_embudo<span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">&quot;df&quot;</span>)</span>
-<span id="cb860-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb860-2" aria-hidden="true" tabindex="-1"></a>diagnosticos <span class="ot">&lt;-</span> ajuste_embudo<span class="sc">$</span><span class="fu">sampler_diagnostics</span>(<span class="at">format =</span> <span class="st">&quot;df&quot;</span>)</span>
-<span id="cb860-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb860-3" aria-hidden="true" tabindex="-1"></a>sims_diag <span class="ot">&lt;-</span> simulaciones <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">inner_join</span>(diagnosticos, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;.draw&quot;</span>, <span class="st">&quot;.iteration&quot;</span>, <span class="st">&quot;.chain&quot;</span>))</span>
-<span id="cb860-4"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb860-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sims_diag, <span class="fu">aes</span>(<span class="at">y =</span> y, <span class="at">x =</span> <span class="st">`</span><span class="at">x[1]</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb860-5"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb860-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb860-6"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb860-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sims_diag <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">filter</span>(divergent__ <span class="sc">==</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb860-7"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb860-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fl">2.5</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="90-hamiltoniano_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<p>Y vemos que ahora que en el primer ejemplo estábamos probablemente sobreestimando
-la media de <span class="math inline">\(y\)</span>. Las divergencias indican que esto puede estar ocurriendo. En este ejemplo
-particular, también vemos que las R-hat y los tamaños efectivos de muestra son bajos.</p>
-<p>Este es un ejemplo extremo. Sin embargo, podemos <em>reparametrizar</em> para hacer las cosas más
-fáciles para el muestreador. Podemos simular <span class="math inline">\(y\)</span>, y después, simular
-<span class="math inline">\(x\)</span> como <span class="math inline">\(x \sim e^{y/2} z\)</span> donde <span class="math inline">\(z\)</span> es normal estándar.</p>
-<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb861-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb861-1" aria-hidden="true" tabindex="-1"></a>mod_embudo_reparam <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">&quot;stan/embudo-neal-reparam.stan&quot;</span>)</span>
-<span id="cb861-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb861-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mod_embudo_reparam)</span></code></pre></div>
-<pre><code>## parameters {
-##   real y;
-##   vector[9] z;
-## }
-## 
-## transformed parameters {
-##   vector[9] x;
-## 
-##   x = exp(y/2) * z;
-## 
-## }
-## 
-## model {
-##   y ~ normal(0, 3);
-##   z ~ std_normal();
-## }</code></pre>
-<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb863-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb863-1" aria-hidden="true" tabindex="-1"></a>ajuste_embudo <span class="ot">&lt;-</span> mod_embudo_reparam<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb863-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb863-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
-<span id="cb863-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb863-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb863-4"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb863-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">10000</span>,</span>
-<span id="cb863-5"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb863-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">1000</span>)</span></code></pre></div>
-<pre><code>## Running MCMC with 4 sequential chains...
-## 
-## Chain 1 Iteration:     1 / 11000 [  0%]  (Warmup) 
-## Chain 1 Iteration:  1000 / 11000 [  9%]  (Warmup) 
-## Chain 1 Iteration:  1001 / 11000 [  9%]  (Sampling) 
-## Chain 1 Iteration:  2000 / 11000 [ 18%]  (Sampling) 
-## Chain 1 Iteration:  3000 / 11000 [ 27%]  (Sampling) 
-## Chain 1 Iteration:  4000 / 11000 [ 36%]  (Sampling) 
-## Chain 1 Iteration:  5000 / 11000 [ 45%]  (Sampling) 
-## Chain 1 Iteration:  6000 / 11000 [ 54%]  (Sampling) 
-## Chain 1 Iteration:  7000 / 11000 [ 63%]  (Sampling) 
-## Chain 1 Iteration:  8000 / 11000 [ 72%]  (Sampling) 
-## Chain 1 Iteration:  9000 / 11000 [ 81%]  (Sampling) 
-## Chain 1 Iteration: 10000 / 11000 [ 90%]  (Sampling) 
-## Chain 1 Iteration: 11000 / 11000 [100%]  (Sampling) 
-## Chain 1 finished in 0.2 seconds.
-## Chain 2 Iteration:     1 / 11000 [  0%]  (Warmup) 
-## Chain 2 Iteration:  1000 / 11000 [  9%]  (Warmup) 
-## Chain 2 Iteration:  1001 / 11000 [  9%]  (Sampling) 
-## Chain 2 Iteration:  2000 / 11000 [ 18%]  (Sampling) 
-## Chain 2 Iteration:  3000 / 11000 [ 27%]  (Sampling) 
-## Chain 2 Iteration:  4000 / 11000 [ 36%]  (Sampling) 
-## Chain 2 Iteration:  5000 / 11000 [ 45%]  (Sampling) 
-## Chain 2 Iteration:  6000 / 11000 [ 54%]  (Sampling) 
-## Chain 2 Iteration:  7000 / 11000 [ 63%]  (Sampling) 
-## Chain 2 Iteration:  8000 / 11000 [ 72%]  (Sampling) 
-## Chain 2 Iteration:  9000 / 11000 [ 81%]  (Sampling) 
-## Chain 2 Iteration: 10000 / 11000 [ 90%]  (Sampling) 
-## Chain 2 Iteration: 11000 / 11000 [100%]  (Sampling) 
-## Chain 2 finished in 0.2 seconds.
-## Chain 3 Iteration:     1 / 11000 [  0%]  (Warmup) 
-## Chain 3 Iteration:  1000 / 11000 [  9%]  (Warmup) 
-## Chain 3 Iteration:  1001 / 11000 [  9%]  (Sampling) 
-## Chain 3 Iteration:  2000 / 11000 [ 18%]  (Sampling) 
-## Chain 3 Iteration:  3000 / 11000 [ 27%]  (Sampling) 
-## Chain 3 Iteration:  4000 / 11000 [ 36%]  (Sampling) 
-## Chain 3 Iteration:  5000 / 11000 [ 45%]  (Sampling) 
-## Chain 3 Iteration:  6000 / 11000 [ 54%]  (Sampling) 
-## Chain 3 Iteration:  7000 / 11000 [ 63%]  (Sampling) 
-## Chain 3 Iteration:  8000 / 11000 [ 72%]  (Sampling) 
-## Chain 3 Iteration:  9000 / 11000 [ 81%]  (Sampling) 
-## Chain 3 Iteration: 10000 / 11000 [ 90%]  (Sampling) 
-## Chain 3 Iteration: 11000 / 11000 [100%]  (Sampling) 
-## Chain 3 finished in 0.2 seconds.
-## Chain 4 Iteration:     1 / 11000 [  0%]  (Warmup) 
-## Chain 4 Iteration:  1000 / 11000 [  9%]  (Warmup) 
-## Chain 4 Iteration:  1001 / 11000 [  9%]  (Sampling) 
-## Chain 4 Iteration:  2000 / 11000 [ 18%]  (Sampling) 
-## Chain 4 Iteration:  3000 / 11000 [ 27%]  (Sampling) 
-## Chain 4 Iteration:  4000 / 11000 [ 36%]  (Sampling) 
-## Chain 4 Iteration:  5000 / 11000 [ 45%]  (Sampling) 
-## Chain 4 Iteration:  6000 / 11000 [ 54%]  (Sampling) 
-## Chain 4 Iteration:  7000 / 11000 [ 63%]  (Sampling) 
-## Chain 4 Iteration:  8000 / 11000 [ 72%]  (Sampling) 
-## Chain 4 Iteration:  9000 / 11000 [ 81%]  (Sampling) 
-## Chain 4 Iteration: 10000 / 11000 [ 90%]  (Sampling) 
-## Chain 4 Iteration: 11000 / 11000 [100%]  (Sampling) 
-## Chain 4 finished in 0.2 seconds.
-## 
-## All 4 chains finished successfully.
-## Mean chain execution time: 0.2 seconds.
-## Total execution time: 1.0 seconds.</code></pre>
-<p>Y con este truco de reparametrización el muestreador funciona correctamente
-(observa que la media de <span class="math inline">\(y\)</span> está estimada correctamente, y no hay divergencias).</p>
-<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb865-1"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb865-1" aria-hidden="true" tabindex="-1"></a>ajuste_embudo<span class="sc">$</span><span class="fu">summary</span>() <span class="sc">|</span><span class="er">&gt;</span></span>
-<span id="cb865-2"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb865-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(variable, mean, rhat, <span class="fu">contains</span>(<span class="st">&quot;ess&quot;</span>)) <span class="sc">|</span><span class="er">&gt;</span></span>
-<span id="cb865-3"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#cb865-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(mean, rhat, ess_bulk, ess_tail), <span class="sc">~</span><span class="fu">round</span>(., <span class="dv">3</span>)))</span></code></pre></div>
-<pre><code>## # A tibble: 20 × 5
-##    variable   mean  rhat ess_bulk ess_tail
-##    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 lp__     -4.99      1   17345.   25655.
-##  2 y        -0.021     1   79307.   31521.
-##  3 z[1]      0.004     1   81319.   31444.
-##  4 z[2]     -0.002     1   77054.   30178.
-##  5 z[3]      0.001     1   78755.   29263.
-##  6 z[4]      0.006     1   75073.   29851.
-##  7 z[5]      0.002     1   75739.   30568.
-##  8 z[6]     -0.001     1   75301.   28333.
-##  9 z[7]     -0.001     1   74467.   30153.
-## 10 z[8]     -0.008     1   77959.   30444.
-## 11 z[9]     -0.005     1   75534.   31004.
-## 12 x[1]      0.043     1   40717.   29839.
-## 13 x[2]      0.032     1   40986.   29056.
-## 14 x[3]     -0.147     1   42538.   31590.
-## 15 x[4]      0.039     1   40029.   30783.
-## 16 x[5]      0.026     1   41137.   30390.
-## 17 x[6]     -0.022     1   39332.   30105.
-## 18 x[7]      0.047     1   41012.   30283.
-## 19 x[8]     -0.13      1   40608.   30769.
-## 20 x[9]     -0.065     1   39531.   31947.</code></pre>
 
-</div>
 </div>
 </div>
 </div>

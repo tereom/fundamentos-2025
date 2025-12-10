@@ -122,7 +122,7 @@ z_tbl <- metropolis_mc(M, c(2.5, 3.5), log_p, 1.0, 1.0)
 ```
 
 ```
-## [1] 0.59962
+## [1] 0.6014
 ```
 
 
@@ -175,7 +175,7 @@ z_tbl <- metropolis_mc(M, c(2.5, 3.5), log_p, 0.2, 0.2)
 ```
 
 ```
-## [1] 0.15636
+## [1] 0.15472
 ```
 
 ``` r
@@ -235,7 +235,7 @@ no siempre es posible. Veremos más el segundo, donde usaremos información
 del gradiente de la distribución objetivo para proponer exploración más eficiente.
 
 
-## Monte Carlo Hamiltoniano
+## Monte Carlo Hamiltoniano {-}
 
 Una manera de mejorar la exploración de Metropolis es utilizar una distribución
 de propuestas más apropiada. La intuición en el caso anterior es: 
@@ -629,7 +629,7 @@ system.time(hmc_1 <- hamilton_mc(1000, c(1,2), log_p, grad_log_p, 0.2, 12))
 
 ```
 ##    user  system elapsed 
-##   0.066   0.000   0.065
+##   0.067   0.001   0.066
 ```
 
 ``` r
@@ -655,7 +655,7 @@ system.time(metropolis_2 <- metropolis_mc(1000, c(1,2), log_p, 1, 1))
 
 ```
 ##    user  system elapsed 
-##   0.015   0.000   0.016
+##   0.016   0.000   0.016
 ```
 
 
@@ -701,368 +701,6 @@ estimar posteriores de manera eficiente:
 la documentación de Stan.
 
 
-
-
-## Diagnósticos adicionales
-
-Adicional a los diagnósticos que vimos en la sección de MCMC, Stan
-provee diagnóstivos adicionales relacionados al HMC. Cuando una 
-trayectoria tuvo un cambio grande en energía $H$ desde
-su valor actual a la propuesta final, usualmente del orden de 10^3 por ejemplo, esto implica un rechazo
-"fuerte" en el nuevo punto de la trayectoria, e implica que la el integrador numérico
-falló de manera grave. 
-
-### Transiciones divergentes {-}
-
-Cuando en Stan obtenemos un número considerable de transiciones divergentes, generalmente
-esto indica que el integrador numérico de Stan no está funcionando bien, y por lo tanto
-la exploración puede ser deficiente y/o puede estar sesgada al espacio de parámetros donde
-no ocurren estos rechazos.
-
-
-Esto puede pasar cuando encontramos zonas de alta curvatura en el espacio de parámetros.
-Que una posterior esté altamente concentrada o más dispersa generalmente no es un problema,
-pero si la concentración varía fuertemente (curvatura) entonces puede ser difícil encontrar la
-escala correcta para que el integrador funcione apropiadamente.
-
-#### El embudo de Neal {-}
-
-Para ver un ejemplo, consideremos un ejemplo de una distribución cuya forma 
-es común en modelos jerárquicos. Primero, la marginal de $y$ es normal con media
-0 y desviación estándar 3. La distribución condicional $p(x|y)$ 
-de $x = c(x_1,\ldots, x_9)$ dado $y$ es normal multivariada, todas con media
-cero y desviación estándar $e^{y/2}$. Veamos qué pasa si intentamos simular de 
-esta distribución en Stan:
-
-
-
-``` r
-library(cmdstanr)
-```
-
-```
-## This is cmdstanr version 0.9.0
-```
-
-```
-## - CmdStanR documentation and vignettes: mc-stan.org/cmdstanr
-```
-
-```
-## - CmdStan path: /home/runner/.cmdstan/cmdstan-2.37.0
-```
-
-```
-## - CmdStan version: 2.37.0
-```
-
-``` r
-mod_embudo <- cmdstan_model("stan/embudo-neal.stan")
-ajuste_embudo <- mod_embudo$sample(
-  chains = 1,
-  iter_warmup = 1000,
-  iter_sampling = 3000,
-  refresh = 1000)
-```
-
-```
-## Running MCMC with 1 chain...
-## 
-## Chain 1 Iteration:    1 / 4000 [  0%]  (Warmup) 
-## Chain 1 Iteration: 1000 / 4000 [ 25%]  (Warmup) 
-## Chain 1 Iteration: 1001 / 4000 [ 25%]  (Sampling) 
-## Chain 1 Iteration: 2000 / 4000 [ 50%]  (Sampling) 
-## Chain 1 Iteration: 3000 / 4000 [ 75%]  (Sampling) 
-## Chain 1 Iteration: 4000 / 4000 [100%]  (Sampling) 
-## Chain 1 finished in 0.1 seconds.
-```
-
-```
-## Warning: 2 of 3000 (0.0%) transitions ended with a divergence.
-## See https://mc-stan.org/misc/warnings for details.
-```
-
-```
-## Warning: 12 of 3000 (0.0%) transitions hit the maximum treedepth limit of 10.
-## See https://mc-stan.org/misc/warnings for details.
-```
-
-```
-## Warning: 1 of 1 chains had an E-BFMI less than 0.3.
-## See https://mc-stan.org/misc/warnings for details.
-```
-
-Y vemos que aparecen algunos problemas.
-
-
-``` r
-simulaciones <- ajuste_embudo$draws(format = "df")
-diagnosticos <- ajuste_embudo$sampler_diagnostics(format = "df")
-sims_diag <- simulaciones |> inner_join(diagnosticos, by = c(".draw", ".iteration", ".chain"))
-ajuste_embudo$summary() |>
-  select(variable, mean, rhat, contains("ess"))
-```
-
-```
-## # A tibble: 11 × 5
-##    variable    mean  rhat ess_bulk ess_tail
-##    <chr>      <dbl> <dbl>    <dbl>    <dbl>
-##  1 lp__     -8.56   1.00      50.5     81.0
-##  2 y         0.820  1.00      48.8     78.9
-##  3 x[1]     -0.114  1.00    2026.     330. 
-##  4 x[2]      0.120  1.00    3797.     357. 
-##  5 x[3]      0.0282 1.00    3538.     349. 
-##  6 x[4]     -0.259  1.000   3563.     351. 
-##  7 x[5]     -0.0866 1.00    4109.     363. 
-##  8 x[6]     -0.0835 1.00    3332.     351. 
-##  9 x[7]     -0.0956 1.000   4139.     397. 
-## 10 x[8]     -0.0514 1.00    4162.     338. 
-## 11 x[9]      0.235  1.00    2349.     358.
-```
-
-``` r
-ggplot(sims_diag, aes(y = y, x = `x[1]`)) +
-  geom_point(alpha = 0.1) +
-  geom_point(data = sims_diag |> filter(divergent__ == 1), color = "red", size = 2) +
-  geom_hline(yintercept = -2.5, linetype = 2)
-```
-
-<img src="90-hamiltoniano_files/figure-html/unnamed-chunk-20-1.png" width="672" />
-
-Y vemos que hay transiciones divergentes. Cuando el muestreador entra en el cuello
-del embudo, es muy fácil que se "despeñe" en probabilidad y que no pueda
-explorar correctamente la forma del cuello. Esto lo podemos ver, por ejemplo, si
-hacemos más simulaciones:
-
-
-
-``` r
-mod_embudo <- cmdstan_model("stan/embudo-neal.stan")
-print(mod_embudo)
-```
-
-```
-## parameters {
-##   real y;
-##   vector[9] x;
-## }
-## model {
-##   y ~ normal(0, 3);
-##   x ~ normal(0, exp(y/2));
-## }
-```
-
-``` r
-ajuste_embudo <- mod_embudo$sample(
-  chains = 1,
-  iter_warmup = 1000,
-  iter_sampling = 30000,
-  refresh = 10000)
-```
-
-```
-## Running MCMC with 1 chain...
-## 
-## Chain 1 Iteration:     1 / 31000 [  0%]  (Warmup) 
-## Chain 1 Iteration:  1001 / 31000 [  3%]  (Sampling) 
-## Chain 1 Iteration: 11000 / 31000 [ 35%]  (Sampling) 
-## Chain 1 Iteration: 21000 / 31000 [ 67%]  (Sampling) 
-## Chain 1 Iteration: 31000 / 31000 [100%]  (Sampling) 
-## Chain 1 finished in 0.6 seconds.
-```
-
-```
-## Warning: 974 of 30000 (3.0%) transitions ended with a divergence.
-## See https://mc-stan.org/misc/warnings for details.
-```
-
-```
-## Warning: 5 of 30000 (0.0%) transitions hit the maximum treedepth limit of 10.
-## See https://mc-stan.org/misc/warnings for details.
-```
-
-```
-## Warning: 1 of 1 chains had an E-BFMI less than 0.3.
-## See https://mc-stan.org/misc/warnings for details.
-```
-
-``` r
-ajuste_embudo$summary() |>
-  select(variable, mean, rhat, contains("ess"))
-```
-
-```
-## # A tibble: 11 × 5
-##    variable     mean  rhat ess_bulk ess_tail
-##    <chr>       <dbl> <dbl>    <dbl>    <dbl>
-##  1 lp__     -13.3     1.01     54.0   137.  
-##  2 y          1.82    1.02     27.8     7.39
-##  3 x[1]       0.132   1.01  21431.   3128.  
-##  4 x[2]       0.172   1.01  18710.   2898.  
-##  5 x[3]       0.0412  1.03  21071.   3070.  
-##  6 x[4]      -0.0104  1.03  25308.   3119.  
-##  7 x[5]      -0.0179  1.00   5497.   2928.  
-##  8 x[6]      -0.0719  1.01  21830.   3026.  
-##  9 x[7]      -0.0360  1.00   1799.   3048.  
-## 10 x[8]      -0.130   1.00   1343.   3168.  
-## 11 x[9]      -0.0263  1.02  22626.   3093.
-```
-
-``` r
-simulaciones <- ajuste_embudo$draws(format = "df")
-diagnosticos <- ajuste_embudo$sampler_diagnostics(format = "df")
-sims_diag <- simulaciones |> inner_join(diagnosticos, by = c(".draw", ".iteration", ".chain"))
-ggplot(sims_diag, aes(y = y, x = `x[1]`)) +
-  geom_point(alpha = 0.1) +
-  geom_point(data = sims_diag |> filter(divergent__ == 1), color = "red", size = 2) +
-  geom_hline(yintercept = -2.5, linetype = 2)
-```
-
-<img src="90-hamiltoniano_files/figure-html/unnamed-chunk-21-1.png" width="672" />
-
-Y vemos que ahora que en el primer ejemplo estábamos probablemente sobreestimando
-la media de $y$. Las divergencias indican que esto puede estar ocurriendo. En este ejemplo
-particular, también vemos que las R-hat y los tamaños efectivos de muestra son bajos.
-
-Este es un ejemplo extremo. Sin embargo, podemos *reparametrizar* para hacer las cosas más
-fáciles para el muestreador. Podemos simular $y$, y después, simular
-$x$ como $x \sim e^{y/2} z$ donde $z$ es normal estándar.
-
-
-
-
-``` r
-mod_embudo_reparam <- cmdstan_model("stan/embudo-neal-reparam.stan")
-print(mod_embudo_reparam)
-```
-
-```
-## parameters {
-##   real y;
-##   vector[9] z;
-## }
-## 
-## transformed parameters {
-##   vector[9] x;
-## 
-##   x = exp(y/2) * z;
-## 
-## }
-## 
-## model {
-##   y ~ normal(0, 3);
-##   z ~ std_normal();
-## }
-```
-
-``` r
-ajuste_embudo <- mod_embudo_reparam$sample(
-  chains = 4,
-  iter_warmup = 1000,
-  iter_sampling = 10000,
-  refresh = 1000)
-```
-
-```
-## Running MCMC with 4 sequential chains...
-## 
-## Chain 1 Iteration:     1 / 11000 [  0%]  (Warmup) 
-## Chain 1 Iteration:  1000 / 11000 [  9%]  (Warmup) 
-## Chain 1 Iteration:  1001 / 11000 [  9%]  (Sampling) 
-## Chain 1 Iteration:  2000 / 11000 [ 18%]  (Sampling) 
-## Chain 1 Iteration:  3000 / 11000 [ 27%]  (Sampling) 
-## Chain 1 Iteration:  4000 / 11000 [ 36%]  (Sampling) 
-## Chain 1 Iteration:  5000 / 11000 [ 45%]  (Sampling) 
-## Chain 1 Iteration:  6000 / 11000 [ 54%]  (Sampling) 
-## Chain 1 Iteration:  7000 / 11000 [ 63%]  (Sampling) 
-## Chain 1 Iteration:  8000 / 11000 [ 72%]  (Sampling) 
-## Chain 1 Iteration:  9000 / 11000 [ 81%]  (Sampling) 
-## Chain 1 Iteration: 10000 / 11000 [ 90%]  (Sampling) 
-## Chain 1 Iteration: 11000 / 11000 [100%]  (Sampling) 
-## Chain 1 finished in 0.2 seconds.
-## Chain 2 Iteration:     1 / 11000 [  0%]  (Warmup) 
-## Chain 2 Iteration:  1000 / 11000 [  9%]  (Warmup) 
-## Chain 2 Iteration:  1001 / 11000 [  9%]  (Sampling) 
-## Chain 2 Iteration:  2000 / 11000 [ 18%]  (Sampling) 
-## Chain 2 Iteration:  3000 / 11000 [ 27%]  (Sampling) 
-## Chain 2 Iteration:  4000 / 11000 [ 36%]  (Sampling) 
-## Chain 2 Iteration:  5000 / 11000 [ 45%]  (Sampling) 
-## Chain 2 Iteration:  6000 / 11000 [ 54%]  (Sampling) 
-## Chain 2 Iteration:  7000 / 11000 [ 63%]  (Sampling) 
-## Chain 2 Iteration:  8000 / 11000 [ 72%]  (Sampling) 
-## Chain 2 Iteration:  9000 / 11000 [ 81%]  (Sampling) 
-## Chain 2 Iteration: 10000 / 11000 [ 90%]  (Sampling) 
-## Chain 2 Iteration: 11000 / 11000 [100%]  (Sampling) 
-## Chain 2 finished in 0.2 seconds.
-## Chain 3 Iteration:     1 / 11000 [  0%]  (Warmup) 
-## Chain 3 Iteration:  1000 / 11000 [  9%]  (Warmup) 
-## Chain 3 Iteration:  1001 / 11000 [  9%]  (Sampling) 
-## Chain 3 Iteration:  2000 / 11000 [ 18%]  (Sampling) 
-## Chain 3 Iteration:  3000 / 11000 [ 27%]  (Sampling) 
-## Chain 3 Iteration:  4000 / 11000 [ 36%]  (Sampling) 
-## Chain 3 Iteration:  5000 / 11000 [ 45%]  (Sampling) 
-## Chain 3 Iteration:  6000 / 11000 [ 54%]  (Sampling) 
-## Chain 3 Iteration:  7000 / 11000 [ 63%]  (Sampling) 
-## Chain 3 Iteration:  8000 / 11000 [ 72%]  (Sampling) 
-## Chain 3 Iteration:  9000 / 11000 [ 81%]  (Sampling) 
-## Chain 3 Iteration: 10000 / 11000 [ 90%]  (Sampling) 
-## Chain 3 Iteration: 11000 / 11000 [100%]  (Sampling) 
-## Chain 3 finished in 0.2 seconds.
-## Chain 4 Iteration:     1 / 11000 [  0%]  (Warmup) 
-## Chain 4 Iteration:  1000 / 11000 [  9%]  (Warmup) 
-## Chain 4 Iteration:  1001 / 11000 [  9%]  (Sampling) 
-## Chain 4 Iteration:  2000 / 11000 [ 18%]  (Sampling) 
-## Chain 4 Iteration:  3000 / 11000 [ 27%]  (Sampling) 
-## Chain 4 Iteration:  4000 / 11000 [ 36%]  (Sampling) 
-## Chain 4 Iteration:  5000 / 11000 [ 45%]  (Sampling) 
-## Chain 4 Iteration:  6000 / 11000 [ 54%]  (Sampling) 
-## Chain 4 Iteration:  7000 / 11000 [ 63%]  (Sampling) 
-## Chain 4 Iteration:  8000 / 11000 [ 72%]  (Sampling) 
-## Chain 4 Iteration:  9000 / 11000 [ 81%]  (Sampling) 
-## Chain 4 Iteration: 10000 / 11000 [ 90%]  (Sampling) 
-## Chain 4 Iteration: 11000 / 11000 [100%]  (Sampling) 
-## Chain 4 finished in 0.2 seconds.
-## 
-## All 4 chains finished successfully.
-## Mean chain execution time: 0.2 seconds.
-## Total execution time: 1.0 seconds.
-```
-
-Y con este truco de reparametrización el muestreador funciona correctamente
-(observa que la media de $y$ está estimada correctamente, y no hay divergencias).
-
-
-``` r
-ajuste_embudo$summary() |>
-  select(variable, mean, rhat, contains("ess")) |>
-  mutate(across(c(mean, rhat, ess_bulk, ess_tail), ~round(., 3)))
-```
-
-```
-## # A tibble: 20 × 5
-##    variable   mean  rhat ess_bulk ess_tail
-##    <chr>     <dbl> <dbl>    <dbl>    <dbl>
-##  1 lp__     -4.99      1   17345.   25655.
-##  2 y        -0.021     1   79307.   31521.
-##  3 z[1]      0.004     1   81319.   31444.
-##  4 z[2]     -0.002     1   77054.   30178.
-##  5 z[3]      0.001     1   78755.   29263.
-##  6 z[4]      0.006     1   75073.   29851.
-##  7 z[5]      0.002     1   75739.   30568.
-##  8 z[6]     -0.001     1   75301.   28333.
-##  9 z[7]     -0.001     1   74467.   30153.
-## 10 z[8]     -0.008     1   77959.   30444.
-## 11 z[9]     -0.005     1   75534.   31004.
-## 12 x[1]      0.043     1   40717.   29839.
-## 13 x[2]      0.032     1   40986.   29056.
-## 14 x[3]     -0.147     1   42538.   31590.
-## 15 x[4]      0.039     1   40029.   30783.
-## 16 x[5]      0.026     1   41137.   30390.
-## 17 x[6]     -0.022     1   39332.   30105.
-## 18 x[7]      0.047     1   41012.   30283.
-## 19 x[8]     -0.13      1   40608.   30769.
-## 20 x[9]     -0.065     1   39531.   31947.
-```
 
 
 

@@ -19,5 +19,3 @@ diagnóstico-trazas-de-cadenas
 ejemplos-de-inferencia-bayesiana-en-stan-i
 ejemplo-exámenes-1
 ejemplo-exámenes-mal-identificado
-monte-carlo-hamiltoniano
-diagnósticos-adicionales

@@ -331,8 +331,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="apéndice-ii-transformaciones.html"><a href="apéndice-ii-transformaciones.html"><i class="fa fa-check"></i>Apéndice II: Transformaciones</a></li>
 <li class="chapter" data-level="" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html"><i class="fa fa-check"></i>Apéndice III: Monte Carlo Hamiltoniano</a>
 <ul>
-<li class="chapter" data-level="13.2" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#monte-carlo-hamiltoniano"><i class="fa fa-check"></i><b>13.2</b> Monte Carlo Hamiltoniano</a></li>
-<li class="chapter" data-level="13.3" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#diagnósticos-adicionales"><i class="fa fa-check"></i><b>13.3</b> Diagnósticos adicionales</a></li>
+<li class="chapter" data-level="" data-path="apéndice-iii-monte-carlo-hamiltoniano.html"><a href="apéndice-iii-monte-carlo-hamiltoniano.html#monte-carlo-hamiltoniano"><i class="fa fa-check"></i>Monte Carlo Hamiltoniano</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
 <li class="divider"></li>
@@ -655,7 +654,7 @@ valor no tan lejano de 0.5. Por ejemplo, con probabilidad 0.95 creemos
 que <span class="math inline">\(\theta\)</span> está en el intervalo</p>
 <div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="introducción-a-inferencia-bayesiana-1.html#cb448-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(sim_inicial<span class="sc">$</span>theta, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|</span><span class="er">&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##  2.5% 97.5% 
-##  0.15  0.85</code></pre>
+##  0.15  0.86</code></pre>
 <p>Es difícil justificar en abstracto por qué escogeriamos una inicial con esta
 forma. <em>Aunque esto los detallaremos más adelante</em>, puedes pensar, por el
 momento, que alguien observó algunos casos de esta población, y quizá vio tres éxitos y tres fracasos. Esto sugeriría que es poco probable que la probablidad
@@ -690,8 +689,8 @@ usamos la media posterior:</p>
 <pre><code>## # A tibble: 2 × 2
 ##   dist      theta_hat
 ##   &lt;chr&gt;         &lt;dbl&gt;
-## 1 inicial       0.5  
-## 2 posterior     0.612</code></pre>
+## 1 inicial       0.501
+## 2 posterior     0.609</code></pre>
 <p>Nota que el estimador de máxima verosimilitud es <span class="math inline">\(\hat{p} = 19/30 = 0.63\)</span>, que
 es ligeramente diferente de la media posterior. ¿Por qué?</p>
 <p>Y podemos construir intervalos de percentiles, que en esta situación
@@ -704,7 +703,7 @@ suelen llamarse <em>intervalos de credibilidad</em>, por ejemplo:</p>
 ## # Groups:   dist [2]
 ##   dist      `0.025` `0.975`
 ##   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;
-## 1 inicial      0.15    0.85
+## 1 inicial      0.15    0.86
 ## 2 posterior    0.45    0.76</code></pre>
 <p>El segundo renglón nos da un intervalo posterior para <span class="math inline">\(\theta\)</span> de <em>credibilidad</em>
 95%. En inferencia bayesiana esto sustituye a los intervalos de confianza.</p>
